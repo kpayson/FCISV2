@@ -1,0 +1,22 @@
+.dropdown-hover:hover > .dropdown-menu {
+  display: inline-block;
+}
+
+.dropdown-hover > .dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+.dropdown-hover-right:hover > .dropdown-menu-right {
+  display: inline-block;
+  /* flex-direction: row-reverse; */
+}
+
+.dropdown-hover-right > .dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+  pointer-events: none;
+}
+
+.navbar .navbar-nav .nav-item:not(:last-child) .nav-link {
+  border-right: .5px solid gray;
+}

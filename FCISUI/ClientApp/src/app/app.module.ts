@@ -9,6 +9,10 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
+import { FormulaHeaderComponent } from './formula-header/formula-header.component';
+import { LegacyPageImportComponent } from './legacy-page-import/legacy-page-import.component';
+import { ApfPortfolioMapComponent } from './apf-portfolio-map/apf-portfolio-map.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    NihLogoHeaderComponent,
+    FormulaHeaderComponent,
+    LegacyPageImportComponent,
+    ApfPortfolioMapComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

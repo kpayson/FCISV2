@@ -1,3 +1,6 @@
 *.vsidx
 PowerShell*.txt
 .vs/*
+**/.angular/*
+**/bin/*
+
