@@ -18,6 +18,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
 import { ChartDemoComponent } from './chart-demo/chart-demo.component';
 import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
 import {appRoutes} from './routes';
+import { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classification-chart/gsf-growth-by-classification-chart.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {appRoutes} from './routes';
     ApfPortfolioMapComponent,
     GsfPieChartComponent,
     ChartDemoComponent,
-    ApfPortfolioAllDashboardComponent
+    ApfPortfolioAllDashboardComponent,
+    GsfGrowthByClassificationChartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
