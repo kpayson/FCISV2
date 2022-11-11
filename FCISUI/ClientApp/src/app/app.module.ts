@@ -12,7 +12,12 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
 import { FormulaHeaderComponent } from './formula-header/formula-header.component';
 import { LegacyPageImportComponent } from './legacy-page-import/legacy-page-import.component';
-import { ApfPortfolioMapComponent } from './apf-portfolio-map/apf-portfolio-map.component';
+import { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-all-map.component';
+import { GsfPieChartComponent } from './gsf-pie-chart/gsf-pie-chart.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { ChartDemoComponent } from './chart-demo/chart-demo.component';
+import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
+import {appRoutes} from './routes';
 
 @NgModule({
   declarations: [
@@ -24,19 +29,25 @@ import { ApfPortfolioMapComponent } from './apf-portfolio-map/apf-portfolio-map.
     NihLogoHeaderComponent,
     FormulaHeaderComponent,
     LegacyPageImportComponent,
-    ApfPortfolioMapComponent
+    ApfPortfolioMapComponent,
+    GsfPieChartComponent,
+    ChartDemoComponent,
+    ApfPortfolioAllDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ])
+    GoogleChartsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// [
+//   { path: '', component: HomeComponent, pathMatch: 'full' },
+//   { path: 'counter', component: CounterComponent },
+//   { path: 'fetch-data', component: FetchDataComponent },
+// ]

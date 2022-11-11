@@ -45,7 +45,7 @@ app.MapControllerRoute(
 
 app.MapFallbackToFile("index.html");
 
-app.MapRoomEndpoints();
+//app.MapRoomEndpoints();
 
 
 
