@@ -12,17 +12,18 @@ export const appRoutes: Routes = [
                 path:'apf-portfolio-all',
                 component:ApfPortfolioAllDashboardComponent
             },
+            {
+                path:'',
+                component:ApfPortfolioAllDashboardComponent
+            },
             //{
             //     path:'apf-portfolio-ic',
             //     component:ApfPortfolioICDashboardComponent
-            // },
-            {
-                path:'',
-                
-                component:ApfPortfolioAllDashboardComponent
-            }
+            // },            
         ]
-    }
+    },
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
+
 ]
 
 // {

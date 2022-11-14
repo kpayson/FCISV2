@@ -18,3 +18,19 @@ git push -u origin --all
 https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows
 
 https://learn.microsoft.com/en-us/aspnet/core/data/ef-rp/intro?view=aspnetcore-6.0&tabs=visual-studio
+
+dotnet ef dbcontext scaffold "Data Source=NCATS-2170893-P\\SQLEXPRESS;Initial Catalog=FCISPortal;Integrated Security=SSPI;" Microsoft.EntityFrameworkCore.SqlServer -o Models --force 
+
+https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-7.0&tabs=visual-studio-code
+
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet tool install -g dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator controller -name GsfGrowthController -async -api -m Gsfgrowth -dc FCISPortalContext -outDir Controllers
+
+
+dotnet add package NSwag.ASpNetCore
+
+https://www.ebenmonney.com/quickapp-asp-net-core-angular-startup-project-template/

@@ -22,6 +22,7 @@ namespace FCISUI.Models
         public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
         public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
+        public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
         public virtual DbSet<Person> People { get; set; } = null!;
         public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
@@ -245,6 +246,17 @@ namespace FCISUI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.PiPath)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Gsfgrowth>(entity =>
+            {
+                entity.ToTable("GSFGrowth");
+
+                entity.Property(e => e.GsfgrowthId).HasColumnName("GSFGrowthID");
+
+                entity.Property(e => e.FacilityName)
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });

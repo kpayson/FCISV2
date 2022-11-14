@@ -20,5 +20,6 @@ public class FCISContext : DbContext
     //entities
     public DbSet<Facility> Facilities { get; set; }
     public DbSet<Room> Rooms { get; set; }
+    public DbSet<Gsfgrowth> Gsfgrowths { get; set; }
 
 }
