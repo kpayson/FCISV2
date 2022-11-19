@@ -21,6 +21,8 @@ export class ApfPortfolioAllDashboardComponent implements OnInit {
     this.dataService.gsfByIC().subscribe(data=>{
       this.gsfByIcData = data.map(x => [x.ic, x.gsf]);;
     });
+
+    //this.dataService.
   }
 
 }

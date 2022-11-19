@@ -20,4 +20,8 @@ export class DataService {
   gsfByIC() {
     return this.http.get<any[]>(`${environment.apiRootUrl}/GsfChart/GsfByIC`);
   }
+
+  gsfGrowthByClassification() {
+    return this.http.get<any[]>(`${environment.apiRootUrl}/GsfChart/GsfGrowthByClassification`);
+  }
 }

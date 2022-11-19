@@ -1,42 +1,39 @@
-<div class="mb-3">
-    <div class="card-body svgCard" style="margin-left: 15px;">
-        <div class="row" id="rowTest">
-            <div class="panel-left col-md-3">
-                <app-apf-portfolio-all-map></app-apf-portfolio-all-map>
-            </div>
-
-            <div class="panel-center col-md-9" style="border: 1px solid black;">
-                <div class="row">
-                    <div class="panel-center col-md-12" style="border: 1px solid black; height: 400px;">
-                        <h4 style="color:#b3172c;">Aseptic Production Facilities (APF) Portfolio Web Portal</h4>
-                        <p>
-                            The National Institutes of Health (NIH) APF Portfolio consists of 12 facilites, including pharmacies, radiopharmacies ...
-                        </p>
-                        <div id="gsfGrowthByClassification" style="width:100%"></div>
-                        <div class="chart-label">APF Portfolio GSF Growth by Classification</div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="panel-center col-md-6" style="border: 1px solid black; height: 300px;">
-                        <app-gsf-pie-chart 
-                            [chartTitle]="'APF Portfolio GSF by IC'"
-                            [chartData]="gsfByIcData"
-                        ></app-gsf-pie-chart>
-                        <div class="chart-label">APF Portfolio GSF by IC</div>
-                    </div>
-
-                    <div class="panel-center col-md-6" style="border: 1px solid black; height: 300px;">
-                        <app-gsf-pie-chart 
-                            [chartTitle]="'APF Portfolio GSF by Facility'"
-                            [chartData]="gsfByFacilityData"></app-gsf-pie-chart>
-                        <div class="chart-label">APF Portfolio GSF by Facility</div>
-                    </div>
-                </div>
-            </div>
-
+<div class="card">
+    <div class="card-body" >
+      <div class="row" id="rowTest" style="border:1px solid red;">
+        <div class="col-md-3">
+          <app-apf-portfolio-all-map></app-apf-portfolio-all-map>
         </div>
+
+    <div class="panel-center col-md-9" style="border: 1px solid black;">
+        <div class="row">
+            <div class="panel-center col-md-12" style="border: 1px solid black; height: 400px;">
+                <h4 style="color:#b3172c;">Aseptic Production Facilities (APF) Portfolio Web Portal</h4>
+                <p>
+                    The National Institutes of Health (NIH) APF Portfolio consists of 12 facilites, including
+                    pharmacies, radiopharmacies ...
+                </p>
+                <app-gsf-growth-by-classification-chart></app-gsf-growth-by-classification-chart>
+                <div class="chart-label">APF Portfolio GSF Growth by Classification</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="panel-center col-md-6" style="border: 1px solid black; height: 300px;">
+                <app-gsf-pie-chart [chartTitle]="'APF Portfolio GSF by IC'" [chartData]="gsfByIcData">
+                </app-gsf-pie-chart>
+                <div class="chart-label">APF Portfolio GSF by IC</div>
+            </div>
+
+            <div class="panel-center col-md-6" style="border: 1px solid black; height: 300px;">
+                <app-gsf-pie-chart [chartTitle]="'APF Portfolio GSF by Facility'"
+                    [chartData]="gsfByFacilityData"></app-gsf-pie-chart>
+                <div class="chart-label">APF Portfolio GSF by Facility</div>
+            </div>
+        </div>
+    </div> 
+
+      </div>
 
     </div>
 </div>
-
