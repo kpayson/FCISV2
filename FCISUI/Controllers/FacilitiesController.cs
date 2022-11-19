@@ -13,9 +13,9 @@ namespace FCISUI.Controllers
     [ApiController]
     public class FacilitiesController : ControllerBase
     {
-        private readonly FCISContext _context;
+        private readonly FCISPortalContext _context;
 
-        public FacilitiesController(FCISContext context)
+        public FacilitiesController(FCISPortalContext context)
         {
             _context = context;
         }

@@ -8,12 +8,14 @@
 // using DAL.Core.Interfaces;
 // using DAL.Models;
 // using IdentityServer4.AccessTokenValidation;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using FCISUI.Models;
 // using AppPermissions = DAL.Core.ApplicationPermissions;
 
 namespace FCISUI
@@ -130,6 +133,11 @@ namespace FCISUI
 
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddDbContext<FCISPortalContext>(options =>
+  options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
+
+  
+
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FCISAPI", Version = "v1" });
@@ -151,7 +159,7 @@ namespace FCISUI
                 // });
             });
 
-            //builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddAutoMapper(typeof(Program));
 
             // Configurations
             builder.Services.Configure<AppSettings>(builder.Configuration);

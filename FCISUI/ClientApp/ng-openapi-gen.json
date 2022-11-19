@@ -1,0 +1,12 @@
+{
+    "$schema": "./node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+    "input": "https://localhost:44420/swagger/v1/swagger.json",
+    "output": ".src/app/api",
+    "includeTags": [
+        "Facilities",
+        "GsfGrowth",
+        "GsfChart"
+    ],
+    "indexFile": true,
+    "removeStaleFiles": true
+}

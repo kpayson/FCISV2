@@ -10,7 +10,10 @@
     "build": "ng build",
     "build:ssr": "ng run FCISUI:server:dev",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "gen-api": "set NODE_EXTRA_CA_CERTS=%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem && set NODE_EXTRA_CA_CERTS && ng-openapi-gen --config ng-openapi-gen.json",
+    "ng-openapi-gen": "ng-openapi-gen",
+    "ng-openapi-gen:dev": "ng-openapi-gen --input https://localhost:44420/swagger/v1/swagger.json"
   },
   "private": true,
   "dependencies": {
@@ -46,6 +49,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
+    "ng-openapi-gen": "^0.23.0",
     "typescript": "~4.7.4"
   },
   "overrides": {

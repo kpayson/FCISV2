@@ -38,7 +38,7 @@ export class GsfGrowthByClassificationChartComponent implements OnInit {
           const goLiveDate = new Date(Number(x.GoLiveDate.replace(/\D+/g, '')));
           return [goLiveDate, x.CncRoomsArea, x.Iso8RoomsArea, x.Iso7RoomsArea]
       }));
-    const growthData = google.visualization.arrayToDataTable(growthDataArray);
+    //const growthData = google.visualization.arrayToDataTable(growthDataArray);
 
     // const ystart = growthDataArray[1][0].getFullYear();
     // const yend = growthDataArray[growthDataArray.length - 1][0].getFullYear();

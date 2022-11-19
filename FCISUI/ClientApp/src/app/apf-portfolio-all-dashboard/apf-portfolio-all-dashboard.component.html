@@ -23,17 +23,13 @@
                             [chartTitle]="'APF Portfolio GSF by IC'"
                             [chartData]="gsfByIcData"
                         ></app-gsf-pie-chart>
-                        <!-- <div id="gsfByICChart" style="width: 100%; height: 56%;"></div> -->
                         <div class="chart-label">APF Portfolio GSF by IC</div>
                     </div>
 
                     <div class="panel-center col-md-6" style="border: 1px solid black; height: 300px;">
                         <app-gsf-pie-chart 
                             [chartTitle]="'APF Portfolio GSF by Facility'"
-                            
-                        ></app-gsf-pie-chart>
-                        <!-- <div id="gsfByFacilityChart" style="width: 100%; height: 56%;"></div> -->
-                        <app-gsf-growth-by-classification-chart></app-gsf-growth-by-classification-chart>
+                            [chartData]="gsfByFacilityData"></app-gsf-pie-chart>
                         <div class="chart-label">APF Portfolio GSF by Facility</div>
                     </div>
                 </div>

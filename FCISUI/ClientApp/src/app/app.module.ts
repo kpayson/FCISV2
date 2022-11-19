@@ -19,6 +19,8 @@ import { ChartDemoComponent } from './chart-demo/chart-demo.component';
 import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
 import {appRoutes} from './routes';
 import { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classification-chart/gsf-growth-by-classification-chart.component';
+//import { DataService } from './data.service';
+
 
 @NgModule({
   declarations: [

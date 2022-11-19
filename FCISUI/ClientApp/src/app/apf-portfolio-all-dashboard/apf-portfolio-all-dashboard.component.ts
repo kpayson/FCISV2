@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-apf-portfolio-all-dashboard',
@@ -7,18 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApfPortfolioAllDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService:DataService) { }
 
-  gsfByIcData = [
-    ['WorkX', 11],
-    ['Eat', 2],
-    ['Commute', 2],
-    ['Watch TV', 2],
-    ['Sleep', 7]
-  ]
-  gsfByFacilityData = [];
+  gsfByIcData:any[] = []
+  gsfByFacilityData:any[] = [];
 
   ngOnInit(): void {
+    this.dataService.gsfByFacility().subscribe(data=>{
+      this.gsfByFacilityData = data.map(x => [x.facility, x.gsf]);
+    });
+
+    this.dataService.gsfByIC().subscribe(data=>{
+      this.gsfByIcData = data.map(x => [x.ic, x.gsf]);;
+    });
   }
 
 }
