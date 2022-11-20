@@ -12,6 +12,7 @@ export class ApfPortfolioAllDashboardComponent implements OnInit {
 
   gsfByIcData:any[] = []
   gsfByFacilityData:any[] = [];
+  gsfGrowthByClassificationData:any[] = []
 
   ngOnInit(): void {
     this.dataService.gsfByFacility().subscribe(data=>{
@@ -22,7 +23,12 @@ export class ApfPortfolioAllDashboardComponent implements OnInit {
       this.gsfByIcData = data.map(x => [x.ic, x.gsf]);;
     });
 
-    //this.dataService.
+    this.dataService.gsfGrowthByClassification().subscribe(data=>{
+      this.gsfGrowthByClassificationData = data.map(x => {
+        const goLiveDate = new Date(x.goLiveDate);
+        return [goLiveDate, x.cncRoomsArea, x.iso8RoomsArea, x.iso7RoomsArea]
+      })
+    })
   }
 
 }

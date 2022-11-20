@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using FCISUI.Models;
 using FCISUI.ViewModels;
+using FCISUI.Logic;
 using AutoMapper;
 
 namespace FCISUI.Controllers
@@ -67,35 +68,8 @@ namespace FCISUI.Controllers
         public List<GSFGrowthCumulative> GetGsfGrowthByClassification()
         {
             var gsfGrowthDeltas = _context.Gsfgrowths.Select(_mapper.Map<GSFGrowthDelta>).ToList();
-            //var gsfGrowthCummulative = GSFGrowthUtil.GetCumulativeValues(gsfGrowthDeltas);
-            return new List<GSFGrowthCumulative>();
-
-
-            // DataModule _dm = new DataModule();
-            // DataSet ds;
-            // ds = _dm.GetDataSet("selectGSFGrowth");
-            // var gsfGrowthDeltas = new List<GSFGrowthDelta>();
-            // var rows = ds.Tables[0].Rows;
-            // for (var i = 0; i < rows.Count; i++)
-            // {
-            //     var r = rows[i];
-            //     gsfGrowthDeltas.Add(new GSFGrowthDelta
-            //     {
-            //         CncRoomsArea = (int)r["CncRoomsArea"],
-            //         CncRoomsCount = (int)r["CncRoomsCount"],
-            //         CriticalEnvironmentPrametersCount = (int)r["CriticalEnvironmentPrametersCount"],
-            //         Iso7RoomsArea = (int)r["Iso7RoomsArea"],
-            //         Iso7RoomsCount = (int)r["Iso7RoomsCount"],
-            //         Iso8RoomsArea = (int)r["Iso8RoomsArea"],
-            //         Iso8RoomsCount = (int)r["Iso8RoomsCount"],
-            //         Month = (int)r["Month"],
-            //         Year = (int)r["Year"]
-
-            //     });
-            // }
-            // var gsfGrowthCummulative = GSFGrowthUtil.GetCumulativeValues(gsfGrowthDeltas);
-            // return gsfGrowthCummulative;
-
+            var gsfGrowthCummulative = GSFGrowthUtil.GetCumulativeValues(gsfGrowthDeltas);
+            return gsfGrowthCummulative;
         }
     }
 }
