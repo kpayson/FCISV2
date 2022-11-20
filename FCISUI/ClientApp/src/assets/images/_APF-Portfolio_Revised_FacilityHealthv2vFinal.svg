@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7613 11828.3">
+  <g id="GraphicArea">
+    <rect width="7613" height="11828.29" style="fill: #fff" />
+  </g>
+  <g id="CampusBuidings">
+    <g id="Facility_Group" data-name="Facility Group">
+      <polygon id="MLP09" points="1346.5 6531.8 1414.2 6533.5 1416.1 6412.6 1351.1 6410.6 1379.8 4725.3 110 4698.9 107.8 4826.9 171.2 4827.7 143.1 6402.7 80.5 6403.1 77.8 6525.7 346 6530.3 345 6603.4 765.2 6736.8 1342 6743.8 1346.4 6532.7 1346.5 6531.8" style="fill: #e1e1e1" />
+      <polygon id="Building49" points="1699.9 8583.3 1943.3 8581.5 1937 7725.4 1691.3 7727.2 1692.4 7875.1 1673.2 7875 1674.2 7756.4 1671.2 7756.4 1671.3 7739 1148 7734.5 245.2 7726.8 245.1 7737.7 101.1 7736.4 101.1 7745.4 97.1 7881 67.3 7880.8 64.3 8233.7 1.6 8233.2 0.9 8316.5 0 8420.5 19.4 8420.6 18.2 8559.2 67.5 8559.6 66.6 8667 171.5 8667.9 170.8 8750.6 810.2 8756.1 810.9 8773 815.6 8789.1 823.9 8803.8 835.5 8816.1 849.5 8825.4 865.4 8831.2 882.1 8833.1 898.9 8831.1 914.7 8825.2 928.8 8815.9 940.2 8803.5 948.5 8788.8 953 8772.6 953.7 8755.7 1591.3 8754 1591.1 8660.6 1700.1 8660.3 1699.9 8583.3" style="fill: #e1e1e1" />
+      <polygon id="Building30" points="2891.4 9309 2882.1 9309 2881.8 9144.2 2910 9143.8 2905.1 8860.8 2692.3 8863.9 2691.7 8827.3 2548.3 8829.4 2547.8 8518.3 2212.6 8518.8 2213.4 9053.4 2188 9053.4 2188.2 9149.1 2134.8 9149.2 2135.2 9401.2 2188.5 9401.1 2188.7 9497.3 2215.5 9497.2 2216.3 10028.9 2216.8 10028.9 2549.6 10028.3 2548.8 9508.7 2621.2 9508.6 2621.4 9613.5 2891.9 9613.1 2891.4 9309" style="fill: #e1e1e1" />
+      <polygon id="Building29-B" points="2147 10514.4 982.6 10517.1 982.7 10557.1 787.4 10557.5 787.3 10514.5 810.6 10514.4 810.1 10299.3 719 10299.5 718.9 10288 370.9 10288.9 371 10301.8 279.1 10302 279.6 10515.9 305 10515.9 307.3 11513.6 371.5 11513.4 371.6 11578.3 725.9 11577.5 725.7 11512.3 789 11512.2 788.7 11364.1 984.7 11363.7 984.9 11452.2 1280.2 11451.5 1280.3 11493.3 1264.5 11493.4 1264.6 11544.3 1252.3 11602.9 1252.5 11656.5 1252.6 11710.3 1265.1 11762.4 1265.2 11812.7 1282.3 11812.7 1282.3 11828.3 1495.6 11827.8 1494.9 11518.6 1515.3 11513.7 1536.1 11508.7 1546.8 11495.1 1561.3 11476.7 1561.3 11450.6 2147.6 11449.2 2147 11229.6 2650.8 11228.4 2667.9 11228.3 2667.9 11250.9 2633.1 11250.9 2633.3 11393.2 2730.3 11393.1 2730.3 11368.4 3261.9 11367.8 3262 11435.6 3448.2 11435.4 3448.5 11634 3644.7 11633.8 3644.3 11366.8 4238 11366.1 4237.7 11235.7 4295.7 11235.6 4295.5 11088.5 4237.8 11088.6 4237.7 11031.6 2726.8 11034.1 2726.9 11093.5 2667.7 11093.6 2667.8 11176.6 2663.7 11176.7 2148.5 11177.9 2147 10514.4" style="fill: #e1e1e1" />
+      <g id="Building10">
+        <path d="M7482.1,2045.6l130.9-.6-1.2-272-129.4.6-.6-149.2-79.8.3v-25.6L6140,1604.7l-.8-193.4h36.6l-.8-185.6-36,.2-.8-172.9,187.4-.8V1029l34.7-.2-2.1-484.1-68.7.3-.6-133.2-678.5,3-1160.6,5-1.1-128.3h.5L4562,274.3,4673.2,248l108.7-35.2L4784.3,0,4677,39,4566.7,68.7,4454.2,88.6,4340.5,98.8,4210,97,4080.7,80.2,3954.2,48.5l-122-46.1-3.3,212.5,122.8,39.8,126.1,27.4,33.7,3.9,1.2,135.3L2358.6,429l.6,128.2-97,.4.3,68.5h36.4l.9,210-45.5.2.2,48.3-80.6.3,1,213,49.8-.3,255.7,3.2.6,135.2h-32.8l.8,185.4h32.8l1,197.2-250.7,1.1v-26.1l-45,.2-967.7,4.5.3,44.6-81.5.4.6,143.5-140.7.6.3,70.7,34.8-.2,1,211.1,106.9-.5,1,194.8,81.6-.4.3,45.9,1175.1-5.4v100.2l.2,281.3h-18.4l-.3-55.1-205.2,1,1,210.3,205.3-1-.3-55.1h18l.2,233.7-1395.4,1.3.9,942.5H947.9l.2,204.8h59.3l.2,272.5,620.9-.6v-43.8H1807v-5.2h70.3l.2,140.7,836.2-.7V4595l-3.6,74-345.8,200.1-31-23.3-33.7-19.5L2264,4811l-37.3-11-38.3-6.6-38.8-2-38.8,2.5-38.2,7.1-37.1,11.6-35.5,15.9-33.4,19.9-30.8,23.7-27.8,27.1-24.4,30.3-20.7,32.9-16.7,35.1-12.4,36.8-8,38.1-3.5,38.7,1.2,38.8-80.7,47.7,31.8,53.8-25.7,15.3,78.7,132.9,29.3-17.3,29.6,50,72.7-43,33.2,21.2,35.5,17.1,37.3,12.7,38.5,8.2,39.3,3.5,39.4-1.3,39-5.9,37.9-10.5,36.5-15,34.5-19.2,31.8-23.2,28.9-26.8,25.5-30.1,21.7-32.9,17.6-35.3,13.3-37.1,8.7-38.4,1.6-15.4,2.5-23.8-.7-39.4-5.3-39,232-134v138.2h-23.8v-3.6H2554V5215h129.6v-51.4h24.9v174.9H2461.4l.2,382.8-638.5.4.3,527.9h54.7v54.6H1948v211.7H1844.7l.3,480.3h177.1v107.8l459.9-.2V6933h164l41,7.7h197.2v264.7l368.1-.2V6937.8h68.1l-.2-372.9h237.6l-.3-385.9h183.3l-.2-249.4h193.5v149.5h134.3v149.2h42.8v26.6h-40.6l.3,455.4,501.8-.3-.3-631.6h103.6V5813.7l559.9-.4v74.1l389.6-.2V5723.5h100v165h-64.9l.2,435h120v-42.8h132.9V5966.1l3.6-80.6H5794.7v-159H5932l-.4-770-.8-477.4,789.5-1.3,1,575.1,116.1-.2v54.4h115.1V5004.8l285.4-.5-1-594.7-1.2-738.8h-27.3l-.6-349.2-192.7-.3V2945.3l179.2-1.6-1.4-323.4-177.8.8v-327l383.7-1.7-.2-44.2,84.5-.4ZM2570.7,1616.7l-.6-189.6H2603l-.6-195.3h-41.8l-.5-170.8,1456.5-4.3.2,82.3-161.1.5,1.1,374.1,217.2-.7.3,99.3Zm3492.2-6.3-494.5-.5-962.2-1,.6-555.9,981.1,1,472,.4-.2,174h-33.3l-.2,186h36.9Z" style="fill: #e1e1e1" />
+        <rect x="5248.7" y="6646.2" width="117.2" height="124.02" transform="translate(6297.9 -1788) rotate(45)" style="fill: #e1e1e1" />
+      </g>
+    </g>
+  </g>
+  <g id="Facilitiy_Footprints" data-name="Facilitiy Footprints">
+    <polygon id="Facil_10_CC_CCE_3T_CTL" data-name="Facil 10 CC CCE 3T CTL" points="1647.9 4303.2 1625.5 4303.2 1625.5 4302.3 1092.8 4302.3 1092.8 4431.6 1625.5 4431.6 1625.5 4392.7 1647.9 4392.7 1647.9 4303.2" style="fill: #fbb03b" />
+    <polygon id="Facil_10_CC_Phrm_I-IVAU" data-name="Facil 10 CC Phrm I-IVAU" points="4950.5 4036.8 4950.8 3906.5 5003.4 3860.6 4987 3860.6 4987.5 3677.9 5326 3678.9 5325 4037.9 4950.5 4036.8" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_NMD_RadioPhrm" data-name="Facil 10 CC NMD RadioPhrm" x="3080.3" y="2521.3" width="362.7" height="190.4" transform="translate(7.4 -9.3) rotate(0.2)" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_PET_RadioPhrm" data-name="Facil 10 CC PET RadioPhrm" x="2926.2" y="2362.6" width="171.6" height="87.7" transform="matrix(1, 0, 0, 1, 6.85, -8.55)" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_PET_B3_RadioChm" data-name="Facil 10 CC PET B3 RadioChm" x="3013.1" y="2145.2" width="133.7" height="271.14" transform="translate(6.5 -8.7) rotate(0.2)" style="fill: #fbb03b" />
+    <path id="Facil_10_CC_CCE_2J_CTL" data-name="Facil 10 CC CCE 2J CTL" d="M2549.5,4390.3H2437v-43.5c-63-.3-191.3-.5-253.8-.4v44.3H1995.8c0,22.5-.3,109-.3,133l553.8,1.6Z" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_CCE_East-T_Mdlr" data-name="Facil 10 CC CCE East-T Mdlr" x="6797.4" y="2557.5" width="214.8" height="457.81" transform="translate(4098.7 9683.3) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_DLM_SterL" data-name="Facil 10 CC DLM SterL" x="3987" y="3845.8" width="84.1" height="193" transform="translate(75.3 7960.1) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_MF_NCI_SB_TIL-MdlrF" data-name="Facil MF NCI SB TIL-MdlrF" x="2428.2" y="7697.2" width="344.2" height="655.71" transform="translate(-5432 10602.5) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_29B_NIAID_BiorRtr" data-name="Facil 29B NIAID BiorRtr" x="734.4" y="10924.9" width="220.1" height="113.41" transform="translate(-10139.5 11794.9) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_Phrm_P-IVAU" data-name="Facil 10 CC Phrm P-IVAU" x="5421" y="1757.5" width="341.4" height="654.9" transform="translate(3490.9 7670.7) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_SB_1B42" data-name="Facil 10 CC SB 1B42" x="5268.5" y="5068" width="233.4" height="116.8" transform="translate(243.5 10497) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_NCI_HypPP_C-13" data-name="Facil 10 NCI HypPP C-13" x="5718.4" y="6092.5" width="176.3" height="84.61" transform="translate(-344.7 11923.9) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_NCI_T-1_10B" data-name="Facil 10 NCI T-1 10B" x="1784.3" y="2221" width="107.8" height="350.35" transform="translate(-563.2 4227.5) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_NCI_T-1_10A" data-name="Facil 10 NCI T-1 10A" x="1783.8" y="2400.6" width="107.8" height="350.35" transform="translate(-743.3 4406.1) rotate(-89.8)" style="fill: #fbb03b" />
+    <rect id="Facil_10_CC_CCE_12E_CellTL" data-name="Facil 10 CC CCE 12E CellTL" x="4576.2" y="4263.6" width="867.7" height="210" style="fill: #fbb03b" />
+  </g>
+  
+  <g id="Facility_Health_Key" data-name="Facility Health Key">
+	<text transform="translate(4900.7 9443.2)" style="font-size: 190.45582580566406px;fill: #676767;font-family: Calibri">(Green) Within Spec</text>
+	<text transform="translate(4900.7 9859.4)" style="font-size: 190.45582580566406px;fill: #676767;font-family: Calibri">(Gray) Comm Loss</text>
+    <text transform="translate(4900.3 10295.6)" style="font-size: 190.45582580566406px;fill: #676767;font-family: Calibri">(Yellow) Warning</text>
+    <text transform="translate(4900.7 10753.4)" style="font-size: 190.45582580566406px;fill: #676767;font-family: Calibri">(Red) Alarm (Out of Spec)</text>
+    <text transform="translate(4900.7 11168.2)" style="font-size: 190.45582580566406px;fill: #676767;font-family: Calibri">(Light Gray) Under Development</text>
+	  <circle id="Key_Icon_LIGHT_GRAY_Facility_Health" data-name="Key Icon GREEN Facility Health" cx="4665.8" cy="9383.3" r="143.9" style="fill: #00931f;stroke: #000;stroke-miterlimit: 10;stroke-width: 3px" />
+    <circle id="Key_Icon_GREEN_Facility_Health" data-name="Key Icon GREY Facility Health" cx="4665.8" cy="9812.5" r="143.9" style="fill: #999;stroke: #000;stroke-miterlimit: 10;stroke-width: 3px" />
+    <circle id="Key_Icon_GREY_Facility_Health" data-name="Key Icon YELLOW Facility Health" cx="4665.5" cy="10241.7" r="143.9" style="fill: #ffff07;stroke: #000;stroke-miterlimit: 10;stroke-width: 3px" />
+    <circle id="Key_Icon_YELLOW_Facility_Health" data-name="Key Icon RED Facility Health" cx="4665.8" cy="10699" r="143.9" style="fill: #fe0000;stroke: #000;stroke-miterlimit: 10;stroke-width: 3px" />
+    <circle id="Key_Icon_RED_Facility_Health" data-name="Key Icon LIGHT GRAY Facility Health" cx="4665.3" cy="11116.7" r="143.9" style="fill: #dbdbdb;stroke: #000;stroke-miterlimit: 10;stroke-width: 3px" />
+  </g>
+  <g id="Text_Facility" data-name="Text Facility">
+    <text transform="translate(352.6 5818)" style="font-size: 320.8323974609375px;fill: #676767;font-family: Calibri">MLP9</text>
+    <text transform="translate(1147 11126.7)" style="font-size: 320.8323974609375px;fill: #676767;font-family: Calibri">29B</text>
+    <text transform="translate(3259.8 11309.6)" style="font-size: 320.8323974609375px;fill: #676767;font-family: Calibri">29A</text>
+    <text transform="translate(2312.2 9320.4)" style="font-size: 320.8323974609375px;fill: #676767;font-family: Calibri">30</text>
+    <text transform="translate(846.2 8363.4)" style="font-size: 320.8323974609375px;fill: #676767;font-family: Calibri">49</text>
+    <text transform="translate(4130.5 2500.8)" style="font-size: 320.8323974609375px;fill: #676767;font-family: Calibri">10</text>
+  </g>
+</svg>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-apf-portfolio-ic-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApfPortfolioIcDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route:ActivatedRoute,
+    private dataService:DataService
+  ) { }
 
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.paramMap;
+    const ic = routeParams.get('ic');
   }
 
 }

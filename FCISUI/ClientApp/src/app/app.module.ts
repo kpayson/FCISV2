@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
 import { FormulaHeaderComponent } from './formula-header/formula-header.component';
 import { LegacyPageImportComponent } from './legacy-page-import/legacy-page-import.component';
@@ -20,6 +18,8 @@ import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard
 import {appRoutes} from './routes';
 import { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classification-chart/gsf-growth-by-classification-chart.component';
 import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
+import { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';
+import { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';
 //import { DataService } from './data.service';
 
 
@@ -28,8 +28,6 @@ import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/a
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     NihLogoHeaderComponent,
     FormulaHeaderComponent,
     LegacyPageImportComponent,
@@ -38,7 +36,9 @@ import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/a
     ChartDemoComponent,
     ApfPortfolioAllDashboardComponent,
     GsfGrowthByClassificationChartComponent,
-    ApfPortfolioIcDashboardComponent
+    ApfPortfolioIcDashboardComponent,
+    ApfPortfolioIcMapComponent,
+    ApfTimelineChartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -51,9 +51,3 @@ import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/a
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-// [
-//   { path: '', component: HomeComponent, pathMatch: 'full' },
-//   { path: 'counter', component: CounterComponent },
-//   { path: 'fetch-data', component: FetchDataComponent },
-// ]
