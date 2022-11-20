@@ -9,19 +9,22 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  gsfGrowth_findAll() {
-    return this.http.get<any[]>(`${environment.apiRootUrl}/GsfChart/GsfGrowth`)
+  private get<T>(url:string) {
+    return this.http.get<T>(`${environment.apiRootUrl}/${url}`)
   }
 
+ 
   gsfByFacility() {
-    return this.http.get<any[]>(`${environment.apiRootUrl}/GsfChart/GsfByFacility`);
+    return this.get<any[]>(`GsfChart/GsfByFacility`);
   }
 
   gsfByIC() {
-    return this.http.get<any[]>(`${environment.apiRootUrl}/GsfChart/GsfByIC`);
+    return this.get<any[]>(`GsfChart/GsfByIC`);
   }
 
   gsfGrowthByClassification() {
-    return this.http.get<any[]>(`${environment.apiRootUrl}/GsfChart/GsfGrowthByClassification`);
+    return this.get<any[]>(`GsfChart/GsfGrowthByClassification`);
   }
+
+
 }

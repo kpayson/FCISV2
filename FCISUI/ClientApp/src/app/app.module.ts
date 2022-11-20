@@ -20,6 +20,7 @@ import { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classif
 import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 import { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';
 import { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';
+import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
 //import { DataService } from './data.service';
 
 
@@ -38,7 +39,8 @@ import { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-cha
     GsfGrowthByClassificationChartComponent,
     ApfPortfolioIcDashboardComponent,
     ApfPortfolioIcMapComponent,
-    ApfTimelineChartComponent
+    ApfTimelineChartComponent,
+    ApfMonitoredRoomsChartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

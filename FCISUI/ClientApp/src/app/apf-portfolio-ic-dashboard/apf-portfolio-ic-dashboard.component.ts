@@ -14,9 +14,15 @@ export class ApfPortfolioIcDashboardComponent implements OnInit {
     private dataService:DataService
   ) { }
 
+  monitoredRoomsChartData:any[] = [];
+
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const ic = routeParams.get('ic');
+
+    this.dataService.gsfGrowthByClassification().subscribe(data=>{
+      this.monitoredRoomsChartData = data;
+    })
   }
 
 }
