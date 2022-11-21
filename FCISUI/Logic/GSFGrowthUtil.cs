@@ -11,7 +11,7 @@ namespace FCISUI.Logic
             {
                 CncRoomsArea = 0,
                 CncRoomsCount = 0,
-                CriticalEnvironmentPrametersCount = 0,
+                CriticalEnvironmentParametersCount = 0,
                 Iso7RoomsArea = 0,
                 Iso7RoomsCount = 0,
                 Iso8RoomsArea = 0,
@@ -30,7 +30,7 @@ namespace FCISUI.Logic
                 curTotals.Iso7RoomsCount += delta.Iso7RoomsCount;
                 curTotals.Iso8RoomsArea += delta.Iso8RoomsArea;
                 curTotals.Iso8RoomsCount += delta.Iso8RoomsCount;
-                curTotals.CriticalEnvironmentPrametersCount += delta.CriticalEnvironmentPrametersCount;
+                curTotals.CriticalEnvironmentParametersCount += delta.CriticalEnvironmentParametersCount;
 
                 if (delta.GoLiveDate != currDate)
                 { 
@@ -42,7 +42,7 @@ namespace FCISUI.Logic
                         Iso7RoomsCount = curTotals.Iso7RoomsCount,
                         Iso8RoomsArea = curTotals.Iso8RoomsArea,
                         Iso8RoomsCount = curTotals.Iso8RoomsCount,
-                        CriticalEnvironmentPrametersCount = curTotals.CriticalEnvironmentPrametersCount,
+                        CriticalEnvironmentParametersCount = curTotals.CriticalEnvironmentParametersCount,
                         GoLiveDate = delta.GoLiveDate
                     }); ;
                 }
@@ -55,7 +55,7 @@ namespace FCISUI.Logic
                     prev.Iso7RoomsCount = curTotals.Iso7RoomsCount;
                     prev.Iso8RoomsArea = curTotals.Iso8RoomsArea;
                     prev.Iso8RoomsCount = curTotals.Iso8RoomsCount;
-                    prev.CriticalEnvironmentPrametersCount = curTotals.CriticalEnvironmentPrametersCount;
+                    prev.CriticalEnvironmentParametersCount = curTotals.CriticalEnvironmentParametersCount;
                 }
                 currDate = delta.GoLiveDate;
             }

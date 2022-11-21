@@ -21,7 +21,10 @@ export class ApfPortfolioIcDashboardComponent implements OnInit {
     const ic = routeParams.get('ic');
 
     this.dataService.gsfGrowthByClassification().subscribe(data=>{
-      this.monitoredRoomsChartData = data;
+      this.monitoredRoomsChartData = data.map(x=>{
+        const goLiveDate = new Date(x.goLiveDate);
+        return [goLiveDate, x.cncRoomsArea + x.iso8RoomsArea + x.iso7RoomsArea, x.criticalEnvironmentParametersCount]
+      });
     })
   }
 

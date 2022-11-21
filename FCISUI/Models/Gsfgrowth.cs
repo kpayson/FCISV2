@@ -15,6 +15,6 @@ namespace FCISUI.Models
         public int Iso7RoomsCount { get; set; }
         public int CncRoomsArea { get; set; }
         public int CncRoomsCount { get; set; }
-        public int CriticalEnvironmentPrametersCount { get; set; }
+        public int CriticalEnvironmentParametersCount { get; set; }
     }
 }

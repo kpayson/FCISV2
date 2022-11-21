@@ -1,15 +1,13 @@
-<div class="mb-3">
-
-    <div class="card-body svgCard" style="margin-left: 15px;">
-
-
+<div class="card">
+    <div class="card-body" style="margin-left: 15px;">
         <div class="row" id="rowTest">
-            <div class="panel-left col-md-3">
-                <h3>Portfolio Map</h3>
+            <div class="col-md-3">
+                <app-apf-portfolio-ic-map></app-apf-portfolio-ic-map>
             </div>
-            <div class="panel-center col-md-9" style="border: 1px solid black;">
+
+            <div class="col-md-9" style="border: 0px solid black;">
                 <div class="row">
-                    <div class="panel-center col-md-12" style="border: 1px solid black; height: 400px;">
+                    <div class="col-md-12" style="border: 0px solid rgb(219, 213, 213);">
                         <h4 style="color:#b3172c;">Composite Health Status of the APF Portfolio</h4>
 
                         <app-apf-monitored-rooms-chart [chartData]="monitoredRoomsChartData"></app-apf-monitored-rooms-chart>
@@ -17,18 +15,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <h3>Timeline</h3>
                     <div class="col-12 justify-content-center">
                         <div id="loadingGif" style="display: none; position: fixed; z-index: 1031; top: 50%; right: 30%; margin-top: 100px; margin-right: -100px;">
-                            <img src="Images/giphy.gif" alt="loading" /></div>
+                            <img src="../../assets/images/giphy.gif" alt="loading" /></div>
                         <app-apf-timeline-chart></app-apf-timeline-chart>
-                        <!-- <div id="CHLChart" style="height: 600px;"></div> -->
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
+<!-- <div id="CHLChart" style="height: 600px;"></div> -->

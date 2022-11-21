@@ -15,7 +15,7 @@ namespace FCISUI.ViewModels
         public int Iso7RoomsArea { get; set; }
         public int Iso8RoomsArea { get; set; }
         public int CncRoomsArea { get; set; }
-        public int CriticalEnvironmentPrametersCount { get; set; }
+        public int CriticalEnvironmentParametersCount { get; set; }
 
         public DateTime GoLiveDate { get; set; }
 
@@ -37,7 +37,7 @@ namespace FCISUI.ViewModels
         public int Iso7RoomsArea { get; set; }
         public int Iso8RoomsArea { get; set; }
         public int CncRoomsArea { get; set; }
-        public int CriticalEnvironmentPrametersCount { get; set; }
+        public int CriticalEnvironmentParametersCount { get; set; }
     }
 
 
