@@ -44,11 +44,11 @@ export class ApfPortfolioIcDashboardComponent implements OnInit {
     const atr = "";
     const interval = 15;
 
-    // this.dataService
-    //   .chlTimelineData(startDate,endDate,facid,atr,interval)
-    //   .subscribe(data=>{
-    //     this.timelineData = data;
-    //   });
+    this.dataService
+      .chlTimelineData(startDate,endDate,facid,atr,interval)
+      .subscribe(data=>{
+        this.timelineData = data;
+      });
   }
 
 }

@@ -7,24 +7,24 @@ using AutoMapper;
 
 namespace FCISUI.Controllers
 {     
-    public interface ITimelineParams {
-        DateTime StartDate {get; set;}
-        DateTime EndDate {get; set;}
-        int FacId {get; set;}
-        string Atr {get; set;}
-        int Interval {get; set;}
+    public class TimelineParams {
+        public DateTime StartDate {get; set;}
+        public DateTime EndDate {get; set;}
+        public int FacId {get; set;}
+        public string Atr {get; set;}
+        public int Interval {get; set;}
     }
 
-    public interface IPiData {
-        string RoomName {get; set;}
-        string RoomNumber {get; set;}
-        string SQ {get; set;}
-        string ISO {get; set;}
-        string ChillerStatus {get; set;}
-        string Color {get; set;}
-        string Tag {get; set;}
-        long StartTime {get; set;}
-        long EndTime {get; set;}
+    public class PiData {
+        public string RoomName {get; set;}
+        public string RoomNumber {get; set;}
+        public string SQ {get; set;}
+        public string ISO {get; set;}
+        public string ChillerStatus {get; set;}
+        public string Color {get; set;}
+        public string Tag {get; set;}
+        public long StartTime {get; set;}
+        public long EndTime {get; set;}
     }
 
     [Route("api/[controller]")]
@@ -44,7 +44,7 @@ namespace FCISUI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<IPiData>>> GetTimelineData(ITimelineParams timelineParams)
+        public async Task<ActionResult<IEnumerable<PiData>>> GetTimelineData(TimelineParams timelineParams)
         {
             // var dataList = (timelineParams.Atr == "DP") ?
             //     CreateDataListWindowB_DP(end1, start1, intervalAF, facid, Atr);
@@ -60,7 +60,7 @@ namespace FCISUI.Controllers
             {
                 //dataList = CreateDataListWindowB_PIDirect(end1, start1, intervalAF, facid, Atr);
             }
-            return new List<IPiData>();
+            return new List<PiData>();
         }
 
     }
