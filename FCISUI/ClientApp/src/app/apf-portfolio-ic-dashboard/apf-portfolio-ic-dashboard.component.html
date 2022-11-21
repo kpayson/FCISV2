@@ -17,8 +17,9 @@
                 <div class="row">
                     <div class="col-12 justify-content-center">
                         <div id="loadingGif" style="display: none; position: fixed; z-index: 1031; top: 50%; right: 30%; margin-top: 100px; margin-right: -100px;">
-                            <img src="../../assets/images/giphy.gif" alt="loading" /></div>
-                        <app-apf-timeline-chart></app-apf-timeline-chart>
+                        <img src="../../assets/images/giphy.gif" alt="loading" /></div>
+                        
+                        <app-apf-timeline-chart [chartData]="timelineData"></app-apf-timeline-chart>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,42 @@
+using FCISUI.ViewModels;
+
+namespace FCISUI.Logic
+{
+    public static class TimelineUtil {
+
+    }
+}
+
+        // protected DataTable CreateEquipmentList(string Tag)
+        // {
+        //     DataTable dt = new DataTable();
+        //     dt.Columns.Add("PiPathStr", typeof(string));//column 0   
+        //     dt.Columns.Add("Attribute", typeof(string));//column 1
+        //     dt.Columns.Add("Element", typeof(string));//column 1
+        //     try
+        //     {
+        //         string Element = Tag;
+        //         string Attribute = "";
+        //         string PIServer = ConfigurationManager.AppSettings["PIServer"] + @"\" + ConfigurationManager.AppSettings["PIDatabase"];
+        //         string PiPath = PIServer + Element;
+
+        //         if (Element.Contains("|"))
+        //         {
+        //             int ssi = Element.LastIndexOf("|");
+        //             Attribute = Element.Substring(ssi + 1);
+        //         }
+        //         dt.Rows.Add(PiPath, Attribute, Element);
+        //     }
+        //     catch (Exception ex)
+        //     {
+
+        //         ErrorHandler.LogErrorToDB((int)Session["personroleid"], "Error Calculating TotalTimelinessCount for Tag:" + Tag, "LoadSummaryByCount", ex);
+        //         //Response.Redirect("CustomErrorPage.aspx");
+        //     }
+        //     return dt;
+        // }
+
+
 // public static List<PIChartData> GetDataToPopulateWindowB(DateTime StrStartDate, DateTime StrEndDate, int facid, string Atr, int interval)
 // {
 //     string strSt = StrStartDate.ToString("yyyy-MM-ddTHH:mm");
