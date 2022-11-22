@@ -13,21 +13,22 @@
                     The National Institutes of Health (NIH) APF Portfolio consists of 12 facilites, including
                     pharmacies, radiopharmacies ...
                 </p>
-                <app-gsf-growth-by-classification-chart [chartData]="gsfGrowthByClassificationData"></app-gsf-growth-by-classification-chart>
+                <app-gsf-growth-by-classification-chart [chartData]="(service.gsfGrowthByClassification$ | async) || []"></app-gsf-growth-by-classification-chart>
                 <div class="chart-label">APF Portfolio GSF Growth by Classification</div>
             </div>
         </div>
 
         <div class="row">
             <div class="panel-center col-md-6" style="border: 0px solid black;">
-                <app-gsf-pie-chart [chartData]="gsfByIcData">
+                <app-gsf-pie-chart [chartData]="(service.gsfByIC$ | async) || []"> 
+                    <!-- gsfByIcData -->
                 </app-gsf-pie-chart>
                 <div class="chart-label">APF Portfolio GSF by IC</div>
             </div>
 
             <div class="panel-center col-md-6" style="border: 0px solid black;">
                 <app-gsf-pie-chart
-                    [chartData]="gsfByFacilityData"></app-gsf-pie-chart>
+                    [chartData]="(service.gsfByFacility$ | async) || []"></app-gsf-pie-chart>
                 <div class="chart-label">APF Portfolio GSF by Facility</div>
             </div>
         </div>

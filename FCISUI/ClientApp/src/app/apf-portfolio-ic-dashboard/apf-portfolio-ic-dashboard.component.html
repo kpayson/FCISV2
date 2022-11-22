@@ -10,7 +10,7 @@
                     <div class="col-md-12" style="border: 0px solid rgb(219, 213, 213);">
                         <h4 style="color:#b3172c;">Composite Health Status of the APF Portfolio</h4>
 
-                        <app-apf-monitored-rooms-chart [chartData]="monitoredRoomsChartData"></app-apf-monitored-rooms-chart>
+                        <app-apf-monitored-rooms-chart [chartData]="(monitoredRoomsChartData$ | async) || []"></app-apf-monitored-rooms-chart>
                         <div class="chart-label">APF Portfolio: Monitored Rooms and Critical Environmental Parameter Points</div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                         <div id="loadingGif" style="display: none; position: fixed; z-index: 1031; top: 50%; right: 30%; margin-top: 100px; margin-right: -100px;">
                         <img src="../../assets/images/giphy.gif" alt="loading" /></div>
                         
-                        <app-apf-timeline-chart [chartData]="timelineData"></app-apf-timeline-chart>
+                        <app-apf-timeline-chart [chartData]="(timelineData$ | async) || []"></app-apf-timeline-chart>
                     </div>
                 </div>
             </div>

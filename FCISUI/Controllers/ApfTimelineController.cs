@@ -3,29 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using FCISUI.Models;
 using FCISUI.ViewModels;
 using FCISUI.Logic;
+using FCISUI.Data;
 using AutoMapper;
+using OSIsoft.AF;
+using OSIsoft.AF.Time;
+using OSIsoft.AF.Asset;
 
 namespace FCISUI.Controllers
-{     
-    public class TimelineParams {
-        public DateTime StartDate {get; set;}
-        public DateTime EndDate {get; set;}
-        public int FacId {get; set;}
-        public string Atr {get; set;}
-        public int Interval {get; set;}
-    }
-
-    public class PiData {
-        public string RoomName {get; set;}
-        public string RoomNumber {get; set;}
-        public string SQ {get; set;}
-        public string ISO {get; set;}
-        public string ChillerStatus {get; set;}
-        public string Color {get; set;}
-        public string Tag {get; set;}
-        public long StartTime {get; set;}
-        public long EndTime {get; set;}
-    }
+{
 
     [Route("api/[controller]")]
     [ApiController]
@@ -34,23 +19,38 @@ namespace FCISUI.Controllers
         private readonly FCISPortalContext _context;
         private readonly IMapper _mapper;
 
+        private readonly IPIDataService _piDataService;
+
         public ApfTimelineController(
             FCISPortalContext context,
+            IPIDataService piDataService,
             IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            _piDataService = piDataService;
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<PiData>>> GetTimelineData(TimelineParams timelineParams)
+        public async Task<ActionResult<IEnumerable<PIChartData>>> GetTimelineData(TimelineParams timelineParams)
         {
+            
+            var piChartData = this._piDataService.CreateDataListFacility(
+                timelineParams.StartDate, 
+                timelineParams.EndDate, 
+                new AFTimeSpan(minutes: timelineParams.Interval),
+                timelineParams.FacId, 
+                timelineParams.Atr);
+
+            return piChartData;
+
             // var dataList = (timelineParams.Atr == "DP") ?
             //     CreateDataListWindowB_DP(end1, start1, intervalAF, facid, Atr);
             if (timelineParams.Atr == "DP")
             {
                 // dataList = CreateDataListWindowB_DP(end1, start1, intervalAF, facid, Atr);
+                
             }
             else if (timelineParams.Atr == "Sum All")
             {
@@ -60,7 +60,7 @@ namespace FCISUI.Controllers
             {
                 //dataList = CreateDataListWindowB_PIDirect(end1, start1, intervalAF, facid, Atr);
             }
-            return new List<PiData>();
+
         }
 
     }

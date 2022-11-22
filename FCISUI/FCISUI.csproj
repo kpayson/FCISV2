@@ -34,6 +34,18 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="OSIsoft.AF.UI">
+      <HintPath>..\..\PI DLLs\OSIsoft.AF.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="OSIsoft.AFSDK">
+      <HintPath>..\..\PI DLLs\OSIsoft.AFSDK.dll</HintPath>
+    </Reference>
+    <Reference Include="OSIsoft.PISDK.Controls">
+      <HintPath>..\..\PI DLLs\OSIsoft.PISDK.Controls.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

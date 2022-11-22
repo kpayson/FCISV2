@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "FCISUI"
+  "defaultProject": "FCISUI",
+  "cli": {
+    "analytics": false
+  }
 }

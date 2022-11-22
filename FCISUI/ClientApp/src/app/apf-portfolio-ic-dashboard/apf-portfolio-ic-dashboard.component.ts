@@ -1,34 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
 import { ActivatedRoute } from '@angular/router';
-
-
+import { ApfPortfolioIcDashboardService } from './apf-portfolio-ic-dashboard.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-apf-portfolio-ic-dashboard',
   templateUrl: './apf-portfolio-ic-dashboard.component.html',
-  styleUrls: ['./apf-portfolio-ic-dashboard.component.scss']
+  styleUrls: ['./apf-portfolio-ic-dashboard.component.scss'],
+  providers: [ApfPortfolioIcDashboardService]
 })
 export class ApfPortfolioIcDashboardComponent implements OnInit {
 
   constructor(
     private route:ActivatedRoute,
-    private dataService:DataService
-  ) { }
+    public service:ApfPortfolioIcDashboardService
+  ) { 
 
-  monitoredRoomsChartData:any[] = [];
-  timelineData:any[] = [];
-
-  ngOnInit(): void {
-    const routeParams = this.route.snapshot.paramMap;
-    const ic = routeParams.get('ic')?.toLowerCase() || "";
-
-    this.dataService.gsfGrowthByClassification().subscribe(data=>{
-      this.monitoredRoomsChartData = data.map(x=>{
-        const goLiveDate = new Date(x.goLiveDate);
-        return [goLiveDate, x.cncRoomsArea + x.iso8RoomsArea + x.iso7RoomsArea, x.criticalEnvironmentParametersCount]
-      });
-    });
+    this.monitoredRoomsChartData$ = this.service.gsfGrowthByClassification$;
 
     const endDate = new Date();
     const startDate = new Date();
@@ -40,15 +29,21 @@ export class ApfPortfolioIcDashboardComponent implements OnInit {
       if(ic==='niad') {return 120;}
       return 0;
     }
+
+    const routeParams = this.route.snapshot.paramMap;
+    const ic = routeParams.get('ic')?.toLowerCase() || "";
     const facid = getFacid(ic);
     const atr = "";
     const interval = 15;
+    this.timelineData$ = this.service.chlTimeline(startDate,endDate,facid,atr,interval);
+  }
 
-    this.dataService
-      .chlTimelineData(startDate,endDate,facid,atr,interval)
-      .subscribe(data=>{
-        this.timelineData = data;
-      });
+  monitoredRoomsChartData$:Observable<any[]>;
+  timelineData$:Observable<any[]>;
+
+  ngOnInit(): void {
+
+
   }
 
 }

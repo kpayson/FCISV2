@@ -4,3 +4,4 @@ PowerShell*.txt
 **/.angular/*
 **/bin/*
 
+*.local.json

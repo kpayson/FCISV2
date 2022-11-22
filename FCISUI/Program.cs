@@ -28,6 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
+using FCISUI.Data;
 using FCISUI.Models;
 // using AppPermissions = DAL.Core.ApplicationPermissions;
 
@@ -38,9 +39,13 @@ namespace FCISUI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Configuration.AddJsonFile("appsettings.json");
+            builder.Configuration.AddJsonFile("appsettings.local.json");
+            
             AddServices(builder);// Add services to the container.
 
             var app = builder.Build();
+            
             ConfigureRequestPipeline(app); // Configure the HTTP request pipeline.
 
             SeedDatabase(app); //Seed initial database
@@ -166,6 +171,7 @@ namespace FCISUI
 
             // Business Services
             //builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddScoped<IPIDataService,PIDataService>();
 
             // Repositories
             // builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();

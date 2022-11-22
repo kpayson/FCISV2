@@ -22,11 +22,6 @@ namespace FCISUI.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<string>>> GetGsfData()
-        {
-            return new List<string>() { "RedTriange", "BlueSquare" };
-        }
 
         [HttpGet("GsfByFacility")]
         public IEnumerable<FacilityGsf> GetGsfByFacility()
