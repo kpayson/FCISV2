@@ -57,42 +57,4 @@ export class ApfMonitoredRoomsChartComponent implements OnInit {
     return options;
   }
 
-
-  // google.charts.load("current", { packages: ["corechart"] });
-  // google.charts.setOnLoadCallback(() => {
-  //     const header = [['Go Live Date', 'Area', 'Critical Environmental Parameters']];
-  //     const growthDataArray =
-  //         header.concat(response.d.map(x => {
-  //             const goLiveDate = new Date(Number(x.GoLiveDate.replace(/\D+/g, '')));
-  //             return [goLiveDate, x.CncRoomsArea + x.Iso8RoomsArea + x.Iso7RoomsArea, x.CriticalEnvironmentParametersCount]
-  //         }));
-  //     const growthData = google.visualization.arrayToDataTable(growthDataArray);
-
-  //     const ystart = growthDataArray[1][0].getFullYear();
-  //     const yend = growthDataArray[growthDataArray.length - 1][0].getFullYear();
-  //     const ycount = yend - ystart + 1;
-  //     const hAxisTicks = [...Array(ycount).keys()].map(y => new Date(y + ystart, 1, 1));
-
-  //     const options = { //fullStacked
-  //         isStacked: 'absolute',
-  //         height: 300,
-  //         legend: { position: 'top', maxLines: 3 },
-  //         seriesType: 'area',
-  //         series: { 1: { type: 'line' } },
-  //         vAxis: {
-  //             minValue: 0
-  //         },
-  //         hAxis: {
-  //             format: 'yyyy',
-  //             ticks: hAxisTicks
-  //         }
-  //     };
-
-  //     const container = document.getElementById(containerId);
-  //     const chart = new google.visualization.ComboChart(container);
-  //     chart.draw(growthData, options);
-
-  //});
-
-
 }
