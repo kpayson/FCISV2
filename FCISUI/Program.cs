@@ -89,6 +89,8 @@ namespace FCISUI
                 //options.Lockout.MaxFailedAccessAttempts = 10;
             });
 
+            builder.Services.AddHttpClient();
+
             // Adds IdentityServer.
             // builder.Services.AddIdentityServer(o =>
             // {

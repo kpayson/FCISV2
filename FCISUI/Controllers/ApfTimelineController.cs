@@ -9,6 +9,7 @@ using OSIsoft.AF;
 using OSIsoft.AF.Time;
 using OSIsoft.AF.Asset;
 
+
 namespace FCISUI.Controllers
 {
 
@@ -35,11 +36,12 @@ namespace FCISUI.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<PIChartData>>> GetTimelineData(TimelineParams timelineParams)
         {
-            
+            var cGMP = this._piDataService.GetCGMP();
+
             var piChartData = this._piDataService.CreateDataListFacility(
                 timelineParams.StartDate, 
                 timelineParams.EndDate, 
-                new AFTimeSpan(minutes: timelineParams.Interval),
+                timelineParams.Interval,
                 timelineParams.FacId, 
                 timelineParams.Atr);
 
