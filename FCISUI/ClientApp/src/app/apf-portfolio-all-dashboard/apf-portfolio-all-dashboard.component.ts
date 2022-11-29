@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-//import { DataService } from 'src/app/data.service';
-import { ApfPortfolioAllDashboardService} from './apf-portfolio-all-dashboard.service';
+import { Component } from '@angular/core';
+import { ApfPortfolioAllDashboardService } from './apf-portfolio-all-dashboard.service';
 
 @Component({
   selector: 'app-apf-portfolio-all-dashboard',
@@ -9,7 +8,5 @@ import { ApfPortfolioAllDashboardService} from './apf-portfolio-all-dashboard.se
   providers: [ApfPortfolioAllDashboardService]
 })
 export class ApfPortfolioAllDashboardComponent {
-
-  constructor(public service:ApfPortfolioAllDashboardService) { }
-
+  constructor(public service: ApfPortfolioAllDashboardService) {}
 }

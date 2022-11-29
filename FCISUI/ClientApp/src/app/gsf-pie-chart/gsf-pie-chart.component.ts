@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartType } from 'angular-google-charts';
 
 @Component({
@@ -6,16 +6,12 @@ import { ChartType } from 'angular-google-charts';
   templateUrl: './gsf-pie-chart.component.html',
   styleUrls: ['./gsf-pie-chart.component.scss']
 })
-export class GsfPieChartComponent implements OnInit {
-
-  constructor() { }
+export class GsfPieChartComponent {
+  constructor() {}
 
   @Input()
-  chartData:any[] = [];
+  chartData: any[] = [];
 
-  chartType= ChartType.PieChart;
-  columnNames =  ['Facility', 'GSF'];
-
-  ngOnInit(): void {}
-
+  chartType = ChartType.PieChart;
+  columnNames = ['Facility', 'GSF'];
 }

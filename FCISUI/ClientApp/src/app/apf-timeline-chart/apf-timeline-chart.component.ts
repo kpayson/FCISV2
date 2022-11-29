@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartType } from 'angular-google-charts';
 
 @Component({
@@ -6,41 +6,34 @@ import { ChartType } from 'angular-google-charts';
   templateUrl: './apf-timeline-chart.component.html',
   styleUrls: ['./apf-timeline-chart.component.scss']
 })
-export class ApfTimelineChartComponent implements OnInit {
+export class ApfTimelineChartComponent {
+  constructor() {}
 
-  constructor() { }
-
-  
   @Input()
-  chartData:any[] = []
- 
+  chartData: any[] = [];
 
   chartType = ChartType.Timeline;
 
   columnNames = [
     { type: 'string', id: 'ChillerName' },
-    { type: 'string', id: 'ChillerNameTooltip', role: 'tooltip', 'p': { 'html': true } },
+    {
+      type: 'string',
+      id: 'ChillerNameTooltip',
+      role: 'tooltip',
+      p: { html: true }
+    },
     { type: 'string', id: 'ChillerStatus' },
     { type: 'string', role: 'style' },
     { type: 'date', id: 'StartTime' },
     { type: 'date', id: 'EndTime' }
   ];
 
-
   options: any = {
-        timeline: { showBarLabels: false, colorByRowLabel: true },
-        backgroundColor: '#ebe9e6',
-        tooltip: { isHtml: true },
-        focusTarget: 'category',
-    };
-
-
-
-  ngOnInit(): void {
-  }
-
-
-
+    timeline: { showBarLabels: false, colorByRowLabel: true },
+    backgroundColor: '#ebe9e6',
+    tooltip: { isHtml: true },
+    focusTarget: 'category'
+  };
 }
 
 // var container = document.getElementById('timeline');
@@ -56,7 +49,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //   [ 'Jefferson',  new Date(1801, 2, 4),  new Date(1809, 2, 4) ]]);
 
 // chart.draw(dataTable);
-
 
 // $(document).ready(function () {
 
@@ -124,7 +116,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //             dummyEnd,
 //             /*tooltipTextStringDummy*/]);
 
-
 //         console.log(" ***THIS IS A DUMMY ROW***");
 //     }
 //     else {
@@ -174,7 +165,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //             }
 //             else {
 
-
 //                 //console.log("                 *********About to add to Window B: " + "pin" + dataValues[i].RoomName);
 //                 var testPin = "pin" + dataValues[i].RoomName;
 //                 var cleanTestPin = testPin.replace("-", "_");
@@ -212,7 +202,7 @@ export class ApfTimelineChartComponent implements OnInit {
 //                     dataTable.addRow([{
 //                         v: dataValues[i].RoomName, p: {
 //                             link: 'https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=' + dataValues[i].Tag // This will need to be the correct concantonated link: dataValues[i].Tag + ...
-                            
+
 //                         }
 //                     },
 //                         tooltipText,
@@ -230,7 +220,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //                 }
 //             }
 
-            
 //         }
 //     }
 
@@ -363,9 +352,7 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                 pinCurrent.setAttribute('class', 'stArrowBackGray');
 //                             });
 
-
-
-//                             // Label in the chart (window B) --> pins (window A) 
+//                             // Label in the chart (window B) --> pins (window A)
 //                             label.addEventListener('click', function (sender) { // add event to row labels when clicked to open URL
 //                                 if (dataRows.length > 0) {
 //                                     var link = dataTable.getProperty(dataRows[0], 0, 'link');
@@ -421,10 +408,9 @@ export class ApfTimelineChartComponent implements OnInit {
 
 //                             console.log("gets here 4");
 
-//                             // Entire pin 
+//                             // Entire pin
 //                             var pinCompName = 'pin' + cleanLabelText;
 //                             var pinComp = document.getElementById(pinCompName);
-
 
 //                             if (pinComp != null) {
 //                                 pinComp.setAttribute('data-toggle', 'tooltip');
@@ -432,7 +418,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                 pinComp.setAttribute('data-html', 'true');
 //                                 pinComp.setAttribute('data-original-title', tooltipData);
 //                             }
-                            
 
 //                             $('[data-toggle="tooltip"]').tooltip({ placement: 'right' });
 //                             console.log("gets here 5");
@@ -456,7 +441,7 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                             url: 'FacilityDashboard.aspx/GetRoomDataListForDetailsWindowSingleRoomAsDictOrdered',
 //                                             data: '{"roomNumber":"' + labelText + '"}',
 //                                             success:
-                                                
+
 //                                                 function (data) {
 //                                                     console.log("            GOT HERE AJAX 3 START");
 
@@ -512,7 +497,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                                                 console.log("         ***BAS 444: " + value);
 //                                                             }
 //                                                         }
-                                                        
 
 //                                                         // Pipe status icon
 //                                                         var valueSymbol = '';
@@ -548,7 +532,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                                                 //'<img src="Images/_StatusIcon_Alarm.svg" style="width: inherit; padding-left: 10px;" />' +
 //                                                                 //'</span>';
 //                                                         }
-
 
 //                                                         // End piping logic
 
@@ -618,13 +601,10 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                         }
 //                                     });
 //                                 }
-                                
+
 //                             }
-                            
 
-
-
-//                             // Label in the chart (window B) --> pins (window A) 
+//                             // Label in the chart (window B) --> pins (window A)
 //                             label.addEventListener('click', function (sender) { // add event to row labels when clicked to open URL
 //                                 if (dataRows.length > 0) {
 //                                     var link = dataTable.getProperty(dataRows[0], 0, 'link');
@@ -639,7 +619,7 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                 if (pinBackCurrComp != null) {
 //                                     pinBackCurrComp.setAttribute('class', 'stHoverBack');
 //                                 }
-                                
+
 //                             });
 
 //                             label.addEventListener('mouseout', function (sender) {
@@ -647,21 +627,17 @@ export class ApfTimelineChartComponent implements OnInit {
 //                                 if (pinBackCurrComp != null) {
 //                                     pinBackCurrComp.setAttribute('class', 'stGray');
 //                                 }
-                                
 
 //                             });
 
 //                             if (pinComp != null) {
 //                                 pinComp.setAttribute('style', 'cursor: pointer; text-decoration: underline;'); // add cursor event to pin
 //                             }
-                            
+
 //                             label.setAttribute('style', 'cursor: pointer; text-decoration: underline;'); // add cursor event to row label
 //                         }
 
-                        
 //                     }
-
-
 
 //                 }
 //             });
@@ -682,7 +658,6 @@ export class ApfTimelineChartComponent implements OnInit {
 //     //var tableChart = new google.visualization.Table(document.getElementById('table_chart_div'));
 //     //tableChart.draw(dataTable, { allowHTML: true, showRowNumber: true, width: '100%', height: '100%' });
 
-    
 // }
 
 // function createCustomHTMLContentTableDP(Name) {
@@ -732,7 +707,7 @@ export class ApfTimelineChartComponent implements OnInit {
 //                     if (document.getElementById(cleanString) != null) {
 //                         document.getElementById(cleanString).setAttribute('class', value.toString());
 //                     }
-                    
+
 //                 });
 //                 console.log("GOT HERE AJAX 2 END");
 //             },
@@ -742,5 +717,3 @@ export class ApfTimelineChartComponent implements OnInit {
 //     });
 
 // })
-
-

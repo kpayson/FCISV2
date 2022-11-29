@@ -8,9 +8,8 @@ describe('ApfPortfolioIcDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApfPortfolioIcDashboardComponent ]
-    })
-    .compileComponents();
+      declarations: [ApfPortfolioIcDashboardComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ApfPortfolioIcDashboardComponent);
     component = fixture.componentInstance;

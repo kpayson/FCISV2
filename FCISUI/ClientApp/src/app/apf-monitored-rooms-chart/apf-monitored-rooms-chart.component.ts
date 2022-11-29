@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartType } from 'angular-google-charts';
 
 @Component({
@@ -6,10 +6,8 @@ import { ChartType } from 'angular-google-charts';
   templateUrl: './apf-monitored-rooms-chart.component.html',
   styleUrls: ['./apf-monitored-rooms-chart.component.scss']
 })
-export class ApfMonitoredRoomsChartComponent implements OnInit {
-
-  constructor() { }
-
+export class ApfMonitoredRoomsChartComponent {
+  constructor() {}
 
   private _chartData: any[] = [];
 
@@ -20,27 +18,25 @@ export class ApfMonitoredRoomsChartComponent implements OnInit {
   set chartData(v: any[]) {
     if (v.some(Boolean)) {
       this._chartData = v;
-      this.options = this.chartOptions(this._chartData)
+      this.options = this.chartOptions(this._chartData);
     }
   }
 
   chartType = ChartType.AreaChart;
   columnNames = ['Go Live Date', 'Area', 'Critical Environmental Parameters'];
-  data: any[] = []
+  data: any[] = [];
   options: any;
 
-
-  ngOnInit(): void {
-  }
-
   chartOptions(data: any[]) {
-
     const ystart = new Date(data[0][0]).getFullYear();
     const yend = new Date(data[data.length - 1][0]).getFullYear();
     const ycount = yend - ystart + 1;
-    const hAxisTicks: any[] = [...Array(ycount).keys()].map(y => new Date(y + ystart, 1, 1));
+    const hAxisTicks: any[] = [...Array(ycount).keys()].map(
+      (y) => new Date(y + ystart, 1, 1)
+    );
 
-    const options = { //fullStacked
+    const options = {
+      //fullStacked
       isStacked: 'absolute',
       height: 300,
       legend: { position: 'top', maxLines: 3 },
@@ -56,5 +52,4 @@ export class ApfMonitoredRoomsChartComponent implements OnInit {
     };
     return options;
   }
-
 }

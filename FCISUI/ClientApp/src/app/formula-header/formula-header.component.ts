@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./formula-header.component.scss']
 })
 export class FormulaHeaderComponent {
-
-  constructor() { }
-
+  constructor() {}
 }

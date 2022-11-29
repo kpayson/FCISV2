@@ -1,154 +1,152 @@
 svg {
-    background-image: url(../../assets/images/APF-Portfolio_RevisedvMM.svg);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    max-width: 900px;
-    width: 90%;
+  background-image: url(../../assets/images/APF-Portfolio_RevisedvMM.svg);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  max-width: 900px;
+  width: 90%;
 }
 
 path {
-    fill: transparent;
-    cursor: pointer;
-    transition: fill 0.2s
+  fill: transparent;
+  cursor: pointer;
+  transition: fill 0.2s;
 }
 
 /*test with new svg*/
 /*CCE Facility = brown*/
 svg #Pin_Facility_2J a:hover path {
-    fill: rgb(180, 107, 23);
-    cursor: pointer;
+  fill: rgb(180, 107, 23);
+  cursor: pointer;
 }
 
 svg #Pin_Facility_2E a:hover path {
-    fill: rgb(180, 107, 23);
-    cursor: pointer;
+  fill: rgb(180, 107, 23);
+  cursor: pointer;
 }
 
 svg #Pin_Facility_3E a:hover path {
-    fill: rgb(180, 107, 23);
-    cursor: pointer;
+  fill: rgb(180, 107, 23);
+  cursor: pointer;
 }
 
 svg #Pin_Facility_East_Terrace a:hover path {
-    fill: rgb(180, 107, 23);
-    cursor: pointer;
+  fill: rgb(180, 107, 23);
+  cursor: pointer;
 }
 
 /*CC Pharmacy Facility = green*/
 svg #Pin_Facility_I-IVAU a:hover path {
-    fill: #b5fd19;
-    cursor: pointer;
+  fill: #b5fd19;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_P-IVAU a:hover path {
-    fill: #b5fd19;
-    cursor: pointer;
+  fill: #b5fd19;
+  cursor: pointer;
 }
 
 /*CC Other Facilities = fuchsia*/
 svg #Pin_Facility_DLM_Image a:hover path {
-    fill: #fb09bf;
-    cursor: pointer;
+  fill: #fb09bf;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_NMD a:hover path {
-    fill: #fb09bf;
-    cursor: pointer;
+  fill: #fb09bf;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_PET_B3 a:hover path {
-    fill: #fb09bf;
-    cursor: pointer;
+  fill: #fb09bf;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_PET_Radiopharm a:hover path {
-    fill: #fb09bf;
-    cursor: pointer;
+  fill: #fb09bf;
+  cursor: pointer;
 }
 
 /*NCI Facility = blue*/
 svg #Ownership_Facility_Other a:hover path {
-    fill: #0ff;
-    cursor: pointer;
+  fill: #0ff;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_HPC13 a:hover path {
-    /*lab 7*/
-    fill: #0ff;
-    cursor: pointer;
+  /*lab 7*/
+  fill: #0ff;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_1B42 a:hover path {
-    fill: #0ff;
-    cursor: pointer;
+  fill: #0ff;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_10A a:hover path {
-    fill: #0ff;
-    cursor: pointer;
+  fill: #0ff;
+  cursor: pointer;
 }
 
 svg #Pin_Facility_10B a:hover path {
-    fill: #0ff;
-    cursor: pointer;
+  fill: #0ff;
+  cursor: pointer;
 }
 
 /*NIAID Facility = red*/
 svg #Ownership_Facility_NIAID a:hover path {
-    /*lab 2*/
-    fill: #c9363c;
-    cursor: pointer;
+  /*lab 2*/
+  fill: #c9363c;
+  cursor: pointer;
 }
 
-
-
 .st1 {
-    fill: #e1e1e1
+  fill: #e1e1e1;
 }
 
 .st2 {
-    fill: #fbb03b
+  fill: #fbb03b;
 }
 
 .st3 {
-    fill-opacity: .25;
-    stroke: #000;
-    stroke-linecap: round;
-    stroke-linejoin: round
+  fill-opacity: 0.25;
+  stroke: #000;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .st4 {
-    fill: #94762d
+  fill: #94762d;
 }
 
 .st5 {
-    fill: #0ff
+  fill: #0ff;
 }
 
 .st6 {
-    fill: #fb09bf
+  fill: #fb09bf;
 }
 
 .st7 {
-    fill: #b5fd19
+  fill: #b5fd19;
 }
 
 .st9 {
-    fill: none
+  fill: none;
 }
 
 .st10 {
-    fill: #676767
+  fill: #676767;
 }
 
 .st11 {
-    font-family: Calibri;
+  font-family: Calibri;
 }
 
 .st12 {
-    font-size: 320.8324px
+  font-size: 320.8324px;
 }
 
 .st14 {
-    font-size: 213.8883px
+  font-size: 213.8883px;
 }

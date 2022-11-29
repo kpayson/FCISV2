@@ -13,7 +13,9 @@
     "test": "ng test",
     "gen-api": "set NODE_EXTRA_CA_CERTS=%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem && set NODE_EXTRA_CA_CERTS && ng-openapi-gen --config ng-openapi-gen.json",
     "ng-openapi-gen": "ng-openapi-gen",
-    "ng-openapi-gen:dev": "ng-openapi-gen --input https://localhost:44420/swagger/v1/swagger.json"
+    "ng-openapi-gen:dev": "ng-openapi-gen --input https://localhost:44420/swagger/v1/swagger.json",
+    "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --quiet --fix",
+    "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write"
   },
   "private": true,
   "dependencies": {
@@ -38,11 +40,19 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.0.3",
+    "@angular-eslint/eslint-plugin": "^15.1.0",
+    "@angular-eslint/eslint-plugin-template": "^15.1.0",
+    "@angular-eslint/template-parser": "^15.1.0",
     "@angular/cli": "^14.2.10",
     "@angular/compiler-cli": "^14.0.3",
+    "@babel/eslint-parser": "^7.19.1",
     "@types/jasmine": "~4.0.3",
     "@types/jasminewd2": "~2.0.10",
     "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "jasmine-core": "~4.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.1",
@@ -50,6 +60,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
     "ng-openapi-gen": "^0.23.0",
+    "prettier": "^2.8.0",
     "typescript": "~4.7.4"
   },
   "overrides": {

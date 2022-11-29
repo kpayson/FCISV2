@@ -1,30 +1,51 @@
 <div class="card">
-    <div class="card-body" style="margin-left: 15px;">
-        <div class="row" id="rowTest">
-            <div class="col-md-3">
-                <app-apf-portfolio-ic-map></app-apf-portfolio-ic-map>
-            </div>
+  <div class="card-body" style="margin-left: 15px">
+    <div class="row" id="rowTest">
+      <div class="col-md-3">
+        <app-apf-portfolio-ic-map></app-apf-portfolio-ic-map>
+      </div>
 
-            <div class="col-md-9" style="border: 0px solid black;">
-                <div class="row">
-                    <div class="col-md-12" style="border: 0px solid rgb(219, 213, 213);">
-                        <h4 style="color:#b3172c;">Composite Health Status of the APF Portfolio</h4>
+      <div class="col-md-9" style="border: 0px solid black">
+        <div class="row">
+          <div class="col-md-12" style="border: 0px solid rgb(219, 213, 213)">
+            <h4 style="color: #b3172c">
+              Composite Health Status of the APF Portfolio
+            </h4>
 
-                        <app-apf-monitored-rooms-chart [chartData]="(monitoredRoomsChartData$ | async) || []"></app-apf-monitored-rooms-chart>
-                        <div class="chart-label">APF Portfolio: Monitored Rooms and Critical Environmental Parameter Points</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 justify-content-center">
-                        <div id="loadingGif" style="display: none; position: fixed; z-index: 1031; top: 50%; right: 30%; margin-top: 100px; margin-right: -100px;">
-                        <img src="../../assets/images/giphy.gif" alt="loading" /></div>
-                        
-                        <app-apf-timeline-chart [chartData]="(timelineData$ | async) || []"></app-apf-timeline-chart>
-                    </div>
-                </div>
+            <app-apf-monitored-rooms-chart
+              [chartData]="(monitoredRoomsChartData$ | async) || []"
+            ></app-apf-monitored-rooms-chart>
+            <div class="chart-label">
+              APF Portfolio: Monitored Rooms and Critical Environmental
+              Parameter Points
             </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-12 justify-content-center">
+            <div
+              id="loadingGif"
+              style="
+                display: none;
+                position: fixed;
+                z-index: 1031;
+                top: 50%;
+                right: 30%;
+                margin-top: 100px;
+                margin-right: -100px;
+              "
+            >
+              <img src="../../assets/images/giphy.gif" alt="loading" />
+            </div>
+
+            <app-apf-timeline-chart
+              [chartData]="(timelineData$ | async) || []"
+            ></app-apf-timeline-chart>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- <div id="CHLChart" style="height: 600px;"></div> -->

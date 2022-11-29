@@ -1,148 +1,245 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-        <!-- Toggle button -->
-        <button class="navbar-toggler px-0" type="button" data-mdb-toggle="collapse"
-            data-mdb-target="#navbarExampleOnHover" aria-controls="navbarExampleOnHover" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler px-0"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarExampleOnHover"
+      aria-controls="navbarExampleOnHover"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
 
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link"><b>Portfolios</b></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown" href="#" id="portfolios-navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">APF Portfolios
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a [routerLink]="['apf-portfolio/all']" class="dropdown-item">All APF</a></li>
-                        <li><a [routerLink]="['apf-portfolio/nci']" class="dropdown-item"
-                                style="border-bottom: white">NCI APF</a></li>
-                        <li>
-                            <a [routerLink]="['apf-portfolio/niad']" class="dropdown-item"
-                                style="border-bottom: white">NIAD APF</a>
-                        </li>
-                        <li><a [routerLink]="['apf-portfolio/cc']" class="dropdown-item">CC APF</a></li>
-                        <li><a href="" class="dropdown-item" style="border-bottom: white">1B42 APF</a></li>
-                        <li><a href="" class="dropdown-item" style="border-bottom: white">E Terr APF</a></li>
-                        <li><a href="" class="dropdown-item" style="border-bottom: white">... APF</a></li>
-                        <li><a href="" class="dropdown-item" style="border-bottom: white">... APF</a></li>
-                        <li><a href="" class="dropdown-item" style="border-bottom: white">... APF</a></li>
-                        <li><a href="" class="dropdown-item" style="border-bottom: white">... APF</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item dropdown position-static" style="display: flex; flex-direction: row-reverse;">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Resources
-                    </a>
-                    <!-- <a class="nav-link dropdown-toggle" href="#" id="portfolios-navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">APF Portfolios
+    <!-- Collapsible wrapper -->
+    <div
+      class="collapse navbar-collapse justify-content-between"
+      id="navbarSupportedContent"
+    >
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link"><b>Portfolios</b></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown"
+            href="#"
+            id="portfolios-navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            >APF Portfolios
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a [routerLink]="['apf-portfolio/all']" class="dropdown-item"
+                >All APF</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="['apf-portfolio/nci']"
+                class="dropdown-item"
+                style="border-bottom: white"
+                >NCI APF</a
+              >
+            </li>
+            <li>
+              <a
+                [routerLink]="['apf-portfolio/niad']"
+                class="dropdown-item"
+                style="border-bottom: white"
+                >NIAD APF</a
+              >
+            </li>
+            <li>
+              <a [routerLink]="['apf-portfolio/cc']" class="dropdown-item"
+                >CC APF</a
+              >
+            </li>
+            <li>
+              <a href="" class="dropdown-item" style="border-bottom: white"
+                >1B42 APF</a
+              >
+            </li>
+            <li>
+              <a href="" class="dropdown-item" style="border-bottom: white"
+                >E Terr APF</a
+              >
+            </li>
+            <li>
+              <a href="" class="dropdown-item" style="border-bottom: white"
+                >... APF</a
+              >
+            </li>
+            <li>
+              <a href="" class="dropdown-item" style="border-bottom: white"
+                >... APF</a
+              >
+            </li>
+            <li>
+              <a href="" class="dropdown-item" style="border-bottom: white"
+                >... APF</a
+              >
+            </li>
+            <li>
+              <a href="" class="dropdown-item" style="border-bottom: white"
+                >... APF</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li
+          class="nav-item dropdown position-static"
+          style="display: flex; flex-direction: row-reverse"
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Resources
+          </a>
+          <!-- <a class="nav-link dropdown-toggle" href="#" id="portfolios-navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">APF Portfolios
                   </a> -->
-                    <!-- Dropdown menu -->
-                    <div class="dropdown-menu mt-0" aria-labelledby="navbarDropdown" style="border-top-left-radius: 0;
-                                    border-top-right-radius: 0;
-                                  ">
-
-                        <div class="container">
-                            <div class="row my-4">
-                                <div class="col-md-4 col-lg-3 mb-3 mb-lg-0">
-                                    <div class="list-group list-group-flush">
-                                        <p class="mb-0 list-group-item font-weight-bold">
-                                            <b>About FCIS</b>
-                                        </p>
-                                        <a href="https://orfd-cogen.ors.nih.gov/fcisportal/whoweare.aspx"
-                                            class="list-group-item list-group-item-action">Who We Are</a>
-                                        <a href="" class="list-group-item list-group-item-action">FCIS Team</a>
-                                        <a href="" class="list-group-item list-group-item-action">
-                                            FCIS Functional
-                                            Statement
-                                        </a>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3 mb-3 mb-lg-0">
-                                    <div class="list-group list-group-flush">
-                                        <p class="mb-0 list-group-item font-weight-bold">
-                                            <b>Resources</b>
-                                        </p>
-                                        <a href="" class="list-group-item list-group-item-action">Abbreviations</a>
-                                        <a href="" class="list-group-item list-group-item-action">Definitions</a>
-                                        <a href="" class="list-group-item list-group-item-action">FAQ</a>
-                                        <a href="" class="list-group-item list-group-item-action">News & Links</a>
-                                        <a href="" class="list-group-item list-group-item-action">DRM</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3 mb-3 mb-md-0">
-                                    <div class="list-group list-group-flush">
-                                        <p class="mb-0 list-group-item font-weight-bold">
-                                            <b>SOP & WI</b>
-                                        </p>
-                                        <a href="" class="list-group-item list-group-item-action">DFOM SOP & WI</a>
-                                        <a href="" class="list-group-item list-group-item-action">DTR SOP & WI</a>
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3 mb-3 mb-md-0">
-                                    <div class="list-group list-group-flush">
-                                        <p class="mb-0 list-group-item font-weight-bold">
-                                            <b>Forms</b>
-                                        </p>
-                                        <a href="" class="list-group-item list-group-item-action">Form 1</a>
-                                        <a href="" class="list-group-item list-group-item-action">Form 2</a>
-                                        <a href="" class="list-group-item list-group-item-action">Form 3</a>
-                                        <a href="" class="list-group-item list-group-item-action">Form 4</a>
-
-
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="col-md-4 col-lg-3 mb-3 mb-md-0">
-                                    <div class="list-group list-group-flush">
-                                        <p class="mb-0 list-group-item font-weight-bold">
-                                            <b>Templates</b>
-                                        </p>
-                                        <a href="" class="list-group-item list-group-item-action">TT 1</a>
-                                        <a href="" class="list-group-item list-group-item-action">TT 2</a>
-                                        <a href="" class="list-group-item list-group-item-action">TT 3</a>
-                                        <a href="" class="list-group-item list-group-item-action">TT 4</a>
-
-
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-3">
-                                    <div class="list-group list-group-flush">
-                                        <p class="mb-0 list-group-item font-weight-bold">
-                                            <b>Outside Links</b>
-                                        </p>
-                                        <a href="" class="list-group-item list-group-item-action">LL/CI Dashboard</a>
-                                        <a href="" class="list-group-item list-group-item-action">
-                                            FCIS Business
-                                            Dashboard
-                                        </a>
-                                        <a href="" class="list-group-item list-group-item-action">Master Control</a>
-                                        <a href="" class="list-group-item list-group-item-action">PI Dashboard</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact US</a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Collapsible wrapper -->
+          <!-- Dropdown menu -->
+          <div
+            class="dropdown-menu mt-0"
+            aria-labelledby="navbarDropdown"
+            style="border-top-left-radius: 0; border-top-right-radius: 0"
+          >
+            <div class="container">
+              <div class="row my-4">
+                <div class="col-md-4 col-lg-3 mb-3 mb-lg-0">
+                  <div class="list-group list-group-flush">
+                    <p class="mb-0 list-group-item font-weight-bold">
+                      <b>About FCIS</b>
+                    </p>
+                    <a
+                      href="https://orfd-cogen.ors.nih.gov/fcisportal/whoweare.aspx"
+                      class="list-group-item list-group-item-action"
+                      >Who We Are</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >FCIS Team</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action">
+                      FCIS Functional Statement
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-3 mb-lg-0">
+                  <div class="list-group list-group-flush">
+                    <p class="mb-0 list-group-item font-weight-bold">
+                      <b>Resources</b>
+                    </p>
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Abbreviations</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Definitions</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >FAQ</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >News & Links</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >DRM</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-3 mb-md-0">
+                  <div class="list-group list-group-flush">
+                    <p class="mb-0 list-group-item font-weight-bold">
+                      <b>SOP & WI</b>
+                    </p>
+                    <a href="" class="list-group-item list-group-item-action"
+                      >DFOM SOP & WI</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >DTR SOP & WI</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4 col-lg-3 mb-3 mb-md-0">
+                  <div class="list-group list-group-flush">
+                    <p class="mb-0 list-group-item font-weight-bold">
+                      <b>Forms</b>
+                    </p>
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Form 1</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Form 2</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Form 3</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Form 4</a
+                    >
+                  </div>
+                </div>
+                <hr />
+                <div class="col-md-4 col-lg-3 mb-3 mb-md-0">
+                  <div class="list-group list-group-flush">
+                    <p class="mb-0 list-group-item font-weight-bold">
+                      <b>Templates</b>
+                    </p>
+                    <a href="" class="list-group-item list-group-item-action"
+                      >TT 1</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >TT 2</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >TT 3</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >TT 4</a
+                    >
+                  </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                  <div class="list-group list-group-flush">
+                    <p class="mb-0 list-group-item font-weight-bold">
+                      <b>Outside Links</b>
+                    </p>
+                    <a href="" class="list-group-item list-group-item-action"
+                      >LL/CI Dashboard</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action">
+                      FCIS Business Dashboard
+                    </a>
+                    <a href="" class="list-group-item list-group-item-action"
+                      >Master Control</a
+                    >
+                    <a href="" class="list-group-item list-group-item-action"
+                      >PI Dashboard</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact US</a>
+        </li>
+      </ul>
     </div>
-    <!-- Container wrapper -->
+
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
 </nav>

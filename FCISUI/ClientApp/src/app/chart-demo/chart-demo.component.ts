@@ -11,14 +11,12 @@ import {
   GoogleChartComponent
 } from 'angular-google-charts';
 
-
 @Component({
   selector: 'app-chart-demo',
   templateUrl: './chart-demo.component.html',
   styleUrls: ['./chart-demo.component.css']
 })
 export class ChartDemoComponent implements OnInit {
-
   public charts: {
     title: string;
     type: ChartType;
@@ -205,7 +203,15 @@ export class ChartDemoComponent implements OnInit {
     this.charts.push({
       title: 'Combo Chart',
       type: ChartType.ComboChart,
-      columns: ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+      columns: [
+        'Month',
+        'Bolivia',
+        'Ecuador',
+        'Madagascar',
+        'Papua New Guinea',
+        'Rwanda',
+        'Average'
+      ],
       data: [
         ['2004/05', 165, 938, 522, 998, 450, 614.6],
         ['2005/06', 135, 1120, 599, 1268, 288, 682],
@@ -292,7 +298,8 @@ export class ChartDemoComponent implements OnInit {
     console.log('Selected: ' + event.toString());
   }
 
-  public onMouseEnter(event: any) { //ChartMouseOverEvent
+  public onMouseEnter(event: any) {
+    //ChartMouseOverEvent
     console.log('Hovering ' + event.toString());
   }
 
@@ -316,6 +323,4 @@ export class ChartDemoComponent implements OnInit {
   public navigateToTest() {
     this.router.navigateByUrl('/test');
   }
-  
-
 }
