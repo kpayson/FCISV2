@@ -16,6 +16,7 @@ export class ApfPortfolioIcDashboardComponent {
   ) {
     this.monitoredRoomsChartData$ = this.service.gsfGrowthByClassification$;
 
+
     const endDate = new Date();
     const startDate = new Date();
     startDate.setDate(startDate.getDate() - 1);
@@ -38,15 +39,24 @@ export class ApfPortfolioIcDashboardComponent {
     const facid = getFacid(ic);
     const atr = '';
     const interval = 15;
-    this.timelineData$ = this.service.chlTimeline(
-      startDate,
-      endDate,
-      facid,
-      atr,
-      interval
-    );
+
+    this.facilityFilterOptions$ = this.service.facilityFilterOptions(ic);
+    this.timelineData$ = this.service.timeline$;
+
   }
 
   monitoredRoomsChartData$: Observable<any[]>;
+  facilityFilterOptions$: Observable<{name:string,value:string}[]>;
   timelineData$: Observable<any[]>;
+
+  filterChange($event:any) {
+    // this.service.chlTimeline(
+    //   startDate,
+    //   endDate,
+    //   facid,
+    //   atr,
+    //   interval
+    // );
+  }
+
 }

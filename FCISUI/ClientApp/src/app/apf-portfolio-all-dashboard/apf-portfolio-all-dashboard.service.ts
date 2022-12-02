@@ -8,17 +8,17 @@ export class ApfPortfolioAllDashboardService {
 
   gsfByFacility$ = this.dataService
     .gsfByFacility()
-    .pipe(map((d) => d.map((x) => [x.facility, x.gsf])));
+    .pipe(map((d:any) => d.map((x:any) => [x.facility, x.gsf])));
 
   gsfByIC$ = this.dataService
     .gsfByIC()
-    .pipe(map((d) => d.map((x) => [x.ic, x.gsf])));
+    .pipe(map((d:any) => d.map((x:any) => [x.ic, x.gsf])));
 
   gsfGrowthByClassification$ = this.dataService
     .gsfGrowthByClassification()
     .pipe(
-      map((d) =>
-        d.map((x) => {
+      map((d:any) =>
+        d.map((x:any) => {
           const goLiveDate = new Date(x.goLiveDate);
           return [goLiveDate, x.cncRoomsArea, x.iso8RoomsArea, x.iso7RoomsArea];
         })

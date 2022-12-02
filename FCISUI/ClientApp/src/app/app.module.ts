@@ -1,9 +1,9 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-
+import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
 import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
@@ -11,6 +11,7 @@ import { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-
 import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 import { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';
 import { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';
+import {PiDataFilterToolbarComponent} from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';
 import { AppComponent } from './app.component';
 import { ChartDemoComponent } from './chart-demo/chart-demo.component';
 import { FormulaHeaderComponent } from './formula-header/formula-header.component';
@@ -37,13 +38,16 @@ import { appRoutes } from './routes';
     ApfPortfolioIcDashboardComponent,
     ApfPortfolioIcMapComponent,
     ApfTimelineChartComponent,
-    ApfMonitoredRoomsChartComponent
+    ApfMonitoredRoomsChartComponent,
+    PiDataFilterToolbarComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     GoogleChartsModule,
+    ThirdPartyComponentsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],

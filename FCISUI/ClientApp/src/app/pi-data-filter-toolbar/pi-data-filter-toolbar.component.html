@@ -1,0 +1,119 @@
+<div class="filter-bar" [formGroup]="filterForm">
+    <div>
+        <label>Facility</label>
+        <!-- <p-dropdown [options]="cities" optionLabel="name"></p-dropdown> -->
+        <p-dropdown [options]="facilities" placeholder="" optionLabel="name" formControlName="facility"></p-dropdown>
+    </div>
+    <div>
+        <label>Status</label>
+        <p-dropdown [options]="statusOptions" placeholder="" optionLabel="name" formControlName="status"></p-dropdown>
+    </div>
+    <div>
+        <label>Start Date</label>
+        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'" [showIcon]="true" formControlName="startDate"></p-calendar>
+    </div>
+    <div>
+        <label>End Date</label>
+        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'" [showIcon]="true" formControlName="endDate"></p-calendar>
+    </div>
+    <div>
+        <label>Interval</label>
+        <p-dropdown [options]="intervalOptions" placeholder="" optionLabel="name" formControlName="interval"></p-dropdown>
+    </div>
+    <div>
+        <button pButton (click)="reset()">Reset</button>
+    </div>
+</div>
+
+<!-- 
+<asp:Table ID="Table1" runat="server" CellPadding="2" Width="800px"  CellSpacing="4" BorderWidth="0">
+    <asp:TableRow Font-Bold="true" ForeColor="White">
+         <asp:TableCell VerticalAlign="Top">
+             Facility:
+             </asp:TableCell>
+          <asp:TableCell VerticalAlign="Top">
+             Status:
+             </asp:TableCell>
+          <asp:TableCell VerticalAlign="Top">
+             Start Date:
+             </asp:TableCell>
+         <asp:TableCell VerticalAlign="Top">
+             End Date:
+             </asp:TableCell>
+        <asp:TableCell VerticalAlign="Top">
+             Interval:
+             </asp:TableCell>
+        <asp:TableCell VerticalAlign="Top">
+              
+             </asp:TableCell>
+        <asp:TableCell VerticalAlign="Top">
+             
+             </asp:TableCell>
+        </asp:TableRow>
+        <asp:TableRow>
+         
+         <asp:TableCell VerticalAlign="Top" HorizontalAlign="Right">
+             <asp:DropDownList CssClass="form-control" ID="ddlfacilSelector"
+                   
+                 runat="server" Width="280px"  Height="40px" >
+               
+                 <asp:ListItem Value="0"> Portfolio (All) </asp:ListItem>
+                 <asp:ListItem Value="1">   CC PET Radiopharmacy  </asp:ListItem>
+                 <asp:ListItem Value="2">   CC B3 PET Radiochemistry  </asp:ListItem>
+                 <asp:ListItem Value="6">  CC DLM Sterility </asp:ListItem>
+                 <asp:ListItem Value="3"> CC CCE 2J Cell Therapy Lab </asp:ListItem>
+                 <asp:ListItem Value="5">  CC CCE East Terrace Modular  </asp:ListItem>
+                 <asp:ListItem Value="10"> NCI 1B42 </asp:ListItem>
+                 <asp:ListItem Value="11"> NCI TIL Modular (T30) </asp:ListItem>
+                 <asp:ListItem Value="12">  NCI Trailer 1 (10B)</asp:ListItem>
+                 <asp:ListItem Value="13">  NCI Trailer 2 (10A)</asp:ListItem>
+                 <asp:ListItem Value="17">   CC PHARMACY I-IVAU  </asp:ListItem>
+                 <asp:ListItem Value="19">   NCI Hyperpolarized C-13   </asp:ListItem>
+           </asp:DropDownList>
+             </asp:TableCell>
+       
+         <asp:TableCell VerticalAlign="Top" HorizontalAlign="Right">
+             <asp:DropDownList CssClass="form-control" ID="ddlStatusSelector" runat="server" ClientIDMode="Static" Width="180px" Height="40px"  >
+                    <asp:ListItem Value="Sum All" Selected="True"  >Composite Status</asp:ListItem>
+                 <asp:ListItem Value="Temp">Temp Status</asp:ListItem>
+                 <asp:ListItem Value="DP">dP Status</asp:ListItem>
+                   <asp:ListItem Value="Hum">RH Status</asp:ListItem>
+                   <asp:ListItem Value="Airx">ACH Status</asp:ListItem>
+                  
+               </asp:DropDownList>
+             </asp:TableCell>
+       
+          <asp:TableCell VerticalAlign="Top" HorizontalAlign="Right">
+              <asp:TextBox ID="txtEndTime" Text="Start Time" ClientIDMode="Static" TextMode="DateTimeLocal"  Height="40px"
+               CssClass="form-control" runat="server"  Width="240px"></asp:TextBox>
+       
+             </asp:TableCell>
+        
+          <asp:TableCell VerticalAlign="Top">
+              
+           
+
+               <asp:TextBox ID="txtStartTime" Text="End Time" ClientIDMode="Static" TextMode="DateTimeLocal"  Height="40px"
+               CssClass="form-control" runat="server"   Width="240px"></asp:TextBox> 
+             </asp:TableCell>
+         
+          <asp:TableCell VerticalAlign="Top" HorizontalAlign="Right">
+              <asp:DropDownList ID="ddltimescaleSelector" ClientIDMode="Static" Width="120px"  Height="40px"
+                 CssClass="form-control" runat="server"  >
+               
+               <asp:ListItem Value="10">10 Min</asp:ListItem>
+               <asp:ListItem Value="30">30 Min</asp:ListItem>
+               <asp:ListItem Value="60">1 Hour</asp:ListItem>
+               <asp:ListItem Value="1440">24 Hour</asp:ListItem>
+           </asp:DropDownList>
+             </asp:TableCell>
+          <asp:TableCell VerticalAlign="Top" HorizontalAlign="Right">
+               <asp:Button ID="btnUpload" TabIndex="15" runat="server"    Height="40px"
+               CssClass="form-control" Text="Show" OnClick="btnUpload_Click" BackColor="#b3112c" ForeColor="White" />
+             </asp:TableCell>
+          <asp:TableCell VerticalAlign="Top" HorizontalAlign="Right">
+               <asp:Button ID="btnReset" TabIndex="15" runat="server"   Height="40px"
+               CssClass="form-control" Text="Reset" OnClick="btnReset_Click" BackColor="#b3112c" ForeColor="White" />
+             </asp:TableCell>
+         </asp:TableRow>
+             </asp:Table> -->

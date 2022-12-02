@@ -14,6 +14,8 @@ export interface TimelineData {
   endTime: number;
 }
 
+export type TimelineDataPoint = {Timestamp:number, numeric_value:number};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +42,10 @@ export class DataService {
     return this.get<any[]>(`GsfChart/GsfGrowthByClassification`);
   }
 
+  facilities() {
+    return this.get<any[]>(`Facilities`);
+  }
+
   chlTimelineData(
     startDate: Date,
     endDate: Date,
@@ -47,7 +53,7 @@ export class DataService {
     atr: string,
     interval: number
   ) {
-    return this.post<TimelineData[]>('ApfTimeline', {
+    return this.post<TimelineDataPoint[]>('ApfTimeline', {
       startDate,
       endDate,
       facid,

@@ -1,7 +1,16 @@
 <div class="card">
-  <div class="card-body" style="margin-left: 15px">
-    <div class="row" id="rowTest">
+  <div class="card-body" style="margin-left: 15px" >
+    <div class="row">
+      <div class="col-md-12">
+        <app-pi-data-filter-toolbar 
+          [facilities]="(facilityFilterOptions$ | async) || []" 
+          (filterChange)="filterChange($event)"></app-pi-data-filter-toolbar>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-md-3">
+        
         <app-apf-portfolio-ic-map></app-apf-portfolio-ic-map>
       </div>
 

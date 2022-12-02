@@ -8,6 +8,7 @@ using AutoMapper;
 using OSIsoft.AF;
 using OSIsoft.AF.Time;
 using OSIsoft.AF.Asset;
+using static System.Net.WebRequestMethods;
 
 
 namespace FCISUI.Controllers
@@ -36,9 +37,20 @@ namespace FCISUI.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<PIChartData>>> GetTimelineData(TimelineParams timelineParams)
         {
-            var cGMP = this._piDataService.GetCGMP();
+            //var timeSeriesData =
+            //    tag=\\ORFD-COGEN\Dev_cGMP\cGMP\2J\2N2J1|Status&
+            //    start_time=2022-11-26&
+            //    end_time=2022-11-27&
+            //    rectype=interpolated&
+            //    interval=10m.
 
-            var piChartData = this._piDataService.CreateDataListFacility(
+            var timeSeriesData = await this._piDataService.GetTimeSeriesData(
+    "\\\\ORFD-COGEN\\Dev_cGMP\\cGMP\\2J\\2N2J1|Status", "2022-11-26", "2022-11-27", "10m");
+                //this._piDataService.GetTimeSeriesData(
+                //    "",timelineParams.StartDate, timelineParams.EndDate,timelineParams.Interval)
+
+            
+                var piChartData = this._piDataService.CreateDataListFacility(
                 timelineParams.StartDate, 
                 timelineParams.EndDate, 
                 timelineParams.Interval,
