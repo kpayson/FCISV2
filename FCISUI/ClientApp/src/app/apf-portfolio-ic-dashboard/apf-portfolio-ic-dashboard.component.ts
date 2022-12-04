@@ -50,6 +50,7 @@ export class ApfPortfolioIcDashboardComponent {
   timelineData$: Observable<any[]>;
 
   filterChange($event:any) {
+    this.service.filterPiData($event)
     // this.service.chlTimeline(
     //   startDate,
     //   endDate,

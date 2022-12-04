@@ -1,28 +1,27 @@
 <div class="filter-bar" [formGroup]="filterForm">
     <div>
         <label>Facility</label>
-        <!-- <p-dropdown [options]="cities" optionLabel="name"></p-dropdown> -->
-        <p-dropdown [options]="facilities" placeholder="" optionLabel="name" formControlName="facility"></p-dropdown>
+        <p-dropdown [options]="facilities" placeholder="" optionLabel="name" optionValue="value" formControlName="facility" [style]="filterStyle"></p-dropdown>
     </div>
     <div>
         <label>Status</label>
-        <p-dropdown [options]="statusOptions" placeholder="" optionLabel="name" formControlName="status"></p-dropdown>
+        <p-dropdown [options]="statusOptions" placeholder="" optionLabel="name"  optionValue="value" formControlName="status"></p-dropdown>
     </div>
     <div>
         <label>Start Date</label>
-        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'" [showIcon]="true" formControlName="startDate"></p-calendar>
+        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'" formControlName="startDate" ></p-calendar>
     </div>
     <div>
         <label>End Date</label>
-        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'" [showIcon]="true" formControlName="endDate"></p-calendar>
+        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'"  formControlName="endDate"></p-calendar>
     </div>
     <div>
         <label>Interval</label>
-        <p-dropdown [options]="intervalOptions" placeholder="" optionLabel="name" formControlName="interval"></p-dropdown>
+        <p-dropdown [options]="intervalOptions" placeholder="" optionLabel="name" optionValue="value" formControlName="interval"></p-dropdown>
     </div>
-    <div>
+    <!-- <div>
         <button pButton (click)="reset()">Reset</button>
-    </div>
+    </div> -->
 </div>
 
 <!-- 

@@ -3,4 +3,10 @@
     label {
         width:120px;
     }
+    .filter-control {
+        width:408;
+    }
+    ::ng-deep input.p-component, ::ng-deep div.p-dropdown {
+        width:208px;
+    }
 }

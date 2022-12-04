@@ -34,6 +34,11 @@ export class PiDataFilterToolbarComponent {
 
   filterForm = this.fb.group(this.defaults);
 
+  selectedCity = {};
+
+  filterStyle = {
+    width:'200px'
+  }
   
   cities = [
     {name: 'New York', code: 'NY'},

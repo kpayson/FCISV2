@@ -7,8 +7,8 @@ namespace FCISUI.Data
 {
     public interface IPIDataService
     {
-        List<PIChartData> CreateDataListFacility(DateTime starttime, DateTime endtime, int interval, int facid, string Attr);
-        Task<object> GetTimeSeriesData(string tag, string startTime, string endTime, string interval);
+        // List<PIChartData> CreateDataListFacility(DateTime starttime, DateTime endtime, int interval, int facid, string Attr);
+        Task<IEnumerable<TimeSeriesPoint>> GetTimeSeriesData(string tag, string startTime, string endTime, string interval);
     }
 
     public class TimeSeriesPoint
@@ -30,36 +30,23 @@ namespace FCISUI.Data
 
         }
 
-        public List<PIChartData> CreateDataListFacility(DateTime starttime, DateTime endtime, int interval, int facid, string Attr)
-        {
-            return new List<PIChartData>();
-        }
+        // public List<PIChartData> CreateDataListFacility(DateTime starttime, DateTime endtime, int interval, int facid, string Attr)
+        // {
+        //     return new List<PIChartData>();
+        // }
 
-        public async Task<object> GetTimeSeriesData(string tag, string startTime, string endTime, string interval)
+        public async Task<IEnumerable<TimeSeriesPoint>> GetTimeSeriesData(string tag, string startTime, string endTime, string interval)
         {
             var httpClient = _httpClientFactory.CreateClient("piDataService");
             var baseUrl = _config.GetValue<string>("piDataServiceBaseUrl");
             httpClient.BaseAddress = new Uri(baseUrl);
 
-            //var res = await httpClient.GetAsync("api/cGMP")
+            // tag=\\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP&start_time=2022-11-26&end_time=2022-11-27&rectype=interpolated&interval=10m
             var timeSeriesPath = $"pi-api/time-series?tag={tag}&start_time={startTime}&end_time={endTime}&rectype=interpolated&interval={interval}";
             var res = await httpClient.GetAsync(timeSeriesPath);
+            var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
 
-            // tag=\\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP&start_time=2022-11-26&end_time=2022-11-27&rectype=interpolated&interval=10m
-            var timeSeriesData = res.Content;
-            //var timeSeries = await JsonSerializer.DeserializeAsync
-            return res.Content;
-
-            //var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
-
-            //if (httpResponseMessage.IsSuccessStatusCode)
-            //{
-            //    using var contentStream =
-            //        await httpResponseMessage.Content.ReadAsStreamAsync();
-
-            //    GitHubBranches = await JsonSerializer.DeserializeAsync
-            //        <IEnumerable<GitHubBranch>>(contentStream);
-            //}
+            return timeSeries!;
         }
 
 
