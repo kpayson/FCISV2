@@ -123,15 +123,14 @@
                     <p class="mb-0 list-group-item font-weight-bold">
                       <b>About FCIS</b>
                     </p>
-                    <a
-                      href="https://orfd-cogen.ors.nih.gov/fcisportal/whoweare.aspx"
+                    <a [routerLink]="['resource','who-we-are']"
                       class="list-group-item list-group-item-action"
                       >Who We Are</a
                     >
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource','gui-org-chart']" class="list-group-item list-group-item-action"
                       >FCIS Team</a
                     >
-                    <a href="" class="list-group-item list-group-item-action">
+                    <a [routerLink]="['resource','functionalstmt']" class="list-group-item list-group-item-action">
                       FCIS Functional Statement
                     </a>
                   </div>
@@ -141,19 +140,19 @@
                     <p class="mb-0 list-group-item font-weight-bold">
                       <b>Resources</b>
                     </p>
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource','gui-doc-abbreviations']" class="list-group-item list-group-item-action"
                       >Abbreviations</a
                     >
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource','gui-doc-definitions']" class="list-group-item list-group-item-action"
                       >Definitions</a
                     >
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource','gui-doc-faq']" class="list-group-item list-group-item-action"
                       >FAQ</a
                     >
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource','gui-doc-wlinks']" class="list-group-item list-group-item-action"
                       >News & Links</a
                     >
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource','gui-doc-drm']" class="list-group-item list-group-item-action"
                       >DRM</a
                     >
                   </div>

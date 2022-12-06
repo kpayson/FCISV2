@@ -99,6 +99,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/assets"
+
             ],
             "styles": [
               "src/styles.css"

@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
 import { appRoutes } from './routes';
+import { StaticContentContainerComponent } from './static-content-container/static-content-container.component';
 //import { DataService } from './data.service';
 
 @NgModule({
@@ -39,7 +40,8 @@ import { appRoutes } from './routes';
     ApfPortfolioIcMapComponent,
     ApfTimelineChartComponent,
     ApfMonitoredRoomsChartComponent,
-    PiDataFilterToolbarComponent
+    PiDataFilterToolbarComponent,
+    StaticContentContainerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
