@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { map, mergeMap, Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { TimelineDataPoint, DataService } from 'src/app/data.service';
+import { map, mergeMap, Observable, BehaviorSubject, zip, of } from 'rxjs';
+import { TimelineDataPoint, LocationData, DataService } from 'src/app/data.service';
 
 interface PiDataFilter {
   facility:number,
@@ -9,6 +9,38 @@ interface PiDataFilter {
   endDate:Date,
   interval:number
 }
+
+interface ChartDataPoint {
+  locationName:string,
+  tag:string,
+  statusValue:number,
+  startTime:number,
+  endTime:number,
+  roomInfo?:any
+}
+
+interface CriticalParameterFilter {
+  facility:number, 
+  status:string, 
+  startDate:Date, 
+  endDate:Date, 
+  interval:number
+}
+
+// const row = 
+// [
+//   {
+//     v: x.RoomName,
+//     p: {
+//         link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${x.Tag}`  // This will need to be the correct concantonated link: dataValues[i].Tag + ...
+//     }
+//   },
+//   tooltipText,
+//   x.ChillerStatus,
+//   statusColor(x.ChillerStatus),
+//   new Date(x.StartTime),
+//   new Date(x.EndTime)
+// ];
 
 @Injectable()
 export class ApfPortfolioIcDashboardService {
@@ -27,25 +59,39 @@ export class ApfPortfolioIcDashboardService {
       interval:10
     })
 
-    // this._facilityFilter$ = new BehaviorSubject<number>(0);
-    // this._statusFilter$ = new BehaviorSubject<string>("");
-    // this._startDateFilter$ = new BehaviorSubject<Date>(defaultStartDate);
-    // this._endDateFilter$ = new BehaviorSubject<Date>(defaultEndDate);
-    // this._intervalFilter$ = new BehaviorSubject<number>(10);
-    this._timeline$ = new BehaviorSubject<TimelineDataPoint[]>([]);
-
-    // const filters = [this._facilityFilter$, this._statusFilter$, this._startDateFilter$, this._endDateFilter$, this._intervalFilter$]
-    // combineLatest(this._facilityFilter$, this._statusFilter$, this._startDateFilter$, this._endDateFilter$, this._intervalFilter$)
-    //   .pipe(mergeMap(([facility,status,startDate,endDate,interval])=>this.dataService.chlTimelineData(startDate, endDate, facility, status, interval)))
-
-    //   .subscribe((timelineData) => {
-    //     this._timeline$.next(timelineData)
-    //   })
-
+    this._timeline$ = new BehaviorSubject<ChartDataPoint[]>([]);
+    
     this._piDataFilter$.pipe(mergeMap(
-      (filter)=>this.dataService.chlTimelineData(filter.startDate,filter.endDate,filter.facility,filter.status,filter.interval)))
-      .subscribe((data)=>{
-        this._timeline$.next(data)
+      (filter:CriticalParameterFilter)=>zip(
+        of(filter),
+        this.dataService.timelineData(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval))))
+      .subscribe((dataAndFilter:[filter:CriticalParameterFilter,data:LocationData[]])=>{
+        const chartData:ChartDataPoint[] = []
+         
+        for(const x of dataAndFilter[1]) {
+          let startTime = dataAndFilter[0].startDate.getTime() - 10000000;
+          for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
+            const point:ChartDataPoint = {
+              locationName:x.locationName,
+              tag:x.tag,
+              startTime:startTime,
+              endTime:y.timestamp,
+              statusValue:y.numeric_value,
+              roomInfo: {
+                // roomName:y.roomName || '',
+                // iso:y.iso || '',
+                // sq:y.sq || ''
+              }
+            }
+            if(point.startTime > point.endTime) {
+              console.log('error');
+            }
+            startTime = y.timestamp
+            chartData.push(point);
+          }
+        }
+        
+        this._timeline$.next(chartData)
       })
   }
   private _piDataFilter$: BehaviorSubject<PiDataFilter>;
@@ -54,37 +100,45 @@ export class ApfPortfolioIcDashboardService {
     this._piDataFilter$.next(filter);
   }
 
-  // private _facilityFilter$: BehaviorSubject<number>;
-  // private _statusFilter$: BehaviorSubject<string>;
-  // private _startDateFilter$: BehaviorSubject<Date>;
-  // private _endDateFilter$: BehaviorSubject<Date>;
-  // private _intervalFilter$: BehaviorSubject<number>;
-  private _timeline$: BehaviorSubject<TimelineDataPoint[]>;
-
-  // public filterByFacility(facility: number) {
-  //   this._facilityFilter$.next(facility)
-  // }
-
-  // public filterByStatus(status: string) {
-  //   this._statusFilter$.next(status)
-  // }
-
-  // public filterByStartDate(startDate: Date) {
-  //   this._startDateFilter$.next(startDate)
-  // }
-
-  // public filterByEndtDate(endDate: Date) {
-  //   this._endDateFilter$.next(endDate)
-  // }
-
-  // public filterByInterval(interval: number) {
-  //   this._intervalFilter$.next(interval);
-  // }
-
+  private _timeline$: BehaviorSubject<ChartDataPoint[]>;
 
   public get timeline$() {
-    return this._timeline$ as Observable<TimelineDataPoint[]>;
+    return this._timeline$ as Observable<ChartDataPoint[]>;
   }
+
+  private locationDataToChartRow(point:TimelineDataPoint, roomNumber:string, roomName:string, iso:string, sq:string) {
+
+    // const statusColor = (chillerStatus:string) => {
+    //   if (chillerStatus == 'Within Spec') { return 'green'; }
+    //   if (chillerStatus == 'Comm Loss') { return 'gray'; }
+    //   if (chillerStatus == 'Warning') { return 'yellow'; }
+    //   if (chillerStatus == 'Alarm (Out of Spec)') { return 'red'; }
+    //   return 'white'; 
+    // }
+
+
+
+    const tooltipText = "";
+    //createCustomHTMLContentTable(locationData.locationName, x.RoomName, x.ISO, x.SQ)
+      
+      const row:any = 
+        [
+          // {
+          //   v: roomName,
+          //   p: {
+          //       link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${tag}`  // This will need to be the correct concantonated link: dataValues[i].Tag + ...
+          //   }
+          // },
+          // tooltipText,
+          // chillerStatusLabel(chillerStatus),
+          // statusColor(chillerStatus),
+          // new Date(startTime),
+          // new Date(endTime)
+        ];
+      return row;
+      
+    };
+
 
 
   public gsfGrowthByClassification$ = this.dataService
@@ -118,105 +172,4 @@ export class ApfPortfolioIcDashboardService {
     )
   }
 
-
-  // private chlDataTransformForChart = (row: any) => {
-  //   const statusColor = (status: string) => {
-  //     switch (status) {
-  //       case 'Within Spec':
-  //         return 'green';
-  //       case 'Comm Loss':
-  //         return 'gray';
-  //       case 'Warning':
-  //         return 'yellow';
-  //       case 'Alarm (Out of Spec)':
-  //         return 'red';
-  //       default:
-  //         return 'white';
-  //     }
-  //   };
-
-  //   const createCustomHTMLContentTableDP = (name: string) => {
-  //     return (
-  //       '<div align="left" style="max-width: 300px; padding:5px 5px 5px 5px;">' +
-  //       '<table>' +
-  //       '<tr><th>' +
-  //       'Name: ' +
-  //       name +
-  //       '</th></tr>' +
-  //       '</table>' +
-  //       '</div>'
-  //     );
-  //   };
-
-  //   const createCustomHTMLContentTable = (
-  //     roomName: string,
-  //     roomNumber: string,
-  //     className: string,
-  //     gsf: string
-  //   ) => {
-  //     return (
-  //       '<div align="left" style="max-width: 300px; padding:5px 5px 5px 5px;">' +
-  //       '<table>' +
-  //       '<tr><th>' +
-  //       'Room: ' +
-  //       roomName +
-  //       '</th></tr>' +
-  //       '<tr><td><b>' +
-  //       'Room #: ' +
-  //       roomNumber +
-  //       '</b></td>' +
-  //       '</tr>' +
-  //       '<tr><td><b>' +
-  //       'Class: ' +
-  //       className +
-  //       '</b></td>' +
-  //       '</tr>' +
-  //       '<tr><td><b>' +
-  //       'GSF: ' +
-  //       gsf +
-  //       '</b></td>' +
-  //       '</tr>' +
-  //       '</table>' +
-  //       '</div>'
-  //     );
-  //   };
-
-  //   const tooltipText = (data: any) => {
-  //     return data.statusAttr === 'DP'
-  //       ? createCustomHTMLContentTableDP(data.roomNumber)
-  //       : createCustomHTMLContentTable(
-  //           data.roomName,
-  //           data.roomNumber,
-  //           data.class,
-  //           data.gsf
-  //         );
-  //   };
-
-  //   return [
-  //     row.roomName,
-  //     tooltipText(row),
-  //     row.chillerStatus,
-  //     statusColor(row.chillerStatus),
-  //     row.startTime,
-  //     row.endTime
-  //   ];
-  // };
-
-  // chlTimeline = (
-  //   startDate: Date,
-  //   endDate: Date,
-  //   facid: any,
-  //   atr: any,
-  //   interval: any
-  // ) => {
-  //   return this.dataService
-  //     .chlTimelineData(startDate, endDate, facid, atr, interval)
-  //     .pipe(map((d) => d.map(this.chlDataTransformForChart)));
-  //   // return of(
-  //   // [
-  //   //   [ 'Chillern', '','','', new Date(1789, 3, 30), new Date(1797, 2, 4) ],
-  //   //   [ 'Adams',      '','','', new Date(1797, 2, 4),  new Date(1801, 2, 4) ],
-  //   //   [ 'Jefferson',  '','','', new Date(1801, 2, 4),  new Date(1809, 2, 4) ]
-  //   // ]);
-  // };
 }

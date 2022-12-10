@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 export class PiDataFilterToolbarComponent {
 
   constructor(private fb:FormBuilder) { 
-    this.filterForm.valueChanges.subscribe(val=>{
+    this.filterForm.valueChanges.subscribe((val:any)=>{
       this.filterChange.emit(val)
     })
   }

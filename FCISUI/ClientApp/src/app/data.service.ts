@@ -2,19 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-export interface TimelineData {
-  roomName: string;
-  roomNumber: string;
-  sq: string;
-  iso: string;
-  chillerStatus: string;
-  color: string;
-  tag: string;
-  startTime: number;
-  endTime: number;
-}
+// export interface TimelineData {
+//   roomName: string;
+//   roomNumber: string;
+//   sq: string;
+//   iso: string;
+//   chillerStatus: number;
+//   color: string;
+//   tag: string;
+//   startTime: number;
+//   endTime: number;
+// }
 
-export type TimelineDataPoint = {Timestamp:number, numeric_value:number};
+export type TimelineDataPoint = { timestamp:number, numeric_value:number, rooomData?:any };
+export type LocationData = { locationName: string, tag: string, points:TimelineDataPoint[] };
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -46,19 +49,23 @@ export class DataService {
     return this.get<any[]>(`Facilities`);
   }
 
-  chlTimelineData(
-    startDate: Date,
-    endDate: Date,
-    facid: number,
-    atr: string,
-    interval: number
-  ) {
-    return this.post<TimelineDataPoint[]>('ApfTimeline', {
+  timelineData(facilityId:number, attr:string, startDate:Date, endDate: Date, interval:number) {
+    if(facilityId == 0) {
+      return this.post<LocationData[]>(`Timeline/AllFacilityTimelineData`, {
+        startDate,
+        endDate,
+        interval
+      }); 
+    }
+
+    return this.post<LocationData[]>(`Timeline/FacilityTimelineData`, {
+      facilityId,
+      attr,
       startDate,
       endDate,
-      facid,
-      atr,
       interval
     });
   }
+
+
 }
