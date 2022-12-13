@@ -48,7 +48,7 @@
             </div>
 
             <app-apf-timeline-chart
-              [chartData]="(timelineData$ | async) || []"
+              [chartData]="(timelineData$ | async) || []" (chartLabelClick)="chartLabelClick($event)"
             ></app-apf-timeline-chart>
           </div>
         </div>

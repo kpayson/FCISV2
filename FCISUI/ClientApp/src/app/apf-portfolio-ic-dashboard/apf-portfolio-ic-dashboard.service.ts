@@ -69,13 +69,16 @@ export class ApfPortfolioIcDashboardService {
         const chartData:ChartDataPoint[] = []
          
         for(const x of dataAndFilter[1]) {
-          let startTime = dataAndFilter[0].startDate.getTime() - 10000000;
+          if(! x.points.some(Boolean)) { continue; }
+          x.points.sort((a,b)=>a.timestamp - b.timestamp);
+          let startTime = x.points[0].timestamp;
+          let status = x.points[0].numeric_value;
           for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
             const point:ChartDataPoint = {
               locationName:x.locationName,
               tag:x.tag,
               startTime:startTime,
-              endTime:y.timestamp,
+              endTime:Math.max(y.timestamp,startTime),
               statusValue:y.numeric_value,
               roomInfo: {
                 // roomName:y.roomName || '',
@@ -89,6 +92,60 @@ export class ApfPortfolioIcDashboardService {
             startTime = y.timestamp
             chartData.push(point);
           }
+
+          // for(const y of x.points) {
+          //   if(y.numeric_value !== status) {
+          //     const point:ChartDataPoint = {
+          //       locationName:x.locationName,
+          //       tag:x.tag,
+          //       startTime:startTime,
+          //       endTime:y.timestamp,
+          //       statusValue:y.numeric_value,
+          //       roomInfo: {
+          //         // roomName:y.roomName || '',
+          //         // iso:y.iso || '',
+          //         // sq:y.sq || ''
+          //       }
+          //     }
+          //     startTime = y.timestamp
+          //     chartData.push(point);
+          //   }
+          // }
+          // const p = x.points[x.points.length -1];
+          // const point:ChartDataPoint = {
+          //   locationName:x.locationName,
+          //   tag:x.tag,
+          //   startTime:startTime,
+          //   endTime:p.timestamp,
+          //   statusValue:p.numeric_value,
+          //   roomInfo: {
+          //     // roomName:y.roomName || '',
+          //     // iso:y.iso || '',
+          //     // sq:y.sq || ''
+          //   }
+          // }
+          //chartData.push(point);
+
+
+          // for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
+          //   const point:ChartDataPoint = {
+          //     locationName:x.locationName,
+          //     tag:x.tag,
+          //     startTime:startTime,
+          //     endTime:y.timestamp,
+          //     statusValue:y.numeric_value,
+          //     roomInfo: {
+          //       // roomName:y.roomName || '',
+          //       // iso:y.iso || '',
+          //       // sq:y.sq || ''
+          //     }
+          //   }
+          //   if(point.startTime > point.endTime) {
+          //     console.log('error');
+          //   }
+          //   startTime = y.timestamp
+          //   chartData.push(point);
+          // }
         }
         
         this._timeline$.next(chartData)
@@ -159,15 +216,19 @@ export class ApfPortfolioIcDashboardService {
   public facilityFilterOptions(ic: string): Observable<{ name: string, value: string }[]> {
     const targetIC = ic.toLowerCase()
     return this.dataService.facilities().pipe(
-      map((facs: any[]) =>
-        facs
+      map((facs: any[]) => {
+        const facilityOptions = 
+          facs
           .filter((fac: any) => {
             return (fac.facilityIc || "").toLowerCase() === targetIC
           })
           .map((fac: any) => {
-             const option = { name: fac.facilityName, value: fac.facilityId };
-             return option;
+            const option = { name: fac.facilityName, value: fac.facilityId };
+            return option;
           })
+          return [{name:`All ${targetIC.toLocaleUpperCase()}`, value:'0'},...facilityOptions];
+      }
+
       )
     )
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ChartType } from 'angular-google-charts';
 
 @Component({
@@ -11,6 +11,9 @@ export class ApfTimelineChartComponent {
 
   @Input()
   chartData: any[] = [];
+
+  @Output()
+  chartLabelClick = new EventEmitter<any>()
 
   chartType = ChartType.Timeline;
 
@@ -37,6 +40,22 @@ export class ApfTimelineChartComponent {
 
   chartReady(){
     console.log("Chart Ready");
+    const chartLabels = document.querySelectorAll('app-apf-timeline-chart text[text-anchor="end"]');
+    const me = this;
+    chartLabels.forEach((label)=>{
+      label.setAttribute('style','cursor: pointer; text-decoration: underline');
+      label.addEventListener('click', function (sender) { // add event to row labels when clicked to open URL
+        console.log(sender); 
+        const text = (sender.currentTarget as Element).innerHTML
+        me.chartLabelClick.emit(text);
+      });
+
+    });
   }
-}
+      
+    
+    //pinCurrent.setAttribute('style', 'cursor: pointer; text-decoration: underline;'); // add cursor event to pin
+    //label.setAttribute('style', 'cursor: pointer; text-decoration: underline;'); // add cursor event to row label
+  }
+
 

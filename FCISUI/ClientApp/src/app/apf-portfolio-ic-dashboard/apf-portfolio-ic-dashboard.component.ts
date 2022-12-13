@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Params } from '@angular/router';
 import { ApfPortfolioIcDashboardService } from './apf-portfolio-ic-dashboard.service';
-import { Observable,of,map } from 'rxjs';
+import { Observable,of,map, mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-apf-portfolio-ic-dashboard',
@@ -11,15 +11,22 @@ import { Observable,of,map } from 'rxjs';
 })
 export class ApfPortfolioIcDashboardComponent {
   constructor(
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     public service: ApfPortfolioIcDashboardService
   ) {
     this.monitoredRoomsChartData$ = this.service.gsfGrowthByClassification$;
 
-    const routeParams = this.route.snapshot.paramMap;
-    const ic = routeParams.get('ic')?.toLowerCase() || '';
+    this.facilityFilterOptions$ = this.activatedRoute.params.pipe(mergeMap(params =>{
+      const ic = params.ic?.toLowerCase() || '';
+      return this.service.facilityFilterOptions(ic)
+    }))
 
-    this.facilityFilterOptions$ = this.service.facilityFilterOptions(ic);
+    
+    
+    //.snapshot.paramMap;
+    //const ic = routeParams.get('ic')?.toLowerCase() || '';
+
+    //this.facilityFilterOptions$ = this.service.facilityFilterOptions(ic);
     //this.timelineData$ = this.service.timeline$;
 
     const statusColor = (statusVal:number) => {
@@ -115,6 +122,10 @@ export class ApfPortfolioIcDashboardComponent {
 
   filterChange($event:any) {
     this.service.filterPiData($event)
+  }
+
+  chartLabelClick($event:any) {
+    console.log($event);
   }
 
 }
