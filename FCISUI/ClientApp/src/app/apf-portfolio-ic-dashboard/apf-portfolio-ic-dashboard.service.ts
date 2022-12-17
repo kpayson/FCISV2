@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, mergeMap, Observable, BehaviorSubject, zip, of } from 'rxjs';
+import { map, mergeMap, Observable, BehaviorSubject, zip, of, distinctUntilChanged, filter } from 'rxjs';
 import { TimelineDataPoint, LocationData, DataService } from 'src/app/data.service';
 
 interface PiDataFilter {
@@ -25,6 +25,10 @@ interface CriticalParameterFilter {
   startDate:Date, 
   endDate:Date, 
   interval:number
+}
+
+interface SvgMap {
+  name: string;
 }
 
 // const row = 
@@ -57,7 +61,19 @@ export class ApfPortfolioIcDashboardService {
       startDate:defaultStartDate,
       endDate:defaultEndDate,
       interval:10
-    })
+    });
+
+    this._svgMap$ = new BehaviorSubject<SvgMap>({name:'apf_facility_all'})
+    // this._piDataFilter$.pipe(
+    //   map(filter=>{
+    //     return filter.facility
+    //   }),
+      
+    //   distinctUntilChanged(),
+    //   mergeMap(facId=>this.dataService.svgMap(facId))
+    // ).subscribe(svgMap=>{
+    //   this._svgMap$.next(svgMap)
+    // })
 
     this._timeline$ = new BehaviorSubject<ChartDataPoint[]>([]);
     
@@ -74,6 +90,9 @@ export class ApfPortfolioIcDashboardService {
           let startTime = x.points[0].timestamp;
           let status = x.points[0].numeric_value;
           for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
+            if(y.timestamp < dataAndFilter[0].startDate.getTime()) {
+              console.log("error - timestamp before request time")
+            }
             const point:ChartDataPoint = {
               locationName:x.locationName,
               tag:x.tag,
@@ -86,9 +105,7 @@ export class ApfPortfolioIcDashboardService {
                 // sq:y.sq || ''
               }
             }
-            if(point.startTime > point.endTime) {
-              console.log('error');
-            }
+
             startTime = y.timestamp
             chartData.push(point);
           }
@@ -152,13 +169,16 @@ export class ApfPortfolioIcDashboardService {
       })
   }
   private _piDataFilter$: BehaviorSubject<PiDataFilter>;
-
   public filterPiData(filter:PiDataFilter){
     this._piDataFilter$.next(filter);
   }
 
-  private _timeline$: BehaviorSubject<ChartDataPoint[]>;
+  private _svgMap$: BehaviorSubject<SvgMap>;
+  public get svgMap$() {
+    return this._svgMap$ as Observable<SvgMap>;
+  }
 
+  private _timeline$: BehaviorSubject<ChartDataPoint[]>;
   public get timeline$() {
     return this._timeline$ as Observable<ChartDataPoint[]>;
   }

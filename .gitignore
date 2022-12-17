@@ -5,3 +5,6 @@ PowerShell*.txt
 **/bin/*
 
 *.local.json
+
+
+*/obj/*

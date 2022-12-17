@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "FCISTools": {
+      "commandName": "Project",
+      "commandLineArgs": "-m apf_facility_all -p C:\\code\\NIHRepos\\FCISPortal2\\FCISTools\\svg"
+    }
+  }
+}

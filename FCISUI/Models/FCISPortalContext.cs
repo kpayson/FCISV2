@@ -28,6 +28,8 @@ namespace FCISUI.Models
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
         public virtual DbSet<RoomOld> RoomOlds { get; set; } = null!;
+        public virtual DbSet<SvgMap> SvgMaps { get; set; } = null!;
+        public virtual DbSet<SvgMapPin> SvgMapPins { get; set; } = null!;
         public virtual DbSet<Temp> Temps { get; set; } = null!;
         public virtual DbSet<TempPiuser> TempPiusers { get; set; } = null!;
         public virtual DbSet<Temppigmpoperator> Temppigmpoperators { get; set; } = null!;
@@ -481,6 +483,18 @@ namespace FCISUI.Models
 
                 entity.Property(e => e.Sq).HasColumnName("SQ");
             });
+
+            modelBuilder.Entity<SvgMap>(entity => {
+                entity.ToTable("SvgMap");
+            });
+
+            modelBuilder.Entity<SvgMapPin>(entity => {
+                entity.ToTable("SvgMapPin");
+                // .HasOne<SvgMap>(s => s.SvgMap)
+                // .WithMany(m=> m.SvgMapPins)
+                // .HasForeignKey(s => s.SvgMapId);
+            });
+
 
             modelBuilder.Entity<Temp>(entity =>
             {

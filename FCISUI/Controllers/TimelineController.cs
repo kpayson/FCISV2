@@ -29,22 +29,42 @@ namespace FCISUI.Controllers
 
 
         [HttpPost("AllFacilityTimelineData")]
-        public async Task<IEnumerable<LocationData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams) {
+        public async Task<IEnumerable<LocationTimeSeriesData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams) {
             var facilities = 
                 this._context.Facilities.Where(x=>! String.IsNullOrWhiteSpace(x.PiPath)).ToList();
-            
-            var facilityTimelineData = await this._piDataService.AllFacilityTimeSeriesData(facilities, timelineParams.StartDate, timelineParams.EndDate, timelineParams.Interval);
-            return facilityTimelineData;
+            var locationQueries = facilities.Select(f=> new LocationQuery {LocationName=f.FacilityName, Tag=f.PiPath!}).ToList();
+            var timelineData = await this._piDataService.LocationTimeSeriesData(locationQueries,timelineParams.StartDate.ToUniversalTime(), timelineParams.EndDate.ToUniversalTime(), timelineParams.Interval);
+            return timelineData;
         }
 
         [HttpPost("FacilityTimelineData")]
-        public async Task<IEnumerable<LocationData>> FacilityTimelineData(FacilityTimelineParams timelineParams) {
-            var rooms = this._context.Rooms.Where(r=>r.FacilityId == timelineParams.FacilityId && r.Parameter == timelineParams.Attr).ToList();
-            
-            var facilityTimelineData = await this._piDataService.FacilityTimeSeriesData(rooms, timelineParams.StartDate, timelineParams.EndDate, timelineParams.Interval);
-            return facilityTimelineData;
-
+        public async Task<IEnumerable<LocationTimeSeriesData>> FacilityTimelineData(FacilityTimelineParams timelineParams) {
+            var rooms = 
+                this._context.Rooms.Where(r=>r.FacilityId == timelineParams.FacilityId && r.Parameter == timelineParams.Attr).ToList();
+            var locationQueries = rooms.Select(r=> new LocationQuery {LocationName=r.RoomNumber!, Tag=r.PiPath!}).ToList();
+            var timelineData = await this._piDataService.LocationTimeSeriesData(locationQueries,timelineParams.StartDate.ToUniversalTime(), timelineParams.EndDate.ToUniversalTime(), timelineParams.Interval);
+            return timelineData;
         }
+
+        [HttpPost("AllFacilityCurrentData")]
+        public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData() {
+            var facilities = 
+                this._context.Facilities.Where(x=>! String.IsNullOrWhiteSpace(x.PiPath)).ToList();
+            var locationQueries = facilities.Select(f => new LocationQuery {LocationName=f.FacilityName!, Tag=f.PiPath!}).ToList();
+            var currentData = await this._piDataService.CurrentStatusData(locationQueries);
+            return currentData;
+        }
+
+        [HttpPost("FacilityCurrentData")]
+        public async Task<IEnumerable<LocationCurrentStatus>> FacilityCurrentStatusData(int facilityId) {
+            var rooms = 
+                this._context.Rooms.Where(r=>r.FacilityId == facilityId && r.Parameter == "Temp" && r.Sq != null).ToList();
+            var locationQueries = rooms.Select(r => new LocationQuery {LocationName=r.RoomNumber!, Tag=r.PiPath!}).ToList();
+            var currentData = await this._piDataService.CurrentStatusData(locationQueries);
+            return currentData;
+        }
+
+        // https://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORFD-COGEN\Dev_cGMP\cGMP\2J\2N2J1|Status
 
     }
 }

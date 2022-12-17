@@ -35,6 +35,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="OSIsoft.AF.UI">
       <HintPath>..\..\PI DLLs\OSIsoft.AF.UI.dll</HintPath>
     </Reference>

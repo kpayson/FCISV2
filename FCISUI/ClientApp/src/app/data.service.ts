@@ -33,6 +33,10 @@ export class DataService {
     return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);
   }
 
+  facilities() {
+    return this.get<any[]>(`Facilities`);
+  }
+
   gsfByFacility() {
     return this.get<any[]>(`GsfChart/GsfByFacility`);
   }
@@ -45,8 +49,8 @@ export class DataService {
     return this.get<any[]>(`GsfChart/GsfGrowthByClassification`);
   }
 
-  facilities() {
-    return this.get<any[]>(`Facilities`);
+  svgMap(facId:number) {
+    return this.get<any>(`SvgMap/${facId}`)
   }
 
   timelineData(facilityId:number, attr:string, startDate:Date, endDate: Date, interval:number) {

@@ -34,3 +34,11 @@ dotnet-aspnet-codegenerator controller -name GsfGrowthController -async -api -m 
 dotnet add package NSwag.ASpNetCore
 
 https://www.ebenmonney.com/quickapp-asp-net-core-angular-startup-project-template/
+
+var buildUrl =  () => { 
+  var startDate = new Date(); 
+  startDate.setDate(startDate.getDate()-1); 
+  endDate = new Date(); 
+  var url = `https://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\\\ORF-COGENAF\\cGMP\\cGMP\\PET_1|Facility_Status_Check&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}&rectype=interpolated&interval=10m`; 
+  console.log(url); 
+}
