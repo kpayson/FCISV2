@@ -1,6 +1,30 @@
+<!-- <div *ngFor="let pin of svgMap.svgMapPins">
+  cx={{pin.cx}} cy={{pin.cy}}
+</div> -->
 
-<!-- <svg xmlns="http://www.w3.org/2000/svg" [viewBox]="viewBox">
-    <g id="background" [innerHtml]="background"></g>
 
-    <g *ngFor="pin in pins"></g>
-</svg>  -->
+<svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="svgMap.viewbox">
+    <g id="background" [innerHtml]="svgMap.backgroundSvg | sanitizedHtml"></g>
+
+    <g *ngFor="let pin of svgMap.svgMapPins" [attr.id]="pin.locationId">
+        <a
+          class="map-pin"
+          data-toggle="tooltip"
+          [title]="pin.title"
+          (click)="pinClick.emit(pin.locationId)"
+          (mouseover)="pinHover.emit(pin.locationId)"
+          (mouseleave)="pinHover.emit('')"
+        >
+          <path *ngIf="pin.path"
+            class="pin-path"
+            [attr.d]="pin.path"
+          />
+          <circle
+            [ngClass]="pinClass(pin.locationId)"  
+            [attr.cx]="pin.cx"
+            [attr.cy]="pin.cy"
+            [attr.r]="pin.r"
+          />
+        </a>
+      </g>
+</svg> 

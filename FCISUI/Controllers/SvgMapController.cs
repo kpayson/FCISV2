@@ -33,7 +33,9 @@ namespace FCISUI.Controllers
                 LocationId = p.LocationId,
                 Title = p.Title,
                 Cx = p.Cx,
-                Cy = p.Cy
+                Cy = p.Cy,
+                R =  p.R,
+                Path = p.Path
             }).ToList();
             svgMap.SvgMapPins = pins;
                 

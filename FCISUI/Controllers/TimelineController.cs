@@ -50,7 +50,7 @@ namespace FCISUI.Controllers
         public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData() {
             var facilities = 
                 this._context.Facilities.Where(x=>! String.IsNullOrWhiteSpace(x.PiPath)).ToList();
-            var locationQueries = facilities.Select(f => new LocationQuery {LocationName=f.FacilityName!, Tag=f.PiPath!}).ToList();
+            var locationQueries = facilities.Select(f => new LocationQuery {LocationName=f.Circleid!, Tag=f.PiPath!}).ToList();
             var currentData = await this._piDataService.CurrentStatusData(locationQueries);
             return currentData;
         }

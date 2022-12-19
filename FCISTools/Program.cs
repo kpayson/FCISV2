@@ -24,6 +24,8 @@ internal class Program
         public string Title { get; set; }
         public double Cx { get; set; }
         public double Cy { get; set; }
+        public double R { get; set; }
+        public string Path { get; set; }
     }
 
     public class DataService
@@ -58,7 +60,7 @@ internal class Program
             using (SqlConnection connection = new SqlConnection(this._connString))
             {
                 connection.Open();
-                string sql = "INSERT INTO SvgMapPin(SvgMapId, LocationId, Title, Cx, Cy) VALUES(@param1, @param2, @param3, @param4, @param5)";
+                string sql = "INSERT INTO SvgMapPin(SvgMapId, LocationId, Title, Cx, Cy, R, Path) VALUES(@param1, @param2, @param3, @param4, @param5, @param6, @param7)";
                 using (SqlCommand cmd = new SqlCommand(sql, connection))
                 {
                     foreach (var pin in pinData)
@@ -68,6 +70,8 @@ internal class Program
                         cmd.Parameters.Add("@param3", SqlDbType.VarChar).Value = pin.Title;
                         cmd.Parameters.Add("@param4", SqlDbType.Float).Value = pin.Cx;
                         cmd.Parameters.Add("@param5", SqlDbType.Float).Value = pin.Cy;
+                        cmd.Parameters.Add("@param6", SqlDbType.Float).Value = pin.R;
+                        cmd.Parameters.Add("@param7", SqlDbType.VarChar).Value = pin.Path;
                         cmd.CommandType = CommandType.Text;
                         try
                         {
@@ -109,13 +113,16 @@ internal class Program
                    {
                        var anchor = g!.Element(ns + "a");
                        var circle = anchor!.Element(ns + "circle");
+                       var path = anchor!.Element(ns + "path");
                        return new PinData
                        {
                            SvgMapId = mapId,
                            LocationId = g.Attribute("id")!.Value,
                            Title = anchor!.Attribute("title")!.Value,
                            Cx = Double.Parse(circle!.Attribute("cx")!.Value),
-                           Cy = Double.Parse(circle!.Attribute("cy")!.Value)
+                           Cy = Double.Parse(circle!.Attribute("cy")!.Value),
+                           R = Double.Parse(circle!.Attribute("r")!.Value),
+                           Path = path != null ? path!.Attribute("d")!.Value : ""
                        };
                    }).ToList();
 

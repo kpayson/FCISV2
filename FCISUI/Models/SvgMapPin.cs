@@ -8,6 +8,8 @@ namespace FCISUI.Models
         public string Title { get; set; }
         public double Cx { get; set; }
         public double Cy { get; set; }
+        public double R { get; set; }
+        public string Path {get; set;}
         
         [ForeignKey("SvgMap")]
         public int SvgMapId { get; set; }

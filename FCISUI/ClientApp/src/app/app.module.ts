@@ -11,7 +11,7 @@ import { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-
 import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 import { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';
 import { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';
-import {PiDataFilterToolbarComponent} from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';
+import { PiDataFilterToolbarComponent} from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';
 import { AppComponent } from './app.component';
 import { ChartDemoComponent } from './chart-demo/chart-demo.component';
 import { FormulaHeaderComponent } from './formula-header/formula-header.component';
@@ -23,6 +23,7 @@ import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.compon
 import { appRoutes } from './routes';
 import { StaticContentContainerComponent } from './static-content-container/static-content-container.component';
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
+import { SanitizedHtmlPipe } from './sanitized-html.pipe';
 //import { DataService } from './data.service';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component
     ApfTimelineChartComponent,
     ApfMonitoredRoomsChartComponent,
     PiDataFilterToolbarComponent,
+    SanitizedHtmlPipe,
     StaticContentContainerComponent,
     SvgStatusMapComponent
   ],

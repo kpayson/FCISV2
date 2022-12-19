@@ -1,22 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-
-// export interface TimelineData {
-//   roomName: string;
-//   roomNumber: string;
-//   sq: string;
-//   iso: string;
-//   chillerStatus: number;
-//   color: string;
-//   tag: string;
-//   startTime: number;
-//   endTime: number;
-// }
-
-export type TimelineDataPoint = { timestamp:number, numeric_value:number, rooomData?:any };
-export type LocationData = { locationName: string, tag: string, points:TimelineDataPoint[] };
-
+import { Facility, SvgMap, LocationTimeSeriesData, LocationCurrentStatus, FacilityGsf, ICGsf, GsfGrowth } from './models'
 
 
 @Injectable({
@@ -34,35 +19,35 @@ export class DataService {
   }
 
   facilities() {
-    return this.get<any[]>(`Facilities`);
+    return this.get<Facility[]>(`Facilities`);
   }
 
   gsfByFacility() {
-    return this.get<any[]>(`GsfChart/GsfByFacility`);
+    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);
   }
 
   gsfByIC() {
-    return this.get<any[]>(`GsfChart/GsfByIC`);
+    return this.get<ICGsf[]>(`GsfChart/GsfByIC`);
   }
 
   gsfGrowthByClassification() {
-    return this.get<any[]>(`GsfChart/GsfGrowthByClassification`);
+    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);
   }
 
   svgMap(facId:number) {
-    return this.get<any>(`SvgMap/${facId}`)
+    return this.get<SvgMap>(`SvgMap/${facId}`)
   }
 
   timelineData(facilityId:number, attr:string, startDate:Date, endDate: Date, interval:number) {
     if(facilityId == 0) {
-      return this.post<LocationData[]>(`Timeline/AllFacilityTimelineData`, {
+      return this.post<LocationTimeSeriesData[]>(`Timeline/AllFacilityTimelineData`, {
         startDate,
         endDate,
         interval
       }); 
     }
 
-    return this.post<LocationData[]>(`Timeline/FacilityTimelineData`, {
+    return this.post<LocationTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {
       facilityId,
       attr,
       startDate,
@@ -71,5 +56,10 @@ export class DataService {
     });
   }
 
-
+  facilityCurrentStatusData(facilityId:number) {
+    if(facilityId == 0) {
+      return this.post<LocationCurrentStatus[]>(`Timeline/AllFacilityCurrentData`, {facilityId});
+    }
+    return this.post<LocationCurrentStatus[]>(`Timeline/FacilityCurrentData`, {facilityId})
+  }
 }

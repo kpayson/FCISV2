@@ -11,7 +11,13 @@
     <div class="row">
       <div class="col-md-3">
         
-        <app-apf-portfolio-ic-map></app-apf-portfolio-ic-map>
+        <app-svg-status-map 
+          [svgMap]="(svgMap$ | async) || defaultSvgMap" 
+          [pinStates]="(pinStates$ | async) || {}"  
+          (pinClick)="pinClick($event)" 
+          (pinHover)="pinHover($event)">
+        </app-svg-status-map>
+
       </div>
 
       <div class="col-md-9" style="border: 0px solid black">

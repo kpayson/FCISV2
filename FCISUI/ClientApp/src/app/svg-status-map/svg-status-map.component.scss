@@ -1,0 +1,50 @@
+svg {
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    max-width: 900px;
+    width: 90%;
+  }
+
+  .map-pin {
+    cursor: pointer;
+  }
+  
+  .pin-path {
+    fill-opacity: 0.25;
+    stroke: #000;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    // fill-opacity: 0.25;
+    // transition: fill 0.2s;
+  }
+
+  .pin-green {
+    fill:green;
+  }
+
+  .pin-red {
+    fill:red;
+  }
+
+  .pin-yellow {
+    fill:yellow;
+  }
+
+  .pin-gray {
+    fill:gray;
+  }
+
+  .pin-lightgray {
+    fill:lightgray;
+  }
+
+  .pin-white {
+    fill:white;
+  }
+
+  circle {
+    cursor: pointer;
+  }
+  
+

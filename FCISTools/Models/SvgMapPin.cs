@@ -14,6 +14,7 @@ namespace FCISTools.Models
         public string Title { get; set; }
         public double Cx { get; set; }
         public double Cy { get; set; }
+        public string Path {get; set;}
     }
 
 }

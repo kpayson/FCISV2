@@ -1,4 +1,4 @@
-import { DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 

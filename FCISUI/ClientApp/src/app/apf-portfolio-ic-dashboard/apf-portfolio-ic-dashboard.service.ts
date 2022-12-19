@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { map, mergeMap, Observable, BehaviorSubject, zip, of, distinctUntilChanged, filter } from 'rxjs';
-import { TimelineDataPoint, LocationData, DataService } from 'src/app/data.service';
+import { DataService } from 'src/app/api/data.service';
+import { SvgMap, TimeSeriesPoint, LocationTimeSeriesData, LocationCurrentStatus } from 'src/app/api/models';
+import { reduce} from 'lodash';
 
 interface PiDataFilter {
   facility:number,
@@ -13,38 +15,16 @@ interface PiDataFilter {
 interface ChartDataPoint {
   locationName:string,
   tag:string,
-  statusValue:number,
-  startTime:number,
-  endTime:number,
+  // statusValue:number,
+  chillerStatusLabel:string,
+  statusColor:string,
+  startDate:Date,
+  endDate:Date,
   roomInfo?:any
 }
 
-interface CriticalParameterFilter {
-  facility:number, 
-  status:string, 
-  startDate:Date, 
-  endDate:Date, 
-  interval:number
-}
+export type locationStatusLookup = { [name: string]: string };
 
-interface SvgMap {
-  name: string;
-}
-
-// const row = 
-// [
-//   {
-//     v: x.RoomName,
-//     p: {
-//         link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${x.Tag}`  // This will need to be the correct concantonated link: dataValues[i].Tag + ...
-//     }
-//   },
-//   tooltipText,
-//   x.ChillerStatus,
-//   statusColor(x.ChillerStatus),
-//   new Date(x.StartTime),
-//   new Date(x.EndTime)
-// ];
 
 @Injectable()
 export class ApfPortfolioIcDashboardService {
@@ -63,25 +43,32 @@ export class ApfPortfolioIcDashboardService {
       interval:10
     });
 
-    this._svgMap$ = new BehaviorSubject<SvgMap>({name:'apf_facility_all'})
-    // this._piDataFilter$.pipe(
-    //   map(filter=>{
-    //     return filter.facility
-    //   }),
-      
-    //   distinctUntilChanged(),
-    //   mergeMap(facId=>this.dataService.svgMap(facId))
-    // ).subscribe(svgMap=>{
-    //   this._svgMap$.next(svgMap)
-    // })
+    this._svgMap$ = new BehaviorSubject<SvgMap>({name:'apf_facility_all', backgroundSvg:"", id:0, svgMapPins:[],viewbox:"0 0 0 0"})
+    
+    this._piDataFilter$.pipe(
+      distinctUntilChanged((prev,curr)=>prev.facility === curr.facility),
+      mergeMap(filter=>zip(this.dataService.svgMap(filter.facility),this.dataService.facilityCurrentStatusData(filter.facility)))
+    ).subscribe(([svgMap,currentStatusValues])=>{
+        this._svgMap$.next(svgMap);
+
+        const valueLookup = reduce(
+          currentStatusValues,
+          (acc, { locationName, statusPoint }) => ({ ...acc, [locationName]: this.statusColor(statusPoint.numeric_value) }),
+          {}
+        )
+
+        this._currentStatusValues$.next(valueLookup);
+    })
+
+    this._currentStatusValues$ = new BehaviorSubject<locationStatusLookup>({})
 
     this._timeline$ = new BehaviorSubject<ChartDataPoint[]>([]);
-    
+   
     this._piDataFilter$.pipe(mergeMap(
-      (filter:CriticalParameterFilter)=>zip(
+      (filter:PiDataFilter)=>zip(
         of(filter),
         this.dataService.timelineData(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval))))
-      .subscribe((dataAndFilter:[filter:CriticalParameterFilter,data:LocationData[]])=>{
+      .subscribe((dataAndFilter:[filter:PiDataFilter,data:LocationTimeSeriesData[]])=>{
         const chartData:ChartDataPoint[] = []
          
         for(const x of dataAndFilter[1]) {
@@ -96,9 +83,11 @@ export class ApfPortfolioIcDashboardService {
             const point:ChartDataPoint = {
               locationName:x.locationName,
               tag:x.tag,
-              startTime:startTime,
-              endTime:Math.max(y.timestamp,startTime),
-              statusValue:y.numeric_value,
+              startDate:new Date(startTime),
+              endDate:new Date(Math.max(y.timestamp,startTime)),
+              statusColor: this.statusColor(y.numeric_value),
+              chillerStatusLabel: this.chillerStatusLabel(y.numeric_value),
+
               roomInfo: {
                 // roomName:y.roomName || '',
                 // iso:y.iso || '',
@@ -178,44 +167,45 @@ export class ApfPortfolioIcDashboardService {
     return this._svgMap$ as Observable<SvgMap>;
   }
 
+  private _currentStatusValues$: BehaviorSubject<locationStatusLookup>;
+  public get currentStatusValues$() {
+    return this._currentStatusValues$ as Observable<locationStatusLookup>
+  }
+
   private _timeline$: BehaviorSubject<ChartDataPoint[]>;
   public get timeline$() {
     return this._timeline$ as Observable<ChartDataPoint[]>;
   }
 
-  private locationDataToChartRow(point:TimelineDataPoint, roomNumber:string, roomName:string, iso:string, sq:string) {
+  private statusColor = (statusVal:number) => {
+    switch(statusVal){
+      case 0:
+        return "green";
+      case 1: 
+        return "gray";
+      case 2:
+         return "yellow";
+      case 3:
+          return "red";
+      default:
+        return "lightgray";
+    }
+  }
 
-    // const statusColor = (chillerStatus:string) => {
-    //   if (chillerStatus == 'Within Spec') { return 'green'; }
-    //   if (chillerStatus == 'Comm Loss') { return 'gray'; }
-    //   if (chillerStatus == 'Warning') { return 'yellow'; }
-    //   if (chillerStatus == 'Alarm (Out of Spec)') { return 'red'; }
-    //   return 'white'; 
-    // }
-
-
-
-    const tooltipText = "";
-    //createCustomHTMLContentTable(locationData.locationName, x.RoomName, x.ISO, x.SQ)
-      
-      const row:any = 
-        [
-          // {
-          //   v: roomName,
-          //   p: {
-          //       link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${tag}`  // This will need to be the correct concantonated link: dataValues[i].Tag + ...
-          //   }
-          // },
-          // tooltipText,
-          // chillerStatusLabel(chillerStatus),
-          // statusColor(chillerStatus),
-          // new Date(startTime),
-          // new Date(endTime)
-        ];
-      return row;
-      
-    };
-
+  private chillerStatusLabel = (statusVal:number) => {
+    switch(statusVal){
+      case 0:
+        return "Within Spec";
+      case 1: 
+        return "Comm Loss";
+      case 2:
+         return "Warning";
+      case 3:
+          return "Alarm (our of Spec)";
+      default:
+          return "";
+    }
+  }
 
 
   public gsfGrowthByClassification$ = this.dataService
