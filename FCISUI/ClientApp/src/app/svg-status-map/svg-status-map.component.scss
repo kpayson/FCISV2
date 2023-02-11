@@ -45,6 +45,19 @@ svg {
 
   circle {
     cursor: pointer;
+    
   }
+
+  .pin-border {
+    fill: gray;
+    stroke: #000;
+    stroke-miterlimit: 10;
+    stroke-width: .5px;
+
+    :hover {
+      fill: black;
+    }
+  }
+
   
 

@@ -1,4 +1,4 @@
 export * from './facility';
 export * from './gsfChart';
-export * from './SvgMap'
+export * from './svgMap';
 export * from './timeline';

@@ -59,12 +59,15 @@ namespace FCISUI.Data
             foreach(var loc in locationQueries) {
                 var currentDataPath = $"pi-api/current-value?tag={loc.Tag}";
                 var res = await this._httpClient.GetAsync(currentDataPath);
-                var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>();
-                var point = new LocationCurrentStatus {
-                    LocationName = loc.LocationName,
-                    StatusPoint = timeSeries.First()
-                }; 
-                statusPoints.Add(point);
+                if(res.IsSuccessStatusCode) {
+                    var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>();
+                    var point = new LocationCurrentStatus {
+                        LocationName = loc.LocationName,
+                        StatusPoint = timeSeries.First()
+                    }; 
+                    statusPoints.Add(point);
+                }
+
             }
             return statusPoints;
         }

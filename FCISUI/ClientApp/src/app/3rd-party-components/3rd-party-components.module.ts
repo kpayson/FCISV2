@@ -5,6 +5,8 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 @NgModule({
     declarations: [],
     imports: [],
@@ -12,7 +14,8 @@ import { DropdownModule } from 'primeng/dropdown';
         BrowserAnimationsModule,
         ButtonModule,
         CalendarModule,
-        DropdownModule
+        DropdownModule,
+        EditorModule
     ],
     providers: [],
     bootstrap: []

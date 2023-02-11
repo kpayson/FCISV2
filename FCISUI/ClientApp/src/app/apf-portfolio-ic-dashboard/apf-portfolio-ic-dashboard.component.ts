@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ApfPortfolioIcDashboardService, locationStatusLookup } from './apf-portfolio-ic-dashboard.service';
-import { Observable,of,map, mergeMap } from 'rxjs';
+import { Observable, map, mergeMap, of } from 'rxjs';
+
+import { ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
 import { SvgMap } from '../api/models';
 
 @Component({
@@ -36,6 +37,7 @@ export class ApfPortfolioIcDashboardComponent {
     }
 
     this.svgMap$ = this.service.svgMap$;
+    this.svgBackgroundImageUrl$ = this.service.svgMapBackgroundImageUrl$;
     this.pinStates$ = this.service.currentStatusValues$
 
     this.timelineData$ = this.service.timeline$.pipe(map(points=>{
@@ -62,13 +64,14 @@ export class ApfPortfolioIcDashboardComponent {
   facilityFilterOptions$: Observable<{name:string,value:string}[]>;
   timelineData$: Observable<any[]>;
   svgMap$:Observable<SvgMap>;
+  svgBackgroundImageUrl$:Observable<string>;
   pinStates$:Observable<locationStatusLookup>;
 
-  defaultSvgMap:SvgMap = {backgroundSvg:"",id:0,name:"",svgMapPins:[],viewbox:""}
+  defaultSvgMap:SvgMap = {backgroundSvg:"",id:0,name:"",svgMapPins:[],viewbox:"",defs:"", facilityId:0}
 
 
   filterChange($event:any) {
-    this.service.filterPiData($event)
+    setTimeout(()=>{this.service.filterPiData($event)},0);
   }
 
   chartLabelClick($event:any) {
@@ -81,6 +84,10 @@ export class ApfPortfolioIcDashboardComponent {
 
   pinHover($event:any){
     console.log($event);
+  }
+
+  staticContentSave(evnt:any) {
+    
   }
 
 }

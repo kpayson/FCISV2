@@ -1,0 +1,9 @@
+<div [formGroup]="editorForm">
+  <editor
+    apiKey="ojb6b43xupdnswfj06s4xwmmscgqq27vxu4a0410zkolh0cs"
+    formControlName="editorContent"
+    [init]="{ plugins: 'lists link image table code help wordcount' }"
+  ></editor>
+
+  <button pButton (click)="save()">Save</button>
+</div>

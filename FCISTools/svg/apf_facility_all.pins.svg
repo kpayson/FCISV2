@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7613 11828.3">
 
-    <g id="Pin_Facility_2J">
+    <g id="Pin_Facility_2J" data-ic="CC">
       <a
         class="far fa-lab3"
         data-toggle="tooltip"
@@ -24,7 +24,7 @@
       </a>
     </g>
 
-    <g id="Pin_Facility_3E">
+    <g id="Pin_Facility_3E" data-ic="CC">
       <a
         class="far fa-lab4"
         data-toggle="tooltip"

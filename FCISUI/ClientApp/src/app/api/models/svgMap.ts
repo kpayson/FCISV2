@@ -12,7 +12,13 @@ export interface SvgMapPin {
 export interface SvgMap {
     id: number;
     name: string;
+    defs: string;
     backgroundSvg: string;
     viewbox: string;
+    facilityId: number;
     svgMapPins: SvgMapPin[]
 }
+
+export const defaultSvgMap: SvgMap = {
+    id:0, backgroundSvg:"",name:"",svgMapPins:[],viewbox:"0 0 0 0", defs:"", facilityId:0
+};

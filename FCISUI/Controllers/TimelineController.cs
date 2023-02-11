@@ -46,7 +46,7 @@ namespace FCISUI.Controllers
             return timelineData;
         }
 
-        [HttpPost("AllFacilityCurrentData")]
+        [HttpGet("AllFacilityCurrentData")]
         public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData() {
             var facilities = 
                 this._context.Facilities.Where(x=>! String.IsNullOrWhiteSpace(x.PiPath)).ToList();
@@ -55,7 +55,7 @@ namespace FCISUI.Controllers
             return currentData;
         }
 
-        [HttpPost("FacilityCurrentData")]
+        [HttpGet("FacilityCurrentData/{facilityId}")]
         public async Task<IEnumerable<LocationCurrentStatus>> FacilityCurrentStatusData(int facilityId) {
             var rooms = 
                 this._context.Rooms.Where(r=>r.FacilityId == facilityId && r.Parameter == "Temp" && r.Sq != null).ToList();

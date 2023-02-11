@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 611.97 700.77">
+  <g id="pinsFID2">
+    <g id="pin5640">
+      <circle id="pinBack5640" class="cls-2" cx="429.78" cy="500.92" r="11.92"/>
+      <circle id="pinColor5640" class="cls-1" cx="429.78" cy="500.92" r="9.93"/>
+    </g>
+    <g id="pin5642">
+      <circle id="pinBack5642" class="cls-2" cx="523.21" cy="500.92" r="11.92"/>
+      <circle id="pinColor5642" class="cls-1" cx="523.21" cy="500.92" r="9.93"/>
+    </g>
+    <g id="pin6624">
+      <circle id="pinBack6624" class="cls-2" cx="357.99" cy="177.64" r="11.92"/>
+      <circle id="pinColor6624" class="cls-1" cx="357.99" cy="177.64" r="9.93"/>
+    </g>
+  </g>
+  <g id="windowAFID17">
+    <g id="pin1C166A5A">
+      <g id="pinTest3">
+        <circle id="pinTestColor3" class="cls-1" cx="216.17" cy="128.1" r="19.45"/>
+      </g>
+    </g>
+  </g>
+</svg>

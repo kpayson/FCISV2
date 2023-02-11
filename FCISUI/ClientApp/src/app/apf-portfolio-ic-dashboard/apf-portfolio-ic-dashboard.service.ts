@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
-import { map, mergeMap, Observable, BehaviorSubject, zip, of, distinctUntilChanged, filter } from 'rxjs';
+import { BehaviorSubject, Observable, distinctUntilChanged, filter, map, mergeMap, of, zip } from 'rxjs';
+import { LocationCurrentStatus, LocationTimeSeriesData, SvgMap, TimeSeriesPoint } from 'src/app/api/models';
+
 import { DataService } from 'src/app/api/data.service';
-import { SvgMap, TimeSeriesPoint, LocationTimeSeriesData, LocationCurrentStatus } from 'src/app/api/models';
-import { reduce} from 'lodash';
+import { Injectable } from '@angular/core';
+import { reduce } from 'lodash';
 
 interface PiDataFilter {
   facility:number,
@@ -43,13 +44,18 @@ export class ApfPortfolioIcDashboardService {
       interval:10
     });
 
-    this._svgMap$ = new BehaviorSubject<SvgMap>({name:'apf_facility_all', backgroundSvg:"", id:0, svgMapPins:[],viewbox:"0 0 0 0"})
+    this._svgMap$ = new BehaviorSubject<SvgMap>({name:'apf_facility_all', backgroundSvg:"", id:0, svgMapPins:[],viewbox:"0 0 0 0", defs:"", facilityId:0 });
+    this._svgMapBackgroundImageUrl$ = new BehaviorSubject<string>('');
     
     this._piDataFilter$.pipe(
       distinctUntilChanged((prev,curr)=>prev.facility === curr.facility),
       mergeMap(filter=>zip(this.dataService.svgMap(filter.facility),this.dataService.facilityCurrentStatusData(filter.facility)))
     ).subscribe(([svgMap,currentStatusValues])=>{
         this._svgMap$.next(svgMap);
+        this._svgMapBackgroundImageUrl$.next(
+          `/assets/images/floor-plans/${svgMap.name}_Background.png`
+          // this.dataService.svgMapBackgroundUrl(svgMap.facilityId)
+          );
 
         const valueLookup = reduce(
           currentStatusValues,
@@ -175,6 +181,11 @@ export class ApfPortfolioIcDashboardService {
   private _timeline$: BehaviorSubject<ChartDataPoint[]>;
   public get timeline$() {
     return this._timeline$ as Observable<ChartDataPoint[]>;
+  }
+
+  private _svgMapBackgroundImageUrl$: BehaviorSubject<string>;
+  public get svgMapBackgroundImageUrl$() {
+    return this._svgMapBackgroundImageUrl$ as Observable<string>;
   }
 
   private statusColor = (statusVal:number) => {

@@ -24,6 +24,7 @@ import { appRoutes } from './routes';
 import { StaticContentContainerComponent } from './static-content-container/static-content-container.component';
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
 import { SanitizedHtmlPipe } from './sanitized-html.pipe';
+import { StaticContentEditorComponent } from './static-content-editor/static-content-editor.component';
 //import { DataService } from './data.service';
 
 @NgModule({
@@ -45,7 +46,8 @@ import { SanitizedHtmlPipe } from './sanitized-html.pipe';
     PiDataFilterToolbarComponent,
     SanitizedHtmlPipe,
     StaticContentContainerComponent,
-    SvgStatusMapComponent
+    SvgStatusMapComponent,
+    StaticContentEditorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

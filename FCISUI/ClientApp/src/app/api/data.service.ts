@@ -1,8 +1,8 @@
+import { Facility, FacilityGsf, GsfGrowth, ICGsf, LocationCurrentStatus, LocationTimeSeriesData, SvgMap } from './models'
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Facility, SvgMap, LocationTimeSeriesData, LocationCurrentStatus, FacilityGsf, ICGsf, GsfGrowth } from './models'
-
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +38,10 @@ export class DataService {
     return this.get<SvgMap>(`SvgMap/${facId}`)
   }
 
+  svgMapBackgroundUrl(facId:number) {
+    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`
+  }
+
   timelineData(facilityId:number, attr:string, startDate:Date, endDate: Date, interval:number) {
     if(facilityId == 0) {
       return this.post<LocationTimeSeriesData[]>(`Timeline/AllFacilityTimelineData`, {
@@ -58,8 +62,8 @@ export class DataService {
 
   facilityCurrentStatusData(facilityId:number) {
     if(facilityId == 0) {
-      return this.post<LocationCurrentStatus[]>(`Timeline/AllFacilityCurrentData`, {facilityId});
+      return this.get<LocationCurrentStatus[]>(`Timeline/AllFacilityCurrentData`);
     }
-    return this.post<LocationCurrentStatus[]>(`Timeline/FacilityCurrentData`, {facilityId})
+    return this.get<LocationCurrentStatus[]>(`Timeline/FacilityCurrentData/${facilityId}`)
   }
 }

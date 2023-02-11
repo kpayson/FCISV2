@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7613 11828.3">
+<g id="cph_main_pinsFID10">
+    <g id="pin1B42" data-toggle="tooltip" data-placement="right" data-html="true" 
+    data-original-title="<div align=&quot;left&quot; style=&quot;max-width: 300px; padding:5px 5px 5px 5px;&quot;><table><tr><th>Room: Entry Room</th></tr><tr><td><b>Room #: 1B42</b></td></tr><tr><td><b>Class: 8</b></td></tr><tr><td><b>GSF: 46</b></td></tr></table></div>" style="cursor: pointer; text-decoration: underline;">
+        <circle id="pinBack1B42" class="stGray" cx="247.88" cy="82.12" r="15"></circle>
+        <circle id="pinColor1B42" class="stGreen" cx="247.88" cy="82.12" r="10"></circle>
+    </g>
+    <g id="pin1B42A" data-toggle="tooltip" data-placement="right" data-html="true" data-original-title="<div align=&quot;left&quot; style=&quot;max-width: 300px; padding:5px 5px 5px 5px;&quot;><table><tr><th>Room: Airlock</th></tr><tr><td><b>Room #: 1B42A</b></td></tr><tr><td><b>Class: 7</b></td></tr><tr><td><b>GSF: 27</b></td></tr></table></div>" style="cursor: pointer; text-decoration: underline;">
+        <circle id="pinBack1B42A" class="stGray" cx="171.91" cy="82.12" r="15"></circle>
+        <circle id="pinColor1B42A" class="stGreen" cx="171.91" cy="82.12" r="10"></circle>
+    </g>
+    <g id="pin1B42A1" data-toggle="tooltip" data-placement="right" data-html="true" data-original-title="<div align=&quot;left&quot; style=&quot;max-width: 300px; padding:5px 5px 5px 5px;&quot;><table><tr><th>Room: Production Room</th></tr><tr><td><b>Room #: 1B42A1</b></td></tr><tr><td><b>Class: 7</b></td></tr><tr><td><b>GSF: 222</b></td></tr></table></div>" style="cursor: pointer; text-decoration: underline;">
+        <circle id="pinBack1B42A1" class="stGray" cx="123.91" cy="155.32" r="15"></circle>
+        <circle id="pinColor1B42A1" class="stGreen" cx="123.91" cy="155.32" r="10"></circle>
+    </g>
+</g>
+</svg>

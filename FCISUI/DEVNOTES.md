@@ -42,3 +42,15 @@ var buildUrl =  () => {
   var url = `https://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\\\ORF-COGENAF\\cGMP\\cGMP\\PET_1|Facility_Status_Check&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}&rectype=interpolated&interval=10m`; 
   console.log(url); 
 }
+
+
+Private properties.
+Data binding properties.
+View and content properties.
+UI properties.
+Component API properties.
+Constructor.
+Lifecycle hooks.
+Event handlers.
+Component API methods.
+Private methods.

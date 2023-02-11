@@ -1,10 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+
 import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-pi-data-filter-toolbar',
   templateUrl: './pi-data-filter-toolbar.component.html',
-  styleUrls: ['./pi-data-filter-toolbar.component.scss']
+  styleUrls: ['./pi-data-filter-toolbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PiDataFilterToolbarComponent {
 
@@ -39,14 +41,6 @@ export class PiDataFilterToolbarComponent {
   filterStyle = {
     width:'200px'
   }
-  
-  cities = [
-    {name: 'New York', code: 'NY'},
-    {name: 'Rome', code: 'RM'},
-    {name: 'London', code: 'LDN'},
-    {name: 'Istanbul', code: 'IST'},
-    {name: 'Paris', code: 'PRS'}
-];
 
   statusOptions = [
     {name:"Composite Status", value:"Sum All" },
