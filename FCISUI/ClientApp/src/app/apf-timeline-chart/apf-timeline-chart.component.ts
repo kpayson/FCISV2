@@ -8,13 +8,30 @@ import { ChartType } from 'angular-google-charts';
   styleUrls: ['./apf-timeline-chart.component.scss']
 })
 export class ApfTimelineChartComponent {
-  constructor() {}
+  constructor() { }
 
   @Input()
   chartData: any[] = [];
 
+  private _highlightedLabel: string = '';
+  @Input()
+  get highlightedLabel() {
+    return this._highlightedLabel;
+  }
+  set highlightedLabel(v: string) {
+    this._highlightedLabel = v;
+    document.querySelectorAll('text[data-locationId]')?.forEach(elem => { elem.setAttribute('fill', 'black') });
+    document.querySelector('text[data-locationId="' + v + '"]')?.setAttribute('fill', 'red');
+  }
+
   @Output()
   chartLabelClick = new EventEmitter<any>()
+
+  @Output()
+  chartLabelMouseOver = new EventEmitter<any>();
+
+  @Output()
+  chartLabelMouseOut = new EventEmitter<any>();
 
   chartType = ChartType.Timeline;
 
@@ -39,24 +56,42 @@ export class ApfTimelineChartComponent {
     focusTarget: 'category'
   };
 
-  chartReady(){
+  chartReady() {
     console.log("Chart Ready");
     const chartLabels = document.querySelectorAll('app-apf-timeline-chart text[text-anchor="end"]');
     const me = this;
-    chartLabels.forEach((label)=>{
-      label.setAttribute('style','cursor: pointer; text-decoration: underline');
-      label.addEventListener('click', function (sender) { // add event to row labels when clicked to open URL
-        console.log(sender); 
+    chartLabels.forEach((label) => {
+
+      label.setAttribute('style', `cursor: pointer; text-decoration: underline;`);
+      label.setAttribute('data-locationId', label.innerHTML);
+
+      label.addEventListener('click', function (sender) {
         const text = (sender.currentTarget as Element).innerHTML
         me.chartLabelClick.emit(text);
+      });
+      label.addEventListener('mouseover', function (sender) {
+        const text = (sender.currentTarget as Element).innerHTML
+        me.handleLabelMouseOver(text);
+      });
+      label.addEventListener('mouseout', function (sender) {
+        const text = (sender.currentTarget as Element).innerHTML
+        me.handleLabelMouseOut(text);
       });
 
     });
   }
-      
-    
-    //pinCurrent.setAttribute('style', 'cursor: pointer; text-decoration: underline;'); // add cursor event to pin
-    //label.setAttribute('style', 'cursor: pointer; text-decoration: underline;'); // add cursor event to row label
+
+  handleLabelMouseOver(locationId: string) {
+    document.querySelector('text[data-locationId="' + locationId + '"]')?.setAttribute('fill', 'red');
+    this.chartLabelMouseOver.emit(locationId);
   }
+
+  handleLabelMouseOut(locationId: string) {
+    document.querySelector('text[data-locationId="' + locationId + '"]')?.setAttribute('fill', 'black');
+    this.chartLabelMouseOut.emit(locationId)
+  }
+
+
+}
 
 

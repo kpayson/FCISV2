@@ -23,6 +23,17 @@ export class SvgStatusMapComponent {
   @Input()
   pinStates: { [name: string]: string } = {};
 
+  private _highlightedMapPin = ''
+  @Input()
+  get highlightedMapPin() {
+    return this._highlightedMapPin;
+  }
+  set highlightedMapPin(v: string) {
+    this._highlightedMapPin = v;
+    document.querySelectorAll('circle.pin-border').forEach(elem=>{elem.setAttribute('fill','grey')});
+    document.querySelector('circle.pin-border[data-locationId="' + v + '"]')?.setAttribute('fill', 'black');
+  }
+
   private _backgroundImageUrl="";
   @Input()
   get backgroundImageUrl() {
@@ -49,16 +60,10 @@ export class SvgStatusMapComponent {
   pinClick:EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  pinHover:EventEmitter<PinHoverInfo> = new EventEmitter<PinHoverInfo>();
+  pinMouseOver:EventEmitter<string> = new EventEmitter<string>();
 
-  handlePinHoverOn(locationId:string, title:string) {
-    // TODO show title
-    this.pinHover.emit({locationId, status:'on'});
-  }
-  
-  handlePinHoverOff(locationId:string) {
-    this.pinHover.emit({locationId, status:'off'});
-  }
+  @Output()
+  pinMouseOut:EventEmitter<string> = new EventEmitter<string>();
   
   pinClass(locationId:string){
     //return 'pin-green';

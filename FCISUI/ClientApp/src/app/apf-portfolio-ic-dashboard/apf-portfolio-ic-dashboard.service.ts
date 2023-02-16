@@ -69,6 +69,9 @@ export class ApfPortfolioIcDashboardService {
     this._currentStatusValues$ = new BehaviorSubject<locationStatusLookup>({})
 
     this._timeline$ = new BehaviorSubject<ChartDataPoint[]>([]);
+
+    this._hoveredPin$ = new BehaviorSubject<string>('');
+    this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
    
     this._piDataFilter$.pipe(mergeMap(
       (filter:PiDataFilter)=>zip(
@@ -188,6 +191,16 @@ export class ApfPortfolioIcDashboardService {
     return this._svgMapBackgroundImageUrl$ as Observable<string>;
   }
 
+  private _hoveredPin$: BehaviorSubject<string>;
+  public get hoveredPin$() {
+    return this._hoveredPin$ as Observable<string>;
+  }
+
+  private _hoveredTimelineLabel$: BehaviorSubject<string>;
+  public get hoveredTimelineLabel$() {
+    return this._hoveredTimelineLabel$ as Observable<string>;
+  }
+
   private statusColor = (statusVal:number) => {
     switch(statusVal){
       case 0:
@@ -252,6 +265,14 @@ export class ApfPortfolioIcDashboardService {
 
       )
     )
+  }
+
+  public setHoveredPin(pinName:string) {
+    this._hoveredPin$.next(pinName);
+  }
+
+  public setHoveredTimelineLabel(label:string) {
+    this._hoveredTimelineLabel$.next(label);
   }
 
 }

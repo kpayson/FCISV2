@@ -27,7 +27,7 @@ export class PiDataFilterToolbarComponent {
     yesterday.setDate(yesterday.getDate()-1);
     return {
       facility:{},
-      status:"",
+      status:"Sum All",
       startDate: yesterday,
       endDate:new Date(),
       interval:10

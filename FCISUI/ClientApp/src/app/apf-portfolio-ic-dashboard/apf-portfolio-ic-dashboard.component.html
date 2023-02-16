@@ -1,19 +1,22 @@
 <div class="card">
-  <div class="card-body" style="margin-left: 15px" >
+  <div class="card-body" style="margin-left: 15px">
 
     <div class="row">
       <div class="col-md-3">
-        <app-pi-data-filter-toolbar 
-          [facilities]="(facilityFilterOptions$ | async)!" 
-          (filterChange)="filterChange($event)"></app-pi-data-filter-toolbar>
+        <div class="filter-toolbar-container">
+          <app-pi-data-filter-toolbar [facilities]="(facilityFilterOptions$ | async)!"
+            (filterChange)="filterChange($event)"></app-pi-data-filter-toolbar>
+        </div>
 
-        <app-svg-status-map 
-          [svgMap]="(svgMap$ | async) || defaultSvgMap" 
-          [pinStates]="(pinStates$ | async) || {}" 
-          [backgroundImageUrl]="(svgBackgroundImageUrl$ | async) || ''" 
-          (pinClick)="pinClick($event)" 
-          (pinHover)="pinHover($event)">
-        </app-svg-status-map>
+        <div class="svg-map-container">
+          <app-svg-status-map [svgMap]="(svgMap$ | async) || defaultSvgMap" [pinStates]="(pinStates$ | async) || {}"
+            [backgroundImageUrl]="(svgBackgroundImageUrl$ | async) || ''" 
+            [highlightedMapPin]="(hoveredTimelineLabel$ | async) || ''"
+            (pinClick)="pinClick($event)"
+            (pinMouseOver)="pinMouseOver($event)"
+            (pinMouseOut)="pinMouseOut($event)">
+          </app-svg-status-map>
+        </div>
 
       </div>
 
@@ -25,8 +28,7 @@
             </h4>
 
             <app-apf-monitored-rooms-chart
-              [chartData]="(monitoredRoomsChartData$ | async) || []"
-            ></app-apf-monitored-rooms-chart>
+              [chartData]="(monitoredRoomsChartData$ | async) || []"></app-apf-monitored-rooms-chart>
             <div class="chart-label">
               APF Portfolio: Monitored Rooms and Critical Environmental
               Parameter Points
@@ -35,9 +37,7 @@
         </div>
         <div class="row">
           <div class="col-12 justify-content-center" style="height:520px;">
-            <div
-              id="loadingGif"
-              style="
+            <div id="loadingGif" style="
                 display: none;
                 position: fixed;
                 z-index: 1031;
@@ -45,18 +45,22 @@
                 right: 30%;
                 margin-top: 100px;
                 margin-right: -100px;
-              "
-            >
+              ">
               <img src="../../assets/images/giphy.gif" alt="loading" />
             </div>
 
             <!-- <app-static-content-editor [initialContent]="'Hello World'" (onSave)="staticContentSave($event)">
 
             </app-static-content-editor> -->
+            <div class="timeline-chart-container">
+              <app-apf-timeline-chart 
+                [chartData]="(timelineData$ | async) || []"
+                [highlightedLabel]="(hoveredPin$ | async) || ''"
+                (chartLabelClick)="chartLabelClick($event)" 
+                (chartLabelMouseOver)="chartLabelMouseOver($event)"
+                (chartLabelMouseOut)="chartLabelMouseOut($event)"></app-apf-timeline-chart>
+            </div>
 
-            <app-apf-timeline-chart
-              [chartData]="(timelineData$ | async) || []" (chartLabelClick)="chartLabelClick($event)"
-            ></app-apf-timeline-chart>
           </div>
         </div>
       </div>

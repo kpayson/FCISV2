@@ -38,8 +38,10 @@ export class ApfPortfolioIcDashboardComponent {
 
     this.svgMap$ = this.service.svgMap$;
     this.svgBackgroundImageUrl$ = this.service.svgMapBackgroundImageUrl$;
-    this.pinStates$ = this.service.currentStatusValues$
-
+    this.pinStates$ = this.service.currentStatusValues$;
+    this.hoveredPin$ = this.service.hoveredPin$;
+    this.hoveredTimelineLabel$ = this.service.hoveredTimelineLabel$;
+    
     this.timelineData$ = this.service.timeline$.pipe(map(points=>{
       return points.map(x=>{
         return [
@@ -66,9 +68,9 @@ export class ApfPortfolioIcDashboardComponent {
   svgMap$:Observable<SvgMap>;
   svgBackgroundImageUrl$:Observable<string>;
   pinStates$:Observable<locationStatusLookup>;
-
   defaultSvgMap:SvgMap = {backgroundSvg:"",id:0,name:"",svgMapPins:[],viewbox:"",defs:"", facilityId:0}
-
+  hoveredPin$:Observable<string>;
+  hoveredTimelineLabel$: Observable<string>;
 
   filterChange($event:any) {
     setTimeout(()=>{this.service.filterPiData($event)},0);
@@ -78,16 +80,24 @@ export class ApfPortfolioIcDashboardComponent {
     console.log($event);
   }
 
+  chartLabelMouseOver($event:any) {
+    this.service.setHoveredTimelineLabel($event);
+  }
+
+  chartLabelMouseOut($event:any) {
+    this.service.setHoveredTimelineLabel('');
+  }
+
   pinClick($event:any){
     console.log($event);
   }
 
-  pinHover($event:any){
-    console.log($event);
+  pinMouseOver($event:any){
+    this.service.setHoveredPin($event);
   }
 
-  staticContentSave(evnt:any) {
-    
+  pinMouseOut($event:any){
+    this.service.setHoveredPin('');
   }
 
 }
