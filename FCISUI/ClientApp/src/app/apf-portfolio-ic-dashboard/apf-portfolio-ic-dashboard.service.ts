@@ -72,21 +72,22 @@ export class ApfPortfolioIcDashboardService {
 
     this._hoveredPin$ = new BehaviorSubject<string>('');
     this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
-   
+
     this._piDataFilter$.pipe(mergeMap(
-      (filter:PiDataFilter)=>zip(
-        of(filter),
-        this.dataService.timelineData(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval))))
-      .subscribe((dataAndFilter:[filter:PiDataFilter,data:LocationTimeSeriesData[]])=>{
+      (filter:PiDataFilter)=>
+        this.dataService.timelineData(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval)
+          .pipe(map(data=>({filter,data})))
+      ))
+     .subscribe((dataAndFilter)=>{
         const chartData:ChartDataPoint[] = []
          
-        for(const x of dataAndFilter[1]) {
+        for(const x of dataAndFilter.data) {
           if(! x.points.some(Boolean)) { continue; }
           x.points.sort((a,b)=>a.timestamp - b.timestamp);
           let startTime = x.points[0].timestamp;
           let status = x.points[0].numeric_value;
           for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
-            if(y.timestamp < dataAndFilter[0].startDate.getTime()) {
+            if(y.timestamp < dataAndFilter.filter.startDate.getTime()) {
               console.log("error - timestamp before request time")
             }
             const point:ChartDataPoint = {

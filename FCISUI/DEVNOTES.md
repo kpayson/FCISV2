@@ -44,6 +44,13 @@ var buildUrl =  () => {
 }
 
 
+http://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check&start_time=2023-02-15T21:17:44&end_time=2023-02-16T21:17:44&rectype=interpolated&interval=10m
+
+
+http://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\\\ORF-COGENAF\\Dev_cGMP\\cGMP/PET_1|Facility_Status_Check
+
+http://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check&start_time=2023-02-16T21:19:10&end_time=2023-02-17T21:19:10&rectype=interpolated&interval=10m
+
 Private properties.
 Data binding properties.
 View and content properties.

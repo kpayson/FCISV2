@@ -1,11 +1,15 @@
 <div class="filter-bar" [formGroup]="filterForm">
     <div>
         <label>Facility</label>
-        <p-dropdown [options]="facilities" placeholder="" optionLabel="name" optionValue="value" formControlName="facility" [style]="filterStyle"></p-dropdown>
+        <p-dropdown [options]="facilities" placeholder="" optionLabel="name" optionValue="value" formControlName="facility" [style]="filterStyle">
+
+        </p-dropdown>
     </div>
     <div>
         <label>Status</label>
-        <p-dropdown [options]="statusOptions" placeholder="" optionLabel="name"  optionValue="value" formControlName="status"></p-dropdown>
+        <p-dropdown [options]="(statusOptions$ | async) || []" placeholder="" optionLabel="name"  optionValue="value" formControlName="status">
+
+        </p-dropdown>
     </div>
     <div>
         <label>Start Date</label>

@@ -92,10 +92,18 @@ namespace FCISUI.Data
             var startUTC = startTime.ToString("s");
             var endUTC = endTime.ToString("s");
             var timeSeriesPath = $"pi-api/time-series?tag={tag}&start_time={startUTC}&end_time={endUTC}&rectype=interpolated&interval={interval}m";
-            var res = await this._httpClient.GetAsync(timeSeriesPath);
-            var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
-            var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null);
-            return nonEmptyPoints;
+            try {
+                var res = await this._httpClient.GetAsync(timeSeriesPath);
+                var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
+                var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null);
+                return nonEmptyPoints;
+            }
+            catch (Exception ex) {
+                Console.Write(ex);
+                throw ex;
+                //return new List<TimeSeriesPoint>();
+            }
+
         }
 
 
