@@ -1,27 +1,28 @@
 import { BehaviorSubject, Observable, distinctUntilChanged, filter, map, mergeMap, of, zip } from 'rxjs';
-import { LocationCurrentStatus, LocationTimeSeriesData, SvgMap, TimeSeriesPoint } from 'src/app/api/models';
+import { Facility, LocationCurrentStatus, LocationTimeSeriesData, Room, SvgMap, TimeSeriesPoint } from 'src/app/api/models';
 
 import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
 import { reduce } from 'lodash';
 
 interface PiDataFilter {
-  facility:number,
-  status:string,
-  startDate:Date,
-  endDate:Date,
-  interval:number
+  facility: number,
+  status: string,
+  startDate: Date,
+  endDate: Date,
+  interval: number
 }
 
 interface ChartDataPoint {
-  locationName:string,
-  tag:string,
+  locationName: string,
+  tag: string,
   // statusValue:number,
-  chillerStatusLabel:string,
-  statusColor:string,
-  startDate:Date,
-  endDate:Date,
-  roomInfo?:any
+  chillerStatusLabel: string,
+  statusColor: string,
+  startDate: Date,
+  endDate: Date,
+  roomInfo?: Partial<Room>,
+  facilityInfo?: Partial<Facility>
 }
 
 export type locationStatusLookup = { [name: string]: string };
@@ -37,138 +38,127 @@ export class ApfPortfolioIcDashboardService {
     const defaultEndDate = new Date();
 
     this._piDataFilter$ = new BehaviorSubject<PiDataFilter>({
-      facility:0,
-      status:'',
-      startDate:defaultStartDate,
-      endDate:defaultEndDate,
-      interval:10
+      facility: 0,
+      status: '',
+      startDate: defaultStartDate,
+      endDate: defaultEndDate,
+      interval: 10
     });
 
-    this._svgMap$ = new BehaviorSubject<SvgMap>({name:'apf_facility_all', backgroundSvg:"", id:0, svgMapPins:[],viewbox:"0 0 0 0", defs:"", facilityId:0 });
+    this._svgMap$ = new BehaviorSubject<SvgMap>({ name: 'apf_facility_all', backgroundSvg: "", id: 0, svgMapPins: [], viewbox: "0 0 0 0", defs: "", facilityId: 0 });
     this._svgMapBackgroundImageUrl$ = new BehaviorSubject<string>('');
-    
-    this._piDataFilter$.pipe(
-      distinctUntilChanged((prev,curr)=>prev.facility === curr.facility),
-      mergeMap(filter=>zip(this.dataService.svgMap(filter.facility),this.dataService.facilityCurrentStatusData(filter.facility)))
-    ).subscribe(([svgMap,currentStatusValues])=>{
-        this._svgMap$.next(svgMap);
-        this._svgMapBackgroundImageUrl$.next(
-          `/assets/images/floor-plans/${svgMap.name}_Background.png`
-          // this.dataService.svgMapBackgroundUrl(svgMap.facilityId)
-          );
-
-        const valueLookup = reduce(
-          currentStatusValues,
-          (acc, { locationName, statusPoint }) => ({ ...acc, [locationName]: this.statusColor(statusPoint.numeric_value) }),
-          {}
-        )
-
-        this._currentStatusValues$.next(valueLookup);
-    })
-
     this._currentStatusValues$ = new BehaviorSubject<locationStatusLookup>({})
-
     this._timeline$ = new BehaviorSubject<ChartDataPoint[]>([]);
-
     this._hoveredPin$ = new BehaviorSubject<string>('');
     this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
 
-    this._piDataFilter$.pipe(mergeMap(
-      (filter:PiDataFilter)=>
-        this.dataService.timelineData(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval)
-          .pipe(map(data=>({filter,data})))
-      ))
-     .subscribe((dataAndFilter)=>{
-        const chartData:ChartDataPoint[] = []
-         
-        for(const x of dataAndFilter.data) {
-          if(! x.points.some(Boolean)) { continue; }
-          x.points.sort((a,b)=>a.timestamp - b.timestamp);
+
+    // Update the SVG floor plan when the facility changes
+    this._piDataFilter$.pipe(
+      distinctUntilChanged((prev, curr) => prev.facility === curr.facility),
+      mergeMap(filter => zip(this.dataService.svgMap(filter.facility), this.dataService.facilityCurrentStatusData(filter.facility)))
+    ).subscribe(([svgMap, currentStatusValues]) => {
+      this._svgMap$.next(svgMap);
+      this._svgMapBackgroundImageUrl$.next(
+        `/assets/images/floor-plans/${svgMap.name}_Background.png`
+        // this.dataService.svgMapBackgroundUrl(svgMap.facilityId)
+      );
+
+      const valueLookup = reduce(
+        currentStatusValues,
+        (acc, { locationName, statusPoint }) => ({ ...acc, [locationName]: this.statusColor(statusPoint.numeric_value) }),
+        {}
+      )
+
+      this._currentStatusValues$.next(valueLookup);
+    })
+
+    // Prepare timeline data for All Facilities Timeline (facilityId == 0)
+    this._piDataFilter$.pipe(
+      filter(f => f.facility == 0),
+      mergeMap(
+        (filter: PiDataFilter) =>
+          this.dataService.facilityAlltimelineData(filter.startDate, filter.endDate, filter.interval)
+            .pipe(map(data => ({ filter, data })))
+      )
+    )
+      .subscribe((dataAndFilter) => {
+        const chartData: ChartDataPoint[] = []
+
+        for (const x of dataAndFilter.data) {
+          if (!x.points.some(Boolean)) { continue; }
+          x.points.sort((a, b) => a.timestamp - b.timestamp);
           let startTime = x.points[0].timestamp;
-          let status = x.points[0].numeric_value;
-          for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
-            if(y.timestamp < dataAndFilter.filter.startDate.getTime()) {
+          for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
+            if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
               console.log("error - timestamp before request time")
             }
-            const point:ChartDataPoint = {
-              locationName:x.locationName,
-              tag:x.tag,
-              startDate:new Date(startTime),
-              endDate:new Date(Math.max(y.timestamp,startTime)),
+            const point: ChartDataPoint = {
+              locationName: x.facility.facilityName, //.locationName,
+              tag: x.tag,
+              startDate: new Date(startTime),
+              endDate: new Date(Math.max(y.timestamp, startTime)),
               statusColor: this.statusColor(y.numeric_value),
               chillerStatusLabel: this.chillerStatusLabel(y.numeric_value),
-
-              roomInfo: {
-                // roomName:y.roomName || '',
-                // iso:y.iso || '',
-                // sq:y.sq || ''
-              }
             }
 
             startTime = y.timestamp
             chartData.push(point);
           }
-
-          // for(const y of x.points) {
-          //   if(y.numeric_value !== status) {
-          //     const point:ChartDataPoint = {
-          //       locationName:x.locationName,
-          //       tag:x.tag,
-          //       startTime:startTime,
-          //       endTime:y.timestamp,
-          //       statusValue:y.numeric_value,
-          //       roomInfo: {
-          //         // roomName:y.roomName || '',
-          //         // iso:y.iso || '',
-          //         // sq:y.sq || ''
-          //       }
-          //     }
-          //     startTime = y.timestamp
-          //     chartData.push(point);
-          //   }
-          // }
-          // const p = x.points[x.points.length -1];
-          // const point:ChartDataPoint = {
-          //   locationName:x.locationName,
-          //   tag:x.tag,
-          //   startTime:startTime,
-          //   endTime:p.timestamp,
-          //   statusValue:p.numeric_value,
-          //   roomInfo: {
-          //     // roomName:y.roomName || '',
-          //     // iso:y.iso || '',
-          //     // sq:y.sq || ''
-          //   }
-          // }
-          //chartData.push(point);
-
-
-          // for(const y of x.points.sort((a,b)=>a.timestamp - b.timestamp)){
-          //   const point:ChartDataPoint = {
-          //     locationName:x.locationName,
-          //     tag:x.tag,
-          //     startTime:startTime,
-          //     endTime:y.timestamp,
-          //     statusValue:y.numeric_value,
-          //     roomInfo: {
-          //       // roomName:y.roomName || '',
-          //       // iso:y.iso || '',
-          //       // sq:y.sq || ''
-          //     }
-          //   }
-          //   if(point.startTime > point.endTime) {
-          //     console.log('error');
-          //   }
-          //   startTime = y.timestamp
-          //   chartData.push(point);
-          // }
         }
-        
+
+        this._timeline$.next(chartData)
+      });
+
+
+    // prepare data for specific facility timeline
+    this._piDataFilter$.pipe(
+      filter(f => f.facility != 0),
+      mergeMap(
+        (filter: PiDataFilter) =>
+          this.dataService.facilityRoomsTimelineDate(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval)
+            .pipe(map(data => ({ filter, data })))
+      )
+    )
+      .subscribe((dataAndFilter) => {
+        const chartData: ChartDataPoint[] = []
+
+        for (const x of dataAndFilter.data) {
+          if (!x.points.some(Boolean)) { continue; }
+          x.points.sort((a, b) => a.timestamp - b.timestamp);
+          let startTime = x.points[0].timestamp;
+          for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
+            if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
+              console.log("error - timestamp before request time")
+            }
+            const point: ChartDataPoint = {
+              locationName: x.room.roomNumber,
+              tag: x.tag,
+              startDate: new Date(startTime),
+              endDate: new Date(Math.max(y.timestamp, startTime)),
+              statusColor: this.statusColor(y.numeric_value),
+              chillerStatusLabel: this.chillerStatusLabel(y.numeric_value),
+
+              roomInfo: {
+                roomName: x.room.roomName,
+                roomNumber: x.room.roomNumber,
+                iso: x.room.iso,
+                sq: x.room.sq
+              }
+            }
+
+            startTime = y.timestamp
+            chartData.push(point);
+          }         
+        }
+
         this._timeline$.next(chartData)
       })
+
+
   }
   private _piDataFilter$: BehaviorSubject<PiDataFilter>;
-  public filterPiData(filter:PiDataFilter){
+  public filterPiData(filter: PiDataFilter) {
     this._piDataFilter$.next(filter);
   }
 
@@ -202,33 +192,33 @@ export class ApfPortfolioIcDashboardService {
     return this._hoveredTimelineLabel$ as Observable<string>;
   }
 
-  private statusColor = (statusVal:number) => {
-    switch(statusVal){
+  private statusColor = (statusVal: number) => {
+    switch (statusVal) {
       case 0:
         return "green";
-      case 1: 
+      case 1:
         return "gray";
       case 2:
-         return "yellow";
+        return "yellow";
       case 3:
-          return "red";
+        return "red";
       default:
         return "lightgray";
     }
   }
 
-  private chillerStatusLabel = (statusVal:number) => {
-    switch(statusVal){
+  private chillerStatusLabel = (statusVal: number) => {
+    switch (statusVal) {
       case 0:
         return "Within Spec";
-      case 1: 
+      case 1:
         return "Comm Loss";
       case 2:
-         return "Warning";
+        return "Warning";
       case 3:
-          return "Alarm (our of Spec)";
+        return "Alarm (our of Spec)";
       default:
-          return "";
+        return "";
     }
   }
 
@@ -252,27 +242,27 @@ export class ApfPortfolioIcDashboardService {
     const targetIC = ic.toLowerCase()
     return this.dataService.facilities().pipe(
       map((facs: any[]) => {
-        const facilityOptions = 
+        const facilityOptions =
           facs
-          .filter((fac: any) => {
-            return (fac.facilityIc || "").toLowerCase() === targetIC
-          })
-          .map((fac: any) => {
-            const option = { name: fac.facilityName, value: fac.facilityId };
-            return option;
-          })
-          return [{name:`All ${targetIC.toLocaleUpperCase()}`, value:'0'},...facilityOptions];
+            .filter((fac: any) => {
+              return (fac.facilityIc || "").toLowerCase() === targetIC
+            })
+            .map((fac: any) => {
+              const option = { name: fac.facilityName, value: fac.facilityId };
+              return option;
+            })
+        return [{ name: `All ${targetIC.toLocaleUpperCase()}`, value: '0' }, ...facilityOptions];
       }
 
       )
     )
   }
 
-  public setHoveredPin(pinName:string) {
+  public setHoveredPin(pinName: string) {
     this._hoveredPin$.next(pinName);
   }
 
-  public setHoveredTimelineLabel(label:string) {
+  public setHoveredTimelineLabel(label: string) {
     this._hoveredTimelineLabel$.next(label);
   }
 

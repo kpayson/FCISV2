@@ -51,7 +51,7 @@ export class ApfPortfolioIcDashboardComponent {
                 link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${x.tag}`
             }
           },
-          "", //createCustomHTMLContentTable(x.RoomNumber, x.RoomName, x.ISO, x.SQ)
+          x.roomInfo ? createCustomHTMLContentTable(x.roomInfo.roomNumber!, x.roomInfo.roomName!, x.roomInfo.iso!, String(x.roomInfo.sq!)) : "",
           x.chillerStatusLabel,
           x.statusColor,
           x.startDate,

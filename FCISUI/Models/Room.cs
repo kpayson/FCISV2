@@ -13,7 +13,7 @@ namespace FCISUI.Models
         public string? RoomName { get; set; }
 
         // public string? Parameter { get; set; }
-        // public string? Iso { get; set; }
+        public string? Iso { get; set; }
         // public string? ConnectingRoom { get; set; }
         // public string? SensorLocation { get; set; }
         // public string? SensorType { get; set; }

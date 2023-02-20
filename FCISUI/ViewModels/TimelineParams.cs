@@ -2,6 +2,7 @@
 {
     public class FacilityAllTimelineParams
     {
+        // public string IC {get; set;}
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Interval { get; set; }

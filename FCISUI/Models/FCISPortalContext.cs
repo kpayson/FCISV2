@@ -397,10 +397,10 @@ namespace FCISUI.Models
                 //     .IsUnicode(false)
                 //     .HasColumnName("HTTE10");
 
-                // entity.Property(e => e.Iso)
-                //     .HasMaxLength(3)
-                //     .IsUnicode(false)
-                //     .HasColumnName("ISO");
+                entity.Property(e => e.Iso)
+                    .HasMaxLength(3)
+                    .IsUnicode(false)
+                    .HasColumnName("ISO");
 
                 // entity.Property(e => e.Isoorder).HasColumnName("ISOOrder");
 

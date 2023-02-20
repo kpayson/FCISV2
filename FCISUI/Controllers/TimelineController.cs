@@ -4,6 +4,26 @@ using FCISUI.ViewModels;
 using FCISUI.Data;
 using AutoMapper;
 
+public class FacilityRoomTimelineData {
+    public List<TimeSeriesPoint> Points {get; set;}
+    public Room Room {get; set;}
+
+    public string Tag {get; set;}
+}
+
+public class FacilityTimelineData {
+    public List<TimeSeriesPoint> Points {get; set;}
+    public Facility Facility {get; set;}
+    public string Tag {get; set;}
+}
+
+public class TimelineData<T> {
+    public List<TimeSeriesPoint> Points {get; set;}
+    public T Facility {get; set;}
+    public string Tag {get; set;}
+}
+
+
 namespace FCISUI.Controllers
 {
 
@@ -37,32 +57,46 @@ namespace FCISUI.Controllers
 
 
         [HttpPost("AllFacilityTimelineData")]
-        public async Task<IEnumerable<LocationTimeSeriesData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams)
+        public async Task<IEnumerable<FacilityTimelineData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams)
         {
-            //TODO what am i trying to do here ?? Is there a timeline for facilities
             var facilities =
                 this._context.Facilities.Where(x => !String.IsNullOrWhiteSpace(x.PiPath)).ToList();
-            var locationQueries = facilities.Select(f =>
+
+            var timelineData = await Task.WhenAll(facilities.Select(async f =>
             {
-                return new LocationQuery { LocationName = f.FacilityName, Tag = f.PiPath! };
-            }).ToList();
-       
-            var timelineData = await this._piDataService.LocationTimeSeriesData(locationQueries, timelineParams.StartDate.ToUniversalTime(), timelineParams.EndDate.ToUniversalTime(), timelineParams.Interval);
+                var pp = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check";
+                var piPath = f.PiPath!; // ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
+                var points = (await this._piDataService.TimeSeriesData(
+                        piPath,
+                        timelineParams.StartDate.ToUniversalTime(),
+                        timelineParams.EndDate.ToUniversalTime(),
+                        timelineParams.Interval)).ToList();
+                return new FacilityTimelineData { Points = points, Facility = f, Tag = piPath };
+            })) ?? new FacilityTimelineData[] {};
+
             return timelineData;
         }
 
         [HttpPost("FacilityTimelineData")]
-        public async Task<IEnumerable<LocationTimeSeriesData>> FacilityTimelineData(FacilityTimelineParams timelineParams)
+        public async Task<IEnumerable<FacilityRoomTimelineData>> FacilityTimelineData(FacilityTimelineParams timelineParams)
         {
             var attributeStatus = timelineParams.Attr == "Sum All" ? "Status" : $"{timelineParams.Attr}|Status";
 
             var rooms =
                 this._context.Rooms.Where(r => r.FacilityId == timelineParams.FacilityId).ToList();
-            var locationQueries = rooms.Select(r => {
+
+            var timelineData = await Task.WhenAll(rooms.Select(async r =>
+            {
                 var piPath = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber} |{attributeStatus}";
-                return new LocationQuery { LocationName = r.RoomNumber!, Tag = piPath };
-            }).ToList();
-            var timelineData = await this._piDataService.LocationTimeSeriesData(locationQueries, timelineParams.StartDate.ToUniversalTime(), timelineParams.EndDate.ToUniversalTime(), timelineParams.Interval);
+                var points = (await this._piDataService.TimeSeriesData(
+                        piPath,
+                        timelineParams.StartDate.ToUniversalTime(),
+                        timelineParams.EndDate.ToUniversalTime(),
+                        timelineParams.Interval)).ToList();
+
+                return new FacilityRoomTimelineData { Points = points, Room = r, Tag = piPath };
+            })) ?? new FacilityRoomTimelineData[] {};
+
             return timelineData;
         }
 

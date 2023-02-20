@@ -8,8 +8,9 @@ namespace FCISUI.Data
 {
     public interface IPIDataService
     {
-        Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes);
+        // Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes);
         Task<IEnumerable<LocationCurrentStatus>> CurrentStatusData(IList<LocationQuery> locationQueries);
+        Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval);
         // Task<IEnumerable<LocationTimeSeriesData>>  AllFacilityTimeSeriesData(IList<Facility> facilities, DateTime startTime, DateTime endTime, int intervalInMinutes);
         // Task<IEnumerable<LocationTimeSeriesData>> FacilityTimeSeriesData(IList<Room> rooms, DateTime startTime, DateTime endTime, int intervalInMinutes);
     }
@@ -22,12 +23,13 @@ namespace FCISUI.Data
         // public int? StatusValue { get { return (int)this.numeric_value;}}
     }
 
-    public class LocationTimeSeriesData
-    {
-        public string LocationName {get; set;} //Facility or Room
-        public string Tag {get; set;}
-        public List<TimeSeriesPoint> Points {get; set;}
-    }
+    // public class LocationTimeSeriesData
+    // {
+    //     // public string LocationName {get; set;} //Facility or Room
+    //     public Room Room {get; set;}
+    //     public string Tag {get; set;}
+    //     public List<TimeSeriesPoint> Points {get; set;}
+    // }
 
     public class LocationCurrentStatus
     {
@@ -72,30 +74,30 @@ namespace FCISUI.Data
             return statusPoints;
         }
 
-        public async Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes) {
+        // public async Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes) {
 
-            // tag=\\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP&start_time=2022-11-26&end_time=2022-11-27&rectype=interpolated&interval=10m
-            var facilityPoints = new List<LocationTimeSeriesData>();
-            foreach(var loc in locationQueries) {
-                var points = await TimeSeriesData(loc.Tag!,startTime,endTime,intervalInMinutes);
-                var facPoints = new LocationTimeSeriesData{
-                    LocationName = loc.LocationName,
-                    Tag = loc.Tag!,
-                    Points = points.ToList()
-                };
-                facilityPoints.Add(facPoints);
-            }
-            return facilityPoints;
-        }
+        //     // tag=\\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP&start_time=2022-11-26&end_time=2022-11-27&rectype=interpolated&interval=10m
+        //     var facilityPoints = new List<LocationTimeSeriesData>();
+        //     foreach(var loc in locationQueries) {
+        //         var points = await TimeSeriesData(loc.Tag!,startTime,endTime,intervalInMinutes);
+        //         var facPoints = new LocationTimeSeriesData{
+        //             LocationName = loc.LocationName,
+        //             Tag = loc.Tag!,
+        //             Points = points.ToList()
+        //         };
+        //         facilityPoints.Add(facPoints);
+        //     }
+        //     return facilityPoints;
+        // }
 
-        private async Task<IEnumerable<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval) {
+        public async Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval) {
             var startUTC = startTime.ToString("s");
             var endUTC = endTime.ToString("s");
             var timeSeriesPath = $"pi-api/time-series?tag={tag}&start_time={startUTC}&end_time={endUTC}&rectype=interpolated&interval={interval}m";
             try {
                 var res = await this._httpClient.GetAsync(timeSeriesPath);
                 var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
-                var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null);
+                var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null).ToList();
                 return nonEmptyPoints;
             }
             catch (Exception ex) {
