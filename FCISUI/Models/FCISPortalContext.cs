@@ -27,6 +27,7 @@ namespace FCISUI.Models
         public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
+        public virtual DbSet<RoomParameter> RoomParameters { get; set; } = null!;
         public virtual DbSet<RoomOld> RoomOlds { get; set; } = null!;
         public virtual DbSet<SvgMap> SvgMaps { get; set; } = null!;
         public virtual DbSet<SvgMapPin> SvgMapPins { get; set; } = null!;
@@ -363,68 +364,16 @@ namespace FCISUI.Models
 
                 entity.Property(e => e.RoomId).HasColumnName("RoomID");
 
-                // entity.Property(e => e.Attribute)
-                //     .HasMaxLength(50)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.CalibrationPeriod)
-                //     .HasMaxLength(250)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.CalibrationType)
-                //     .HasMaxLength(250)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.Column1)
-                //     .HasMaxLength(350)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.ConnectingRoom)
-                //     .HasMaxLength(50)
-                //     .IsUnicode(false);
-
                 entity.Property(e => e.Facility)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
 
-                // entity.Property(e => e.FormatedName)
-                //     .HasMaxLength(200)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.Htte10)
-                //     .IsUnicode(false)
-                //     .HasColumnName("HTTE10");
-
                 entity.Property(e => e.Iso)
                     .HasMaxLength(3)
                     .IsUnicode(false)
                     .HasColumnName("ISO");
-
-                // entity.Property(e => e.Isoorder).HasColumnName("ISOOrder");
-
-                // entity.Property(e => e.JcipointName)
-                //     .HasMaxLength(350)
-                //     .IsUnicode(false)
-                //     .HasColumnName("JCIPointName");
-
-                // entity.Property(e => e.NextCalibration)
-                //     .HasMaxLength(50)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.Parameter)
-                //     .HasMaxLength(50)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.PiPath)
-                //     .HasMaxLength(200)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.RhtargetRange)
-                //     .HasMaxLength(50)
-                //     .IsUnicode(false)
-                //     .HasColumnName("RHTargetRange");
 
                 entity.Property(e => e.RoomName)
                     .HasMaxLength(250)
@@ -434,20 +383,58 @@ namespace FCISUI.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                // entity.Property(e => e.SensorLocation)
-                //     .HasMaxLength(250)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.SensorType)
-                //     .HasMaxLength(250)
-                //     .IsUnicode(false);
-
-                // entity.Property(e => e.SiemensPointName)
-                //     .HasMaxLength(350)
-                //     .IsUnicode(false);
-
                 entity.Property(e => e.Sq).HasColumnName("SQ");
             });
+
+            modelBuilder.Entity<RoomParameter>(entity =>
+            {
+                entity.ToTable("RoomParameter");
+
+                entity.Property(e => e.RoomId).HasColumnName("RoomPropertyID");
+
+                entity.Property(e => e.Facility)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
+
+                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                entity.Property(e => e.RoomNumber).HasColumnName("RoomNumber");
+
+                entity.Property(e => e.Parameter)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("Parameter");
+
+                entity.Property(e => e.SensorLocation)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CalibrationType)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CalibrationPeriod)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+                
+                entity.Property(e => e.NextCalibration)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+                
+                entity.Property(e => e.SiemensPointName)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+                
+                entity.Property(e => e.JCIPointName)
+                    .HasMaxLength(350)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.RHTargetRange)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+        });
+        
 
             modelBuilder.Entity<RoomOld>(entity =>
             {

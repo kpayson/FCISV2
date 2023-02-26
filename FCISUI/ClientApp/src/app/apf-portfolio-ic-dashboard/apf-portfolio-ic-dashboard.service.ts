@@ -1,9 +1,11 @@
-import { BehaviorSubject, Observable, distinctUntilChanged, filter, map, mergeMap, of, zip } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, distinctUntilChanged, filter, map, mergeMap, of, zip } from 'rxjs';
 import { Facility, LocationCurrentStatus, LocationTimeSeriesData, Room, SvgMap, TimeSeriesPoint } from 'src/app/api/models';
+import { keyBy, reduce } from 'lodash';
 
 import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
-import { reduce } from 'lodash';
+
+// import {RoomDisplayField} from '../room-data-table/room-data-table.component';
 
 interface PiDataFilter {
   facility: number,
@@ -13,7 +15,7 @@ interface PiDataFilter {
   interval: number
 }
 
-interface ChartDataPoint {
+interface TimelineChartDataPoint {
   locationName: string,
   tag: string,
   // statusValue:number,
@@ -21,8 +23,18 @@ interface ChartDataPoint {
   statusColor: string,
   startDate: Date,
   endDate: Date,
-  roomInfo?: Partial<Room>,
-  facilityInfo?: Partial<Facility>
+}
+
+export interface RoomDisplayField{
+  name: string;
+  value: string;
+  displayType?: 'status' | 'string'  
+}
+
+export interface TimelineChartData {
+  points: TimelineChartDataPoint[],
+  locations: {[name:string]: any}
+  locationType: 'room' | 'facility'
 }
 
 export type locationStatusLookup = { [name: string]: string };
@@ -48,15 +60,21 @@ export class ApfPortfolioIcDashboardService {
     this._svgMap$ = new BehaviorSubject<SvgMap>({ name: 'apf_facility_all', backgroundSvg: "", id: 0, svgMapPins: [], viewbox: "0 0 0 0", defs: "", facilityId: 0 });
     this._svgMapBackgroundImageUrl$ = new BehaviorSubject<string>('');
     this._currentStatusValues$ = new BehaviorSubject<locationStatusLookup>({})
-    this._timeline$ = new BehaviorSubject<ChartDataPoint[]>([]);
+    this._timelineChartData$ = new BehaviorSubject<TimelineChartData>({points:[],locations:{},locationType:'facility'});
+    this._selectedPin$ = new BehaviorSubject<string>('');
+    this._selectedRoomInfo$ = new BehaviorSubject<RoomDisplayField[]>([]);
     this._hoveredPin$ = new BehaviorSubject<string>('');
     this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
 
+    const selectedFacility$ = 
+      this._piDataFilter$.pipe(
+        distinctUntilChanged((prev, curr) => prev.facility === curr.facility),
+        map(f=>f.facility)
+      );
 
     // Update the SVG floor plan when the facility changes
-    this._piDataFilter$.pipe(
-      distinctUntilChanged((prev, curr) => prev.facility === curr.facility),
-      mergeMap(filter => zip(this.dataService.svgMap(filter.facility), this.dataService.facilityCurrentStatusData(filter.facility)))
+    selectedFacility$.pipe(
+      mergeMap(facility => zip(this.dataService.svgMap(facility), this.dataService.facilityCurrentStatusData(facility)))
     ).subscribe(([svgMap, currentStatusValues]) => {
       this._svgMap$.next(svgMap);
       this._svgMapBackgroundImageUrl$.next(
@@ -71,7 +89,50 @@ export class ApfPortfolioIcDashboardService {
       )
 
       this._currentStatusValues$.next(valueLookup);
-    })
+    });
+
+    // set the selected room info when a room pin on the map is selected
+    // combineLatest([
+    //   this._selectedPin$,
+    //   this._timelineChartData$
+    // ]).pipe(map(([pin,data])=>{
+    //     return (data.locationType !== 'room' || !pin) ? {} :data.locations[pin]
+    // })).subscribe(room => {
+    //   const info = Object.keys(room).map(k=>{
+    //     return{
+    //       name:k,
+    //       value: room[k],
+    //       displayType:'string'
+    //     }
+    //   });
+    //   this._selectedRoomInfo$.next(info);
+    // });
+    // combineLatest([
+    //   this._selectedPin$.pipe(filter(pin => Boolean(pin))),
+    //   this._piDataFilter$.pipe(filter(f => f.facility != 0))
+    // ]).pipe(mergeMap(([pin,filter])=>{
+    //   return this.dataService.roomStatusInfo(filter.facility,pin,filter.status)
+    // }))
+    this._selectedPin$.pipe(mergeMap((pin)=>{
+      const filter = this._piDataFilter$.value;
+      if(filter.facility == 0){
+        return of([])
+      } else {
+        return this.dataService.roomStatusInfo(filter.facility,pin,filter.status)
+      }
+    }))
+    .subscribe(room => {
+
+        const info = Object.keys(room).map(k=>{
+          return{
+            name:k,
+            value: room[k],
+            displayType:'string'
+          }
+        });
+        this._selectedRoomInfo$.next(info);
+      });
+
 
     // Prepare timeline data for All Facilities Timeline (facilityId == 0)
     this._piDataFilter$.pipe(
@@ -83,7 +144,9 @@ export class ApfPortfolioIcDashboardService {
       )
     )
       .subscribe((dataAndFilter) => {
-        const chartData: ChartDataPoint[] = []
+        const chartDataPoints: TimelineChartDataPoint[] = [];
+        const facilities = dataAndFilter.data.map(d=>d.facility);
+        const facilityLookup = keyBy(facilities,f=>f.facilityName)
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) { continue; }
@@ -93,8 +156,8 @@ export class ApfPortfolioIcDashboardService {
             if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
               console.log("error - timestamp before request time")
             }
-            const point: ChartDataPoint = {
-              locationName: x.facility.facilityName, //.locationName,
+            const point: TimelineChartDataPoint = {
+              locationName: x.facility.facilityName, 
               tag: x.tag,
               startDate: new Date(startTime),
               endDate: new Date(Math.max(y.timestamp, startTime)),
@@ -103,11 +166,11 @@ export class ApfPortfolioIcDashboardService {
             }
 
             startTime = y.timestamp
-            chartData.push(point);
+            chartDataPoints.push(point);
           }
         }
 
-        this._timeline$.next(chartData)
+        this._timelineChartData$.next({points:chartDataPoints, locations:facilityLookup, locationType:'facility'})
       });
 
 
@@ -121,7 +184,17 @@ export class ApfPortfolioIcDashboardService {
       )
     )
       .subscribe((dataAndFilter) => {
-        const chartData: ChartDataPoint[] = []
+        const chartDataPoints: TimelineChartDataPoint[] = []
+        const rooms = dataAndFilter.data.map(d=>d.room);
+        const roomLookup = keyBy(rooms,r=>r.roomNumber)
+        // roomInfo: {
+        //   roomName: x.room.roomName,
+        //   roomNumber: x.room.roomNumber,
+        //   iso: x.room.iso,
+        //   sq: x.room.sq
+        // }
+
+        // var tooltips = dataAndFilter.data[0]
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) { continue; }
@@ -131,28 +204,21 @@ export class ApfPortfolioIcDashboardService {
             if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
               console.log("error - timestamp before request time")
             }
-            const point: ChartDataPoint = {
+            const point: TimelineChartDataPoint = {
               locationName: x.room.roomNumber,
               tag: x.tag,
               startDate: new Date(startTime),
               endDate: new Date(Math.max(y.timestamp, startTime)),
               statusColor: this.statusColor(y.numeric_value),
               chillerStatusLabel: this.chillerStatusLabel(y.numeric_value),
-
-              roomInfo: {
-                roomName: x.room.roomName,
-                roomNumber: x.room.roomNumber,
-                iso: x.room.iso,
-                sq: x.room.sq
-              }
             }
 
             startTime = y.timestamp
-            chartData.push(point);
+            chartDataPoints.push(point);
           }         
         }
 
-        this._timeline$.next(chartData)
+        this._timelineChartData$.next({points:chartDataPoints, locations:roomLookup, locationType:'room'})
       })
 
 
@@ -172,14 +238,19 @@ export class ApfPortfolioIcDashboardService {
     return this._currentStatusValues$ as Observable<locationStatusLookup>
   }
 
-  private _timeline$: BehaviorSubject<ChartDataPoint[]>;
-  public get timeline$() {
-    return this._timeline$ as Observable<ChartDataPoint[]>;
+  private _timelineChartData$: BehaviorSubject<TimelineChartData>;
+  public get timelineChartData$() {
+    return this._timelineChartData$ as Observable<TimelineChartData>;
   }
 
   private _svgMapBackgroundImageUrl$: BehaviorSubject<string>;
   public get svgMapBackgroundImageUrl$() {
     return this._svgMapBackgroundImageUrl$ as Observable<string>;
+  }
+
+  private _selectedPin$: BehaviorSubject<string>;
+  public get selectedPin$() {
+    return this._selectedPin$ as Observable<string>;
   }
 
   private _hoveredPin$: BehaviorSubject<string>;
@@ -191,6 +262,26 @@ export class ApfPortfolioIcDashboardService {
   public get hoveredTimelineLabel$() {
     return this._hoveredTimelineLabel$ as Observable<string>;
   }
+  
+  private _selectedRoomInfo$: BehaviorSubject<any>;
+  public get selectedRoomInfo$() {
+    return this._selectedRoomInfo$ as Observable<any>;
+  }
+  
+  public setSelectedPin(pinName: string) {
+    this._selectedPin$.next(pinName);
+  }
+
+  public setHoveredPin(pinName: string) {
+    this._hoveredPin$.next(pinName);
+  }
+
+  public setHoveredTimelineLabel(label: string) {
+    this._hoveredTimelineLabel$.next(label);
+  }
+
+
+
 
   private statusColor = (statusVal: number) => {
     switch (statusVal) {
@@ -258,12 +349,5 @@ export class ApfPortfolioIcDashboardService {
     )
   }
 
-  public setHoveredPin(pinName: string) {
-    this._hoveredPin$.next(pinName);
-  }
-
-  public setHoveredTimelineLabel(label: string) {
-    this._hoveredTimelineLabel$.next(label);
-  }
 
 }

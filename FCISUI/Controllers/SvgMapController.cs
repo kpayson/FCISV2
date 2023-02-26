@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using FCISUI.Models;
+using FCISUI.Data;
 using AutoMapper;
-using System.Data.Entity;
 using System.Net;
-using System.Net.Http.Headers;
 
 namespace FCISUI.Controllers
 {
@@ -15,19 +14,22 @@ namespace FCISUI.Controllers
     {
         private readonly FCISPortalContext _context;
         private readonly IMapper _mapper;
+        private readonly IPIDataService _piDataService;
 
 
         public SvgMapController(
             FCISPortalContext context,
+            IPIDataService piDataService,
             IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
+            _piDataService = piDataService;
 
         }
 
         [HttpGet("{facilityId}")]
-        public SvgMap GetSvgMap(int facilityId)
+        public ActionResult<SvgMap> GetSvgMap(int facilityId)
         {
             try {
 
@@ -50,27 +52,10 @@ namespace FCISUI.Controllers
                 return svgMap;
             }
             catch(Exception ex) {
-                Console.Write(ex);
-                return null;
+                return StatusCode(500);
             }
         }
 
-        //[HttpGet("BackgroundImage/{facilityId}")]
-        //public byte[] BackgroundImage(int facilityId)
-        //{
-        //    try
-        //    {
-        //        var map = this._context.SvgMaps.FirstOrDefault(x => x.FacilityId == facilityId);
-        //        var image = map?.BackgroundImage ?? new byte[] {};
-
-        //        return image;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex);
-        //        throw;
-        //    }
-        //}
 
         [HttpGet("BackgroundImage/{facilityId}")]
         public HttpResponseMessage BackgroundImage(int facilityId)
@@ -78,10 +63,6 @@ namespace FCISUI.Controllers
 
             var map = this._context.SvgMaps.FirstOrDefault(x => x.FacilityId == facilityId);
             var image = map?.BackgroundImage ?? new byte[] { };
-
-
-
-
 
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
             //MemoryStream ms = new MemoryStream(image);
@@ -93,6 +74,22 @@ namespace FCISUI.Controllers
 
             //send response of image/png type
             return response;
+        }
+
+        [HttpGet("RoomStatusInfo/facility/{facilityId}/room/{roomNumber}/status/{statusParam}")]
+        public ActionResult<object> RoomStatusInfo(int facilityId, string roomNumber, string statusParam) {
+            try {
+                var room = this._context.Rooms.FirstOrDefault(r=> r.FacilityId == facilityId && r.RoomNumber == roomNumber);
+                // var info = this._context.RoomParameters.FirstOrDefault(rp=>rp.RoomId == roomId && rp.Parameter == statusParam);
+                // if(info == null) {
+                //     return NotFound();
+                // }
+                // return info;
+                return room;
+            }
+            catch(Exception ex) {
+                return StatusCode(500);
+            }
         }
 
     }

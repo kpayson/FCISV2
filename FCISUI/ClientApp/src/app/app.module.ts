@@ -20,6 +20,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NgModule } from '@angular/core';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
 import { PiDataFilterToolbarComponent } from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';
+import { RoomDataTableComponent } from './room-data-table/room-data-table.component';
+import { RoomInfoDisplayComponent } from './room-info-display/room-info-display.component';
 import { RouterModule } from '@angular/router';
 import { SanitizedHtmlPipe } from './sanitized-html.pipe';
 import { StaticContentContainerComponent } from './static-content-container/static-content-container.component';
@@ -50,7 +52,9 @@ import { appRoutes } from './routes';
     SanitizedHtmlPipe,
     StaticContentContainerComponent,
     SvgStatusMapComponent,
-    StaticContentEditorComponent
+    StaticContentEditorComponent,
+    RoomInfoDisplayComponent,
+    RoomDataTableComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

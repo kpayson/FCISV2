@@ -14,6 +14,8 @@ namespace FCISUI.Models
 
         // public string? Parameter { get; set; }
         public string? Iso { get; set; }
+
+        public virtual ICollection<RoomParameter> RoomParameters {get; set;}
         // public string? ConnectingRoom { get; set; }
         // public string? SensorLocation { get; set; }
         // public string? SensorType { get; set; }

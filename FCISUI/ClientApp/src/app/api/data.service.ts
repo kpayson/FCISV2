@@ -35,11 +35,15 @@ export class DataService {
   }
 
   svgMap(facId: number) {
-    return this.get<SvgMap>(`SvgMap/${facId}`)
+    return this.get<SvgMap>(`SvgMap/${facId}`);
   }
 
   svgMapBackgroundUrl(facId: number) {
-    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`
+    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;
+  }
+
+  roomStatusInfo(facilityId: number, roomNumber: string, statusParam: string) {
+    return this.get<{[field:string]:any}>(`SvgMap/RoomStatusInfo/facility/${facilityId}/room/${roomNumber}/status/${statusParam}`);
   }
 
   timelineData(facilityId: number, attr: string, startDate: Date, endDate: Date, interval: number) {

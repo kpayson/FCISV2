@@ -49,16 +49,17 @@
               <img src="../../assets/images/giphy.gif" alt="loading" />
             </div>
 
-            <!-- <app-static-content-editor [initialContent]="'Hello World'" (onSave)="staticContentSave($event)">
-
-            </app-static-content-editor> -->
             <div class="timeline-chart-container">
               <app-apf-timeline-chart 
-                [chartData]="(timelineData$ | async) || []"
+                [chartData]="(timelineChartData$ | async) || {points:[],locations:{},locationType:'facility'}"
                 [highlightedLabel]="(hoveredPin$ | async) || ''"
                 (chartLabelClick)="chartLabelClick($event)" 
                 (chartLabelMouseOver)="chartLabelMouseOver($event)"
                 (chartLabelMouseOut)="chartLabelMouseOut($event)"></app-apf-timeline-chart>
+            </div>
+
+            <div class="room-info-display-container">
+              <app-room-info-display [displayFields]="(selectedRoomInfo$ | async) || []"></app-room-info-display>
             </div>
 
           </div>
@@ -68,4 +69,3 @@
   </div>
 </div>
 
-<!-- <div id="CHLChart" style="height: 600px;"></div> -->

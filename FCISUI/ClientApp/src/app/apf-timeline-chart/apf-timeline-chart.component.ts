@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ChartType } from 'angular-google-charts';
+import { TimelineChartData } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.service';
 
 declare const bootstrap: any;
 
@@ -12,8 +13,37 @@ declare const bootstrap: any;
 export class ApfTimelineChartComponent {
   constructor() { }
 
+  timelineData: any[] = []
+  locationLookup: {[key:string]: any} = {};
+
+  private _timelineChartData: TimelineChartData = {points:[], locations:{}, locationType:'facility'};
   @Input()
-  chartData: any[] = [];
+  get chartData(): TimelineChartData {
+    return this._timelineChartData
+  }
+  set chartData(v) {
+    this._timelineChartData = v;
+    
+    this.timelineData = this.chartData.points.map((x:any)=>{
+      return [
+        {
+          v: x.locationName,
+          p: {
+              link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${x.tag}`
+          }
+        },
+        "",
+        x.chillerStatusLabel,
+        x.statusColor,
+        x.startDate,
+        x.endDate
+      ]
+    });
+
+    this.locationLookup = this.chartData.locations;
+
+
+  }
 
   private _highlightedLabel: string = '';
   @Input()
@@ -73,15 +103,27 @@ roomLabelTooltipDP(name:string) {
 
   roomLabelTooltip(room:any) {
     const tooltipHtml = `
-      <div align="left" class="label-tooltip"> 
-        <table>
-         <tr><th> Room: ${room.RoomName} </th></tr>
-         <tr><td><b> Room #: ${room.RoomNumber} </b></td></tr>
-         <tr><td><b> Class: ${room.ISO} </b></td></tr>
-         <tr><td><b> GSF: ${room.GSF} </b></td></tr>
-         </table>
-      </div>
-    `;
+    <div class="label-tooltip">
+      Room: ${room.roomName} <br>
+      Room #: ${room.roomNumber} <br>
+      Class: ${room.iso} <br>
+      GSF: ${room.sq}
+    </div>`;
+
+    // Room: ${room.roomName} <br>
+    // Room #: ${room.roomNumber} <br>
+    // Class: ${room.iso} <br>
+    // GSF: ${room.sq}
+    // const tooltipHtml = `
+    //   <div align="left" class="label-tooltip"> 
+    //     <table>
+    //      <tr><td> Room: ${room.roomName} </td></tr>
+    //      <tr><td><b> Room #: ${room.roomNumber} </b></td></tr>
+    //      <tr><td><b> Class: ${room.iso} </b></td></tr>
+    //      <tr><td><b> GSF: ${room.sq} </b></td></tr>
+    //      </table>
+    //   </div>
+    // `;
     return tooltipHtml;
   }
 
@@ -94,15 +136,33 @@ roomLabelTooltipDP(name:string) {
 
       label.setAttribute('style', `cursor: pointer; text-decoration: underline;`);
 
-      // (label as any).tooltip({
-      //   location: 'right',
-      //   title: label.innerHTML
-      // })
+      const locationName = label.innerHTML;
+      if(this.chartData.locationType === 'room') {
+        const roomData = this.chartData.locations[locationName];
+        if(roomData) {
+          const roomTooltip = this.roomLabelTooltip(roomData);
+          const tooltip = new bootstrap.Tooltip(label, {
+            placement:'right',
+            html: true,
+            title: roomTooltip
+          });
+        }
+        else {
+          const tooltip = new bootstrap.Tooltip(label, {
+            placement:'right',
+            title: locationName
+          });
+        }
+      }
+      else {
+        const tooltip = new bootstrap.Tooltip(label, {
+          placement:'right',
+          title: locationName
+        });
+      }
+      
       label.setAttribute('data-locationId', label.innerHTML);
-      const tooltip = new bootstrap.Tooltip(label, {
-        placement:'right',
-        title: label.innerHTML
-      });
+
 
       console.log(this.chartData);
       // label.setAttribute('data-toggle', 'tooltip');
@@ -131,7 +191,7 @@ roomLabelTooltipDP(name:string) {
   handleLabelMouseOver(locationId: string) {
     const label = document.querySelector('text[data-locationId="' + locationId + '"]');
     if(label) {
-      label.setAttribute('fiil', 'red');
+      label.setAttribute('fill', 'red');
 
       // tooltip.show();
     }

@@ -5,6 +5,10 @@ text[locationId] {
 }
 
 .label-tooltip {
-    max-width: 300px; 
+    width:300px;
     padding:5px 5px 5px 5px;
+
+    .row {
+        display:flex;
+    }
 }
