@@ -5,18 +5,21 @@ import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic
 @Component({
   selector: 'app-room-data-table',
   template: `
-    <table class="table table-sm table-striped">
+    <table class="table table-sm table-striped" style="width:100%">
       <tbody>
           <tr *ngFor="let field of displayFields">
-              <td><strong>{{field.name}}</strong></td> 
-              <td *ngIf="field.displayType == 'status'; then statusCircle else plainText ">{{field.value}}</td>
+              <td><strong>{{field.name}}</strong></td>
+              <td>
+                <ng-container *ngIf="field.displayType == 'status'; then statusCircle else plainText ">{{field.value}}></ng-container>
+                <ng-template #statusCircle>
+                    {{field.value}}
+                </ng-template>
+                <ng-template #plainText>
+                    {{field.value}}
+                </ng-template>
+              </td>
+              
 
-              <ng-template #statusCircle>
-                  {{field.value}}
-              </ng-template>
-              <ng-template #plainText>
-                  {{field.value}}
-              </ng-template>
           <tr>
       </tbody>
   </table>

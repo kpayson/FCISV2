@@ -8,8 +8,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="svgMap.viewbox" [style]="backgroundStyle">
     <defs [innerHtml]="svgMap.defs | sanitizedHtml"></defs>
     <g *ngIf="svgMap.backgroundSvg" id="background" [innerHtml]="svgMap.backgroundSvg | sanitizedHtml"></g>
-    <g *ngFor="let pin of svgMap.svgMapPins" [attr.id]="pin.locationId">
-      <title>{{pin.title}}</title>
+    <g *ngFor="let pin of svgMap.svgMapPins" [attr.id]="'pin_'+ pin.locationId">
         <a
           class="map-pin"
           data-toggle="tooltip"
@@ -40,7 +39,7 @@
       </g>
 </svg>
 
-<img src="../../assets/images/floor-plans/FloorPlanColorKey.svg" style="max-width: 100%" />
+<img src="../../assets/images/floor-plans/FloorPlanColorKey.svg" style="max-width: 100%; border:1px solid red;" />
 
 
 <script>

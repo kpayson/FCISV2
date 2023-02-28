@@ -89,6 +89,8 @@ export class ApfPortfolioIcDashboardService {
       )
 
       this._currentStatusValues$.next(valueLookup);
+
+      this._selectedPin$.next('');
     });
 
     // set the selected room info when a room pin on the map is selected
@@ -115,7 +117,7 @@ export class ApfPortfolioIcDashboardService {
     // }))
     this._selectedPin$.pipe(mergeMap((pin)=>{
       const filter = this._piDataFilter$.value;
-      if(filter.facility == 0){
+      if(filter.facility == 0 || !pin){
         return of([])
       } else {
         return this.dataService.roomStatusInfo(filter.facility,pin,filter.status)

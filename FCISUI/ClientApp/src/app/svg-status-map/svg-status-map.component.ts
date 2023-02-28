@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SvgMap, defaultSvgMap } from '../api/models';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { SvgMap, SvgMapPin, defaultSvgMap } from '../api/models';
 
 import { DomSanitizer } from '@angular/platform-browser';
+
+declare const bootstrap: any;
 
 export interface PinHoverInfo {
   locationId:string;
@@ -13,9 +15,65 @@ export interface PinHoverInfo {
   templateUrl: './svg-status-map.component.html',
   styleUrls: ['./svg-status-map.component.scss']
 })
-export class SvgStatusMapComponent {
+export class SvgStatusMapComponent implements OnChanges {
 
   constructor(private sanitizer: DomSanitizer) { }
+
+  mapTooltip(pin:SvgMapPin) {
+    const tooltipHtml = `
+    <div class="label-tooltip">
+      Room: ${pin.title} <br>
+
+    </div>`;
+
+          // Room #: ${room.roomNumber} <br>
+      // Class: ${room.iso} <br>
+      // GSF: ${room.sq}
+
+    // Room: ${room.roomName} <br>
+    // Room #: ${room.roomNumber} <br>
+    // Class: ${room.iso} <br>
+    // GSF: ${room.sq}
+    // const tooltipHtml = `
+    //   <div align="left" class="label-tooltip"> 
+    //     <table>
+    //      <tr><td> Room: ${room.roomName} </td></tr>
+    //      <tr><td><b> Room #: ${room.roomNumber} </b></td></tr>
+    //      <tr><td><b> Class: ${room.iso} </b></td></tr>
+    //      <tr><td><b> GSF: ${room.sq} </b></td></tr>
+    //      </table>
+    //   </div>
+    // `;
+    return tooltipHtml;
+  }
+
+  ngOnChanges(){
+    for(const pin of this.svgMap.svgMapPins){
+      window.setTimeout(()=>{
+        const pinElem = document.getElementById('pin_' + pin.locationId);
+        if(pinElem) {
+          const tooltip = new bootstrap.Tooltip(pinElem, {
+            placement:'right',
+            html: true,
+            title: '<div>' + pin.title + '</div>'
+          });
+        }
+      },100)
+
+
+      // const roomData = this.chartData.locations[locationName];
+      // if(roomData) {
+      //   const roomTooltip = this.roomLabelTooltip(roomData);
+      //   const tooltip = new bootstrap.Tooltip(label, {
+      //     placement:'right',
+      //     html: true,
+      //     title: roomTooltip
+      //   });
+      // }
+    }
+  }
+  
+
 
   @Input()
   svgMap: SvgMap = defaultSvgMap 
@@ -30,8 +88,11 @@ export class SvgStatusMapComponent {
   }
   set highlightedMapPin(v: string) {
     this._highlightedMapPin = v;
-    document.querySelectorAll('circle.pin-border').forEach(elem=>{elem.setAttribute('fill','grey')});
-    document.querySelector('circle.pin-border[data-locationId="' + v + '"]')?.setAttribute('fill', 'black');
+    document.querySelectorAll('circle.pin-border').forEach(elem=>{(elem as HTMLElement).style.fill = "grey"});
+    const target = document.querySelector('circle.pin-border[data-locationId="' + v + '"]') as HTMLElement;
+    if(target) {
+      target.style.fill = "black";
+    }
   }
 
   private _backgroundImageUrl="";
@@ -49,9 +110,11 @@ export class SvgStatusMapComponent {
       this.backgroundStyle = {
         'background-image':  'url('+this.backgroundImageUrl+')',
         'background-size': '100% 100%',
-        'background-repeat': 'no-repeat'
+        'background-repeat': 'no-repeat',
+        'border':'1px solid blue;'
       }
     }
+
   }
 
   public backgroundStyle = {};

@@ -1,4 +1,4 @@
-import {BehaviorSubject, Observable, Subject, map} from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.service';
@@ -6,16 +6,20 @@ import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic
 @Component({
   selector: 'app-room-info-display',
   template: `
-  <div>
-    <app-room-data-table [displayFields]="(leftTableFields$ | async) || []"></app-room-data-table>
-    <app-room-data-table [displayFields]="(rightTableFields$ | async) || []"></app-room-data-table>
+  <div style="display:flex">
+    <div style="width:50%; padding:0px 20px">
+        <app-room-data-table [displayFields]="(leftTableFields$ | async) || []"></app-room-data-table>
+    </div>
+    <div style="width:50%; padding:0px 20px;">
+        <app-room-data-table [displayFields]="(rightTableFields$ | async) || []"></app-room-data-table>
+    </div>
   </div>
   `,
   styleUrls: ['./room-info-display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomInfoDisplayComponent {
-  
+
   private _displayFields$: Subject<RoomDisplayField[]>
   @Input()
   set displayFields(v: RoomDisplayField[]) {
@@ -25,15 +29,15 @@ export class RoomInfoDisplayComponent {
   leftTableFields$: Observable<RoomDisplayField[]>;
   rightTableFields$: Observable<RoomDisplayField[]>;
 
-  constructor() { 
+  constructor() {
     this._displayFields$ = new BehaviorSubject<RoomDisplayField[]>([]);
 
-    this.leftTableFields$ = this._displayFields$.pipe(map(fields=>{
+    this.leftTableFields$ = this._displayFields$.pipe(map(fields => {
       return fields.slice(0, fields.length / 2 + fields.length % 2)
     }));
 
-    
-    this.rightTableFields$ = this._displayFields$.pipe(map(fields=>{
+
+    this.rightTableFields$ = this._displayFields$.pipe(map(fields => {
       return fields.slice(fields.length / 2 + fields.length % 2)
     }));
   }
