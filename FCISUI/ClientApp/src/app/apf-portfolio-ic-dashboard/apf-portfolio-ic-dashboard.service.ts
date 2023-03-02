@@ -230,6 +230,12 @@ export class ApfPortfolioIcDashboardService {
     this._piDataFilter$.next(filter);
   }
 
+  public get isFacilityAll$() {
+    return this._piDataFilter$.pipe(map(f=>{
+      return Number(f.facility)===0
+    }))
+  }
+
   private _svgMap$: BehaviorSubject<SvgMap>;
   public get svgMap$() {
     return this._svgMap$ as Observable<SvgMap>;

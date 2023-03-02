@@ -23,6 +23,23 @@ export class ApfTimelineChartComponent {
   }
   set chartData(v) {
     this._timelineChartData = v;
+
+    // set a padding value to cover the height of title and axis values
+    const paddingHeight = 50;
+    // set the height to be covered by the rows
+    const rowHeight = Object.keys(v.locations).length * 42; //data.getNumberOfRows() * 15;
+    // set the total chart height
+    const chartHeight = Math.min(rowHeight + paddingHeight, 375);
+
+    this.options = {
+      timeline: { showBarLabels: false, colorByRowLabel: true },
+      backgroundColor: '#ebe9e6',
+      tooltip: { isHtml: true },
+      focusTarget: 'category',
+      height:chartHeight
+    };
+
+    // body > div > app-home > div > app-apf-portfolio-ic-dashboard > div > div > div > div.col-md-9 > div:nth-child(2) > div > div.timeline-chart-container > app-apf-timeline-chart > google-chart > div > div:nth-child(1) > div > div:nth-child(2)
     
     this.timelineData = this.chartData.points.map((x:any)=>{
       return [
@@ -86,7 +103,8 @@ export class ApfTimelineChartComponent {
     timeline: { showBarLabels: false, colorByRowLabel: true },
     backgroundColor: '#ebe9e6',
     tooltip: { isHtml: true },
-    focusTarget: 'category'
+    focusTarget: 'category',
+    height:'600px'
   };
 
 

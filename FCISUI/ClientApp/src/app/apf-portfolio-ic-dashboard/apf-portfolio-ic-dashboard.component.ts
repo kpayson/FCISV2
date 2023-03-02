@@ -31,6 +31,7 @@ export class ApfPortfolioIcDashboardComponent {
     this.hoveredTimelineLabel$ = this.service.hoveredTimelineLabel$;
     this.timelineChartData$ = this.service.timelineChartData$;
     this.selectedRoomInfo$ = this.service.selectedRoomInfo$;
+    this.isFacilityAll$ = this.service.isFacilityAll$;
 
   }
 
@@ -44,6 +45,7 @@ export class ApfPortfolioIcDashboardComponent {
   hoveredPin$:Observable<string>;
   hoveredTimelineLabel$: Observable<string>;
   selectedRoomInfo$: Observable<RoomDisplayField[]>
+  isFacilityAll$: Observable<boolean>
 ;
   filterChange($event:any) {
     setTimeout(()=>{this.service.filterPiData($event)},0);
