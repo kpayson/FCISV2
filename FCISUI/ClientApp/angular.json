@@ -58,7 +58,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "baseHref": "/FPV2/"
             },
             "development": {
               "buildOptimizer": false,
@@ -79,10 +80,11 @@
             },
             "development": {
               "browserTarget": "FCISUI:build:development",
-              "proxyConfig": "proxy.conf.js"
+              "proxyConfig": "proxy.conf.js",
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
