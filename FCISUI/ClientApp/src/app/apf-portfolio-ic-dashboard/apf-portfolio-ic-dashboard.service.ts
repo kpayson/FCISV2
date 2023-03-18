@@ -25,15 +25,15 @@ interface TimelineChartDataPoint {
   endDate: Date,
 }
 
-export interface RoomDisplayField{
+export interface RoomDisplayField {
   name: string;
   value: string;
-  displayType?: 'status' | 'string'  
+  displayType?: 'status' | 'string'
 }
 
 export interface TimelineChartData {
   points: TimelineChartDataPoint[],
-  locations: {[name:string]: any}
+  locations: { [name: string]: any }
   locationType: 'room' | 'facility'
 }
 
@@ -60,16 +60,16 @@ export class ApfPortfolioIcDashboardService {
     this._svgMap$ = new BehaviorSubject<SvgMap>({ name: 'apf_facility_all', backgroundSvg: "", id: 0, svgMapPins: [], viewbox: "0 0 0 0", defs: "", facilityId: 0 });
     this._svgMapBackgroundImageUrl$ = new BehaviorSubject<string>('');
     this._currentStatusValues$ = new BehaviorSubject<locationStatusLookup>({})
-    this._timelineChartData$ = new BehaviorSubject<TimelineChartData>({points:[],locations:{},locationType:'facility'});
+    this._timelineChartData$ = new BehaviorSubject<TimelineChartData>({ points: [], locations: {}, locationType: 'facility' });
     this._selectedPin$ = new BehaviorSubject<string>('');
     this._selectedRoomInfo$ = new BehaviorSubject<RoomDisplayField[]>([]);
     this._hoveredPin$ = new BehaviorSubject<string>('');
     this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
 
-    const selectedFacility$ = 
+    const selectedFacility$ =
       this._piDataFilter$.pipe(
         distinctUntilChanged((prev, curr) => prev.facility === curr.facility),
-        map(f=>f.facility)
+        map(f => f.facility)
       );
 
     // Update the SVG floor plan when the facility changes
@@ -115,21 +115,21 @@ export class ApfPortfolioIcDashboardService {
     // ]).pipe(mergeMap(([pin,filter])=>{
     //   return this.dataService.roomStatusInfo(filter.facility,pin,filter.status)
     // }))
-    this._selectedPin$.pipe(mergeMap((pin)=>{
+    this._selectedPin$.pipe(mergeMap((pin) => {
       const filter = this._piDataFilter$.value;
-      if(filter.facility == 0 || !pin){
+      if (filter.facility == 0 || !pin) {
         return of([])
       } else {
-        return this.dataService.roomStatusInfo(filter.facility,pin,filter.status)
+        return this.dataService.roomStatusInfo(filter.facility, pin, filter.status)
       }
     }))
-    .subscribe(room => {
+      .subscribe(room => {
 
-        const info = Object.keys(room).map(k=>{
-          return{
-            name:k,
+        const info = Object.keys(room).map(k => {
+          return {
+            name: k,
             value: room[k],
-            displayType:'string'
+            displayType: 'string'
           }
         });
         this._selectedRoomInfo$.next(info);
@@ -147,11 +147,23 @@ export class ApfPortfolioIcDashboardService {
     )
       .subscribe((dataAndFilter) => {
         const chartDataPoints: TimelineChartDataPoint[] = [];
-        const facilities = dataAndFilter.data.map(d=>d.facility);
-        const facilityLookup = keyBy(facilities,f=>f.facilityName)
+        const facilities = dataAndFilter.data.map(d => d.facility);
+        const facilityLookup = keyBy(facilities, f => f.facilityName)
 
         for (const x of dataAndFilter.data) {
-          if (!x.points.some(Boolean)) { continue; }
+          if (!x.points.some(Boolean)) {
+            x.points = [
+              {
+                timestamp: dataAndFilter.filter.startDate.getTime(),
+                numeric_value: 1
+              },
+              {
+                timestamp: dataAndFilter.filter.endDate.getTime(),
+                numeric_value: 1
+              }
+            ]
+          }
+
           x.points.sort((a, b) => a.timestamp - b.timestamp);
           let startTime = x.points[0].timestamp;
           for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
@@ -159,7 +171,7 @@ export class ApfPortfolioIcDashboardService {
               console.log("error - timestamp before request time")
             }
             const point: TimelineChartDataPoint = {
-              locationName: x.facility.facilityName, 
+              locationName: x.facility.facilityName,
               tag: x.tag,
               startDate: new Date(startTime),
               endDate: new Date(Math.max(y.timestamp, startTime)),
@@ -172,7 +184,7 @@ export class ApfPortfolioIcDashboardService {
           }
         }
 
-        this._timelineChartData$.next({points:chartDataPoints, locations:facilityLookup, locationType:'facility'})
+        this._timelineChartData$.next({ points: chartDataPoints, locations: facilityLookup, locationType: 'facility' })
       });
 
 
@@ -187,8 +199,8 @@ export class ApfPortfolioIcDashboardService {
     )
       .subscribe((dataAndFilter) => {
         const chartDataPoints: TimelineChartDataPoint[] = []
-        const rooms = dataAndFilter.data.map(d=>d.room);
-        const roomLookup = keyBy(rooms,r=>r.roomNumber)
+        const rooms = dataAndFilter.data.map(d => d.room);
+        const roomLookup = keyBy(rooms, r => r.roomNumber)
         // roomInfo: {
         //   roomName: x.room.roomName,
         //   roomNumber: x.room.roomNumber,
@@ -199,7 +211,19 @@ export class ApfPortfolioIcDashboardService {
         // var tooltips = dataAndFilter.data[0]
 
         for (const x of dataAndFilter.data) {
-          if (!x.points.some(Boolean)) { continue; }
+          if (!x.points.some(Boolean)) {
+            x.points = [
+              {
+                timestamp: dataAndFilter.filter.startDate.getTime(),
+                numeric_value: 1
+              },
+              {
+                timestamp: dataAndFilter.filter.endDate.getTime(),
+                numeric_value: 1
+              }
+            ]
+          }
+
           x.points.sort((a, b) => a.timestamp - b.timestamp);
           let startTime = x.points[0].timestamp;
           for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
@@ -217,10 +241,10 @@ export class ApfPortfolioIcDashboardService {
 
             startTime = y.timestamp
             chartDataPoints.push(point);
-          }         
+          }
         }
 
-        this._timelineChartData$.next({points:chartDataPoints, locations:roomLookup, locationType:'room'})
+        this._timelineChartData$.next({ points: chartDataPoints, locations: roomLookup, locationType: 'room' })
       })
 
 
@@ -231,8 +255,8 @@ export class ApfPortfolioIcDashboardService {
   }
 
   public get isFacilityAll$() {
-    return this._piDataFilter$.pipe(map(f=>{
-      return Number(f.facility)===0
+    return this._piDataFilter$.pipe(map(f => {
+      return Number(f.facility) === 0
     }))
   }
 
@@ -270,12 +294,12 @@ export class ApfPortfolioIcDashboardService {
   public get hoveredTimelineLabel$() {
     return this._hoveredTimelineLabel$ as Observable<string>;
   }
-  
+
   private _selectedRoomInfo$: BehaviorSubject<any>;
   public get selectedRoomInfo$() {
     return this._selectedRoomInfo$ as Observable<any>;
   }
-  
+
   public setSelectedPin(pinName: string) {
     this._selectedPin$.next(pinName);
   }
