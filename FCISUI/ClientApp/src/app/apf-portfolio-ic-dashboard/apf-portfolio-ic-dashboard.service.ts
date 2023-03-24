@@ -4,11 +4,10 @@ import { keyBy, reduce } from 'lodash';
 
 import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
-
-// import {RoomDisplayField} from '../room-data-table/room-data-table.component';
+import { catchError } from 'rxjs/operators';
 
 interface PiDataFilter {
-  facility: number,
+  facility: { repName: string, sectionName: string, value: number },
   status: string,
   startDate: Date,
   endDate: Date,
@@ -28,7 +27,7 @@ interface TimelineChartDataPoint {
 export interface RoomDisplayField {
   name: string;
   value: string;
-  displayType?: 'status' | 'string'
+  displayType?: string
 }
 
 export interface TimelineChartData {
@@ -37,7 +36,14 @@ export interface TimelineChartData {
   locationType: 'room' | 'facility'
 }
 
+export interface StatusPoint {
+  timeStamp: number,
+  numeric_value: number
+}
+
 export type locationStatusLookup = { [name: string]: string };
+export type roomInfoLookup = { [name: string]: string };
+export type apfLimitsLookup = { [facRoomKey: string]: any };
 
 
 @Injectable()
@@ -50,99 +56,130 @@ export class ApfPortfolioIcDashboardService {
     const defaultEndDate = new Date();
 
     this._piDataFilter$ = new BehaviorSubject<PiDataFilter>({
-      facility: 0,
+      facility: { repName: '', sectionName: '', value: 0 },
       status: '',
       startDate: defaultStartDate,
       endDate: defaultEndDate,
       interval: 10
     });
 
+    this._ic$ = new BehaviorSubject<string>('');
+    this._facilityFilterOptions$ = new BehaviorSubject<{ repName: string, sectionName: string, value: string }[]>([]);
     this._svgMap$ = new BehaviorSubject<SvgMap>({ name: 'apf_facility_all', backgroundSvg: "", id: 0, svgMapPins: [], viewbox: "0 0 0 0", defs: "", facilityId: 0 });
     this._svgMapBackgroundImageUrl$ = new BehaviorSubject<string>('');
-    this._currentStatusValues$ = new BehaviorSubject<locationStatusLookup>({})
+    this._currentStatusValues$ = new BehaviorSubject<LocationCurrentStatus[]>([]);
+    this._parameterValues$ = new BehaviorSubject<Room[]>([]);
     this._timelineChartData$ = new BehaviorSubject<TimelineChartData>({ points: [], locations: {}, locationType: 'facility' });
     this._selectedPin$ = new BehaviorSubject<string>('');
-    this._selectedRoomInfo$ = new BehaviorSubject<RoomDisplayField[]>([]);
+    this._selectedRoomInfo$ = new BehaviorSubject<roomInfoLookup>({});
     this._hoveredPin$ = new BehaviorSubject<string>('');
     this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
+    this._apfLimits$ = new BehaviorSubject<apfLimitsLookup>({});
+    this._pinStates = new BehaviorSubject<locationStatusLookup>({});
+
+    // Set the list of Facilities when the IC changes
+    this._ic$.pipe(filter(Boolean), mergeMap((ic: string) => {
+      return this.dataService.facilitiesByIC(ic).pipe(map(facs => {
+        const facilityOptions = facs.map((fac: any) => {
+          const option = { repName: fac.facilityRepName, sectionName: fac.facilitySection, value: fac.facilityId };
+          return option;
+        });
+        const all =[{ repName: `All ${ic.toLocaleUpperCase()}`, sectionName:'', value: '0' }, ...facilityOptions];
+        return all;
+      }))
+    })).subscribe(facOptions => {
+      this._facilityFilterOptions$.next(facOptions);
+    })
+
+
+    // Setup APF Limits from PI for all facilities
+    this.dataService.apfLimits().subscribe((limits: any[]) => {
+      const limitsLookup = reduce(
+        limits,
+        (acc, limit) => ({ ...acc, [`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`]: limit })
+      )
+
+      this._apfLimits$.next(limitsLookup);
+    });
 
     const selectedFacility$ =
       this._piDataFilter$.pipe(
-        distinctUntilChanged((prev, curr) => prev.facility === curr.facility),
+        distinctUntilChanged((prev, curr) => prev.facility.value === curr.facility.value),
         map(f => f.facility)
       );
 
-    // Update the SVG floor plan when the facility changes
+    // Update the SVG floor plan, status values for rooms, and parameter values for rooms when the facility changes
     selectedFacility$.pipe(
-      mergeMap(facility => zip(this.dataService.svgMap(facility), this.dataService.facilityCurrentStatusData(facility)))
-    ).subscribe(([svgMap, currentStatusValues]) => {
+      mergeMap(facility => zip(
+        this.dataService.svgMap(facility.value),
+        this.dataService.facilityCurrentStatusData(facility.value), //status for each room and attribute in facility
+        this.dataService.roomParameterInfo(facility.value)  // parameter info from dastabase for each room and attribute in facility
+      ))
+    ).subscribe(([svgMap, currentStatusValues, parameterValues]) => {
       this._svgMap$.next(svgMap);
       this._svgMapBackgroundImageUrl$.next(
-        `/assets/images/floor-plans/${svgMap.name}_Background.png`
+        //`/assets/images/floor-plans/${svgMap.name}_Background.png`
         // this.dataService.svgMapBackgroundUrl(svgMap.facilityId)
+        svgMap.facilityId == 0 ? '/assets/images/floor-plans/apf_facility_all_background.png' :
+          `/assets/images/orig-floor-plans/FID${svgMap.facilityId}_FloorPlan.jpg`
       );
 
-      const valueLookup = reduce(
-        currentStatusValues,
-        (acc, { locationName, statusPoint }) => ({ ...acc, [locationName]: this.statusColor(statusPoint.numeric_value) }),
-        {}
-      )
+      this._currentStatusValues$.next(currentStatusValues);
 
-      this._currentStatusValues$.next(valueLookup);
+      const compositeStatusValues = currentStatusValues.filter(x => x.attribute === 'Composite');
+      const pinStatusLookup = reduce(
+        compositeStatusValues,
+        (acc, x) => ({ ...acc, [x.locationName]: this.statusColor(x.statusPoint.numeric_value) }),
+        {}
+      );
+      this._pinStates.next(pinStatusLookup);
+
+      this._parameterValues$.next(parameterValues);
 
       this._selectedPin$.next('');
+      this._selectedRoomInfo$.next({});
     });
 
-    // set the selected room info when a room pin on the map is selected
-    // combineLatest([
-    //   this._selectedPin$,
-    //   this._timelineChartData$
-    // ]).pipe(map(([pin,data])=>{
-    //     return (data.locationType !== 'room' || !pin) ? {} :data.locations[pin]
-    // })).subscribe(room => {
-    //   const info = Object.keys(room).map(k=>{
-    //     return{
-    //       name:k,
-    //       value: room[k],
-    //       displayType:'string'
-    //     }
-    //   });
-    //   this._selectedRoomInfo$.next(info);
-    // });
-    // combineLatest([
-    //   this._selectedPin$.pipe(filter(pin => Boolean(pin))),
-    //   this._piDataFilter$.pipe(filter(f => f.facility != 0))
-    // ]).pipe(mergeMap(([pin,filter])=>{
-    //   return this.dataService.roomStatusInfo(filter.facility,pin,filter.status)
-    // }))
-    this._selectedPin$.pipe(mergeMap((pin) => {
-      const filter = this._piDataFilter$.value;
-      if (filter.facility == 0 || !pin) {
-        return of([])
-      } else {
-        return this.dataService.roomStatusInfo(filter.facility, pin, filter.status)
-      }
-    }))
-      .subscribe(room => {
 
-        const info = Object.keys(room).map(k => {
-          return {
-            name: k,
-            value: room[k],
-            displayType: 'string'
-          }
-        });
-        this._selectedRoomInfo$.next(info);
-      });
+    // when a map pin is selected, prepare room info display data using the apf limits query, current status values, and the room parameters
+    this._selectedPin$.pipe(filter(Boolean)).subscribe(pin => {
+      const statusValues = this._currentStatusValues$.value
+      const facility = this._piDataFilter$.value.facility.sectionName.toLowerCase();
+      const key = `${facility}|${pin.toLowerCase()}`;  // pin = room number 
+      const apfLimits = this._apfLimits$.value[key];
 
+      const room = this._parameterValues$.value.find(r => r.roomNumber.toLowerCase() === pin.toLowerCase());
+      const roomStatusValues = statusValues.filter(x => x.locationName === pin)
+      const info = {
+        ...apfLimits,
+        gsf: room?.sq,
+        roomParameters: room?.roomParameters,
+        roomStatusValues,
+        compositeStatus: roomStatusValues.find(x => x.attribute === 'Composite')?.statusPoint,
+        tempStatus: roomStatusValues.find(x => x.attribute === 'Temp')?.statusPoint,
+        rhStatus: roomStatusValues.find(x => x.attribute === 'Hum')?.statusPoint,
+        achStatus: roomStatusValues.find(x => x.attribute === 'Airx')?.statusPoint,
+        dpStatus: roomStatusValues.find(x => x.attribute === 'DP')?.statusPoint,
+      };
+
+      this._selectedRoomInfo$.next(info);
+    })
 
     // Prepare timeline data for All Facilities Timeline (facilityId == 0)
-    this._piDataFilter$.pipe(
-      filter(f => f.facility == 0),
+    const facilityAllFilter$ = this._piDataFilter$.pipe(filter(f=>f.facility.value == 0))
+
+    combineLatest([this._ic$,facilityAllFilter$])
+    .pipe(
+      filter(([ic,filter])=>Boolean(ic)),
       mergeMap(
-        (filter: PiDataFilter) =>
-          this.dataService.facilityAlltimelineData(filter.startDate, filter.endDate, filter.interval)
-            .pipe(map(data => ({ filter, data })))
+        ([ic, filter]) =>
+          this.dataService.facilityAlltimelineData(ic,filter.startDate, filter.endDate, filter.interval)
+            .pipe(
+              catchError(err => {
+                console.log("Error from dataService.facilityAlltimelineData:" + JSON.stringify(err));
+                return of([]);
+              }),
+              map(data => ({ filter, data })))
       )
     )
       .subscribe((dataAndFilter) => {
@@ -190,25 +227,22 @@ export class ApfPortfolioIcDashboardService {
 
     // prepare data for specific facility timeline
     this._piDataFilter$.pipe(
-      filter(f => f.facility != 0),
+      filter(f => f.facility.value != 0),
       mergeMap(
         (filter: PiDataFilter) =>
-          this.dataService.facilityRoomsTimelineDate(filter.facility, filter.status, filter.startDate, filter.endDate, filter.interval)
-            .pipe(map(data => ({ filter, data })))
+          this.dataService.facilityRoomsTimelineDate(filter.facility.value, filter.status, filter.startDate, filter.endDate, filter.interval)
+            .pipe(
+              catchError((err) => {
+                console.log("Error from dataService.facilityRoomsTimelineDate:" + JSON.stringify(err));
+                return of([])
+              }),
+              map(data => ({ filter, data })))
       )
     )
       .subscribe((dataAndFilter) => {
         const chartDataPoints: TimelineChartDataPoint[] = []
         const rooms = dataAndFilter.data.map(d => d.room);
         const roomLookup = keyBy(rooms, r => r.roomNumber)
-        // roomInfo: {
-        //   roomName: x.room.roomName,
-        //   roomNumber: x.room.roomNumber,
-        //   iso: x.room.iso,
-        //   sq: x.room.sq
-        // }
-
-        // var tooltips = dataAndFilter.data[0]
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) {
@@ -247,11 +281,19 @@ export class ApfPortfolioIcDashboardService {
         this._timelineChartData$.next({ points: chartDataPoints, locations: roomLookup, locationType: 'room' })
       })
 
+  } // end contstructor
 
+  private _ic$: BehaviorSubject<string>;
+  public setIC(ic: string) {
+    this._ic$.next(ic);
   }
+
   private _piDataFilter$: BehaviorSubject<PiDataFilter>;
   public filterPiData(filter: PiDataFilter) {
     this._piDataFilter$.next(filter);
+  }
+  public get piDataFilter$() {
+    return this._piDataFilter$ as Observable<PiDataFilter>;
   }
 
   public get isFacilityAll$() {
@@ -265,9 +307,16 @@ export class ApfPortfolioIcDashboardService {
     return this._svgMap$ as Observable<SvgMap>;
   }
 
-  private _currentStatusValues$: BehaviorSubject<locationStatusLookup>;
-  public get currentStatusValues$() {
-    return this._currentStatusValues$ as Observable<locationStatusLookup>
+  private _currentStatusValues$: BehaviorSubject<LocationCurrentStatus[]>;
+  private _pinStates: BehaviorSubject<locationStatusLookup>;
+
+  public get pinStates$() {
+    return this._pinStates as Observable<locationStatusLookup>
+  }
+
+  private _parameterValues$: BehaviorSubject<Room[]>;
+  public get parameterValues$() {
+    return this._parameterValues$ as Observable<Room[]>;
   }
 
   private _timelineChartData$: BehaviorSubject<TimelineChartData>;
@@ -295,9 +344,9 @@ export class ApfPortfolioIcDashboardService {
     return this._hoveredTimelineLabel$ as Observable<string>;
   }
 
-  private _selectedRoomInfo$: BehaviorSubject<any>;
+  private _selectedRoomInfo$: BehaviorSubject<roomInfoLookup>;
   public get selectedRoomInfo$() {
-    return this._selectedRoomInfo$ as Observable<any>;
+    return this._selectedRoomInfo$ as Observable<roomInfoLookup>;
   }
 
   public setSelectedPin(pinName: string) {
@@ -312,7 +361,10 @@ export class ApfPortfolioIcDashboardService {
     this._hoveredTimelineLabel$.next(label);
   }
 
-
+  private _apfLimits$: BehaviorSubject<apfLimitsLookup>;
+  public get apfLimits$() {
+    return this._apfLimits$ as Observable<apfLimitsLookup>
+  }
 
 
   private statusColor = (statusVal: number) => {
@@ -361,24 +413,9 @@ export class ApfPortfolioIcDashboardService {
       )
     );
 
-  public facilityFilterOptions(ic: string): Observable<{ name: string, value: string }[]> {
-    const targetIC = ic.toLowerCase()
-    return this.dataService.facilities().pipe(
-      map((facs: any[]) => {
-        const facilityOptions =
-          facs
-            .filter((fac: any) => {
-              return (fac.facilityIc || "").toLowerCase() === targetIC
-            })
-            .map((fac: any) => {
-              const option = { name: fac.facilityName, value: fac.facilityId };
-              return option;
-            })
-        return [{ name: `All ${targetIC.toLocaleUpperCase()}`, value: '0' }, ...facilityOptions];
-      }
-
-      )
-    )
+  private _facilityFilterOptions$: BehaviorSubject<{ repName: string, sectionName: string, value: string }[]>
+  public get facilityFilterOptions$() {
+    return this._facilityFilterOptions$ as Observable<{ repName: string, sectionName: string, value: string }[]>
   }
 
 

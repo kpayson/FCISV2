@@ -1,0 +1,14 @@
+                    <g id="pinsFID2" runat="server" Visible="false">
+                        <g id="pin5640">
+                            <circle id="pinBack5640" class="stGray" cx="429.78" cy="547.43" r="20" />
+                            <circle id="pinColor5640" class="stWhite" cx="429.78" cy="547.43" r="14" />
+                        </g>
+                        <g id="pin5642">
+                            <circle id="pinBack5642" class="stGray" cx="530.21" cy="546.43" r="20" />
+                            <circle id="pinColor5642" class="stWhite" cx="530.21" cy="546.43" r="14" />
+                        </g>
+                        <g id="pin6624">
+                            <circle id="pinBack6624" class="stGray" cx="258.92" cy="223.15" r="20" />
+                            <circle id="pinColor6624" class="stWhite" cx="258.92" cy="223.15" r="14" />
+                        </g>
+                    </g>

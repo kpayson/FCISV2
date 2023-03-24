@@ -7,7 +7,7 @@ namespace FCISUI.Models
     {
         public int RoomParameterId { get; set; }
         public int RoomId { get; set; }
-        public int FacilityId { get; set; }
+
         public string Facility { get; set; }
         public string RoomNumber { get; set; }
         public string Parameter { get; set; }
@@ -18,5 +18,8 @@ namespace FCISUI.Models
         public string SiemensPointName { get; set; }
         public string JCIPointName { get; set; }
         public string RHTargetRange { get; set; }
+
+        public string SensorType {get; set;}
+        public string HTTE10 {get;set;}
     }
 }

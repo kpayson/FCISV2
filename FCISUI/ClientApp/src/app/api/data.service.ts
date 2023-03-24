@@ -22,6 +22,10 @@ export class DataService {
     return this.get<Facility[]>(`Facilities`);
   }
 
+  facilitiesByIC(ic:string) {
+    return this.get<Facility[]>(`Facilities/ic/${ic}`);
+  }
+
   gsfByFacility() {
     return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);
   }
@@ -42,8 +46,9 @@ export class DataService {
     return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;
   }
 
-  roomStatusInfo(facilityId: number, roomNumber: string, statusParam: string) {
-    return this.get<{[field:string]:any}>(`SvgMap/RoomStatusInfo/facility/${facilityId}/room/${roomNumber}/status/${statusParam}`);
+
+  roomParameterInfo(facilityId: number) {
+    return this.get<Room[]>(`SvgMap/RoomParameterInfo/facility/${facilityId}`);
   }
 
   timelineData(facilityId: number, attr: string, startDate: Date, endDate: Date, interval: number) {
@@ -64,8 +69,9 @@ export class DataService {
     });
   }
 
-  facilityAlltimelineData(startDate: Date, endDate: Date, interval: number) {
+  facilityAlltimelineData(ic:string, startDate: Date, endDate: Date, interval: number) {
     return this.post<FacilityTimeSeriesData[]>(`Timeline/AllFacilityTimelineData`, {
+      ic,
       startDate,
       endDate,
       interval
@@ -87,5 +93,9 @@ export class DataService {
       return this.get<LocationCurrentStatus[]>(`Timeline/AllFacilityCurrentData`);
     }
     return this.get<LocationCurrentStatus[]>(`Timeline/FacilityCurrentData/${facilityId}`)
+  }
+
+  apfLimits() {
+    return this.get<any[]>(`Timeline/ApfLimits`);
   }
 }

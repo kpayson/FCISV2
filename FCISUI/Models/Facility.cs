@@ -8,7 +8,7 @@ namespace FCISUI.Models
         public int FacilityId { get; set; }
         public string FacilityName { get; set; } = null!;
         public string? FacilityAbbrName { get; set; }
-        public string? FacilityIc { get; set; }
+        public string FacilityIc { get; set; }
         public string? FacilitySection { get; set; }
         public string? FacilityBuilding { get; set; }
         public string? FacilityLocation { get; set; }
@@ -19,7 +19,7 @@ namespace FCISUI.Models
         public string? PiPath { get; set; }
         public string? Attribute { get; set; }
         public string? Circleid { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public string? FacilityRepName { get; set; }
         public string? FacilityFullName { get; set; }
     }

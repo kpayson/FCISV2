@@ -11,6 +11,7 @@ namespace FCISUI.Data
         // Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes);
         Task<IEnumerable<LocationCurrentStatus>> CurrentStatusData(IList<LocationQuery> locationQueries);
         Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval);
+        Task<List<dynamic>> APFLimits();
         // Task<IEnumerable<LocationTimeSeriesData>>  AllFacilityTimeSeriesData(IList<Facility> facilities, DateTime startTime, DateTime endTime, int intervalInMinutes);
         // Task<IEnumerable<LocationTimeSeriesData>> FacilityTimeSeriesData(IList<Room> rooms, DateTime startTime, DateTime endTime, int intervalInMinutes);
     }
@@ -19,27 +20,21 @@ namespace FCISUI.Data
     {
         public long Timestamp { get; set; }
         public double? numeric_value { get; set; }
-
-        // public int? StatusValue { get { return (int)this.numeric_value;}}
     }
 
-    // public class LocationTimeSeriesData
-    // {
-    //     // public string LocationName {get; set;} //Facility or Room
-    //     public Room Room {get; set;}
-    //     public string Tag {get; set;}
-    //     public List<TimeSeriesPoint> Points {get; set;}
-    // }
+
 
     public class LocationCurrentStatus
     {
         public string LocationName {get; set;} //Facility or Room
+        public string Attribute {get;set;}
         public TimeSeriesPoint StatusPoint {get; set;}
     }
 
     public class LocationQuery
     {
         public string LocationName {get; set;} //Facility or Room
+        public string Attribute {get;set;} 
         public string Tag {get; set;}
     }
 
@@ -65,6 +60,7 @@ namespace FCISUI.Data
                     var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>();
                     var point = new LocationCurrentStatus {
                         LocationName = loc.LocationName,
+                        Attribute = loc.Attribute,
                         StatusPoint = timeSeries.First()
                     }; 
                     statusPoints.Add(point);
@@ -105,7 +101,19 @@ namespace FCISUI.Data
                 throw ex;
                 //return new List<TimeSeriesPoint>();
             }
+        }
 
+        public async Task<List<dynamic>> APFLimits() {
+            try {
+                var res = await this._httpClient.GetAsync(@"pi-api/table-values?path=\\ORF-COGENAF\cGMP\APF_Limits");
+                var limits = await res.Content.ReadFromJsonAsync<IEnumerable<dynamic>>() ?? new List<dynamic>();
+                var limitList = limits.ToList();
+                return limitList;
+            }
+            catch (Exception ex) {
+                Console.Write(ex);
+                throw ex;
+           }
         }
 
 

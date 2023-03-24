@@ -60,7 +60,8 @@ namespace FCISUI.Controllers
         public async Task<IEnumerable<FacilityTimelineData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams)
         {
             var facilities =
-                this._context.Facilities.Where(x => !String.IsNullOrWhiteSpace(x.PiPath)).ToList();
+                this._context.Facilities.Where(x => x.IsActive && x.FacilityIc.ToLower() == timelineParams.IC.ToLower())
+                .ToList();
 
             var timelineData = await Task.WhenAll(facilities.Select(async f =>
             {
@@ -100,6 +101,27 @@ namespace FCISUI.Controllers
             return timelineData;
         }
 
+                [HttpPost("FacilityTimelineDataDP")]
+        public async Task<IEnumerable<FacilityRoomTimelineData>> FacilityTimelineDataDP(FacilityTimelineParams timelineParams)
+        {
+            // \\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP|Maximum
+// &start_time=2023-03-14T21:19:10&end_time=2023-03-15T21:19:10&rectype=interpolated&interval=10m
+            var connectedRooms = 
+                this._context.ConnectingRooms.Where(r => r.FacilityId == timelineParams.FacilityId).ToList();
+            var timelineData = await Task.WhenAll(connectedRooms.Select(async r => {
+                var piPath = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{r.ConnectedRoomNumber}";
+                var points = (await this._piDataService.TimeSeriesData(
+                        piPath,
+                        timelineParams.StartDate.ToUniversalTime(),
+                        timelineParams.EndDate.ToUniversalTime(),
+                        timelineParams.Interval)).ToList();
+
+                return new FacilityRoomTimelineData { Points = points, Room = new Room{RoomName=r.RoomName}, Tag = piPath };
+            }))  ?? new FacilityRoomTimelineData[] {};
+            return timelineData;
+        }
+
+
         [HttpGet("AllFacilityCurrentData")]
         public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData()
         {
@@ -108,7 +130,7 @@ namespace FCISUI.Controllers
             var locationQueries = facilities.Select(f =>
             {
                 var piPath = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check"; //ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
-                return new LocationQuery { LocationName = f.Circleid!, Tag = piPath };
+                return new LocationQuery { LocationName = f.Circleid!, Tag = piPath, Attribute="Composite" };
             }).ToList();
             var currentData = await this._piDataService.CurrentStatusData(locationQueries);
             return currentData;
@@ -119,16 +141,44 @@ namespace FCISUI.Controllers
         {
             var rooms =
                 this._context.Rooms.Where(r => r.FacilityId == facilityId).ToList();
-            var locationQueries = rooms.Select(r =>
+
+            var connectedRooms = 
+                this._context.ConnectingRooms.Where(r => r.FacilityId == facilityId).ToList();
+
+            var roomStatusQueries = rooms.SelectMany(r =>
             {
-                var piPath = $@"{piPathEnv}\{r.Facility}|Facility_Status_Check";
-                return new LocationQuery { LocationName = r.RoomNumber!, Tag = piPath };
+                var piPathRoom = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}";
+                return new List<LocationQuery>() {
+                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Status", Attribute="Composite" },
+                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Temp|Status", Attribute="Temp" },
+                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Airx|Status", Attribute="Airx" },
+                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Hum|Status", Attribute="Hum" },
+                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|DP|Status", Attribute="DP" },
+                };
             }).ToList();
-            var currentData = await this._piDataService.CurrentStatusData(locationQueries);
+
+            var dpStatusQueries = connectedRooms.Select(r => {
+                var piPath =  $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{r.ConnectedRoomNumber}_{r.RoomNumber}_DP|DP|Status";
+                return new LocationQuery { LocationName = $"{r.ConnectedRoomNumber}_{r.RoomNumber}", Tag=piPath, Attribute="DP" };
+            }).ToList();
+
+            var allQueries = roomStatusQueries.Union(dpStatusQueries).ToList();
+            var currentData = await this._piDataService.CurrentStatusData(allQueries);
             return currentData;
         }
 
         // https://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORFD-COGEN\Dev_cGMP\cGMP\2J\2N2J1|Status
+        // https://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORF-COGEN\cGMP\Dev_cGMP\2J\2N3074\2N2J1_2N3074_DP|Temp|Status
+        // https://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORF-COGEN\Dev_cGMP\cGMP\2J\2N3074|Status
+   // https://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORFD-COGEN\Dev_cGMP\cGMP\2J\2N2J1\2N2J1_2N3074_DP|DP|Status
+
+
+        [HttpGet("APFLimits")]
+        public async Task<IEnumerable<dynamic>> APFLimits() {
+            var limits = await this._piDataService.APFLimits();
+            return limits;
+        }
+       
 
     }
 }

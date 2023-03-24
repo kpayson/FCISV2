@@ -18,6 +18,7 @@ namespace FCISUI.Models
 
         public virtual DbSet<Attachment> Attachments { get; set; } = null!;
         public virtual DbSet<AttachmentType> AttachmentTypes { get; set; } = null!;
+        public virtual DbSet<ConnectingRoom> ConnectingRooms {get; set; } = null;
         public virtual DbSet<DocCategory> DocCategories { get; set; } = null!;
         public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
         public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
@@ -28,7 +29,7 @@ namespace FCISUI.Models
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
         public virtual DbSet<RoomParameter> RoomParameters { get; set; } = null!;
-        public virtual DbSet<RoomOld> RoomOlds { get; set; } = null!;
+        // public virtual DbSet<RoomOld> RoomOlds { get; set; } = null!;
         public virtual DbSet<SvgMap> SvgMaps { get; set; } = null!;
         public virtual DbSet<SvgMapPin> SvgMapPins { get; set; } = null!;
         public virtual DbSet<Temp> Temps { get; set; } = null!;
@@ -78,7 +79,7 @@ namespace FCISUI.Models
 
                 entity.Property(e => e.ExpirationDate).HasColumnType("datetime");
 
-                entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
+                entity.Property(e => e.FacilityId).HasColumnName("FacilityId");
 
                 entity.Property(e => e.FileType)
                     .HasMaxLength(255)
@@ -196,7 +197,7 @@ namespace FCISUI.Models
             {
                 entity.ToTable("Facility");
 
-                entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
+                entity.Property(e => e.FacilityId).HasColumnName("FacilityId");
 
                 entity.Property(e => e.Attribute)
                     .HasMaxLength(255)
@@ -362,13 +363,13 @@ namespace FCISUI.Models
             {
                 entity.ToTable("Room");
 
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                entity.Property(e => e.RoomId).HasColumnName("RoomId");
 
                 entity.Property(e => e.Facility)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
+                entity.Property(e => e.FacilityId).HasColumnName("FacilityId");
 
                 entity.Property(e => e.Iso)
                     .HasMaxLength(3)
@@ -396,9 +397,7 @@ namespace FCISUI.Models
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
-
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                entity.Property(e => e.RoomId).HasColumnName("RoomId");
                 entity.Property(e => e.RoomNumber).HasColumnName("RoomNumber");
 
                 entity.Property(e => e.Parameter)
@@ -436,40 +435,40 @@ namespace FCISUI.Models
         });
         
 
-            modelBuilder.Entity<RoomOld>(entity =>
-            {
-                entity.HasKey(e => e.RoomId)
-                    .HasName("PK__Room__328639197430B856");
+            // modelBuilder.Entity<RoomOld>(entity =>
+            // {
+            //     entity.HasKey(e => e.RoomId)
+            //         .HasName("PK__Room__328639197430B856");
 
-                entity.ToTable("Room_Old");
+            //     entity.ToTable("Room_Old");
 
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+            //     entity.Property(e => e.RoomId).HasColumnName("RoomId");
 
-                entity.Property(e => e.Attribute)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.Attribute)
+            //         .HasMaxLength(50)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
+            //     entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
 
-                entity.Property(e => e.FacilityId).HasColumnName("FacilityID");
+            //     entity.Property(e => e.FacilityId).HasColumnName("FacilityId");
 
-                entity.Property(e => e.Iso)
-                    .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("ISO");
+            //     entity.Property(e => e.Iso)
+            //         .HasMaxLength(20)
+            //         .IsUnicode(false)
+            //         .HasColumnName("ISO");
 
-                entity.Property(e => e.Isoorder).HasColumnName("ISOOrder");
+            //     entity.Property(e => e.Isoorder).HasColumnName("ISOOrder");
 
-                entity.Property(e => e.PiPath)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.PiPath)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.RoomNumber)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.RoomNumber)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.Sq).HasColumnName("SQ");
-            });
+            //     entity.Property(e => e.Sq).HasColumnName("SQ");
+            // });
 
             modelBuilder.Entity<SvgMap>(entity => {
                 entity.ToTable("SvgMap");

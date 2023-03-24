@@ -103,17 +103,17 @@ export class SvgStatusMapComponent implements OnChanges {
   set backgroundImageUrl(v) {
     this._backgroundImageUrl = v;
 
-    if(!v || this.svgMap.backgroundSvg) {
-      this.backgroundStyle = {}
-    }
-    else {
+    // if(!v || this.svgMap.backgroundSvg) {
+    //  this.backgroundStyle = {}
+    //}
+    // else {
       this.backgroundStyle = {
         'background-image':  'url('+this.backgroundImageUrl+')',
         'background-size': '100% 100%',
         'background-repeat': 'no-repeat',
         'border':'1px solid blue;'
       }
-    }
+    //}
 
   }
 

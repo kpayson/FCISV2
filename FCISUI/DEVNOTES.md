@@ -48,6 +48,7 @@ http://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\ORF-COGENAF\cGMP\cGMP\PET
 
 
 http://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\\\ORF-COGENAF\\Dev_cGMP\\cGMP/PET_1|Facility_Status_Check
+http://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORF-COGENAF\Dev_cGMP\cGMP/PET_1|Facility_Status_Check
 
 http://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check&start_time=2023-02-16T21:19:10&end_time=2023-02-17T21:19:10&rectype=interpolated&interval=10m
 
@@ -61,3 +62,7 @@ Lifecycle hooks.
 Event handlers.
 Component API methods.
 Private methods.
+
+http://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORF-COGENAF\Dev_cGMP\cGMP/PET_1|Facility_Status_Check
+
+ https://orfd-cogen.ors.nih.gov/pi-api/table-values?path=\\ORF-COGENAF\cGMP\APF_Limits

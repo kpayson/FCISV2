@@ -3,6 +3,8 @@ using FCISUI.Models;
 using FCISUI.Data;
 using AutoMapper;
 using System.Net;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FCISUI.Controllers
 {
@@ -76,20 +78,14 @@ namespace FCISUI.Controllers
             return response;
         }
 
-        [HttpGet("RoomStatusInfo/facility/{facilityId}/room/{roomNumber}/status/{statusParam}")]
-        public ActionResult<object> RoomStatusInfo(int facilityId, string roomNumber, string statusParam) {
-            try {
-                var room = this._context.Rooms.FirstOrDefault(r=> r.FacilityId == facilityId && r.RoomNumber == roomNumber);
-                // var info = this._context.RoomParameters.FirstOrDefault(rp=>rp.RoomId == roomId && rp.Parameter == statusParam);
-                // if(info == null) {
-                //     return NotFound();
-                // }
-                // return info;
-                return room;
-            }
-            catch(Exception ex) {
-                return StatusCode(500);
-            }
+
+        [HttpGet("RoomParameterInfo/facility/{facilityId}")]
+        public ActionResult<IEnumerable<Room>> RoomParameterInfo(int facilityId) {
+
+            var rooms = this._context.Rooms.Include(room => room.RoomParameters).Where(r=>r.FacilityId == facilityId).ToList();
+            // .Include(room => room.RoomParameters)
+            //.Where(r=>r.FacilityId == facilityId).ToList();
+            return rooms;
         }
 
     }

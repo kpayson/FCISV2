@@ -12,7 +12,7 @@ import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic
               <td>
                 <ng-container *ngIf="field.displayType == 'status'; then statusCircle else plainText ">{{field.value}}></ng-container>
                 <ng-template #statusCircle>
-                    {{field.value}}
+                  <div class="status-circle" [ngStyle]="{background:statusColor(field.value)}"></div>
                 </ng-template>
                 <ng-template #plainText>
                     {{field.value}}
@@ -34,6 +34,21 @@ export class RoomDataTableComponent {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  statusColor(statusVal: string | number) {
+    switch (String(statusVal)) {
+      case "0":
+        return "green";
+      case "1":
+        return "gray";
+      case "2":
+        return "yellow";
+      case "3":
+        return "red";
+      default:
+        return "lightgray";
+    }
   }
 
 }

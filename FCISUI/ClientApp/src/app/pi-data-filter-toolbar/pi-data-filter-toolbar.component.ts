@@ -32,13 +32,9 @@ export class PiDataFilterToolbarComponent {
       if(facId === 0 && this.filterForm.controls.status.value !== 'Sum All') {
         this.filterForm.patchValue({status:'Sum All'});
       }
-      // this.filterChange.emit(this.filterForm.value);
     });
 
-    // this.filterForm.controls.status.valueChanges.subscribe(()=>this.filterChange.emit(this.filterForm.value));
-    // this.filterForm.controls.interval.valueChanges.subscribe(()=>this.filterChange.emit(this.filterForm.value));
-    // this.filterForm.controls.startDate.valueChanges.subscribe(()=>this.filterChange.emit(this.filterForm.value));
-    // this.filterForm.controls.endDate.valueChanges.subscribe(()=>this.filterChange.emit(this.filterForm.value));
+
   }
 
 
@@ -47,7 +43,7 @@ export class PiDataFilterToolbarComponent {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
     return {
-      facility:0,
+      facility:this.facilities? this.facilities[0] : {repName:'',sectionName:'', value:0},
       status:"Sum All",
       startDate: yesterday,
       endDate:new Date(),

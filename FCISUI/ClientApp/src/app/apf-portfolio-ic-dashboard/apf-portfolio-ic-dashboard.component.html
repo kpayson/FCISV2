@@ -59,8 +59,9 @@
                 (chartLabelMouseOut)="chartLabelMouseOut($event)"></app-apf-timeline-chart>
             </div>
 
-            <div class="room-info-display-container">
-              <app-room-info-display [displayFields]="(selectedRoomInfo$ | async) || []"></app-room-info-display>
+            <div class="room-info-display-container" *ngIf="(hasSelectedRoom$ | async) || false">
+              <app-room-info-display 
+                [roomInfo]="(selectedRoomInfo$ | async) || {}" [attribute]="(selectedAttributeStatus$ | async) || 'composite'"></app-room-info-display>
             </div>
 
           </div>

@@ -80,10 +80,10 @@
             },
             "development": {
               "browserTarget": "FCISUI:build:development",
-              "proxyConfig": "proxy.conf.js",
+              "proxyConfig": "proxy.conf.js"
             }
           },
-          "defaultConfiguration": "development",
+          "defaultConfiguration": "development"
           
         },
         "extract-i18n": {
@@ -104,7 +104,7 @@
 
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

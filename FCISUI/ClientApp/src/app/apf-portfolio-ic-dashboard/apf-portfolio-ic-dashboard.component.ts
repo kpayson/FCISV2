@@ -1,5 +1,7 @@
-import { ApfPortfolioIcDashboardService, RoomDisplayField, TimelineChartData, locationStatusLookup } from './apf-portfolio-ic-dashboard.service';
-import { Observable, map, mergeMap, of } from 'rxjs';
+import {} from  './apf-portfolio-ic-dashboard.service'
+
+import { ApfPortfolioIcDashboardService, TimelineChartData, locationStatusLookup, } from './apf-portfolio-ic-dashboard.service';
+import { Observable, filter, map } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
@@ -18,25 +20,29 @@ export class ApfPortfolioIcDashboardComponent {
   ) {
     this.monitoredRoomsChartData$ = this.service.gsfGrowthByClassification$;
 
-    this.facilityFilterOptions$ = this.activatedRoute.params.pipe(mergeMap(params =>{
-      const ic = params.ic?.toLowerCase() || '';
-      return this.service.facilityFilterOptions(ic)
-    }))
-
-
+    this.activatedRoute.params.pipe(
+      filter(Boolean),
+      map(p=>p.ic?.toLowerCase() || '')).subscribe(ic=>{
+      
+      this.service.setIC(ic);
+    })
+    
     this.svgMap$ = this.service.svgMap$;
     this.svgBackgroundImageUrl$ = this.service.svgMapBackgroundImageUrl$;
-    this.pinStates$ = this.service.currentStatusValues$;
+    this.pinStates$ = this.service.pinStates$;
     this.hoveredPin$ = this.service.hoveredPin$;
     this.hoveredTimelineLabel$ = this.service.hoveredTimelineLabel$;
     this.timelineChartData$ = this.service.timelineChartData$;
     this.selectedRoomInfo$ = this.service.selectedRoomInfo$;
     this.isFacilityAll$ = this.service.isFacilityAll$;
+    this.selectedAttributeStatus$ = this.service.piDataFilter$.pipe(map(x=>x.status));
+    this.hasSelectedRoom$ = this.selectedRoomInfo$.pipe(map(x=>Object.keys(x).length > 0));
+    this.facilityFilterOptions$ = this.service.facilityFilterOptions$;
 
   }
 
   monitoredRoomsChartData$: Observable<any[]>;
-  facilityFilterOptions$: Observable<{name:string,value:string}[]>;
+  facilityFilterOptions$: Observable<{repName:string, sectionName: string, value:string}[]>;
   timelineChartData$: Observable<TimelineChartData>;
   svgMap$:Observable<SvgMap>;
   svgBackgroundImageUrl$:Observable<string>;
@@ -44,9 +50,13 @@ export class ApfPortfolioIcDashboardComponent {
   defaultSvgMap:SvgMap = {backgroundSvg:"",id:0,name:"",svgMapPins:[],viewbox:"",defs:"", facilityId:0}
   hoveredPin$:Observable<string>;
   hoveredTimelineLabel$: Observable<string>;
-  selectedRoomInfo$: Observable<RoomDisplayField[]>
-  isFacilityAll$: Observable<boolean>
-;
+  selectedRoomInfo$: Observable<{[field:string]:string}>;
+
+  isFacilityAll$: Observable<boolean>;
+  selectedAttributeStatus$: Observable<string>;
+  
+  hasSelectedRoom$: Observable<boolean>;
+
   filterChange($event:any) {
     setTimeout(()=>{this.service.filterPiData($event)},0);
   }

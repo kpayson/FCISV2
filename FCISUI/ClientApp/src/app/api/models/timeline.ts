@@ -32,6 +32,7 @@ export interface RoomTimeSeriesData
 export interface LocationCurrentStatus 
 {
     locationName: string; //facility or room name
+    attribute: 'Composite' | 'Temp' | 'Hum' | 'Airx' | 'DP';
     statusPoint: TimeSeriesPoint;
 }
 
