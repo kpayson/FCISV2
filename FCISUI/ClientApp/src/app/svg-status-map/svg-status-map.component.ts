@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output
+} from '@angular/core';
 import { SvgMap, SvgMapPin, defaultSvgMap } from '../api/models';
 
 import { DomSanitizer } from '@angular/platform-browser';
@@ -6,7 +13,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 declare const bootstrap: any;
 
 export interface PinHoverInfo {
-  locationId:string;
+  locationId: string;
   status: 'on' | 'off';
 }
 
@@ -16,26 +23,25 @@ export interface PinHoverInfo {
   styleUrls: ['./svg-status-map.component.scss']
 })
 export class SvgStatusMapComponent implements OnChanges {
+  constructor(private sanitizer: DomSanitizer) {}
 
-  constructor(private sanitizer: DomSanitizer) { }
-
-  mapTooltip(pin:SvgMapPin) {
+  mapTooltip(pin: SvgMapPin) {
     const tooltipHtml = `
     <div class="label-tooltip">
       Room: ${pin.title} <br>
 
     </div>`;
 
-          // Room #: ${room.roomNumber} <br>
-      // Class: ${room.iso} <br>
-      // GSF: ${room.sq}
+    // Room #: ${room.roomNumber} <br>
+    // Class: ${room.iso} <br>
+    // GSF: ${room.sq}
 
     // Room: ${room.roomName} <br>
     // Room #: ${room.roomNumber} <br>
     // Class: ${room.iso} <br>
     // GSF: ${room.sq}
     // const tooltipHtml = `
-    //   <div align="left" class="label-tooltip"> 
+    //   <div align="left" class="label-tooltip">
     //     <table>
     //      <tr><td> Room: ${room.roomName} </td></tr>
     //      <tr><td><b> Room #: ${room.roomNumber} </b></td></tr>
@@ -47,19 +53,18 @@ export class SvgStatusMapComponent implements OnChanges {
     return tooltipHtml;
   }
 
-  ngOnChanges(){
-    for(const pin of this.svgMap.svgMapPins){
-      window.setTimeout(()=>{
+  ngOnChanges() {
+    for (const pin of this.svgMap.svgMapPins) {
+      window.setTimeout(() => {
         const pinElem = document.getElementById('pin_' + pin.locationId);
-        if(pinElem) {
+        if (pinElem) {
           const tooltip = new bootstrap.Tooltip(pinElem, {
-            placement:'right',
+            placement: 'right',
             html: true,
             title: '<div>' + pin.title + '</div>'
           });
         }
-      },100)
-
+      }, 100);
 
       // const roomData = this.chartData.locations[locationName];
       // if(roomData) {
@@ -72,33 +77,35 @@ export class SvgStatusMapComponent implements OnChanges {
       // }
     }
   }
-  
-
 
   @Input()
-  svgMap: SvgMap = defaultSvgMap 
+  svgMap: SvgMap = defaultSvgMap;
 
   @Input()
   pinStates: { [name: string]: string } = {};
 
-  private _highlightedMapPin = ''
+  private _highlightedMapPin = '';
   @Input()
   get highlightedMapPin() {
     return this._highlightedMapPin;
   }
   set highlightedMapPin(v: string) {
     this._highlightedMapPin = v;
-    document.querySelectorAll('circle.pin-border').forEach(elem=>{(elem as HTMLElement).style.fill = "grey"});
-    const target = document.querySelector('circle.pin-border[data-locationId="' + v + '"]') as HTMLElement;
-    if(target) {
-      target.style.fill = "black";
+    document.querySelectorAll('circle.pin-border').forEach((elem) => {
+      (elem as HTMLElement).style.fill = 'grey';
+    });
+    const target = document.querySelector(
+      'circle.pin-border[data-locationId="' + v + '"]'
+    ) as HTMLElement;
+    if (target) {
+      target.style.fill = 'black';
     }
   }
 
-  private _backgroundImageUrl="";
+  private _backgroundImageUrl = '';
   @Input()
   get backgroundImageUrl() {
-    return this._backgroundImageUrl
+    return this._backgroundImageUrl;
   }
   set backgroundImageUrl(v) {
     this._backgroundImageUrl = v;
@@ -107,37 +114,33 @@ export class SvgStatusMapComponent implements OnChanges {
     //  this.backgroundStyle = {}
     //}
     // else {
-      this.backgroundStyle = {
-        'background-image':  'url('+this.backgroundImageUrl+')',
-        'background-size': '100% 100%',
-        'background-repeat': 'no-repeat',
-        'border':'1px solid blue;'
-      }
+    this.backgroundStyle = {
+      'background-image': 'url(' + this.backgroundImageUrl + ')',
+      'background-size': '100% 100%',
+      'background-repeat': 'no-repeat',
+      border: '1px solid blue;'
+    };
     //}
-
   }
 
   public backgroundStyle = {};
 
   @Output()
-  pinClick:EventEmitter<string> = new EventEmitter<string>();
+  pinClick: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  pinMouseOver:EventEmitter<string> = new EventEmitter<string>();
+  pinMouseOver: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  pinMouseOut:EventEmitter<string> = new EventEmitter<string>();
-  
-  pinClass(locationId:string){
+  pinMouseOut: EventEmitter<string> = new EventEmitter<string>();
+
+  pinClass(locationId: string) {
     //return 'pin-green';
-    if(this.pinStates[locationId]) {
-      return `pin-${this.pinStates[locationId]}`
-    }
-    else {
+    if (this.pinStates[locationId]) {
+      return `pin-${this.pinStates[locationId]}`;
+    } else {
       // console.log(locationId)
       return 'pin-lightgray';
     }
-
   }
-
 }

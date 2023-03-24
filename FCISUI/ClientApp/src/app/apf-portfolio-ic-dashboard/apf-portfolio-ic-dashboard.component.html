@@ -1,23 +1,26 @@
 <div class="card">
   <div class="card-body" style="margin-left: 15px">
-
     <div class="row">
       <div class="col-md-3">
         <div class="filter-toolbar-container">
-          <app-pi-data-filter-toolbar [facilities]="(facilityFilterOptions$ | async)!"
-            (filterChange)="filterChange($event)"></app-pi-data-filter-toolbar>
+          <app-pi-data-filter-toolbar
+            [facilities]="(facilityFilterOptions$ | async)!"
+            (filterChange)="filterChange($event)"
+          ></app-pi-data-filter-toolbar>
         </div>
 
         <div class="svg-map-container">
-          <app-svg-status-map [svgMap]="(svgMap$ | async) || defaultSvgMap" [pinStates]="(pinStates$ | async) || {}"
-            [backgroundImageUrl]="(svgBackgroundImageUrl$ | async) || ''" 
+          <app-svg-status-map
+            [svgMap]="(svgMap$ | async) || defaultSvgMap"
+            [pinStates]="(pinStates$ | async) || {}"
+            [backgroundImageUrl]="(svgBackgroundImageUrl$ | async) || ''"
             [highlightedMapPin]="(hoveredTimelineLabel$ | async) || ''"
             (pinClick)="pinClick($event)"
             (pinMouseOver)="pinMouseOver($event)"
-            (pinMouseOut)="pinMouseOut($event)">
+            (pinMouseOut)="pinMouseOut($event)"
+          >
           </app-svg-status-map>
         </div>
-
       </div>
 
       <div class="col-md-9" style="border: 0px solid black">
@@ -28,7 +31,8 @@
             </h4>
 
             <app-apf-monitored-rooms-chart
-              [chartData]="(monitoredRoomsChartData$ | async) || []"></app-apf-monitored-rooms-chart>
+              [chartData]="(monitoredRoomsChartData$ | async) || []"
+            ></app-apf-monitored-rooms-chart>
             <div class="chart-label">
               APF Portfolio: Monitored Rooms and Critical Environmental
               Parameter Points
@@ -36,8 +40,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-12 justify-content-center" style="height:520px;">
-            <div id="loadingGif" style="
+          <div class="col-12 justify-content-center" style="height: 520px">
+            <div
+              id="loadingGif"
+              style="
                 display: none;
                 position: fixed;
                 z-index: 1031;
@@ -45,29 +51,40 @@
                 right: 30%;
                 margin-top: 100px;
                 margin-right: -100px;
-              ">
+              "
+            >
               <img src="/assets/images/giphy.gif" alt="loading" />
             </div>
 
             <div class="timeline-chart-container">
               <h4 style="color: #b3172c">Critical Parameter Timeline</h4>
-              <app-apf-timeline-chart 
-                [chartData]="(timelineChartData$ | async) || {points:[],locations:{},locationType:'facility'}"
+              <app-apf-timeline-chart
+                [chartData]="
+                  (timelineChartData$ | async) || {
+                    points: [],
+                    locations: {},
+                    locationType: 'facility'
+                  }
+                "
                 [highlightedLabel]="(hoveredPin$ | async) || ''"
-                (chartLabelClick)="chartLabelClick($event)" 
+                (chartLabelClick)="chartLabelClick($event)"
                 (chartLabelMouseOver)="chartLabelMouseOver($event)"
-                (chartLabelMouseOut)="chartLabelMouseOut($event)"></app-apf-timeline-chart>
+                (chartLabelMouseOut)="chartLabelMouseOut($event)"
+              ></app-apf-timeline-chart>
             </div>
 
-            <div class="room-info-display-container" *ngIf="(hasSelectedRoom$ | async) || false">
-              <app-room-info-display 
-                [roomInfo]="(selectedRoomInfo$ | async) || {}" [attribute]="(selectedAttributeStatus$ | async) || 'composite'"></app-room-info-display>
+            <div
+              class="room-info-display-container"
+              *ngIf="(hasSelectedRoom$ | async) || false"
+            >
+              <app-room-info-display
+                [roomInfo]="(selectedRoomInfo$ | async) || {}"
+                [attribute]="(selectedAttributeStatus$ | async) || 'composite'"
+              ></app-room-info-display>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-

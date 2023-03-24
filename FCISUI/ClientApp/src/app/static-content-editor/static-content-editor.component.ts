@@ -7,26 +7,21 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./static-content-editor.component.scss']
 })
 export class StaticContentEditorComponent implements OnInit {
-  
-  @Input() initialContent:string = "";
+  @Input() initialContent: string = '';
   @Output() onSave = new EventEmitter<string>();
 
-
   editorForm = this.fb.group({
-    editorContent:''
+    editorContent: ''
   });
 
-  constructor(private fb:FormBuilder) { 
-
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.editorForm.patchValue({editorContent:this.initialContent})
+    this.editorForm.patchValue({ editorContent: this.initialContent });
   }
 
   save() {
-    const content = this.editorForm.get("editorContent")?.value || "";
+    const content = this.editorForm.get('editorContent')?.value || '';
     this.onSave.emit(content);
   }
-
 }

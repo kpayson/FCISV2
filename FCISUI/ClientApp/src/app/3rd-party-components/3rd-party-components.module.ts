@@ -8,16 +8,16 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
-    declarations: [],
-    imports: [],
-    exports: [
-        BrowserAnimationsModule,
-        ButtonModule,
-        CalendarModule,
-        DropdownModule,
-        EditorModule
-    ],
-    providers: [],
-    bootstrap: []
+  declarations: [],
+  imports: [],
+  exports: [
+    BrowserAnimationsModule,
+    ButtonModule,
+    CalendarModule,
+    DropdownModule,
+    EditorModule
+  ],
+  providers: [],
+  bootstrap: []
 })
-export class ThirdPartyComponentsModule { }
+export class ThirdPartyComponentsModule {}

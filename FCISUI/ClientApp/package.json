@@ -22,6 +22,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-eslint/schematics": "^1.0.0",
     "@angular/animations": "^14.0.3",
     "@angular/common": "^14.0.3",
     "@angular/compiler": "^14.0.3",
@@ -78,7 +79,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.0.0",
     "ng-openapi-gen": "^0.23.0",
-    "prettier": "^2.8.0",
+    "prettier": "^2.8.6",
     "typescript": "~4.7.4"
   },
   "overrides": {

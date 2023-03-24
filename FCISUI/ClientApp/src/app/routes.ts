@@ -19,7 +19,7 @@ export const appRoutes: Routes = [
       },
       {
         path: 'resource/:page',
-        component: StaticContentContainerComponent,
+        component: StaticContentContainerComponent
       },
       {
         path: '',

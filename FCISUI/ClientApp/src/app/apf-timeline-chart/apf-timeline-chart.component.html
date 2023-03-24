@@ -1,12 +1,10 @@
-
-<google-chart *ngIf="timelineData.length > 0"
-  style="width: 100%; height:100%"
+<google-chart
+  *ngIf="timelineData.length > 0"
+  style="width: 100%; height: 100%"
   [type]="chartType"
   [data]="timelineData"
   [columns]="columnNames"
   [options]="options"
-
   (ready)="chartReady()"
 >
 </google-chart>
-

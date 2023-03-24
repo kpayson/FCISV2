@@ -1,12 +1,12 @@
-import { RoomParameter } from "./roomParameter";
+import { RoomParameter } from './roomParameter';
 
 export interface Room {
-    roomId: number;
-    facilityId: number;
-    facility: string;
-    roomNumber: string;
-    roomName: string;
-    sq: number;
-    iso: string;
-    roomParameters?: RoomParameter[]
-};
+  roomId: number;
+  facilityId: number;
+  facility: string;
+  roomNumber: string;
+  roomName: string;
+  sq: number;
+  iso: string;
+  roomParameters?: RoomParameter[];
+}

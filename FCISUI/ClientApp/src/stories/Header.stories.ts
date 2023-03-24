@@ -11,24 +11,24 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [Button],
-      imports: [CommonModule],
-    }),
+      imports: [CommonModule]
+    })
   ],
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/angular/configure/story-layout
-    layout: 'fullscreen',
-  },
+    layout: 'fullscreen'
+  }
 } as Meta;
 
 const Template: Story<Header> = (args: Header) => ({
-  props: args,
+  props: args
 });
 
 export const LoggedIn = Template.bind({});
 LoggedIn.args = {
   user: {
-    name: 'Jane Doe',
-  },
+    name: 'Jane Doe'
+  }
 };
 
 export const LoggedOut = Template.bind({});

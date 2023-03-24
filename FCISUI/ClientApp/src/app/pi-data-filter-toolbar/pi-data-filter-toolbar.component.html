@@ -1,29 +1,55 @@
 <div class="filter-bar" [formGroup]="filterForm">
-    <div>
-        <label>Facility</label>
-        <p-dropdown [options]="facilities" placeholder="" optionLabel="repName" formControlName="facility" [style]="filterStyle">
-
-        </p-dropdown>
-    </div>
-    <div>
-        <label>Status</label>
-        <p-dropdown [options]="(statusOptions$ | async) || []" placeholder="" optionLabel="name"  optionValue="value" formControlName="status">
-
-        </p-dropdown>
-    </div>
-    <div>
-        <label>Start Date</label>
-        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'" formControlName="startDate" ></p-calendar>
-    </div>
-    <div>
-        <label>End Date</label>
-        <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'"  formControlName="endDate"></p-calendar>
-    </div>
-    <div>
-        <label>Interval</label>
-        <p-dropdown [options]="intervalOptions" placeholder="" optionLabel="name" optionValue="value" formControlName="interval"></p-dropdown>
-    </div>
-    <!-- <div>
+  <div>
+    <label>Facility</label>
+    <p-dropdown
+      [options]="facilities"
+      placeholder=""
+      optionLabel="repName"
+      formControlName="facility"
+      [style]="filterStyle"
+    >
+    </p-dropdown>
+  </div>
+  <div>
+    <label>Status</label>
+    <p-dropdown
+      [options]="(statusOptions$ | async) || []"
+      placeholder=""
+      optionLabel="name"
+      optionValue="value"
+      formControlName="status"
+    >
+    </p-dropdown>
+  </div>
+  <div>
+    <label>Start Date</label>
+    <p-calendar
+      inputId="basic"
+      [showTime]="true"
+      [hourFormat]="'12'"
+      formControlName="startDate"
+    ></p-calendar>
+  </div>
+  <div>
+    <label>End Date</label>
+    <p-calendar
+      inputId="basic"
+      [showTime]="true"
+      [hourFormat]="'12'"
+      formControlName="endDate"
+    ></p-calendar>
+  </div>
+  <div>
+    <label>Interval</label>
+    <p-dropdown
+      [options]="intervalOptions"
+      placeholder=""
+      optionLabel="name"
+      optionValue="value"
+      formControlName="interval"
+    ></p-dropdown>
+  </div>
+  <!-- <div>
         <button pButton (click)="reset()">Reset</button>
     </div> -->
 </div>

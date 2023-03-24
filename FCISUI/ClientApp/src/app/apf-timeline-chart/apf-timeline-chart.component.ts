@@ -11,15 +11,19 @@ declare const bootstrap: any;
   styleUrls: ['./apf-timeline-chart.component.scss']
 })
 export class ApfTimelineChartComponent {
-  constructor() { }
+  constructor() {}
 
-  timelineData: any[] = []
-  locationLookup: {[key:string]: any} = {};
+  timelineData: any[] = [];
+  locationLookup: { [key: string]: any } = {};
 
-  private _timelineChartData: TimelineChartData = {points:[], locations:{}, locationType:'facility'};
+  private _timelineChartData: TimelineChartData = {
+    points: [],
+    locations: {},
+    locationType: 'facility'
+  };
   @Input()
   get chartData(): TimelineChartData {
-    return this._timelineChartData
+    return this._timelineChartData;
   }
   set chartData(v) {
     this._timelineChartData = v;
@@ -36,30 +40,28 @@ export class ApfTimelineChartComponent {
       backgroundColor: '#ebe9e6',
       tooltip: { isHtml: true },
       focusTarget: 'category',
-      height:chartHeight
+      height: chartHeight
     };
 
     // body > div > app-home > div > app-apf-portfolio-ic-dashboard > div > div > div > div.col-md-9 > div:nth-child(2) > div > div.timeline-chart-container > app-apf-timeline-chart > google-chart > div > div:nth-child(1) > div > div:nth-child(2)
-    
-    this.timelineData = this.chartData.points.map((x:any)=>{
+
+    this.timelineData = this.chartData.points.map((x: any) => {
       return [
         {
           v: x.locationName,
           p: {
-              link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${x.tag}`
+            link: `https://orfd-cogen.ors.nih.gov/data-quality/plotcgmp?path=${x.tag}`
           }
         },
-        "",
+        '',
         x.chillerStatusLabel,
         x.statusColor,
         x.startDate,
         x.endDate
-      ]
+      ];
     });
 
     this.locationLookup = this.chartData.locations;
-
-
   }
 
   private _highlightedLabel: string = '';
@@ -69,13 +71,16 @@ export class ApfTimelineChartComponent {
   }
   set highlightedLabel(v: string) {
     this._highlightedLabel = v;
-    document.querySelectorAll('text[data-locationId]')?.forEach(elem => { elem.setAttribute('fill', 'black') });
-    document.querySelector('text[data-locationId="' + v + '"]')?.setAttribute('fill', 'red');
+    document.querySelectorAll('text[data-locationId]')?.forEach((elem) => {
+      elem.setAttribute('fill', 'black');
+    });
+    document
+      .querySelector('text[data-locationId="' + v + '"]')
+      ?.setAttribute('fill', 'red');
   }
 
-
   @Output()
-  chartLabelClick = new EventEmitter<any>()
+  chartLabelClick = new EventEmitter<any>();
 
   @Output()
   chartLabelMouseOver = new EventEmitter<any>();
@@ -104,22 +109,21 @@ export class ApfTimelineChartComponent {
     backgroundColor: '#ebe9e6',
     tooltip: { isHtml: true },
     focusTarget: 'category',
-    height:'600px'
+    height: '600px'
   };
 
-
-roomLabelTooltipDP(name:string) {
-  const tooltipHtml = `
+  roomLabelTooltipDP(name: string) {
+    const tooltipHtml = `
     <div align="left" class="label-tooltip"> 
       <table>
        <tr><th> Name: ${name} </th></tr>
        </table>
     </div>
   `;
-  return tooltipHtml;
-}
+    return tooltipHtml;
+  }
 
-  roomLabelTooltip(room:any) {
+  roomLabelTooltip(room: any) {
     const tooltipHtml = `
     <div class="label-tooltip">
       Room: ${room.roomName} <br>
@@ -133,7 +137,7 @@ roomLabelTooltipDP(name:string) {
     // Class: ${room.iso} <br>
     // GSF: ${room.sq}
     // const tooltipHtml = `
-    //   <div align="left" class="label-tooltip"> 
+    //   <div align="left" class="label-tooltip">
     //     <table>
     //      <tr><td> Room: ${room.roomName} </td></tr>
     //      <tr><td><b> Room #: ${room.roomNumber} </b></td></tr>
@@ -145,42 +149,42 @@ roomLabelTooltipDP(name:string) {
     return tooltipHtml;
   }
 
-
   chartReady() {
-    console.log("Chart Ready");
-    const chartLabels = document.querySelectorAll('app-apf-timeline-chart text[text-anchor="end"]');
+    console.log('Chart Ready');
+    const chartLabels = document.querySelectorAll(
+      'app-apf-timeline-chart text[text-anchor="end"]'
+    );
     const me = this;
     chartLabels.forEach((label) => {
-
-      label.setAttribute('style', `cursor: pointer; text-decoration: underline;`);
+      label.setAttribute(
+        'style',
+        `cursor: pointer; text-decoration: underline;`
+      );
 
       const locationName = label.innerHTML;
-      if(this.chartData.locationType === 'room') {
+      if (this.chartData.locationType === 'room') {
         const roomData = this.chartData.locations[locationName];
-        if(roomData) {
+        if (roomData) {
           const roomTooltip = this.roomLabelTooltip(roomData);
           const tooltip = new bootstrap.Tooltip(label, {
-            placement:'right',
+            placement: 'right',
             html: true,
             title: roomTooltip
           });
-        }
-        else {
+        } else {
           const tooltip = new bootstrap.Tooltip(label, {
-            placement:'right',
+            placement: 'right',
             title: locationName
           });
         }
-      }
-      else {
+      } else {
         const tooltip = new bootstrap.Tooltip(label, {
-          placement:'right',
+          placement: 'right',
           title: locationName
         });
       }
-      
-      label.setAttribute('data-locationId', label.innerHTML);
 
+      label.setAttribute('data-locationId', label.innerHTML);
 
       console.log(this.chartData);
       // label.setAttribute('data-toggle', 'tooltip');
@@ -188,27 +192,28 @@ roomLabelTooltipDP(name:string) {
       // label.setAttribute('title', 'Hello ' + label.innerHTML);
 
       label.addEventListener('click', function (sender) {
-        const text = (sender.currentTarget as Element).innerHTML
+        const text = (sender.currentTarget as Element).innerHTML;
         me.chartLabelClick.emit(text);
       });
       label.addEventListener('mouseover', function (sender) {
-        const text = (sender.currentTarget as Element).innerHTML
+        const text = (sender.currentTarget as Element).innerHTML;
         me.handleLabelMouseOver(text);
       });
       label.addEventListener('mouseout', function (sender) {
-        const text = (sender.currentTarget as Element).innerHTML
+        const text = (sender.currentTarget as Element).innerHTML;
         me.handleLabelMouseOut(text);
       });
 
       // document.querySelectorAll()
       // data-toggle="tooltip" data-placement="right" title="Tooltip on right"
-
     });
   }
 
   handleLabelMouseOver(locationId: string) {
-    const label = document.querySelector('text[data-locationId="' + locationId + '"]');
-    if(label) {
+    const label = document.querySelector(
+      'text[data-locationId="' + locationId + '"]'
+    );
+    if (label) {
       label.setAttribute('fill', 'red');
 
       // tooltip.show();
@@ -218,11 +223,9 @@ roomLabelTooltipDP(name:string) {
   }
 
   handleLabelMouseOut(locationId: string) {
-    document.querySelector('text[data-locationId="' + locationId + '"]')?.setAttribute('fill', 'black');
-    this.chartLabelMouseOut.emit(locationId)
+    document
+      .querySelector('text[data-locationId="' + locationId + '"]')
+      ?.setAttribute('fill', 'black');
+    this.chartLabelMouseOut.emit(locationId);
   }
-
-
 }
-
-

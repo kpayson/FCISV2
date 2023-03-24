@@ -6,28 +6,31 @@ import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic
 @Component({
   selector: 'app-room-info-display',
   template: `
-  <div style="display:flex">
-    <div style="width:50%; padding:0px 20px">
-        <app-room-data-table [displayFields]="leftTableFields"></app-room-data-table>
+    <div style="display:flex">
+      <div style="width:50%; padding:0px 20px">
+        <app-room-data-table
+          [displayFields]="leftTableFields"
+        ></app-room-data-table>
+      </div>
+      <div style="width:50%; padding:0px 20px;">
+        <app-room-data-table
+          [displayFields]="rightTableFields"
+        ></app-room-data-table>
+      </div>
     </div>
-    <div style="width:50%; padding:0px 20px;">
-        <app-room-data-table [displayFields]="rightTableFields"></app-room-data-table>
-    </div>
-  </div>
   `,
   styleUrls: ['./room-info-display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomInfoDisplayComponent {
-
-  private _roomInfo$: Subject<{[FileSystemFileHandle:string]:string}>;
+  private _roomInfo$: Subject<{ [FileSystemFileHandle: string]: string }>;
   private _attribute$: Subject<string>;
 
-  leftTableFields:RoomDisplayField[]  = [];
-  rightTableFields:RoomDisplayField[] = [];
-  
+  leftTableFields: RoomDisplayField[] = [];
+  rightTableFields: RoomDisplayField[] = [];
+
   @Input()
-  set roomInfo(v: {[field:string]:string}) {
+  set roomInfo(v: { [field: string]: string }) {
     this._roomInfo$.next(v);
   }
 
@@ -37,146 +40,188 @@ export class RoomInfoDisplayComponent {
   }
 
   constructor() {
-    this._roomInfo$ = new BehaviorSubject<{[field:string]:string}>({});
+    this._roomInfo$ = new BehaviorSubject<{ [field: string]: string }>({});
     this._attribute$ = new BehaviorSubject<string>('');
 
-    combineLatest([this._roomInfo$, this._attribute$]).subscribe(([roomInfo,attribute])=>{
-      const attr = attribute.toLowerCase();
-      const fields = 
-        attr === 'composite' || attr === 'sum all' ? this.compositeFields(roomInfo) :
-        attr === 'temp' ? this.tempFields(roomInfo) :
-        attr === 'hum' ? this.rhFields(roomInfo) :
-        attr === 'airx' ? this.achFields(roomInfo) :
-        attr === 'dp' ? this.dpFields(roomInfo):
-        [];
+    combineLatest([this._roomInfo$, this._attribute$]).subscribe(
+      ([roomInfo, attribute]) => {
+        const attr = attribute.toLowerCase();
+        const fields =
+          attr === 'composite' || attr === 'sum all'
+            ? this.compositeFields(roomInfo)
+            : attr === 'temp'
+            ? this.tempFields(roomInfo)
+            : attr === 'hum'
+            ? this.rhFields(roomInfo)
+            : attr === 'airx'
+            ? this.achFields(roomInfo)
+            : attr === 'dp'
+            ? this.dpFields(roomInfo)
+            : [];
 
-        const mid = fields.length / 2 + fields.length % 2;
+        const mid = fields.length / 2 + (fields.length % 2);
         this.leftTableFields = fields.slice(0, mid);
-        this.rightTableFields = fields.slice(mid);     
-    })
+        this.rightTableFields = fields.slice(mid);
+      }
+    );
   }
-
 
   // compositeStatus: statusValues[`${pin}|Composite`],
   // tempStatus: statusValues[`${pin}|Temp`],
   // rhStatus: statusValues[`${pin}|Hum`],
   // dpStatus: statusValues[`${pin}|DP`]
 
-  private compositeFields(roomInfo:{[name:string]:any}) {
+  private compositeFields(roomInfo: { [name: string]: any }) {
     const status = roomInfo['compositeStatus'];
     return [
-      {name:'Room #', value:roomInfo['Room'] },
-      {name:'Room Name', value:roomInfo['Description'] },
-      {name:'Timestamp', value:new Date(status.timeStamp).toLocaleString()},
-      {name:'Classification', value:`ISO-${roomInfo['ISO']}`},
-      {name:'GSF', value:roomInfo['gsf']},
-      {name:'Composite Status', value:status.numeric_value, displayType:'status'},
-      {name:'Temp Status', value:roomInfo['tempStatus']?.numeric_value, displayType:'status'},
-      {name:'DP Status', value:roomInfo['dpStatus']?.numeric_value, displayType:'status'},
-      {name:'RH Status', value:roomInfo['rhStatus']?.numeric_value, displayType:'status'},
-      {name:'ACH Status', value:roomInfo['achStatus']?.numeric_value, displayType:'status'},
+      { name: 'Room #', value: roomInfo['Room'] },
+      { name: 'Room Name', value: roomInfo['Description'] },
+      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'Classification', value: `ISO-${roomInfo['ISO']}` },
+      { name: 'GSF', value: roomInfo['gsf'] },
+      {
+        name: 'Composite Status',
+        value: status.numeric_value,
+        displayType: 'status'
+      },
+      {
+        name: 'Temp Status',
+        value: roomInfo['tempStatus']?.numeric_value,
+        displayType: 'status'
+      },
+      {
+        name: 'DP Status',
+        value: roomInfo['dpStatus']?.numeric_value,
+        displayType: 'status'
+      },
+      {
+        name: 'RH Status',
+        value: roomInfo['rhStatus']?.numeric_value,
+        displayType: 'status'
+      },
+      {
+        name: 'ACH Status',
+        value: roomInfo['achStatus']?.numeric_value,
+        displayType: 'status'
+      }
     ];
   }
 
-  private tempFields(roomInfo:{[name:string]:any}) {
-    const parameters = roomInfo['roomParameters'].find((p:any)=>p.parameter === 'Temp') || {};
+  private tempFields(roomInfo: { [name: string]: any }) {
+    const parameters =
+      roomInfo['roomParameters'].find((p: any) => p.parameter === 'Temp') || {};
     const status = roomInfo['tempStatus'];
 
     return [
-      {name:'Room #', value:roomInfo['Room'] },
-      {name:'Room Name', value:roomInfo['Description'] },
-      {name:'Classification', value:`ISO-${roomInfo['ISO']}`},
-      {name:'GSF', value:roomInfo['gsf']},
-      {name:'Room Status', value:status.numeric_value, displayType:'status'},
-      {name:'Timestamp', value:new Date(status.timeStamp).toLocaleString()},
-      {name:'High Alarm Limit', value:roomInfo['HiHi'] || ''},
-      {name:'High Alarm Delay', value:roomInfo['AlmHiDelay'] ||''},
-      {name:'Target', value:roomInfo['Target'] || ''},
-      {name:'Low Alarm Limit', value: roomInfo['HiHi'] || ''},
-      {name:'Low Alarm Delay', value:roomInfo['AlmLoDelay'] || ''},
-      {name:'BAS (SQL)', value:parameters.HTTE10 || 'n/a'},
-      {name:'BAS (PI)', value:parameters.siemansPointName},
-      {name:'Sensor Type', value:parameters.sensorType},
-      {name:'Sensor Location', value:parameters.sensorLocation},
-      {name:'Calibration Type', value:parameters.calibrationType},
-      {name:'Calibration Period', value:parameters.calibrationPeriod},
-      {name:'Next Calibration', value:parameters.nextCalibration},
-    ]
+      { name: 'Room #', value: roomInfo['Room'] },
+      { name: 'Room Name', value: roomInfo['Description'] },
+      { name: 'Classification', value: `ISO-${roomInfo['ISO']}` },
+      { name: 'GSF', value: roomInfo['gsf'] },
+      {
+        name: 'Room Status',
+        value: status.numeric_value,
+        displayType: 'status'
+      },
+      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
+      { name: 'Target', value: roomInfo['Target'] || '' },
+      { name: 'Low Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'Low Alarm Delay', value: roomInfo['AlmLoDelay'] || '' },
+      { name: 'BAS (SQL)', value: parameters.HTTE10 || 'n/a' },
+      { name: 'BAS (PI)', value: parameters.siemansPointName },
+      { name: 'Sensor Type', value: parameters.sensorType },
+      { name: 'Sensor Location', value: parameters.sensorLocation },
+      { name: 'Calibration Type', value: parameters.calibrationType },
+      { name: 'Calibration Period', value: parameters.calibrationPeriod },
+      { name: 'Next Calibration', value: parameters.nextCalibration }
+    ];
   }
 
-
-  private dpFields(roomInfo:{[name:string]:any}) {
-    const parameters = roomInfo['roomParameters'].find((p:any)=>p.parameter === 'DP') || {};
+  private dpFields(roomInfo: { [name: string]: any }) {
+    const parameters =
+      roomInfo['roomParameters'].find((p: any) => p.parameter === 'DP') || {};
     const status = roomInfo['dpStatus'];
     return [
-      {name:'Room to Room #', value:roomInfo['Room'] },
-      {name:'Room Name', value:roomInfo['Description'] },
-      {name:'Room Status', value:status.numeric_value, displayType:'status'},
-      {name:'Timestamp', value:new Date(status.timeStamp).toLocaleString()},
-      {name:'High Alarm Limit', value:roomInfo['HiHi'] || ''},
-      {name:'High Alarm Delay', value:roomInfo['AlmHiDelay'] ||''},
-      {name:'Target', value:roomInfo['Target'] || ''},
-      {name:'Low Alarm Limit', value: roomInfo['HiHi'] || ''},
-      {name:'Low Alarm Delay', value:roomInfo['AlmLoDelay'] || ''},
-      {name:'BAS (SQL)',  value:parameters.HTTE10 || 'n/a'},
-      {name:'BAS (PI)', value:parameters.siemansPointName},
-      {name:'Sensor Type', value:parameters.sensorType},
-      {name:'Sensor Location', value:parameters.sensorLocation},
-      {name:'Calibration Type', value:parameters.calibrationType},
-      {name:'Calibration Period', value:parameters.calibrationPeriod},
-      {name:'Next Calibration', value:parameters.nextCalibration}
-    ]
+      { name: 'Room to Room #', value: roomInfo['Room'] },
+      { name: 'Room Name', value: roomInfo['Description'] },
+      {
+        name: 'Room Status',
+        value: status.numeric_value,
+        displayType: 'status'
+      },
+      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
+      { name: 'Target', value: roomInfo['Target'] || '' },
+      { name: 'Low Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'Low Alarm Delay', value: roomInfo['AlmLoDelay'] || '' },
+      { name: 'BAS (SQL)', value: parameters.HTTE10 || 'n/a' },
+      { name: 'BAS (PI)', value: parameters.siemansPointName },
+      { name: 'Sensor Type', value: parameters.sensorType },
+      { name: 'Sensor Location', value: parameters.sensorLocation },
+      { name: 'Calibration Type', value: parameters.calibrationType },
+      { name: 'Calibration Period', value: parameters.calibrationPeriod },
+      { name: 'Next Calibration', value: parameters.nextCalibration }
+    ];
   }
 
-  private rhFields(roomInfo:{[name:string]:any}) {
-    const parameters = roomInfo['roomParameters'].find((p:any)=>p.parameter === 'Hum') || {};
+  private rhFields(roomInfo: { [name: string]: any }) {
+    const parameters =
+      roomInfo['roomParameters'].find((p: any) => p.parameter === 'Hum') || {};
     const status = roomInfo['rhStatus'];
     return [
-      {name:'Room #', value:roomInfo['Room'] },
-      {name:'Room Name', value:roomInfo['Description'] },
-      {name:'Classification', value:`ISO-${roomInfo['ISO']}`},
-      {name:'GSF', value:roomInfo['gsf']},
-      {name:'Room Status', value:status.numeric_value, displayType:'status'},
-      {name:'Timestamp', value:new Date(status.timeStamp).toLocaleString()},
-      {name:'High Alarm Limit', value:roomInfo['HiHi'] || ''},
-      {name:'High Alarm Delay', value:roomInfo['AlmHiDelay'] ||''},
-      {name:'RH Target Range', value:roomInfo['Target'] || ''},
-      {name:'Low Alarm Limit', value: roomInfo['HiHi'] || ''},
-      {name:'Low Alarm Delay', value:roomInfo['AlmLoDelay'] || ''},
-      {name:'BAS (SQL)', value:parameters.HTTE10 || 'n/a'},
-      {name:'BAS (PI)', value:parameters.siemansPointName},
-      {name:'Sensor Type', value:parameters.sensorType},
-      {name:'Sensor Location', value:parameters.sensorLocation},
-      {name:'Calibration Type', value:parameters.calibrationType},
-      {name:'Calibration Period', value:parameters.calibrationPeriod},
-      {name:'Next Calibration', value:parameters.nextCalibration}
-    ]
+      { name: 'Room #', value: roomInfo['Room'] },
+      { name: 'Room Name', value: roomInfo['Description'] },
+      { name: 'Classification', value: `ISO-${roomInfo['ISO']}` },
+      { name: 'GSF', value: roomInfo['gsf'] },
+      {
+        name: 'Room Status',
+        value: status.numeric_value,
+        displayType: 'status'
+      },
+      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
+      { name: 'RH Target Range', value: roomInfo['Target'] || '' },
+      { name: 'Low Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'Low Alarm Delay', value: roomInfo['AlmLoDelay'] || '' },
+      { name: 'BAS (SQL)', value: parameters.HTTE10 || 'n/a' },
+      { name: 'BAS (PI)', value: parameters.siemansPointName },
+      { name: 'Sensor Type', value: parameters.sensorType },
+      { name: 'Sensor Location', value: parameters.sensorLocation },
+      { name: 'Calibration Type', value: parameters.calibrationType },
+      { name: 'Calibration Period', value: parameters.calibrationPeriod },
+      { name: 'Next Calibration', value: parameters.nextCalibration }
+    ];
   }
 
-
-  private achFields(roomInfo:{[name:string]:any}) {
-    const parameters = roomInfo['roomParameters'].find((p:any)=>p.parameter === 'Airx') || {};
+  private achFields(roomInfo: { [name: string]: any }) {
+    const parameters =
+      roomInfo['roomParameters'].find((p: any) => p.parameter === 'Airx') || {};
     const status = roomInfo['achStatus'];
     return [
-      {name:'Room #', value:roomInfo['Room'] },
-      {name:'Room Name', value:roomInfo['Description'] },
-      {name:'Classification', value:`ISO-${roomInfo['ISO']}`},
-      {name:'GSF', value:roomInfo['gsf']},
-      {name:'Current Value', value:''},
-      {name:'Room Status', value:status.numeric_value, displayType:'status'},
-      {name:'Timestamp', value:new Date(status.timeStamp).toLocaleString()},
-      {name:'High Alarm Limit', value:roomInfo['HiHi'] || ''},
-      {name:'High Alarm Delay', value:roomInfo['AlmHiDelay'] ||''},
-      {name:'Target', value:roomInfo['Target'] || ''},
-      {name:'Low Alarm Limit', value: roomInfo['HiHi'] || ''},
-      {name:'Low Alarm Delay', value:roomInfo['AlmLoDelay'] || ''},
-      {name:'BAS (SQL)', value:parameters.HTTE10 || 'n/a'},
-      {name:'BAS (PI)', value:parameters.siemansPointName},
-    ]
+      { name: 'Room #', value: roomInfo['Room'] },
+      { name: 'Room Name', value: roomInfo['Description'] },
+      { name: 'Classification', value: `ISO-${roomInfo['ISO']}` },
+      { name: 'GSF', value: roomInfo['gsf'] },
+      { name: 'Current Value', value: '' },
+      {
+        name: 'Room Status',
+        value: status.numeric_value,
+        displayType: 'status'
+      },
+      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
+      { name: 'Target', value: roomInfo['Target'] || '' },
+      { name: 'Low Alarm Limit', value: roomInfo['HiHi'] || '' },
+      { name: 'Low Alarm Delay', value: roomInfo['AlmLoDelay'] || '' },
+      { name: 'BAS (SQL)', value: parameters.HTTE10 || 'n/a' },
+      { name: 'BAS (PI)', value: parameters.siemansPointName }
+    ];
   }
 }
-
-
 
 // ACH Fields
 // Room #:	2N307C
@@ -194,32 +239,31 @@ export class RoomInfoDisplayComponent {
 // BAS (SQL):	n/a
 // BAS (PI):	BMU.10.J.GMP.RM2N307C.AIRX
 
+// "Facility": "2J",
+// "ISO": 7,
+// "Room": "2N307G",
+// "Conn_Room": null,
+// "Parameter": "Temp",
+// "LoLo": 59,
+// "LoWarn": null,
+// "HiHi": 68,
+// "HiWarn": null,
+// "Alarmable": 1,
+// "AlmRange": "Both",
+// "Description": "Small Tissue Culture",
+// "Target": "66",
+// "GraphType": 0,
+// "GraphLo": 45,
+// "GraphHi": 90,
+// "AlmHiDelay": 1800,
+// "WarnHiDelay": 300,
+// "AlmLoDelay": 1800,
+// "WarnLoDelay": 300,
+// "Comments": null,
+// "SiemensName": "BMU.10.J.GMP.RM2N307G.RMTEMP",
+// "JCIName": "N/A"
 
-  // "Facility": "2J",
-  // "ISO": 7,
-  // "Room": "2N307G",
-  // "Conn_Room": null,
-  // "Parameter": "Temp",
-  // "LoLo": 59,
-  // "LoWarn": null,
-  // "HiHi": 68,
-  // "HiWarn": null,
-  // "Alarmable": 1,
-  // "AlmRange": "Both",
-  // "Description": "Small Tissue Culture",
-  // "Target": "66",
-  // "GraphType": 0,
-  // "GraphLo": 45,
-  // "GraphHi": 90,
-  // "AlmHiDelay": 1800,
-  // "WarnHiDelay": 300,
-  // "AlmLoDelay": 1800,
-  // "WarnLoDelay": 300,
-  // "Comments": null,
-  // "SiemensName": "BMU.10.J.GMP.RM2N307G.RMTEMP",
-  // "JCIName": "N/A"
-
-  // Temp Fields
+// Temp Fields
 // Room #:	2N307G
 // Room Name:	Small Tissue Culture
 // Classification:	ISO-7
@@ -239,7 +283,6 @@ export class RoomInfoDisplayComponent {
 // Calibration Type:	Single Point
 // Calibration Period:	Annual
 // Next Calibration:	31-Aug-22
-
 
 // Sample Output from https://orfd-cogen.ors.nih.gov/pi-api/table-values?path=\\ORF-COGENAF\cGMP\APF_Limits
 // {
@@ -355,5 +398,3 @@ export class RoomInfoDisplayComponent {
 // Low Alarm Delay:	1800 (sec)
 // BAS (SQL):	n/a
 // BAS (PI):	BMU.10.J.GMP.RM2N307C.AIRX
-
-

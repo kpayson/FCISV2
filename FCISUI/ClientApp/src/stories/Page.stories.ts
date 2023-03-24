@@ -11,18 +11,18 @@ export default {
   component: Page,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/angular/configure/story-layout
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
   decorators: [
     moduleMetadata({
       declarations: [Button, Header],
-      imports: [CommonModule],
-    }),
-  ],
+      imports: [CommonModule]
+    })
+  ]
 } as Meta;
 
 const Template: Story<Page> = (args: Page) => ({
-  props: args,
+  props: args
 });
 
 export const LoggedOut = Template.bind({});

@@ -1,4 +1,16 @@
-import { Facility, FacilityGsf, FacilityTimeSeriesData, GsfGrowth, ICGsf, LocationCurrentStatus, LocationTimeSeriesData, Room, RoomTimeSeriesData, SvgMap, SvgMapPin } from './models'
+import {
+  Facility,
+  FacilityGsf,
+  FacilityTimeSeriesData,
+  GsfGrowth,
+  ICGsf,
+  LocationCurrentStatus,
+  LocationTimeSeriesData,
+  Room,
+  RoomTimeSeriesData,
+  SvgMap,
+  SvgMapPin
+} from './models';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -8,7 +20,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private get<T>(url: string) {
     return this.http.get<T>(`${environment.apiRootUrl}/${url}`);
@@ -22,7 +34,7 @@ export class DataService {
     return this.get<Facility[]>(`Facilities`);
   }
 
-  facilitiesByIC(ic:string) {
+  facilitiesByIC(ic: string) {
     return this.get<Facility[]>(`Facilities/ic/${ic}`);
   }
 
@@ -46,39 +58,64 @@ export class DataService {
     return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;
   }
 
-
   roomParameterInfo(facilityId: number) {
     return this.get<Room[]>(`SvgMap/RoomParameterInfo/facility/${facilityId}`);
   }
 
-  timelineData(facilityId: number, attr: string, startDate: Date, endDate: Date, interval: number) {
+  timelineData(
+    facilityId: number,
+    attr: string,
+    startDate: Date,
+    endDate: Date,
+    interval: number
+  ) {
     if (facilityId == 0) {
-      return this.post<LocationTimeSeriesData<Facility>[]>(`Timeline/AllFacilityTimelineData`, {
+      return this.post<LocationTimeSeriesData<Facility>[]>(
+        `Timeline/AllFacilityTimelineData`,
+        {
+          startDate,
+          endDate,
+          interval
+        }
+      );
+    }
+
+    return this.post<LocationTimeSeriesData<Room>[]>(
+      `Timeline/FacilityTimelineData`,
+      {
+        facilityId,
+        attr,
         startDate,
         endDate,
         interval
-      });
-    }
-
-    return this.post<LocationTimeSeriesData<Room>[]>(`Timeline/FacilityTimelineData`, {
-      facilityId,
-      attr,
-      startDate,
-      endDate,
-      interval
-    });
+      }
+    );
   }
 
-  facilityAlltimelineData(ic:string, startDate: Date, endDate: Date, interval: number) {
-    return this.post<FacilityTimeSeriesData[]>(`Timeline/AllFacilityTimelineData`, {
-      ic,
-      startDate,
-      endDate,
-      interval
-    });
+  facilityAlltimelineData(
+    ic: string,
+    startDate: Date,
+    endDate: Date,
+    interval: number
+  ) {
+    return this.post<FacilityTimeSeriesData[]>(
+      `Timeline/AllFacilityTimelineData`,
+      {
+        ic,
+        startDate,
+        endDate,
+        interval
+      }
+    );
   }
 
-  facilityRoomsTimelineDate(facilityId: number, attr: string, startDate: Date, endDate: Date, interval: number) {
+  facilityRoomsTimelineDate(
+    facilityId: number,
+    attr: string,
+    startDate: Date,
+    endDate: Date,
+    interval: number
+  ) {
     return this.post<RoomTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {
       facilityId,
       attr,
@@ -90,9 +127,13 @@ export class DataService {
 
   facilityCurrentStatusData(facilityId: number) {
     if (facilityId == 0) {
-      return this.get<LocationCurrentStatus[]>(`Timeline/AllFacilityCurrentData`);
+      return this.get<LocationCurrentStatus[]>(
+        `Timeline/AllFacilityCurrentData`
+      );
     }
-    return this.get<LocationCurrentStatus[]>(`Timeline/FacilityCurrentData/${facilityId}`)
+    return this.get<LocationCurrentStatus[]>(
+      `Timeline/FacilityCurrentData/${facilityId}`
+    );
   }
 
   apfLimits() {

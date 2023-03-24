@@ -1,46 +1,56 @@
-
 <!-- <div>
   <h2>Background</h2>
   <img src="assets/images/floor-plans/PET_B3_Background.png" />
 </div> -->
 
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  [attr.viewBox]="svgMap.viewbox"
+  [style]="backgroundStyle"
+>
+  <defs [innerHtml]="svgMap.defs | sanitizedHtml"></defs>
+  <g
+    *ngIf="svgMap.backgroundSvg"
+    id="background"
+    [innerHtml]="svgMap.backgroundSvg | sanitizedHtml"
+  ></g>
+  <g *ngFor="let pin of svgMap.svgMapPins" [attr.id]="'pin_' + pin.locationId">
+    <a
+      class="map-pin"
+      data-toggle="tooltip"
+      (click)="pinClick.emit(pin.locationId)"
+      (mouseover)="pinMouseOver.emit(pin.locationId)"
+      (mouseout)="pinMouseOut.emit(pin.locationId)"
+    >
+      <path
+        *ngIf="pin.path"
+        class="pin-path"
+        [attr.d]="pin.path"
+        [attr.data-locationId]="pin.locationId"
+      />
+      <circle
+        *ngIf="!pin.path"
+        class="pin-border"
+        [attr.data-locationId]="pin.locationId"
+        [attr.cx]="pin.cx"
+        [attr.cy]="pin.cy"
+        [attr.r]="pin.r + 5"
+      />
 
-<svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="svgMap.viewbox" [style]="backgroundStyle">
-    <defs [innerHtml]="svgMap.defs | sanitizedHtml"></defs>
-    <g *ngIf="svgMap.backgroundSvg" id="background" [innerHtml]="svgMap.backgroundSvg | sanitizedHtml"></g>
-    <g *ngFor="let pin of svgMap.svgMapPins" [attr.id]="'pin_'+ pin.locationId">
-        <a
-          class="map-pin"
-          data-toggle="tooltip"
-          (click)="pinClick.emit(pin.locationId)"
-          (mouseover)="pinMouseOver.emit(pin.locationId)"
-          (mouseout)="pinMouseOut.emit(pin.locationId)"
-
-        >
-          <path *ngIf="pin.path"
-            class="pin-path"
-            [attr.d]="pin.path"
-            [attr.data-locationId]="pin.locationId"
-          />
-          <circle *ngIf="!pin.path"
-            class="pin-border"
-            [attr.data-locationId]="pin.locationId"
-            [attr.cx]="pin.cx"
-            [attr.cy]="pin.cy"
-            [attr.r]="pin.r + 5"/>          
-
-          <circle
-            [ngClass]="pinClass(pin.locationId)"  
-            [attr.cx]="pin.cx"
-            [attr.cy]="pin.cy"
-            [attr.r]="pin.r"
-          />
-        </a>
-      </g>
+      <circle
+        [ngClass]="pinClass(pin.locationId)"
+        [attr.cx]="pin.cx"
+        [attr.cy]="pin.cy"
+        [attr.r]="pin.r"
+      />
+    </a>
+  </g>
 </svg>
 
-<img src="/assets/images/floor-plans/FloorPlanColorKey.svg" style="max-width: 100%; border:1px solid red;" />
-
+<img
+  src="/assets/images/floor-plans/FloorPlanColorKey.svg"
+  style="max-width: 100%; border: 1px solid red"
+/>
 
 <script>
   $('[data-toggle="tooltip"]').tooltip();
