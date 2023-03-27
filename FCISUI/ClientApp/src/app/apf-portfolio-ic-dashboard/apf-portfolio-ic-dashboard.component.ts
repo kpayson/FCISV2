@@ -63,6 +63,7 @@ export class ApfPortfolioIcDashboardComponent {
     id: 0,
     name: '',
     svgMapPins: [],
+    svgMapArrows: [],
     viewbox: '',
     defs: '',
     facilityId: 0

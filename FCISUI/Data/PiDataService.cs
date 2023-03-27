@@ -1,8 +1,9 @@
 using FCISUI.ViewModels;
 using System.Net.Http;
 using System.Configuration;
-using System.Text.Json;
 using FCISUI.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace FCISUI.Data
 {
@@ -11,6 +12,8 @@ namespace FCISUI.Data
         // Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes);
         Task<IEnumerable<LocationCurrentStatus>> CurrentStatusData(IList<LocationQuery> locationQueries);
         Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval);
+
+         Task<List<TimeSeriesPoint>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval);
         Task<List<dynamic>> APFLimits();
         // Task<IEnumerable<LocationTimeSeriesData>>  AllFacilityTimeSeriesData(IList<Facility> facilities, DateTime startTime, DateTime endTime, int intervalInMinutes);
         // Task<IEnumerable<LocationTimeSeriesData>> FacilityTimeSeriesData(IList<Room> rooms, DateTime startTime, DateTime endTime, int intervalInMinutes);
@@ -96,6 +99,34 @@ namespace FCISUI.Data
                 var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null).ToList();
                 return nonEmptyPoints;
             }
+            catch (Exception ex) {
+                Console.Write(ex);
+                return new List<TimeSeriesPoint>();
+            }
+        }
+
+        public async Task<List<TimeSeriesPoint>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval) {
+            var startUTC = startTime.ToString("s");
+            var endUTC = endTime.ToString("s");
+
+            try {
+
+                var postData = new {
+                    tags=tags,
+                    start_time=startTime,
+                    end_time=endTime,
+                    interval=interval,
+                    rectype=""
+                };
+                var postDataJson = JsonSerializer.Serialize(postData);
+                
+                var content = new StringContent(postDataJson, System.Text.Encoding.UTF8, "application/json");
+
+                var res = await this._httpClient.PostAsync("/pi-api/time-series-batch", content);
+                var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
+                var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null).ToList();
+                return nonEmptyPoints;
+           }
             catch (Exception ex) {
                 Console.Write(ex);
                 throw ex;

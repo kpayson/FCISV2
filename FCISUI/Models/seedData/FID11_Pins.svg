@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">   
+    <g id="pinsFID11">
+        <g id="pinVest1_2">
+            <circle id="pinBackVest1_2" class="stGray" cx="320.47" cy="254.98" r="15" />
+            <circle id="pinColorVest1_2" class="stWhite" cx="320.47" cy="254.98" r="10" />
+        </g>
+        <g id="pin100B1">
+            <circle id="pinBack100B1" class="stGray" cx="370.26" cy="135.49" r="13.5" />
+            <circle id="pinColor100B1" class="stWhite" cx="370.26" cy="135.49" r="9" />
+        </g>
+        <g id="pin100C1">
+            <circle id="pinBack100C1" class="stGray" cx="271.45" cy="173.02" r="12.5" />
+            <circle id="pinColor100C1" class="stWhite" cx="271.45" cy="173.02" r="8.33" />
+        </g>
+        <g id="pin100C2">
+            <circle id="pinBack100C2" class="stGray" cx="300.68" cy="173.02" r="12.5" />
+            <circle id="pinColor100C2" class="stWhite" cx="300.68" cy="173.02" r="8.33" />
+        </g>
+        <g id="pin100C3">
+            <circle id="pinBack100C3" class="stGray" cx="328.63" cy="173.02" r="12.5" />
+            <circle id="pinColor100C3" class="stWhite" cx="328.63" cy="173.02" r="8.33" />
+        </g>
+        <g id="pin100C4">
+            <circle id="pinBack100C4" class="stGray" cx="365.91" cy="191.67" r="15" />
+            <circle id="pinColor100C4" class="stWhite" cx="365.91" cy="191.67" r="10" />
+        </g>
+        <g id="pin100D">
+            <circle id="pinBack100D" class="stGray" cx="298.6" cy="338.28" r="15" />
+            <circle id="pinColor100D" class="stWhite" cx="298.6" cy="338.28" r="10" />
+        </g>
+        <g id="pin100D1">
+            <circle id="pinBack100D1" class="stGray" cx="379.83" cy="275.32" r="15" />
+            <circle id="pinColor100D1" class="stWhite" cx="379.83" cy="275.32" r="10" />
+        </g>
+        <g id="pin100D2">
+            <circle id="pinBack100D2" class="stGray" cx="405.91" cy="199.06" r="15" />
+            <circle id="pinColor100D2" class="stWhite" cx="405.91" cy="199.06" r="10" />
+        </g>
+        <g id="pin100D2A">
+            <circle id="pinBack100D2A" class="stGray" cx="541" cy="189.13" r="15" />
+            <circle id="pinColor100D2A" class="stWhite" cx="541" cy="189.13" r="10" />
+        </g>
+        <g id="pin100D3">
+            <circle id="pinBack100D3" class="stGray" cx="445.57" cy="273.32" r="15" />
+            <circle id="pinColor100D3" class="stWhite" cx="445.57" cy="273.32" r="10" />
+        </g>
+        <g id="pin100D3A">
+            <circle id="pinBack100D3A" class="stGray" cx="572.77" cy="273.33" r="15" />
+            <circle id="pinColor100D3A" class="stWhite" cx="572.77" cy="273.33" r="10" />
+        </g>
+        <g id="pin100D4">
+            <circle id="pinBack100D4" class="stGray" cx="405.91" cy="349.7" r="15" />
+            <circle id="pinColor100D4" class="stWhite" cx="405.91" cy="349.7" r="10" />
+        </g>
+        <g id="pin100D4A">
+            <circle id="pinBack100D4A" class="stGray" cx="541" cy="356.13" r="15" />
+            <circle id="pinColor100D4A" class="stWhite" cx="541" cy="356.13" r="10" />
+        </g>
+        <g id="pin100D5">
+            <circle id="pinBack100D5" class="stGray" cx="358.98" cy="349.7" r="15" />
+            <circle id="pinColor100D5" class="stWhite" cx="358.98" cy="349.7" r="10" />
+        </g>
+        <g id="pin100D5A">
+            <circle id="pinBack100B1D5A" class="stGray" cx="339.49" cy="439.06" r="15" />
+            <circle id="pinColor100D5A" class="stWhite" cx="339.49" cy="439.06" r="10" />
+        </g>
+    </g>
+</svg>

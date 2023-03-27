@@ -1,6 +1,7 @@
 import {
   BehaviorSubject,
   Observable,
+  Subject,
   combineLatest,
   distinctUntilChanged,
   filter,
@@ -87,6 +88,7 @@ export class ApfPortfolioIcDashboardService {
       backgroundSvg: '',
       id: 0,
       svgMapPins: [],
+      svgMapArrows: [],
       viewbox: '0 0 0 0',
       defs: '',
       facilityId: 0
@@ -140,6 +142,7 @@ export class ApfPortfolioIcDashboardService {
         this._facilityFilterOptions$.next(facOptions);
       });
 
+
     // Setup APF Limits from PI for all facilities
     this.dataService.apfLimits().subscribe((limits: any[]) => {
       const limitsLookup = reduce(limits, (acc, limit) => ({
@@ -156,27 +159,29 @@ export class ApfPortfolioIcDashboardService {
       ),
       map((f) => f.facility)
     );
+    const svgMapMarker$ = this._piDataFilter$.pipe(map(f => f.status.toLowerCase() === 'dp' ? 'arrow' : 'pin'), distinctUntilChanged());
+
+
 
     // Update the SVG floor plan, status values for rooms, and parameter values for rooms when the facility changes
     selectedFacility$
       .pipe(
         mergeMap((facility) =>
           zip(
-            this.dataService.svgMap(facility.value),
-            this.dataService.facilityCurrentStatusData(facility.value), //status for each room and attribute in facility
+            // this.dataService.svgMap(facility.value),
+            of(facility.value),
+            this.dataService.facilityCurrentStatusData(facility.value), // status for each room and attribute in facility
             this.dataService.roomParameterInfo(facility.value) // parameter info from dastabase for each room and attribute in facility
           )
         )
       )
-      .subscribe(([svgMap, currentStatusValues, parameterValues]) => {
-        this._svgMap$.next(svgMap);
-        this._svgMapBackgroundImageUrl$.next(
-          //`/assets/images/floor-plans/${svgMap.name}_Background.png`
-          // this.dataService.svgMapBackgroundUrl(svgMap.facilityId)
-          svgMap.facilityId == 0
-            ? '/assets/images/floor-plans/apf_facility_all_background.png'
-            : `/assets/images/orig-floor-plans/FID${svgMap.facilityId}_FloorPlan.jpg`
-        );
+      .subscribe(([facilityId, currentStatusValues, parameterValues]) => {
+
+        const backGroundImageUrl = facilityId == 0
+          ? '/assets/images/floor-plans/apf_facility_all_background.png'
+          : `/assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
+
+        this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
 
         this._currentStatusValues$.next(currentStatusValues);
 
@@ -197,6 +202,14 @@ export class ApfPortfolioIcDashboardService {
 
         this._selectedPin$.next('');
         this._selectedRoomInfo$.next({});
+      });
+
+        // Get the pins or arrows for the Svg Floor plan if the facility changes or attriibute changes between not dp and dp
+    combineLatest([selectedFacility$, svgMapMarker$])
+      .pipe(mergeMap(([facility, marker]) => {
+        return this.dataService.svgMap(facility.value, marker)
+      })).subscribe(svgMap => {
+        this._svgMap$.next(svgMap);
       });
 
     // when a map pin is selected, prepare room info display data using the apf limits query, current status values, and the room parameters
@@ -254,7 +267,7 @@ export class ApfPortfolioIcDashboardService {
               catchError((err) => {
                 console.log(
                   'Error from dataService.facilityAlltimelineData:' +
-                    JSON.stringify(err)
+                  JSON.stringify(err)
                 );
                 return of([]);
               }),
@@ -325,7 +338,7 @@ export class ApfPortfolioIcDashboardService {
               catchError((err) => {
                 console.log(
                   'Error from dataService.facilityRoomsTimelineDate:' +
-                    JSON.stringify(err)
+                  JSON.stringify(err)
                 );
                 return of([]);
               }),
@@ -380,7 +393,7 @@ export class ApfPortfolioIcDashboardService {
       });
   } // end contstructor
 
-  private _ic$: BehaviorSubject<string>;
+  private _ic$: Subject<string>;
   public setIC(ic: string) {
     this._ic$.next(ic);
   }
@@ -401,7 +414,7 @@ export class ApfPortfolioIcDashboardService {
     );
   }
 
-  private _svgMap$: BehaviorSubject<SvgMap>;
+  private _svgMap$: Subject<SvgMap>;
   public get svgMap$() {
     return this._svgMap$ as Observable<SvgMap>;
   }
@@ -418,32 +431,32 @@ export class ApfPortfolioIcDashboardService {
     return this._parameterValues$ as Observable<Room[]>;
   }
 
-  private _timelineChartData$: BehaviorSubject<TimelineChartData>;
+  private _timelineChartData$: Subject<TimelineChartData>;
   public get timelineChartData$() {
     return this._timelineChartData$ as Observable<TimelineChartData>;
   }
 
-  private _svgMapBackgroundImageUrl$: BehaviorSubject<string>;
+  private _svgMapBackgroundImageUrl$: Subject<string>;
   public get svgMapBackgroundImageUrl$() {
     return this._svgMapBackgroundImageUrl$ as Observable<string>;
   }
 
-  private _selectedPin$: BehaviorSubject<string>;
+  private _selectedPin$: Subject<string>;
   public get selectedPin$() {
     return this._selectedPin$ as Observable<string>;
   }
 
-  private _hoveredPin$: BehaviorSubject<string>;
+  private _hoveredPin$: Subject<string>;
   public get hoveredPin$() {
     return this._hoveredPin$ as Observable<string>;
   }
 
-  private _hoveredTimelineLabel$: BehaviorSubject<string>;
+  private _hoveredTimelineLabel$: Subject<string>;
   public get hoveredTimelineLabel$() {
     return this._hoveredTimelineLabel$ as Observable<string>;
   }
 
-  private _selectedRoomInfo$: BehaviorSubject<roomInfoLookup>;
+  private _selectedRoomInfo$: Subject<roomInfoLookup>;
   public get selectedRoomInfo$() {
     return this._selectedRoomInfo$ as Observable<roomInfoLookup>;
   }

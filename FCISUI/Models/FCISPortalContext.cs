@@ -32,6 +32,7 @@ namespace FCISUI.Models
         // public virtual DbSet<RoomOld> RoomOlds { get; set; } = null!;
         public virtual DbSet<SvgMap> SvgMaps { get; set; } = null!;
         public virtual DbSet<SvgMapPin> SvgMapPins { get; set; } = null!;
+        public virtual DbSet<SvgMapArrow> SvgMapArrows { get; set; } = null!;
         public virtual DbSet<Temp> Temps { get; set; } = null!;
         public virtual DbSet<TempPiuser> TempPiusers { get; set; } = null!;
         public virtual DbSet<Temppigmpoperator> Temppigmpoperators { get; set; } = null!;

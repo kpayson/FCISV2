@@ -18,20 +18,24 @@ namespace FCISUI.Controllers
         private readonly IMapper _mapper;
         private readonly IPIDataService _piDataService;
 
+        private readonly ISvgDataService _svgDataService;
+
 
         public SvgMapController(
             FCISPortalContext context,
             IPIDataService piDataService,
+            ISvgDataService svgDataService,
             IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
             _piDataService = piDataService;
+            _svgDataService = svgDataService;
 
         }
 
         [HttpGet("{facilityId}")]
-        public ActionResult<SvgMap> GetSvgMap(int facilityId)
+        public ActionResult<SvgMap> GetSvgMap(int facilityId, string? marker)
         {
             try {
 
@@ -39,26 +43,42 @@ namespace FCISUI.Controllers
                 if(svgMap == null) {
                     throw new Exception("error unable to get svgMap");
                 }
-                var pins = this._context.SvgMapPins.Where(p=>p.SvgMapId == svgMap.Id).Select(p=>new SvgMapPin{
-                    LocationId = p.LocationId,
-                    Title = p.Title,
-                    Cx = p.Cx,
-                    Cy = p.Cy,
-                    R =  p.R,
-                    Path = p.Path
-                }).ToList();
-                svgMap.BackgroundImage = new Byte[]{};
-                svgMap.SvgMapPins = pins;
+
+                if((marker ?? "").ToLower() == "arrow" ) {
+                    var arrowFileName = $"FID{facilityId}_Arrows.svg";
+                    var arrows =  this._svgDataService.GetMapArrows(arrowFileName, svgMap.Id);
+                    svgMap.SvgMapArrows = arrows;
+                    svgMap.SvgMapPins = new List<SvgMapPin>();
+                }
+                else {
+                    var pinsFileName = $"FID{facilityId}_Pins.svg";
+                    List<SvgMapPin> pins;
+                    if(facilityId == 0) {
+                        pins = this._context.SvgMapPins.Where(p=>p.SvgMapId == svgMap.Id).Select(p=>new SvgMapPin{
+                            LocationId = p.LocationId,
+                            Title = p.Title,
+                            Cx = p.Cx,
+                            Cy = p.Cy,
+                            R =  p.R,
+                            Path = p.Path
+                         }).ToList();
+                    }
+                    else {
+                        pins = this._svgDataService.GetMapPins(pinsFileName, svgMap.Id);
+                    }
+
+                    svgMap.SvgMapPins = pins;
+                    svgMap.SvgMapArrows = new List<SvgMapArrow>();
+                }
                 
-                var path = this.Request.Path;
+                svgMap.BackgroundImage = new Byte[]{};
+
                 return svgMap;
             }
             catch(Exception ex) {
                 return StatusCode(500);
             }
         }
-
-
         [HttpGet("BackgroundImage/{facilityId}")]
         public HttpResponseMessage BackgroundImage(int facilityId)
         {

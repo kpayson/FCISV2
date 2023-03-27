@@ -174,6 +174,7 @@ namespace FCISUI
             // Business Services
             //builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IPIDataService,PIDataService>();
+            builder.Services.AddScoped<ISvgDataService,SvgDataService>();
 
             // Repositories
             // builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();

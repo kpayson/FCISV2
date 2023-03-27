@@ -50,8 +50,8 @@ export class DataService {
     return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);
   }
 
-  svgMap(facId: number) {
-    return this.get<SvgMap>(`SvgMap/${facId}`);
+  svgMap(facId: number, marker: string = 'pin') {
+    return this.get<SvgMap>(`SvgMap/${facId}?marker=${marker}`);
   }
 
   svgMapBackgroundUrl(facId: number) {

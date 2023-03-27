@@ -12,5 +12,8 @@ namespace FCISUI.Models
         public string RoomName { get; set;}
         public string RoomNumber {get; set;}
         public string ConnectedRoomNumber {get; set;}
+
+        public Boolean IsActive {get; set;}
+        public string FormattedName {get;set;}
     }
 }

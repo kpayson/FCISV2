@@ -12,5 +12,6 @@
         public int FacilityId { get; set; }
 
         public virtual ICollection<SvgMapPin> SvgMapPins {get; set;}
+        public virtual ICollection<SvgMapArrow> SvgMapArrows {get; set;}
     }
 }

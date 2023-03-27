@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">                  
+    <g id="pinsFID1">
+        <g id="pin1C482_1" >
+            <circle id="pinBack1C482_1" class="stGray" cx="158.86" cy="98.95" r="20" />
+            <circle id="pinColor1C482_1" class="stWhite" cx="158.86" cy="98.95" r="13.33" />
+        </g>
+        <g id="pin1C482_2">
+            <circle id="pinBack1C482_2" class="stGray" cx="298.54" cy="98.95" r="20" />
+            <circle id="pinColor1C482_2" class="stWhite" cx="298.54" cy="98.95" r="13.33" />
+        </g>
+    </g>
+</svg>
