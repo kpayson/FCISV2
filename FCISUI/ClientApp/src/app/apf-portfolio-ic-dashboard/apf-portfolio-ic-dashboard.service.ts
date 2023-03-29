@@ -142,7 +142,6 @@ export class ApfPortfolioIcDashboardService {
         this._facilityFilterOptions$.next(facOptions);
       });
 
-
     // Setup APF Limits from PI for all facilities
     this.dataService.apfLimits().subscribe((limits: any[]) => {
       const limitsLookup = reduce(limits, (acc, limit) => ({
@@ -159,9 +158,10 @@ export class ApfPortfolioIcDashboardService {
       ),
       map((f) => f.facility)
     );
-    const svgMapMarker$ = this._piDataFilter$.pipe(map(f => f.status.toLowerCase() === 'dp' ? 'arrow' : 'pin'), distinctUntilChanged());
-
-
+    const svgMapMarker$ = this._piDataFilter$.pipe(
+      map((f) => (f.status.toLowerCase() === 'dp' ? 'arrow' : 'pin')),
+      distinctUntilChanged()
+    );
 
     // Update the SVG floor plan, status values for rooms, and parameter values for rooms when the facility changes
     selectedFacility$
@@ -176,17 +176,17 @@ export class ApfPortfolioIcDashboardService {
         )
       )
       .subscribe(([facilityId, currentStatusValues, parameterValues]) => {
-
-        const backGroundImageUrl = facilityId == 0
-          ? '/assets/images/floor-plans/apf_facility_all_background.png'
-          : `/assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
+        const backGroundImageUrl =
+          facilityId == 0
+            ? '/assets/images/floor-plans/apf_facility_all_background.png'
+            : `/assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
 
         this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
 
         this._currentStatusValues$.next(currentStatusValues);
 
         const compositeStatusValues = currentStatusValues.filter(
-          (x) => x.attribute === 'Composite'
+          (x) => x.attribute === 'Composite' || x.locationName.endsWith('_DP')
         );
         const pinStatusLookup = reduce(
           compositeStatusValues,
@@ -204,11 +204,14 @@ export class ApfPortfolioIcDashboardService {
         this._selectedRoomInfo$.next({});
       });
 
-        // Get the pins or arrows for the Svg Floor plan if the facility changes or attriibute changes between not dp and dp
+    // Get the pins or arrows for the Svg Floor plan if the facility changes or attriibute changes between not dp and dp
     combineLatest([selectedFacility$, svgMapMarker$])
-      .pipe(mergeMap(([facility, marker]) => {
-        return this.dataService.svgMap(facility.value, marker)
-      })).subscribe(svgMap => {
+      .pipe(
+        mergeMap(([facility, marker]) => {
+          return this.dataService.svgMap(facility.value, marker);
+        })
+      )
+      .subscribe((svgMap) => {
         this._svgMap$.next(svgMap);
       });
 
@@ -267,7 +270,7 @@ export class ApfPortfolioIcDashboardService {
               catchError((err) => {
                 console.log(
                   'Error from dataService.facilityAlltimelineData:' +
-                  JSON.stringify(err)
+                    JSON.stringify(err)
                 );
                 return of([]);
               }),
@@ -279,12 +282,18 @@ export class ApfPortfolioIcDashboardService {
         const chartDataPoints: TimelineChartDataPoint[] = [];
         const facilities = dataAndFilter.data.map((d) => d.facility);
         const facilityLookup = keyBy(facilities, (f) => f.facilityName);
+        const timestamps = (dataAndFilter.data || [])
+          .filter((x) => x.points.some(Boolean))
+          .map((x) => x.points[0].timestamp);
+        const minTimestamp = timestamps.reduce(function (a, b) {
+          return a < b ? a : b;
+        });
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) {
             x.points = [
               {
-                timestamp: dataAndFilter.filter.startDate.getTime(),
+                timestamp: minTimestamp,
                 numeric_value: 1
               },
               {
@@ -338,7 +347,7 @@ export class ApfPortfolioIcDashboardService {
               catchError((err) => {
                 console.log(
                   'Error from dataService.facilityRoomsTimelineDate:' +
-                  JSON.stringify(err)
+                    JSON.stringify(err)
                 );
                 return of([]);
               }),
@@ -350,12 +359,18 @@ export class ApfPortfolioIcDashboardService {
         const chartDataPoints: TimelineChartDataPoint[] = [];
         const rooms = dataAndFilter.data.map((d) => d.room);
         const roomLookup = keyBy(rooms, (r) => r.roomNumber);
+        const timestamps = (dataAndFilter.data || [])
+          .filter((x) => x.points.some(Boolean))
+          .map((x) => x.points[0].timestamp);
+        const minTimestamp = timestamps.reduce(function (a, b) {
+          return a < b ? a : b;
+        });
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) {
             x.points = [
               {
-                timestamp: dataAndFilter.filter.startDate.getTime(),
+                timestamp: minTimestamp,
                 numeric_value: 1
               },
               {

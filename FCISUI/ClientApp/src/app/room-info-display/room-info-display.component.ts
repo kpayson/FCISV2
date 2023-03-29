@@ -109,7 +109,8 @@ export class RoomInfoDisplayComponent {
 
   private tempFields(roomInfo: { [name: string]: any }) {
     const parameters =
-      roomInfo['roomParameters']?.find((p: any) => p.parameter === 'Temp') || {};
+      roomInfo['roomParameters']?.find((p: any) => p.parameter === 'Temp') ||
+      {};
     const status = roomInfo['tempStatus'];
 
     return [
@@ -198,7 +199,8 @@ export class RoomInfoDisplayComponent {
 
   private achFields(roomInfo: { [name: string]: any }) {
     const parameters =
-      roomInfo['roomParameters']?.find((p: any) => p.parameter === 'Airx') || {};
+      roomInfo['roomParameters']?.find((p: any) => p.parameter === 'Airx') ||
+      {};
     const status = roomInfo['achStatus'];
     return [
       { name: 'Room #', value: roomInfo['Room'] },

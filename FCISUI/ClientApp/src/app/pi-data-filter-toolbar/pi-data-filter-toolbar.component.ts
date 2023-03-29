@@ -4,10 +4,22 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output
 } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
-import { FormBuilder } from '@angular/forms';
+type filterFormData = {
+  facility: FormControl<{
+    repName: string;
+    sectionName: string;
+    value: number;
+  }>;
+  status: FormControl<string>;
+  startDate: FormControl<Date>;
+  endDate: FormControl<Date>;
+  interval: FormControl<number>;
+};
 
 @Component({
   selector: 'app-pi-data-filter-toolbar',
@@ -15,19 +27,38 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./pi-data-filter-toolbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PiDataFilterToolbarComponent {
+export class PiDataFilterToolbarComponent implements OnInit {
   @Input()
   facilities: any[] = [];
+
+  @Input()
+  defaultFacilityId: number = 0;
+
+  @Input()
+  defaultStatus: string = 'Sum All';
+
+  @Input()
+  defaultStartDate: Date = (() => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return yesterday;
+  })();
+
+  @Input()
+  defaultEndDate: Date = new Date();
+
+  @Input()
+  defaultInterval: number = 60;
 
   @Output()
   filterChange = new EventEmitter<any>();
 
   constructor(private fb: FormBuilder) {
-    this.filterForm.valueChanges
-      //.pipe(debounce(() => timer(100)))
-      .subscribe((val: any) => {
-        this.filterChange.emit(val);
-      });
+    // this.filterForm.valueChanges
+    //   //.pipe(debounce(() => timer(100)))
+    //   .subscribe((val: any) => {
+    //     this.filterChange.emit(val);
+    //   });
 
     this._statusOptions$ = new BehaviorSubject(this.facilityStatusOptions);
 
@@ -43,21 +74,25 @@ export class PiDataFilterToolbarComponent {
     });
   }
 
-  private get defaults() {
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    return {
+  ngOnInit(): void {
+    this.filterForm.patchValue({
       facility: this.facilities
-        ? this.facilities[0]
+        ? this.facilities.find((f) => f.facilityId == this.defaultFacilityId)
         : { repName: '', sectionName: '', value: 0 },
-      status: 'Sum All',
-      startDate: yesterday,
-      endDate: new Date(),
-      interval: 10
-    };
+      status: this.defaultStatus,
+      startDate: this.defaultStartDate,
+      endDate: this.defaultEndDate,
+      interval: this.defaultInterval
+    });
   }
 
-  filterForm = this.fb.group(this.defaults);
+  filterForm = this.fb.group({
+    facility: { repName: '', sectionName: '', value: 0 },
+    status: '',
+    startDate: new Date(),
+    endDate: new Date(),
+    interval: 0
+  });
 
   selectedCity = {};
 
@@ -85,13 +120,14 @@ export class PiDataFilterToolbarComponent {
   }
 
   public intervalOptions = [
-    { name: '10 Min', value: '10' },
-    { name: '30 Min', value: '30' },
-    { name: '1 Hour', value: '60' },
-    { name: '24 Hour', value: '1440' }
+    { name: '10 Min', value: 10 },
+    { name: '30 Min', value: 30 },
+    { name: '1 Hour', value: 60 },
+    { name: '24 Hour', value: 1440 }
   ];
 
-  reset() {
-    this.filterForm.patchValue(this.defaults);
+  search() {
+    const searchVal = this.filterForm.value;
+    this.filterChange.emit(searchVal);
   }
 }

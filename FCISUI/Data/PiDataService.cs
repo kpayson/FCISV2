@@ -13,7 +13,7 @@ namespace FCISUI.Data
         Task<IEnumerable<LocationCurrentStatus>> CurrentStatusData(IList<LocationQuery> locationQueries);
         Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval);
 
-         Task<List<TimeSeriesPoint>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval);
+         Task<List<dynamic>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval);
         Task<List<dynamic>> APFLimits();
         // Task<IEnumerable<LocationTimeSeriesData>>  AllFacilityTimeSeriesData(IList<Facility> facilities, DateTime startTime, DateTime endTime, int intervalInMinutes);
         // Task<IEnumerable<LocationTimeSeriesData>> FacilityTimeSeriesData(IList<Room> rooms, DateTime startTime, DateTime endTime, int intervalInMinutes);
@@ -31,6 +31,7 @@ namespace FCISUI.Data
     {
         public string LocationName {get; set;} //Facility or Room
         public string Attribute {get;set;}
+        // public bool ForDP {get;set;}
         public TimeSeriesPoint StatusPoint {get; set;}
     }
 
@@ -105,7 +106,7 @@ namespace FCISUI.Data
             }
         }
 
-        public async Task<List<TimeSeriesPoint>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval) {
+        public async Task<List<dynamic>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval) {
             var startUTC = startTime.ToString("s");
             var endUTC = endTime.ToString("s");
 
@@ -113,19 +114,20 @@ namespace FCISUI.Data
 
                 var postData = new {
                     tags=tags,
-                    start_time=startTime,
-                    end_time=endTime,
-                    interval=interval,
-                    rectype=""
+                    start_time=startUTC,
+                    end_time=endUTC,
+                    interval=$"{interval}m",
+                    rectype="interpolated"
                 };
-                var postDataJson = JsonSerializer.Serialize(postData);
+                // var postDataJson = JsonSerializer.Serialize(postData);
                 
-                var content = new StringContent(postDataJson, System.Text.Encoding.UTF8, "application/json");
+                // var content = new StringContent(postDataJson, System.Text.Encoding.UTF8, "application/json");
 
-                var res = await this._httpClient.PostAsync("/pi-api/time-series-batch", content);
-                var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
-                var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null).ToList();
-                return nonEmptyPoints;
+                var res = await this._httpClient.PostAsJsonAsync("/pi-api/time-series-batch", postData);
+                var timeSeries = (await res.Content.ReadFromJsonAsync<IEnumerable<dynamic>>()).ToList(); //?? new List<TimeSeriesPoint>(); 
+                // ex "{"Timestamp":1679861329000,"\\\\ORF-COGENAF\\cGMP\\cGMP\\Pet_1\\1C482-1|Hum|Status":0.0,"\\\\ORF-COGENAF\\cGMP\\cGMP\\Pet_1\\1C482-2|Hum|Status":0.0}"
+                // var nonEmptyPoints = timeSeries!.Where(p => p.numeric_value != null).ToList();
+                return timeSeries;
            }
             catch (Exception ex) {
                 Console.Write(ex);

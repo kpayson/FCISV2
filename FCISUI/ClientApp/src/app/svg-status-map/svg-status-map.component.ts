@@ -91,11 +91,11 @@ export class SvgStatusMapComponent implements OnChanges {
   }
   set highlightedMapPin(v: string) {
     this._highlightedMapPin = v;
-    document.querySelectorAll('circle.pin-border').forEach((elem) => {
+    document.querySelectorAll('.pin-border').forEach((elem) => {
       (elem as HTMLElement).style.fill = 'grey';
     });
     const target = document.querySelector(
-      'circle.pin-border[data-locationId="' + v + '"]'
+      '.pin-border[data-locationId="' + v + '"]'
     ) as HTMLElement;
     if (target) {
       target.style.fill = 'black';
@@ -110,17 +110,12 @@ export class SvgStatusMapComponent implements OnChanges {
   set backgroundImageUrl(v) {
     this._backgroundImageUrl = v;
 
-    // if(!v || this.svgMap.backgroundSvg) {
-    //  this.backgroundStyle = {}
-    //}
-    // else {
     this.backgroundStyle = {
       'background-image': 'url(' + this.backgroundImageUrl + ')',
       'background-size': '100% 100%',
       'background-repeat': 'no-repeat',
       border: '1px solid blue;'
     };
-    //}
   }
 
   public backgroundStyle = {};
@@ -135,12 +130,30 @@ export class SvgStatusMapComponent implements OnChanges {
   pinMouseOut: EventEmitter<string> = new EventEmitter<string>();
 
   pinClass(locationId: string) {
-    //return 'pin-green';
     if (this.pinStates[locationId]) {
       return `pin-${this.pinStates[locationId]}`;
     } else {
-      // console.log(locationId)
       return 'pin-lightgray';
     }
+  }
+
+  mouseOver(locationId: string) {
+    const target = document.querySelector(
+      '.pin-border[data-locationId="' + locationId + '"]'
+    ) as HTMLElement;
+    if (target) {
+      target.style.fill = 'black';
+    }
+    this.pinMouseOver.emit(locationId);
+  }
+
+  mouseOut(locationId: string) {
+    const target = document.querySelector(
+      '.pin-border[data-locationId="' + locationId + '"]'
+    ) as HTMLElement;
+    if (target) {
+      target.style.fill = 'grey';
+    }
+    this.pinMouseOut.emit(locationId);
   }
 }

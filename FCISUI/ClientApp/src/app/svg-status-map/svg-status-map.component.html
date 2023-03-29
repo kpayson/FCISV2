@@ -3,31 +3,77 @@
   <img src="assets/images/floor-plans/PET_B3_Background.png" />
 </div> -->
 
-<svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="svgMap.viewbox" [style]="backgroundStyle">
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  [attr.viewBox]="svgMap.viewbox"
+  [style]="backgroundStyle"
+>
   <defs [innerHtml]="svgMap.defs | sanitizedHtml"></defs>
-  <g *ngIf="svgMap.backgroundSvg" id="background" [innerHtml]="svgMap.backgroundSvg | sanitizedHtml"></g>
+  <g
+    *ngIf="svgMap.backgroundSvg"
+    id="background"
+    [innerHtml]="svgMap.backgroundSvg | sanitizedHtml"
+  ></g>
   <g *ngFor="let pin of svgMap.svgMapPins" [attr.id]="'pin_' + pin.locationId">
-    <a class="map-pin" data-toggle="tooltip" (click)="pinClick.emit(pin.locationId)"
-      (mouseover)="pinMouseOver.emit(pin.locationId)" (mouseout)="pinMouseOut.emit(pin.locationId)">
-      <path *ngIf="pin.path" class="pin-path" [attr.d]="pin.path" [attr.data-locationId]="pin.locationId" />
-      <circle *ngIf="!pin.path" class="pin-border" [attr.data-locationId]="pin.locationId" [attr.cx]="pin.cx"
-        [attr.cy]="pin.cy" [attr.r]="pin.r + 5" />
+    <a
+      class="map-pin"
+      data-toggle="tooltip"
+      (click)="pinClick.emit(pin.locationId)"
+      (mouseover)="mouseOver(pin.locationId)"
+      (mouseout)="mouseOut(pin.locationId)"
+    >
+      <path
+        *ngIf="pin.path"
+        class="pin-path"
+        [attr.d]="pin.path"
+        [attr.data-locationId]="pin.locationId"
+      />
+      <circle
+        *ngIf="!pin.path"
+        class="pin-border"
+        [attr.data-locationId]="pin.locationId"
+        [attr.cx]="pin.cx"
+        [attr.cy]="pin.cy"
+        [attr.r]="pin.r + 5"
+      />
 
-      <circle [ngClass]="pinClass(pin.locationId)" [attr.cx]="pin.cx" [attr.cy]="pin.cy" [attr.r]="pin.r" />
+      <circle
+        [ngClass]="pinClass(pin.locationId)"
+        [attr.cx]="pin.cx"
+        [attr.cy]="pin.cy"
+        [attr.r]="pin.r"
+      />
     </a>
   </g>
 
-  <g *ngFor="let arrow of svgMap.svgMapArrows" [attr.id]="'arrow_' + arrow.locationId">
-    <a class="map-pin" data-toggle="tooltip" (click)="pinClick.emit(arrow.locationId)"
-      (mouseover)="pinMouseOver.emit(arrow.locationId)" (mouseout)="pinMouseOut.emit(arrow.locationId)">
-      <polygon class="arrow-border" [attr.points]="arrow.arrowOutlinePoints"></polygon>
-      <polygon [ngClass]="pinClass(arrow.locationId)" [attr.points]="arrow.arrowInsidePoints"></polygon>
+  <g
+    *ngFor="let arrow of svgMap.svgMapArrows"
+    [attr.id]="'pin_' + arrow.locationId"
+  >
+    <a
+      class="map-pin"
+      data-toggle="tooltip"
+      (click)="pinClick.emit(arrow.locationId)"
+      (mouseover)="mouseOver(arrow.locationId)"
+      (mouseout)="mouseOut(arrow.locationId)"
+    >
+      <polygon
+        class="pin-border"
+        [attr.data-locationId]="arrow.locationId"
+        [attr.points]="arrow.arrowOutlinePoints"
+      ></polygon>
+      <polygon
+        [ngClass]="pinClass(arrow.locationId)"
+        [attr.points]="arrow.arrowInsidePoints"
+      ></polygon>
     </a>
-
   </g>
 </svg>
 
-<img src="/assets/images/floor-plans/FloorPlanColorKey.svg" style="max-width: 100%; border: 1px solid red" />
+<img
+  src="/assets/images/floor-plans/FloorPlanColorKey.svg"
+  style="max-width: 100%; border: 1px solid red"
+/>
 
 <script>
   $('[data-toggle="tooltip"]').tooltip();

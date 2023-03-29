@@ -71,3 +71,15 @@ http://orfd-cogen.ors.nih.gov/pi-api/current-value?tag=\\ORF-COGENAF\Dev_cGMP\cG
  "{\"tags\":[\"\\\\\\\\ORF-COGENAF\\\\cGMP\\\\cGMP\\\\Pet_1\\\\1C482-1 |Status\",\"\\\\\\\\ORF-COGENAF\\\\cGMP\\\\cGMP\\\\Pet_1\\\\1C482-2 |Status\"],\"start_time\":\"2023-03-26T01:45:04.375Z\",\"end_time\":\"2023-03-27T01:45:04.375Z\",\"interval\":10,\"rectype\":\"\"}"
 
  https://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\\\ORF-COGENAF\\cGMP\\cGMP\\E_TER\\1CM100A\\1CM100_DP|DP|Status&start_time=2023-03-26T03:08:05&end_time=2023-03-27T03:08:05&rectype=interpolated&interval=60m
+
+Query to JSON ex
+SELECT [RoomId]
+      ,[FacilityId]
+      ,[Facility]
+      ,[RoomNumber]
+      ,[SQ]
+      ,[RoomName]
+      ,[ISO]
+  FROM [FCISPortal].[dbo].[Room]
+      FOR JSON PATH, 
+        INCLUDE_NULL_VALUES

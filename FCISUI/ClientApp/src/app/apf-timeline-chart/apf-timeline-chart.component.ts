@@ -124,12 +124,22 @@ export class ApfTimelineChartComponent {
   }
 
   roomLabelTooltip(room: any) {
+    const toolTipParts = [];
+    if (room.roomName) {
+      toolTipParts.push(`${room.roomName}`);
+    }
+    if (room.roomNumber) {
+      toolTipParts.push(`${room.roomNumber}`);
+    }
+    if (room.iso) {
+      toolTipParts.push(`Class: ${room.iso}`);
+    }
+    if (room.sq) {
+      toolTipParts.push(`GSF: ${room.sq}`);
+    }
     const tooltipHtml = `
     <div class="label-tooltip">
-      Room: ${room.roomName} <br>
-      Room #: ${room.roomNumber} <br>
-      Class: ${room.iso} <br>
-      GSF: ${room.sq}
+      ${toolTipParts.join('<br>')}
     </div>`;
 
     // Room: ${room.roomName} <br>
@@ -186,7 +196,7 @@ export class ApfTimelineChartComponent {
 
       label.setAttribute('data-locationId', label.innerHTML);
 
-      console.log(this.chartData);
+      // console.log(this.chartData);
       // label.setAttribute('data-toggle', 'tooltip');
       // label.setAttribute('data-placement', 'right');
       // label.setAttribute('title', 'Hello ' + label.innerHTML);

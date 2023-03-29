@@ -5,6 +5,8 @@
         <div class="filter-toolbar-container">
           <app-pi-data-filter-toolbar
             [facilities]="(facilityFilterOptions$ | async)!"
+            [defaultFacilityId]="0"
+            [defaultInterval]="30"
             (filterChange)="filterChange($event)"
           ></app-pi-data-filter-toolbar>
         </div>

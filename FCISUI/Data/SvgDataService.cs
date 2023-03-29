@@ -38,15 +38,16 @@ namespace FCISUI.Data
 
             try {
                 var arrowsSvg = XDocument.Load(Path.Combine(dataFolderPath, arrowsFileName));
-                var namePtrn = new Regex(@"^pin([A-Za-z0-9]+)_([A-Za-z0-9]+)_DP");
+                // var namePtrn = new Regex(@"^pin([A-Za-z0-9]+(_\d+)?)_([A-Za-z0-9]+(_\d+)?)_DP");
                 XNamespace ns = "http://www.w3.org/2000/svg";
                 var root = arrowsSvg.Root!.Element(ns + "g"); // ex <g id="dPArrowsFID5"
                 var arrowGroups = root!.Elements(ns + "g");
                 var arrows = arrowGroups.Select(ag=>{
                     var id=ag.Attribute("id")!.Value;
-                    var match = namePtrn.Match(id);
-                    var room1 = match.Groups[1].Value;
-                    var room2 = match.Groups[2].Value;
+                    // var match = namePtrn.Match(id);
+                    // var room1 = match.Groups[1].Value;
+                    // var room2 = match.Groups[2].Value;
+                    var locationId = id.Substring(3);
                     var polygons = ag.Elements(ns + "polygon").ToArray();
 
                     var outline =polygons.First(p=>p.Attribute("class")!.Value == "stGray");
@@ -57,7 +58,7 @@ namespace FCISUI.Data
 
                     return new SvgMapArrow {
                         SvgMapId = 1,
-                        LocationId = $"{room1}_{room2}",
+                        LocationId = locationId, //$"{room1}_{room2}",
                         ArrowInsidePoints = insidePoints,
                         ArrowOutlinePoints = outlinePoints
                     };

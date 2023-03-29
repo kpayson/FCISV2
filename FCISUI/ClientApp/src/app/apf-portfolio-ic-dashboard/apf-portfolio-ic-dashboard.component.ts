@@ -48,6 +48,16 @@ export class ApfPortfolioIcDashboardComponent {
       map((x) => Object.keys(x).length > 0)
     );
     this.facilityFilterOptions$ = this.service.facilityFilterOptions$;
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    this.service.filterPiData({
+      facility: { value: 0, repName: '', sectionName: '' },
+      interval: 30,
+      status: 'Sum All',
+      startDate: new Date(),
+      endDate: yesterday
+    });
   }
 
   monitoredRoomsChartData$: Observable<any[]>;
@@ -84,7 +94,7 @@ export class ApfPortfolioIcDashboardComponent {
   }
 
   chartLabelClick($event: any) {
-    console.log($event);
+    // console.log($event);
   }
 
   chartLabelMouseOver($event: any) {
@@ -97,7 +107,7 @@ export class ApfPortfolioIcDashboardComponent {
 
   pinClick($event: any) {
     this.service.setSelectedPin($event);
-    console.log($event);
+    // console.log($event);
   }
 
   pinMouseOver($event: any) {

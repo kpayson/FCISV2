@@ -11,7 +11,7 @@ export interface SvgMapPin {
 export interface SvgMapArrow {
   id: number;
   locationId: string;
-  
+
   arrowOutlinePoints: string;
   arrowInsidePoints: string;
 }
