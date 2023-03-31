@@ -5,8 +5,12 @@ export interface Room {
   facilityId: number;
   facility: string;
   roomNumber: string;
+  connectingRoom: string;
   roomName: string;
   sq: number;
-  iso: string;
+  formattedName: string;
+  isActive: boolean;
   roomParameters?: RoomParameter[];
 }
+
+

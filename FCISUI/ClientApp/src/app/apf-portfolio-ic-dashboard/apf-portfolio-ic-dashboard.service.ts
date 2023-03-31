@@ -144,31 +144,47 @@ export class ApfPortfolioIcDashboardService {
 
     // Setup APF Limits from PI for all facilities
     this.dataService.apfLimits().subscribe((limits: any[]) => {
-      const limitsLookup = reduce(limits, (acc, limit) => ({
-        ...acc,
-        [`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`]: limit
-      }));
+      const limitsLookup = reduce(limits, (acc, limit) => {
+        
+        if(limit.Conn_Room) {
+          const name1 = limit.Conn_Room ? `${limit.Room}_${limit.Conn_Room}_DP` : limit.Room;
+          const name2 = limit.Conn_Room ? `${limit.Conn_Room}_${limit.Room}_DP` : limit.Room;
+          // hard to know room/conn_room order so add lookup for both directions
+          return{...acc,
+            [`${limit.Facility.toLowerCase()}|${name1.toLowerCase()}`]: limit,
+            [`${limit.Facility.toLowerCase()}|${name2.toLowerCase()}`]: limit,
+          }
+        } else {       
+          return{...acc,
+            [`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`]: limit,
+          }
+        }
+
+      }
+    );
 
       this._apfLimits$.next(limitsLookup);
     });
 
+    // create an observable of the facility selected in the fillter control
     const selectedFacility$ = this._piDataFilter$.pipe(
       distinctUntilChanged(
         (prev, curr) => prev.facility.value === curr.facility.value
       ),
       map((f) => f.facility)
     );
+    
+    // create an observable of the marker type to use with the map - 'pin' or 'arrow'
     const svgMapMarker$ = this._piDataFilter$.pipe(
       map((f) => (f.status.toLowerCase() === 'dp' ? 'arrow' : 'pin')),
       distinctUntilChanged()
     );
 
-    // Update the SVG floor plan, status values for rooms, and parameter values for rooms when the facility changes
+    // Update the floor plan, current status values for rooms, and parameter values for rooms when the facility changes
     selectedFacility$
       .pipe(
         mergeMap((facility) =>
           zip(
-            // this.dataService.svgMap(facility.value),
             of(facility.value),
             this.dataService.facilityCurrentStatusData(facility.value), // status for each room and attribute in facility
             this.dataService.roomParameterInfo(facility.value) // parameter info from dastabase for each room and attribute in facility
@@ -180,7 +196,6 @@ export class ApfPortfolioIcDashboardService {
           facilityId == 0
             ? '/assets/images/floor-plans/apf_facility_all_background.png'
             : `/assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
-
         this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
 
         this._currentStatusValues$.next(currentStatusValues);
@@ -222,10 +237,14 @@ export class ApfPortfolioIcDashboardService {
         this._piDataFilter$.value.facility.sectionName.toLowerCase();
       const key = `${facility}|${pin.toLowerCase()}`; // pin = room number
       const apfLimits = this._apfLimits$.value[key];
-
-      const room = this._parameterValues$.value.find(
-        (r) => r.roomNumber.toLowerCase() === pin.toLowerCase()
-      );
+      const isDP = pin.indexOf('DP') > -1;
+      const room = isDP ? 
+        this._parameterValues$.value.find(
+          (r) => (r.formattedName.toLowerCase() === pin.toLowerCase())
+        ) : 
+        this._parameterValues$.value.find(
+          (r) => (r.roomNumber.toLowerCase() === pin.toLowerCase())
+        );
       const roomStatusValues = statusValues.filter(
         (x) => x.locationName === pin
       );
@@ -287,7 +306,7 @@ export class ApfPortfolioIcDashboardService {
           .map((x) => x.points[0].timestamp);
         const minTimestamp = timestamps.reduce(function (a, b) {
           return a < b ? a : b;
-        });
+        }, Number.MAX_VALUE);
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) {
@@ -364,7 +383,7 @@ export class ApfPortfolioIcDashboardService {
           .map((x) => x.points[0].timestamp);
         const minTimestamp = timestamps.reduce(function (a, b) {
           return a < b ? a : b;
-        });
+        },Number.MAX_VALUE);
 
         for (const x of dataAndFilter.data) {
           if (!x.points.some(Boolean)) {

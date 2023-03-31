@@ -6,14 +6,14 @@ namespace FCISUI.Models
     public partial class Room
     {
         public int RoomId { get; set; }
-        public int? FacilityId { get; set; }
-        public string? Facility { get; set; }
-        public string? RoomNumber { get; set; }
+        public int FacilityId { get; set; }
+        public string Facility { get; set; }
+        public string RoomNumber { get; set; }
+        public string? ConnectingRoom { get; set; }
         public int? Sq { get; set; }
-        public string? RoomName { get; set; }
-
-        // public string? Parameter { get; set; }
-        public string? Iso { get; set; }
+        public string RoomName { get; set; }
+        public bool IsActive { get; set; }
+        public string FormattedName {get; set;}
 
         public virtual ICollection<RoomParameter> RoomParameters {get; set;}
         // public string? ConnectingRoom { get; set; }

@@ -91,6 +91,7 @@ namespace FCISUI.Data
         // }
 
         public async Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval) {
+            //var sw = System.Diagnostics.
             var startUTC = startTime.ToString("s");
             var endUTC = endTime.ToString("s");
             var timeSeriesPath = $"pi-api/time-series?tag={tag}&start_time={startUTC}&end_time={endUTC}&rectype=interpolated&interval={interval}m";

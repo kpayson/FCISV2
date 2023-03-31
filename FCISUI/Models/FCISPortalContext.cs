@@ -18,7 +18,7 @@ namespace FCISUI.Models
 
         public virtual DbSet<Attachment> Attachments { get; set; } = null!;
         public virtual DbSet<AttachmentType> AttachmentTypes { get; set; } = null!;
-        public virtual DbSet<ConnectingRoom> ConnectingRooms {get; set; } = null;
+        // public virtual DbSet<ConnectingRoom> ConnectingRooms {get; set; } = null;
         public virtual DbSet<DocCategory> DocCategories { get; set; } = null!;
         public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
         public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
@@ -371,11 +371,6 @@ namespace FCISUI.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.FacilityId).HasColumnName("FacilityId");
-
-                entity.Property(e => e.Iso)
-                    .HasMaxLength(3)
-                    .IsUnicode(false)
-                    .HasColumnName("ISO");
 
                 entity.Property(e => e.RoomName)
                     .HasMaxLength(250)
