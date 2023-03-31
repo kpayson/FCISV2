@@ -58,6 +58,10 @@ export class ApfPortfolioIcDashboardComponent {
       startDate: new Date(),
       endDate: yesterday
     });
+
+    this.timelineChartData$.subscribe(()=>{
+      this.isLoading = false;
+    })
   }
 
   monitoredRoomsChartData$: Observable<any[]>;
@@ -88,10 +92,14 @@ export class ApfPortfolioIcDashboardComponent {
   hasSelectedRoom$: Observable<boolean>;
 
   filterChange($event: any) {
+    this.isLoading = true;
     setTimeout(() => {
       this.service.filterPiData($event);
     }, 0);
   }
+
+  isLoading=false;
+
 
   chartLabelClick($event: any) {
     // console.log($event);

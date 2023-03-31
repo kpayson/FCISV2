@@ -78,6 +78,9 @@ export class ApfTimelineChartComponent {
       .querySelector('text[data-locationId="' + v + '"]')
       ?.setAttribute('fill', 'red');
   }
+  
+  @Input()
+  isLoading:boolean = false;
 
   @Output()
   chartLabelClick = new EventEmitter<any>();

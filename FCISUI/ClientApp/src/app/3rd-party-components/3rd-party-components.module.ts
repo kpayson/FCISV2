@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { NgModule } from '@angular/core';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [],
@@ -15,7 +14,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ButtonModule,
     CalendarModule,
     DropdownModule,
-    EditorModule
+    EditorModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: []

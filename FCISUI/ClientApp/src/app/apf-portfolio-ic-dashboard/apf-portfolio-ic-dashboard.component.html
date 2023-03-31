@@ -69,6 +69,7 @@
                   }
                 "
                 [highlightedLabel]="(hoveredPin$ | async) || ''"
+                [isLoading]="isLoading"
                 (chartLabelClick)="chartLabelClick($event)"
                 (chartLabelMouseOver)="chartLabelMouseOver($event)"
                 (chartLabelMouseOut)="chartLabelMouseOut($event)"
