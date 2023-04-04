@@ -16,26 +16,25 @@ namespace FCISUI.Models
         {
         }
 
-        public virtual DbSet<Attachment> Attachments { get; set; } = null!;
-        public virtual DbSet<AttachmentType> AttachmentTypes { get; set; } = null!;
-        // public virtual DbSet<ConnectingRoom> ConnectingRooms {get; set; } = null;
-        public virtual DbSet<DocCategory> DocCategories { get; set; } = null!;
-        public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
-        public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
+        // public virtual DbSet<Attachment> Attachments { get; set; } = null!;
+        // public virtual DbSet<AttachmentType> AttachmentTypes { get; set; } = null!;
+
+        // public virtual DbSet<DocCategory> DocCategories { get; set; } = null!;
+        // public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
+        // public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
-        public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
-        public virtual DbSet<Person> People { get; set; } = null!;
-        public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
-        public virtual DbSet<Role> Roles { get; set; } = null!;
+        // public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
+        // public virtual DbSet<Person> People { get; set; } = null!;
+        // public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
+        // public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
         public virtual DbSet<RoomParameter> RoomParameters { get; set; } = null!;
-        // public virtual DbSet<RoomOld> RoomOlds { get; set; } = null!;
+
         public virtual DbSet<SvgMap> SvgMaps { get; set; } = null!;
         public virtual DbSet<SvgMapPin> SvgMapPins { get; set; } = null!;
         public virtual DbSet<SvgMapArrow> SvgMapArrows { get; set; } = null!;
-        public virtual DbSet<Temp> Temps { get; set; } = null!;
-        public virtual DbSet<TempPiuser> TempPiusers { get; set; } = null!;
-        public virtual DbSet<Temppigmpoperator> Temppigmpoperators { get; set; } = null!;
+        // public virtual DbSet<TempPiuser> TempPiusers { get; set; } = null!;
+        // public virtual DbSet<Temppigmpoperator> Temppigmpoperators { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -431,41 +430,6 @@ namespace FCISUI.Models
         });
         
 
-            // modelBuilder.Entity<RoomOld>(entity =>
-            // {
-            //     entity.HasKey(e => e.RoomId)
-            //         .HasName("PK__Room__328639197430B856");
-
-            //     entity.ToTable("Room_Old");
-
-            //     entity.Property(e => e.RoomId).HasColumnName("RoomId");
-
-            //     entity.Property(e => e.Attribute)
-            //         .HasMaxLength(50)
-            //         .IsUnicode(false);
-
-            //     entity.Property(e => e.EquipmentId).HasColumnName("EquipmentID");
-
-            //     entity.Property(e => e.FacilityId).HasColumnName("FacilityId");
-
-            //     entity.Property(e => e.Iso)
-            //         .HasMaxLength(20)
-            //         .IsUnicode(false)
-            //         .HasColumnName("ISO");
-
-            //     entity.Property(e => e.Isoorder).HasColumnName("ISOOrder");
-
-            //     entity.Property(e => e.PiPath)
-            //         .HasMaxLength(255)
-            //         .IsUnicode(false);
-
-            //     entity.Property(e => e.RoomNumber)
-            //         .HasMaxLength(255)
-            //         .IsUnicode(false);
-
-            //     entity.Property(e => e.Sq).HasColumnName("SQ");
-            // });
-
             modelBuilder.Entity<SvgMap>(entity => {
                 entity.ToTable("SvgMap");
             });
@@ -477,17 +441,6 @@ namespace FCISUI.Models
                 // .HasForeignKey(s => s.SvgMapId);
             });
 
-
-            modelBuilder.Entity<Temp>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("temp");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-            });
 
             modelBuilder.Entity<TempPiuser>(entity =>
             {
