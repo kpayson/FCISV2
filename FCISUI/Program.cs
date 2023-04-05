@@ -30,6 +30,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using FCISUI.Data;
 using FCISUI.Models;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 // using AppPermissions = DAL.Core.ApplicationPermissions;
 
 namespace FCISUI
@@ -39,18 +41,25 @@ namespace FCISUI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Configuration.AddJsonFile("appsettings.json");
+            builder.Configuration.AddJsonFile("appsettings.json").Build();
             builder.Configuration.AddJsonFile("appsettings.local.json");
-            
+
             AddServices(builder);// Add services to the container.
 
             var app = builder.Build();
-            
+
             ConfigureRequestPipeline(app); // Configure the HTTP request pipeline.
+
+            var settings = app.Configuration.Get<AppSettings>();
+
 
             SeedDatabase(app); //Seed initial database
 
+            // CreateDbIfNotExists(app);
+            // var config = builder.Configuration.Get()
+
             app.Run();
+
         }
 
 
@@ -135,15 +144,17 @@ namespace FCISUI
             //     options.AddPolicy(Authorization.Policies.AssignAllowedRolesPolicy, policy => policy.Requirements.Add(new AssignRolesAuthorizationRequirement()));
             // });
 
-            // Add cors
+            // Add cors.
             builder.Services.AddCors();
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+    options.JsonSerializerOptions.ReferenceHandler =
+         System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddDbContext<FCISPortalContext>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
 
-  
+
 
             builder.Services.AddSwaggerGen(c =>
             {
@@ -173,8 +184,8 @@ namespace FCISUI
 
             // Business Services
             //builder.Services.AddScoped<IEmailSender, EmailSender>();
-            builder.Services.AddScoped<IPIDataService,PIDataService>();
-            builder.Services.AddScoped<ISvgDataService,SvgDataService>();
+            builder.Services.AddScoped<IPIDataService, PIDataService>();
+            builder.Services.AddScoped<ISvgDataService, SvgDataService>();
 
             // Repositories
             // builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
@@ -247,26 +258,134 @@ namespace FCISUI
             });
         }
 
+        private static void SeedRoomData(string seedDataFolder, FCISPortalContext context, ILogger<Program> logger) {
+            try {
+                if(context.Rooms.Any()) {return;}
+
+                var roomJsonPath = Path.Combine(seedDataFolder,"room.json");
+                var roomJson = File.ReadAllText(roomJsonPath);
+                var jsonNodeRooms = JsonSerializer.Deserialize<JsonNode[]>(roomJson)!;
+                foreach(var r in jsonNodeRooms){ r["RoomId"] = null; }
+                var rooms = jsonNodeRooms.Select(x=>x.Deserialize<Room>()).ToList();
+                context.Rooms.AddRange(rooms);
+                context.SaveChanges();
+            }
+            catch(Exception ex){
+                logger.LogError(ex, "Error seeding Room table");
+            }
+
+        }
+        private static void SeedSvgMapData(string seedDataFolder, FCISPortalContext context, ILogger<Program> logger)
+        {
+            try
+            {
+                var svgDataService = new SvgDataService(seedDataFolder);
+
+                if (context.SvgMaps.Any() || context.SvgMapPins.Any() || context.SvgMapArrows.Any()) { return; }
+
+                var svgMaps = new List<SvgMap> {
+                    new SvgMap {
+                        FacilityId=0,
+                        Name="apf_facility_all",
+                        Viewbox="0 0 7613 11828.3",
+                        SvgMapPins = svgDataService.GetMapPins("facilities_all.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=1,
+                        Name="PET_B1",
+                        Viewbox="0 0 397.31 231.83",
+                        SvgMapPins = svgDataService.GetMapPins("FID1_Pins.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=2,
+                        Name="PET_B3",
+                        Viewbox="0 0 612 615.23",
+                        SvgMapPins = svgDataService.GetMapPins("FID2_Pins.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=3,
+                        Name="2J",
+                        Viewbox="0 0 612 310.6",
+                        SvgMapPins = svgDataService.GetMapPins("FID3_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID3_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=5,
+                        Name="CC-CCE East Terrace Modular (T10B)",
+                        Viewbox="0 0 792 612",
+                        SvgMapPins = svgDataService.GetMapPins("FID5_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID5_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=6,
+                        Name="DLM_Sterility",
+                        Viewbox="0 0 792 356.49",
+                        SvgMapPins = svgDataService.GetMapPins("FID6_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID6_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=10,
+                        Name="1B42",
+                        Viewbox="0 0 369.7 328.9",
+                        SvgMapPins = svgDataService.GetMapPins("FID10_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID10_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=11,
+                        Name="T30",
+                        Viewbox="0 0 792 612",
+                        SvgMapPins = svgDataService.GetMapPins("FID11_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID11_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=12,
+                        Name="T1and2",
+                        Viewbox="0 0 612.66 326.07",
+                        SvgMapPins = svgDataService.GetMapPins("FID12_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID12_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=13,
+                        Name="T1and2",
+                        Viewbox="0 0 612.66 326.07",
+                        SvgMapPins = svgDataService.GetMapPins("FID13_Pins.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=17,
+                        Name="CC PHAR I-IVAU Expansion",
+                        Viewbox="0 0 612.98 590",
+                        SvgMapPins = svgDataService.GetMapPins("FID17_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID17_Arrows.svg")
+                    },
+                    new SvgMap {
+                        FacilityId=19,
+                        Name="NCI-HPP",
+                        Viewbox="0 0 792 612",
+                        SvgMapPins = svgDataService.GetMapPins("FID19_Pins.svg"),
+                        SvgMapArrows = svgDataService.GetMapArrows("FID19_Arrows.svg")
+                    },
+                };
+
+                context.SvgMaps.AddRange(svgMaps);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Error Seeding SvgMap, SvgPin, and SvgArrow tables"); 
+            }
+        }
 
         private static void SeedDatabase(WebApplication app)
         {
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+                var seedDataFolder = app.Configuration.GetSection("seedDataFolder").Value;
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                var context = services.GetRequiredService<FCISPortalContext>();
 
-                //     try
-                //     {
-                //         var databaseInitializer = services.GetRequiredService<IDatabaseInitializer>();
-                //         databaseInitializer.SeedAsync().Wait();
-                //     }
-                //     catch (Exception ex)
-                //     {
-                //         var logger = services.GetRequiredService<ILogger<Program>>();
-                //         logger.LogCritical(LoggingEvents.INIT_DATABASE, ex, LoggingEvents.INIT_DATABASE.Name);
-
-                //         throw new Exception(LoggingEvents.INIT_DATABASE.Name, ex);
-                //     }
-                // }
+                // SeedRoomData(seedDataFolder, context, logger);
+                SeedSvgMapData(seedDataFolder, context, logger);
             }
         }
     }

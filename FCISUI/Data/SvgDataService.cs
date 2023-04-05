@@ -12,8 +12,8 @@ using System.Text.RegularExpressions;
 namespace FCISUI.Data
 {
     public interface ISvgDataService {
-        public List<SvgMapArrow> GetMapArrows(string arrowsFileName, int MapId);
-        public List<SvgMapPin> GetMapPins(string pinsFileName, int svgMapId);
+        public List<SvgMapArrow> GetMapArrows(string arrowsFileName);
+        public List<SvgMapPin> GetMapPins(string pinsFileName);
     }
 
     class SvgDataService : ISvgDataService
@@ -22,7 +22,10 @@ namespace FCISUI.Data
         public SvgDataService(IConfiguration config) {
             this.dataFolderPath = config.GetValue<string>("seedDataFolder");
         }
-        public List<SvgMapArrow> GetMapArrows(string arrowsFileName, int svgMapId) {
+        public SvgDataService(string seedDataPath) {
+            this.dataFolderPath = seedDataPath;
+        }
+        public List<SvgMapArrow> GetMapArrows(string arrowsFileName) {
 
             
             // <svg xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +60,6 @@ namespace FCISUI.Data
                     var insidePoints = inside.Attribute("points")!.Value;
 
                     return new SvgMapArrow {
-                        SvgMapId = 1,
                         LocationId = locationId, //$"{room1}_{room2}",
                         ArrowInsidePoints = insidePoints,
                         ArrowOutlinePoints = outlinePoints
@@ -75,7 +77,7 @@ namespace FCISUI.Data
         }
 
         
-        public List<SvgMapPin> GetMapPins(string pinsFileName, int svgMapId) {
+        public List<SvgMapPin> GetMapPins(string pinsFileName) {
 
             // <svg xmlns="http://www.w3.org/2000/svg">                  
             //     <g id="pinsFID1">
@@ -96,23 +98,27 @@ namespace FCISUI.Data
                 var pins = pinGroups.Select(pg=>{
                     var id=pg.Attribute("id")!.Value;
                     var roomNum = id.Substring(3).Replace('_','-');
-                    var circle = pg.Elements(ns+ "circle").Skip(1).FirstOrDefault();
+                    var circle = pg.Descendants(ns+ "circle").LastOrDefault();
+                    
+                    
                     if(circle != null) {
                         var cx = circle.Attribute("cx")!.Value;
                         var cy = circle.Attribute("cy")!.Value;
                         var r= circle.Attribute("r")!.Value;
+                        var path = pg.Descendants(ns+ "path").LastOrDefault();
 
                         return new SvgMapPin {
                             Cx=double.Parse(cx),
                             Cy=double.Parse(cy),
                             LocationId=roomNum,
                             R=double.Parse(r),
-                            SvgMapId=svgMapId,
+                            Path= path == null ? "" : path.Attribute("d")!.Value,
+                            //SvgMapId=svgMapId,
                             Title = roomNum // TODO
                         };
                     }
                     else {
-                        var ellipse = pg.Elements(ns+ "ellipse").Skip(1).FirstOrDefault(); 
+                        var ellipse = pg.Elements(ns+ "ellipse").Skip(1).LastOrDefault(); 
                         var cx = ellipse.Attribute("cx")!.Value;
                         var cy = ellipse.Attribute("cy")!.Value;
                         var r= ellipse.Attribute("rx")!.Value;
@@ -122,7 +128,7 @@ namespace FCISUI.Data
                             Cy=double.Parse(cy),
                             LocationId=roomNum,
                             R=double.Parse(r),
-                            SvgMapId=svgMapId,
+                            //SvgMapId=svgMapId,
                             Title = roomNum // TODO
                          };
                     }

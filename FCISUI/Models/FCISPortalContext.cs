@@ -23,7 +23,7 @@ namespace FCISUI.Models
         // public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
         // public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
-        // public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
+        public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
         // public virtual DbSet<Person> People { get; set; } = null!;
         // public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
         // public virtual DbSet<Role> Roles { get; set; } = null!;
@@ -439,6 +439,10 @@ namespace FCISUI.Models
                 // .HasOne<SvgMap>(s => s.SvgMap)
                 // .WithMany(m=> m.SvgMapPins)
                 // .HasForeignKey(s => s.SvgMapId);
+            });
+
+            modelBuilder.Entity<SvgMapArrow>(entity => {
+                entity.ToTable("SvgMapArrow");
             });
 
 

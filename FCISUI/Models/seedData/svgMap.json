@@ -1,0 +1,110 @@
+[
+    {
+        "Id": 149,
+        "Name": "apf_facility_all",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 7613 11828.3",
+        "Defs": null,
+        "FacilityId": 0,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 150,
+        "Name": "PET_B1",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 397.31 231.83",
+        "Defs": null,
+        "FacilityId": 1,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 151,
+        "Name": "PET_B3",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 612 615.23",
+        "Defs": null,
+        "FacilityId": 2,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 152,
+        "Name": "2J",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 612 310.6",
+        "Defs": null,
+        "FacilityId": 3,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 153,
+        "Name": "CC-CCE East Terrace Modular (T10B)",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 792 612",
+        "Defs": null,
+        "FacilityId": 5,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 154,
+        "Name": "DLM_Sterility",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 792 356.49",
+        "Defs": null,
+        "FacilityId": 6,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 155,
+        "Name": "1B42",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 369.7 328.9",
+        "Defs": null,
+        "FacilityId": 10,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 156,
+        "Name": "T30",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 792 612",
+        "Defs": null,
+        "FacilityId": 11,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 157,
+        "Name": "T1and2",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 612.66 326.07",
+        "Defs": null,
+        "FacilityId": 12,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 158,
+        "Name": "T1and2",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 612.66 326.07",
+        "Defs": null,
+        "FacilityId": 13,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 159,
+        "Name": "CC PHAR I-IVAU Expansion",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 612.98 590",
+        "Defs": null,
+        "FacilityId": 17,
+        "BackgroundImage": null
+    },
+    {
+        "Id": 160,
+        "Name": "NCI-HPP",
+        "BackgroundSvg": null,
+        "Viewbox": "0 0 792 612",
+        "Defs": null,
+        "FacilityId": 19,
+        "BackgroundImage": null
+    }
+]

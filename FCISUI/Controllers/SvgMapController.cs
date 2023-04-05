@@ -4,6 +4,7 @@ using FCISUI.Data;
 using AutoMapper;
 using System.Net;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace FCISUI.Controllers
@@ -35,41 +36,56 @@ namespace FCISUI.Controllers
         }
 
         [HttpGet("{facilityId}")]
-        public ActionResult<SvgMap> GetSvgMap(int facilityId, string? marker)
+        public ActionResult<SvgMap> GetSvgMap(int facilityId, string marker = "pin")
         {
             try {
 
-                var svgMap = this._context.SvgMaps.FirstOrDefault(x=>x.FacilityId == facilityId);
-                if(svgMap == null) {
-                    throw new Exception("error unable to get svgMap");
-                }
+                // var svgMap = marker.ToLower() == "arrow" ?
+                //     this._context.SvgMaps.Include(m=>m.SvgMapArrows).FirstOrDefault(x=>x.FacilityId == facilityId): 
+                //     this._context.SvgMaps.Include(m=>m.SvgMapPins).FirstOrDefault(x=>x.FacilityId == facilityId);
 
-                if((marker ?? "").ToLower() == "arrow" ) {
-                    var arrowFileName = $"FID{facilityId}_Arrows.svg";
-                    var arrows =  this._svgDataService.GetMapArrows(arrowFileName, svgMap.Id);
+                var svgMap = this._context.SvgMaps.First(x=>x.FacilityId == facilityId);
+
+                if(marker.ToLower() == "arrow") {
+                    var arrows = this._context.SvgMapArrows.Where(x=>x.SvgMapId == svgMap.Id).ToList();
                     svgMap.SvgMapArrows = arrows;
                     svgMap.SvgMapPins = new List<SvgMapPin>();
                 }
                 else {
-                    var pinsFileName = $"FID{facilityId}_Pins.svg";
-                    List<SvgMapPin> pins;
-                    if(facilityId == 0) {
-                        pins = this._context.SvgMapPins.Where(p=>p.SvgMapId == svgMap.Id).Select(p=>new SvgMapPin{
-                            LocationId = p.LocationId,
-                            Title = p.Title,
-                            Cx = p.Cx,
-                            Cy = p.Cy,
-                            R =  p.R,
-                            Path = p.Path
-                         }).ToList();
-                    }
-                    else {
-                        pins = this._svgDataService.GetMapPins(pinsFileName, svgMap.Id);
-                    }
-
+                    var pins = this._context.SvgMapPins.Where(x=>x.SvgMapId == svgMap.Id).ToList();
                     svgMap.SvgMapPins = pins;
                     svgMap.SvgMapArrows = new List<SvgMapArrow>();
                 }
+                if(svgMap == null) {
+                    throw new Exception("error unable to get svgMap");
+                }
+
+                // if((marker ?? "").ToLower() == "arrow" ) {
+                //     var arrowFileName = $"FID{facilityId}_Arrows.svg";
+                //     var arrows =  this._svgDataService.GetMapArrows(arrowFileName);
+                //     svgMap.SvgMapArrows = arrows;
+                //     svgMap.SvgMapPins = new List<SvgMapPin>();
+                // }
+                // else {
+                //     var pinsFileName = $"FID{facilityId}_Pins.svg";
+                //     List<SvgMapPin> pins;
+                //     if(facilityId == 0) {
+                //         pins = this._context.SvgMapPins.Where(p=>p.SvgMapId == svgMap.Id).Select(p=>new SvgMapPin{
+                //             LocationId = p.LocationId,
+                //             Title = p.Title,
+                //             Cx = p.Cx,
+                //             Cy = p.Cy,
+                //             R =  p.R,
+                //             Path = p.Path
+                //          }).ToList();
+                //     }
+                //     else {
+                //         pins = this._svgDataService.GetMapPins(pinsFileName); 
+                //     }
+
+                //     svgMap.SvgMapPins = pins;
+                //     svgMap.SvgMapArrows = new List<SvgMapArrow>();
+                // }
                 
                 svgMap.BackgroundImage = new Byte[]{};
 
