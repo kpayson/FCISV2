@@ -48,8 +48,8 @@ namespace FCISUI.Controllers
                 (
                     from room in rooms
                     join facility in facilities on room.FacilityId equals facility.FacilityId
-                    where facility.FacilityIc != null
-                    select new ICGsf{ IC = facility.FacilityIc ?? "", Gsf = room.Sq.GetValueOrDefault() }
+                    where facility.FacilityIC != null
+                    select new ICGsf{ IC = facility.FacilityIC ?? "", Gsf = room.Sq.GetValueOrDefault() }
                 ).GroupBy(g => g.IC).Select(g => new ICGsf
                 {
                     IC = g.Key,

@@ -26,6 +26,7 @@ namespace FCISUI.Models
         public int ISOOrder {get; set; }
         public string RHTargetRange { get; set; }
 
+        public virtual Room Room {get; set;}
+
     }
 }
-

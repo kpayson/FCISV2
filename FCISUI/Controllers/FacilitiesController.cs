@@ -31,7 +31,7 @@ namespace FCISUI.Controllers
         [HttpGet("ic/{ic}")]
         public async Task<ActionResult<IEnumerable<Facility>>> GetFacilitiesByIC(string ic)
         {
-            var facilities = await _context.Facilities.Where(f=>f.IsActive == true && f.FacilityIc.ToLower() == ic.ToLower()).ToListAsync();
+            var facilities = await _context.Facilities.Where(f=>f.IsActive == true && f.FacilityIC.ToLower() == ic.ToLower()).ToListAsync();
             return facilities;
         }
 

@@ -83,3 +83,5 @@ SELECT [RoomId]
   FROM [FCISPortal].[dbo].[Room]
       FOR JSON PATH, 
         INCLUDE_NULL_VALUES
+
+https://stackoverflow.com/questions/22209499/sql-server-error-exclusive-access-could-not-be-obtained-because-the-database

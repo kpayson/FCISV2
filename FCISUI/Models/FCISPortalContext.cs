@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.IO;
 
 namespace FCISUI.Models
 {
@@ -9,11 +10,14 @@ namespace FCISUI.Models
     {
         public FCISPortalContext()
         {
+            Console.Write("Foo");
         }
 
         public FCISPortalContext(DbContextOptions<FCISPortalContext> options)
             : base(options)
         {
+           // , AppSettings settings
+
         }
 
         // public virtual DbSet<Attachment> Attachments { get; set; } = null!;
@@ -203,10 +207,10 @@ namespace FCISUI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Circleid)
+                entity.Property(e => e.CircleId)
                     .HasMaxLength(120)
                     .IsUnicode(false)
-                    .HasColumnName("circleid");
+                    .HasColumnName("CircleId");
 
                 entity.Property(e => e.Comments)
                     .HasMaxLength(255)
@@ -224,7 +228,7 @@ namespace FCISUI.Models
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.Property(e => e.FacilityIc)
+                entity.Property(e => e.FacilityIC)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("FacilityIC");
@@ -258,10 +262,12 @@ namespace FCISUI.Models
             {
                 entity.ToTable("GSFGrowth");
 
-                entity.Property(e => e.GsfgrowthId).HasColumnName("GSFGrowthID");
-
                 entity.Property(e => e.FacilityName)
                     .HasMaxLength(255)
+                    .IsUnicode(false);
+                    
+                entity.Property(e=>e.EstimateOrActual)
+                    .HasMaxLength(1)
                     .IsUnicode(false);
             });
 
@@ -386,14 +392,12 @@ namespace FCISUI.Models
             {
                 entity.ToTable("RoomParameter");
 
-                entity.Property(e => e.RoomId).HasColumnName("RoomPropertyID");
+                entity.Property(e => e.RoomParameterId).HasColumnName("RoomParameterId");
+                entity.Property(e => e.RoomId).HasColumnName("RoomId");
 
                 entity.Property(e => e.Facility)
                     .HasMaxLength(100)
                     .IsUnicode(false);
-
-                entity.Property(e => e.RoomId).HasColumnName("RoomId");
-                entity.Property(e => e.RoomNumber).HasColumnName("RoomNumber");
 
                 entity.Property(e => e.Parameter)
                     .HasMaxLength(50)
@@ -467,6 +471,32 @@ namespace FCISUI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });
+
+            var pwd = Directory.GetCurrentDirectory();
+            var seedDataFolder = Path.Combine(pwd,"Models","seedData");
+            var loader = new JsonSeedDataLoader(seedDataFolder);
+
+            var facilities = loader.GetFacilities();
+            modelBuilder.Entity<Facility>().HasData(facilities);
+
+            var rooms = loader.GetRooms();
+            modelBuilder.Entity<Room>().HasData(rooms);
+
+            var roomParameters = loader.GetRoomParameters();
+            modelBuilder.Entity<RoomParameter>().HasData(roomParameters);
+
+            var svgMaps = loader.GetSvgMap();
+            modelBuilder.Entity<SvgMap>().HasData(svgMaps);
+
+            var svgMapPins = loader.GetSvgMapPins();
+            modelBuilder.Entity<SvgMapPin>().HasData(svgMapPins);
+
+            var svgMapArrows = loader.GetSvgMapArrows();
+            modelBuilder.Entity<SvgMapArrow>().HasData(svgMapArrows);
+
+            var gsfGrowth = loader.GetGsfGrowth();
+            modelBuilder.Entity<Gsfgrowth>().HasData(gsfGrowth);
+
 
             OnModelCreatingPartial(modelBuilder);
         }

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore.
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -152,7 +153,11 @@ namespace FCISUI
          System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddDbContext<FCISPortalContext>(options =>
-  options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
+
+
+
+  options.UseInMemoryDatabase(databaseName: "FCISInMem"));
+  // options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
 
 
 
@@ -384,8 +389,11 @@ namespace FCISUI
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 var context = services.GetRequiredService<FCISPortalContext>();
 
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
                 // SeedRoomData(seedDataFolder, context, logger);
-                SeedSvgMapData(seedDataFolder, context, logger);
+               // SeedSvgMapData(seedDataFolder, context, logger);
             }
         }
     }

@@ -5,7 +5,7 @@
         "Facility": "Pet_1",
         "RoomNumber": "1C482-1",
         "ConnectingRoom": "",
-        "SQ": 382,
+        "Sq": 382,
         "RoomName": "Radiochemistry Lab",
         "IsActive": true,
         "FormattedName": "1C482-1__DP"
@@ -16,7 +16,7 @@
         "Facility": "Pet_1",
         "RoomNumber": "1C482-2",
         "ConnectingRoom": "",
-        "SQ": 215,
+        "Sq": 215,
         "RoomName": "Radiochemistry Lab",
         "IsActive": true,
         "FormattedName": "1C482-2__DP"
@@ -27,7 +27,7 @@
         "Facility": "Pet_B3",
         "RoomNumber": "5640",
         "ConnectingRoom": "",
-        "SQ": 42,
+        "Sq": 42,
         "RoomName": "Air Lock",
         "IsActive": true,
         "FormattedName": "5640__DP"
@@ -38,7 +38,7 @@
         "Facility": "Pet_B3",
         "RoomNumber": "5642",
         "ConnectingRoom": "",
-        "SQ": 102,
+        "Sq": 102,
         "RoomName": "Clean Room",
         "IsActive": true,
         "FormattedName": "5642__DP"
@@ -49,7 +49,7 @@
         "Facility": "Pet_B3",
         "RoomNumber": "6624",
         "ConnectingRoom": "",
-        "SQ": 48,
+        "Sq": 48,
         "RoomName": "Laminar Hood Room",
         "IsActive": true,
         "FormattedName": "6624__DP"
@@ -60,7 +60,7 @@
         "Facility": "2J",
         "RoomNumber": "2N2J1",
         "ConnectingRoom": "",
-        "SQ": 97,
+        "Sq": 97,
         "RoomName": "Exit",
         "IsActive": true,
         "FormattedName": "2N2J1__DP"
@@ -71,7 +71,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3071",
         "ConnectingRoom": "",
-        "SQ": 195,
+        "Sq": 195,
         "RoomName": "Airlock #1",
         "IsActive": true,
         "FormattedName": "2N3071__DP"
@@ -82,7 +82,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3071",
         "ConnectingRoom": "2N3072",
-        "SQ": 195,
+        "Sq": 195,
         "RoomName": "Airlock #1 to Airlock #2",
         "IsActive": true,
         "FormattedName": "2N3072_2N3071_DP"
@@ -93,7 +93,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3072",
         "ConnectingRoom": "",
-        "SQ": 130,
+        "Sq": 130,
         "RoomName": "Airlock #2",
         "IsActive": true,
         "FormattedName": "2N3072__DP"
@@ -104,7 +104,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3072",
         "ConnectingRoom": "2N3073",
-        "SQ": 130,
+        "Sq": 130,
         "RoomName": "Airlock #2 to Hallway",
         "IsActive": true,
         "FormattedName": "2N3073_2N3072_DP"
@@ -115,7 +115,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway",
         "IsActive": true,
         "FormattedName": "2N3073__DP"
@@ -126,7 +126,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N3074",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Exit Airlock",
         "IsActive": true,
         "FormattedName": "2N3074_2N3073_DP"
@@ -137,7 +137,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307A",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Clean Freezer",
         "IsActive": true,
         "FormattedName": "2N307_2N307A_DP"
@@ -148,7 +148,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307B",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307B_2N3073_DP"
@@ -159,7 +159,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307C",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307C_2N3073_DP"
@@ -170,7 +170,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307D",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Clean Supply",
         "IsActive": true,
         "FormattedName": "2N307D_2N3073_DP"
@@ -181,7 +181,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307G",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Equipment Storage",
         "IsActive": true,
         "FormattedName": "2N307G_2N3073_DP"
@@ -192,7 +192,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307H",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307H_2N3073_DP"
@@ -203,7 +203,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307J",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307J_2N3073_DP"
@@ -214,7 +214,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307K",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307K_2N3073_DP"
@@ -225,7 +225,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N307L",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Large Equipment Room",
         "IsActive": true,
         "FormattedName": "2N307L_2N3073_DP"
@@ -236,7 +236,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3073",
         "ConnectingRoom": "2N308D",
-        "SQ": 470,
+        "Sq": 470,
         "RoomName": "Hallway to Entry Airlock",
         "IsActive": true,
         "FormattedName": "2N308D_2N3073_DP"
@@ -247,7 +247,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3074",
         "ConnectingRoom": "",
-        "SQ": 65,
+        "Sq": 65,
         "RoomName": "Exit Airlock",
         "IsActive": true,
         "FormattedName": "2N3074__DP"
@@ -258,7 +258,7 @@
         "Facility": "2J",
         "RoomNumber": "2N3074",
         "ConnectingRoom": "2N2J1",
-        "SQ": 65,
+        "Sq": 65,
         "RoomName": "Exit Airlock to Exit Hallway",
         "IsActive": true,
         "FormattedName": "2N2J1_2N3074_DP"
@@ -269,7 +269,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307A",
         "ConnectingRoom": "",
-        "SQ": 171,
+        "Sq": 171,
         "RoomName": "Clean Freezer",
         "IsActive": true,
         "FormattedName": "2N307A__DP"
@@ -280,7 +280,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307B",
         "ConnectingRoom": "",
-        "SQ": 220,
+        "Sq": 220,
         "RoomName": "Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307B__DP"
@@ -291,7 +291,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307C",
         "ConnectingRoom": "",
-        "SQ": 214,
+        "Sq": 214,
         "RoomName": "Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307C__DP"
@@ -302,7 +302,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307D",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Clean Supply",
         "IsActive": true,
         "FormattedName": "2N307D__DP"
@@ -313,7 +313,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307G",
         "ConnectingRoom": "",
-        "SQ": 169,
+        "Sq": 169,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307G__DP"
@@ -324,7 +324,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307H",
         "ConnectingRoom": "",
-        "SQ": 155,
+        "Sq": 155,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307H__DP"
@@ -335,7 +335,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307J",
         "ConnectingRoom": "",
-        "SQ": 155,
+        "Sq": 155,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307J__DP"
@@ -346,7 +346,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307JC",
         "ConnectingRoom": "",
-        "SQ": 60,
+        "Sq": 60,
         "RoomName": "Clean JC",
         "IsActive": true,
         "FormattedName": "2N307JC__DP"
@@ -357,7 +357,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307K",
         "ConnectingRoom": "",
-        "SQ": 157,
+        "Sq": 157,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
         "FormattedName": "2N307K__DP"
@@ -368,7 +368,7 @@
         "Facility": "2J",
         "RoomNumber": "2N307L",
         "ConnectingRoom": "",
-        "SQ": 240,
+        "Sq": 240,
         "RoomName": "Large Equipment Room",
         "IsActive": true,
         "FormattedName": "2N307L__DP"
@@ -379,7 +379,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308",
         "ConnectingRoom": "",
-        "SQ": 147,
+        "Sq": 147,
         "RoomName": "Degown",
         "IsActive": true,
         "FormattedName": "2N308__DP"
@@ -390,7 +390,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308",
         "ConnectingRoom": "2N3074",
-        "SQ": 147,
+        "Sq": 147,
         "RoomName": "Degown to Exit Airlock",
         "IsActive": true,
         "FormattedName": "2N308_2N3074_DP"
@@ -401,7 +401,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308A",
         "ConnectingRoom": "",
-        "SQ": 101,
+        "Sq": 101,
         "RoomName": "Degown Airlock",
         "IsActive": true,
         "FormattedName": "2N308A__DP"
@@ -412,7 +412,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308A",
         "ConnectingRoom": "2N308",
-        "SQ": 101,
+        "Sq": 101,
         "RoomName": "Degown Airlock to Degown",
         "IsActive": true,
         "FormattedName": "2N308_2N308A_DP"
@@ -423,7 +423,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308C",
         "ConnectingRoom": "",
-        "SQ": 277,
+        "Sq": 277,
         "RoomName": "Infectious Suite",
         "IsActive": true,
         "FormattedName": "2N308C__DP"
@@ -434,7 +434,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308C",
         "ConnectingRoom": "2N308A",
-        "SQ": 277,
+        "Sq": 277,
         "RoomName": "Infectious Suite to Degown Airlock",
         "IsActive": true,
         "FormattedName": "2N308A_2N308C_DP"
@@ -445,7 +445,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308D",
         "ConnectingRoom": "",
-        "SQ": 87,
+        "Sq": 87,
         "RoomName": "Entry Airlock",
         "IsActive": true,
         "FormattedName": "2N308D__DP"
@@ -456,7 +456,7 @@
         "Facility": "2J",
         "RoomNumber": "2N308D",
         "ConnectingRoom": "2N308C",
-        "SQ": 87,
+        "Sq": 87,
         "RoomName": "Entry Airlock to Infectious Suite",
         "IsActive": true,
         "FormattedName": "2N308C_2N308D_DP"
@@ -467,7 +467,7 @@
         "Facility": "2J",
         "RoomNumber": "2N312",
         "ConnectingRoom": "",
-        "SQ": 278,
+        "Sq": 278,
         "RoomName": "Freezer Room",
         "IsActive": true,
         "FormattedName": "2N312__DP"
@@ -478,7 +478,7 @@
         "Facility": "2J",
         "RoomNumber": "2N316",
         "ConnectingRoom": "",
-        "SQ": 172,
+        "Sq": 172,
         "RoomName": "Supply",
         "IsActive": true,
         "FormattedName": "2N316__DP"
@@ -489,7 +489,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Admin",
         "IsActive": true,
         "FormattedName": "1CM100__DP"
@@ -500,7 +500,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Clean Supply",
         "IsActive": true,
         "FormattedName": "1CM100A__DP"
@@ -511,7 +511,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100A",
         "ConnectingRoom": "1CM100",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Clean Suppy to Admin",
         "IsActive": true,
         "FormattedName": "1CM100A_1CM100_DP"
@@ -522,7 +522,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Locker Room",
         "IsActive": true,
         "FormattedName": "1CM100B__DP"
@@ -533,7 +533,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100B",
         "ConnectingRoom": "1CM100",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Locker Room to Admin",
         "IsActive": true,
         "FormattedName": "1CM100B_1CM100_DP"
@@ -544,7 +544,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100D",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Cryo-Freezer",
         "IsActive": true,
         "FormattedName": "1CM100D__DP"
@@ -555,7 +555,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100D",
         "ConnectingRoom": "1CM100",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Cryo-Freezer to Admin",
         "IsActive": true,
         "FormattedName": "1CM100D_1CM100_DP"
@@ -566,7 +566,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM100D",
         "ConnectingRoom": "1CM100B",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Cryo-Freezer to Locker Room",
         "IsActive": true,
         "FormattedName": "1CM100D_1CM100B_DP"
@@ -577,7 +577,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM102",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Gowning",
         "IsActive": true,
         "FormattedName": "1CM102__DP"
@@ -588,7 +588,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM102",
         "ConnectingRoom": "1CM100B",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Gowning to Locker Room",
         "IsActive": true,
         "FormattedName": "1CM102_1CM100B_DP"
@@ -599,7 +599,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM102",
         "ConnectingRoom": "CORR1CM-1",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Gowning to Supply Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-1_1CM102_DP"
@@ -610,7 +610,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 1",
         "IsActive": true,
         "FormattedName": "1CM104__DP"
@@ -621,7 +621,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104",
         "ConnectingRoom": "CORR1CM-1",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 1 to Supply Corridor",
         "IsActive": true,
         "FormattedName": "1CM104_CORR1CM-1_DP"
@@ -632,7 +632,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 1",
         "IsActive": true,
         "FormattedName": "1CM104A__DP"
@@ -643,7 +643,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104A",
         "ConnectingRoom": "1CM104",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 1 to Anter Room 1",
         "IsActive": true,
         "FormattedName": "1CM104A_1CM104_DP"
@@ -654,7 +654,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104A",
         "ConnectingRoom": "1CM104B",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 1 to Anter Room 5",
         "IsActive": true,
         "FormattedName": "1CM104B_1CM104A_DP"
@@ -665,7 +665,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 5",
         "IsActive": true,
         "FormattedName": "1CM104B__DP"
@@ -676,7 +676,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM104B",
         "ConnectingRoom": "CORR1CM-2",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 5 to Return Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-2_1CM104B_DP"
@@ -687,7 +687,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 2",
         "IsActive": true,
         "FormattedName": "1CM106__DP"
@@ -698,7 +698,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106",
         "ConnectingRoom": "CORR1CM-1",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 2 to Supply Corridor",
         "IsActive": true,
         "FormattedName": "1CM106_CORR1CM-1_DP"
@@ -709,7 +709,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 2",
         "IsActive": true,
         "FormattedName": "1CM106A__DP"
@@ -720,7 +720,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106A",
         "ConnectingRoom": "1CM106",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 2 to Anter Room 2",
         "IsActive": true,
         "FormattedName": "1CM106A_1CM106_DP"
@@ -731,7 +731,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106A",
         "ConnectingRoom": "1CM106B",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 2 to Anter Room 6",
         "IsActive": true,
         "FormattedName": "1CM106B_1CM106A_DP"
@@ -742,7 +742,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 6",
         "IsActive": true,
         "FormattedName": "1CM106B__DP"
@@ -753,7 +753,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM106B",
         "ConnectingRoom": "CORR1CM-2",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 6 to Return Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-2_1CM106B_DP"
@@ -764,7 +764,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 3",
         "IsActive": true,
         "FormattedName": "1CM108__DP"
@@ -775,7 +775,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108",
         "ConnectingRoom": "CORR1CM-1",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 3 to Supply Corridor",
         "IsActive": true,
         "FormattedName": "1CM108_CORR1CM-1_DP"
@@ -786,7 +786,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 3",
         "IsActive": true,
         "FormattedName": "1CM108A__DP"
@@ -797,7 +797,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108A",
         "ConnectingRoom": "1CM108",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 3 to Anter Room 3",
         "IsActive": true,
         "FormattedName": "1CM108A_1CM108_DP"
@@ -808,7 +808,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108A",
         "ConnectingRoom": "1CM108B",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 3 to Anter Room 7",
         "IsActive": true,
         "FormattedName": "1CM108B_1CM108A_DP"
@@ -819,7 +819,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 7",
         "IsActive": true,
         "FormattedName": "1CM108B__DP"
@@ -830,7 +830,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM108B",
         "ConnectingRoom": "CORR1CM-2",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 7 to Return Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-2_1CM108B_DP"
@@ -841,7 +841,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 4",
         "IsActive": true,
         "FormattedName": "1CM110__DP"
@@ -852,7 +852,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110",
         "ConnectingRoom": "CORR1CM-1",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 4 to Supply Corridor",
         "IsActive": true,
         "FormattedName": "1CM110_CORR1CM-1_DP"
@@ -863,7 +863,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 4",
         "IsActive": true,
         "FormattedName": "1CM110A__DP"
@@ -874,7 +874,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110A",
         "ConnectingRoom": "1CM110",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 4 to Anter Room 4",
         "IsActive": true,
         "FormattedName": "1CM110A_1CM110_DP"
@@ -885,7 +885,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110A",
         "ConnectingRoom": "1CM110B",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Tissue Culture 4 to Anter Room 8",
         "IsActive": true,
         "FormattedName": "1CM110B_1CM110A_DP"
@@ -896,7 +896,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 8",
         "IsActive": true,
         "FormattedName": "1CM110B__DP"
@@ -907,7 +907,7 @@
         "Facility": "E_TER",
         "RoomNumber": "1CM110B",
         "ConnectingRoom": "CORR1CM-2",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Ante Room 8 to Return Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-2_1CM110B_DP"
@@ -918,7 +918,7 @@
         "Facility": "E_TER",
         "RoomNumber": "CORR1CM-1",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Supply Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-1__DP"
@@ -929,7 +929,7 @@
         "Facility": "E_TER",
         "RoomNumber": "CORR1CM-2",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Return Corridor",
         "IsActive": true,
         "FormattedName": "CORR1CM-2__DP"
@@ -940,7 +940,7 @@
         "Facility": "E_TER",
         "RoomNumber": "CORR1CM-2",
         "ConnectingRoom": "1CM100D",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Return Coordidor to Cryo-Freezer",
         "IsActive": true,
         "FormattedName": "1CM100D_CORR1CM-2_DP"
@@ -951,7 +951,7 @@
         "Facility": "E_TER",
         "RoomNumber": "REST1-1",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Unisex Tlt 1",
         "IsActive": true,
         "FormattedName": "REST1-1__DP"
@@ -962,7 +962,7 @@
         "Facility": "E_TER",
         "RoomNumber": "REST1-2",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Unisex Tlt 2",
         "IsActive": true,
         "FormattedName": "REST1-2__DP"
@@ -973,7 +973,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C450",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Entry Anteroom",
         "IsActive": true,
         "FormattedName": "2C450__DP"
@@ -984,7 +984,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C450",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Entry Anteroom to Corridor",
         "IsActive": true,
         "FormattedName": "2C450__DP"
@@ -995,7 +995,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C450",
         "ConnectingRoom": "2C452C",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Entry Anteroom to Corridor",
         "IsActive": true,
         "FormattedName": "2C450_2C452C_DP"
@@ -1006,7 +1006,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C451A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Sterility Anteroom",
         "IsActive": true,
         "FormattedName": "2C451A__DP"
@@ -1017,7 +1017,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C451A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Sterility Anteroom to Entry Anteroom",
         "IsActive": true,
         "FormattedName": "2C451A__DP"
@@ -1028,7 +1028,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C451A",
         "ConnectingRoom": "2C450",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Sterility Anteroom to Entry Anteroom",
         "IsActive": true,
         "FormattedName": "2C451A_2C450_DP"
@@ -1039,7 +1039,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C451B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Sterility Lab",
         "IsActive": true,
         "FormattedName": "2C451B__DP"
@@ -1050,7 +1050,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C451B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Sterility Lab to Sterility Anteroom",
         "IsActive": true,
         "FormattedName": "2C451B__DP"
@@ -1061,7 +1061,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C451B",
         "ConnectingRoom": "2C451A",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Sterility Lab to Sterility Anteroom",
         "IsActive": true,
         "FormattedName": "2C451B_2C451A_DP"
@@ -1072,7 +1072,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Culture Anteroom",
         "IsActive": true,
         "FormattedName": "2C452A__DP"
@@ -1083,7 +1083,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Culture Anteroom to Entry Anteroom",
         "IsActive": true,
         "FormattedName": "2C452A__DP"
@@ -1094,7 +1094,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452A",
         "ConnectingRoom": "2C450",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Culture Anteroom to Entry Anteroom",
         "IsActive": true,
         "FormattedName": "2C452A_2C450_DP"
@@ -1105,7 +1105,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Culture Lab",
         "IsActive": true,
         "FormattedName": "2C452B__DP"
@@ -1116,7 +1116,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452B",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Culture Lab to Culture Anteroom",
         "IsActive": true,
         "FormattedName": "2C452B__DP"
@@ -1127,7 +1127,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452B",
         "ConnectingRoom": "2C452A",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Culture Lab to Culture Anteroom",
         "IsActive": true,
         "FormattedName": "2C452B_2C452A_DP"
@@ -1138,7 +1138,7 @@
         "Facility": "DLM-SL",
         "RoomNumber": "2C452C",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Corridor",
         "IsActive": true,
         "FormattedName": "2C452C__DP"
@@ -1149,7 +1149,7 @@
         "Facility": "VVF",
         "RoomNumber": "1B42",
         "ConnectingRoom": "",
-        "SQ": 46,
+        "Sq": 46,
         "RoomName": "Entry Room",
         "IsActive": true,
         "FormattedName": "1B42__DP"
@@ -1160,7 +1160,7 @@
         "Facility": "VVF",
         "RoomNumber": "1B42",
         "ConnectingRoom": "1B42A",
-        "SQ": 46,
+        "Sq": 46,
         "RoomName": "Entry Room to Air Lock",
         "IsActive": true,
         "FormattedName": "1B42A_1B42_DP"
@@ -1171,7 +1171,7 @@
         "Facility": "VVF",
         "RoomNumber": "1B42A",
         "ConnectingRoom": "",
-        "SQ": 27,
+        "Sq": 27,
         "RoomName": "Air Lock",
         "IsActive": true,
         "FormattedName": "1B42A__DP"
@@ -1182,7 +1182,7 @@
         "Facility": "VVF",
         "RoomNumber": "1B42A",
         "ConnectingRoom": "1B42A1",
-        "SQ": 27,
+        "Sq": 27,
         "RoomName": "Air Lock to Production Room",
         "IsActive": true,
         "FormattedName": "1B42A_1B42A1_DP"
@@ -1193,7 +1193,7 @@
         "Facility": "VVF",
         "RoomNumber": "1B42A1",
         "ConnectingRoom": "",
-        "SQ": 222,
+        "Sq": 222,
         "RoomName": "Production Room",
         "IsActive": true,
         "FormattedName": "1B42A1__DP"
@@ -1204,7 +1204,7 @@
         "Facility": "VVF",
         "RoomNumber": "1B44",
         "ConnectingRoom": "",
-        "SQ": 127,
+        "Sq": 127,
         "RoomName": "Mechanical Room",
         "IsActive": true,
         "FormattedName": "1B44__DP"
@@ -1215,7 +1215,7 @@
         "Facility": "VVF",
         "RoomNumber": "1C1",
         "ConnectingRoom": "1B42",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Corridor to Entry Room",
         "IsActive": true,
         "FormattedName": "1B42_1C1_DP"
@@ -1226,7 +1226,7 @@
         "Facility": "T30",
         "RoomNumber": "100",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Main Entry/Receiving/Quarantine Area",
         "IsActive": true,
         "FormattedName": "100__DP"
@@ -1237,7 +1237,7 @@
         "Facility": "T30",
         "RoomNumber": "100A1",
         "ConnectingRoom": "",
-        "SQ": 317,
+        "Sq": 317,
         "RoomName": "Multipurpose Room",
         "IsActive": true,
         "FormattedName": "100A1__DP"
@@ -1248,7 +1248,7 @@
         "Facility": "T30",
         "RoomNumber": "100A1",
         "ConnectingRoom": "100",
-        "SQ": 317,
+        "Sq": 317,
         "RoomName": "Multipurpose Room To Main Entry",
         "IsActive": true,
         "FormattedName": "100A1_100_DP"
@@ -1259,7 +1259,7 @@
         "Facility": "T30",
         "RoomNumber": "100A1",
         "ConnectingRoom": "VEST1-3",
-        "SQ": 317,
+        "Sq": 317,
         "RoomName": "Multipurpose Room To Vestible",
         "IsActive": true,
         "FormattedName": "100A1_VEST1-3_DP"
@@ -1270,7 +1270,7 @@
         "Facility": "T30",
         "RoomNumber": "100A2",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "EVS",
         "IsActive": true,
         "FormattedName": "100A2__DP"
@@ -1281,7 +1281,7 @@
         "Facility": "T30",
         "RoomNumber": "100A3",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Toilet",
         "IsActive": true,
         "FormattedName": "100A3__DP"
@@ -1292,7 +1292,7 @@
         "Facility": "T30",
         "RoomNumber": "100A4",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Toilet",
         "IsActive": true,
         "FormattedName": "100A4__DP"
@@ -1303,7 +1303,7 @@
         "Facility": "T30",
         "RoomNumber": "100B1",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "EVS",
         "IsActive": true,
         "FormattedName": "100B1__DP"
@@ -1314,7 +1314,7 @@
         "Facility": "T30",
         "RoomNumber": "100B1",
         "ConnectingRoom": "VEST1-3",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "EVS To Vestible",
         "IsActive": true,
         "FormattedName": "100B1_VEST1-3_DP"
@@ -1325,7 +1325,7 @@
         "Facility": "T30",
         "RoomNumber": "100B2",
         "ConnectingRoom": "",
-        "SQ": 395,
+        "Sq": 395,
         "RoomName": "Office",
         "IsActive": true,
         "FormattedName": "100B2__DP"
@@ -1336,7 +1336,7 @@
         "Facility": "T30",
         "RoomNumber": "100B2A",
         "ConnectingRoom": "",
-        "SQ": 128,
+        "Sq": 128,
         "RoomName": "Office",
         "IsActive": true,
         "FormattedName": "100B2A__DP"
@@ -1347,7 +1347,7 @@
         "Facility": "T30",
         "RoomNumber": "100C",
         "ConnectingRoom": "",
-        "SQ": 129,
+        "Sq": 129,
         "RoomName": "Locker Room",
         "IsActive": true,
         "FormattedName": "100C__DP"
@@ -1358,7 +1358,7 @@
         "Facility": "T30",
         "RoomNumber": "100C4",
         "ConnectingRoom": "",
-        "SQ": 92,
+        "Sq": 92,
         "RoomName": "Gown-in",
         "IsActive": true,
         "FormattedName": "100C4__DP"
@@ -1369,7 +1369,7 @@
         "Facility": "T30",
         "RoomNumber": "100C4",
         "ConnectingRoom": "100B1",
-        "SQ": 92,
+        "Sq": 92,
         "RoomName": "Gown-in To EVS",
         "IsActive": true,
         "FormattedName": "100C4_100B1_DP"
@@ -1380,7 +1380,7 @@
         "Facility": "T30",
         "RoomNumber": "100C4",
         "ConnectingRoom": "100C",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Gown-in to Locker Room",
         "IsActive": true,
         "FormattedName": "100C4_100C_DP"
@@ -1391,7 +1391,7 @@
         "Facility": "T30",
         "RoomNumber": "100D",
         "ConnectingRoom": "",
-        "SQ": 277,
+        "Sq": 277,
         "RoomName": "Cold Storage Room",
         "IsActive": true,
         "FormattedName": "100D__DP"
@@ -1402,7 +1402,7 @@
         "Facility": "T30",
         "RoomNumber": "100D",
         "ConnectingRoom": "100",
-        "SQ": 277,
+        "Sq": 277,
         "RoomName": "Cold Storage Room To Main Entry",
         "IsActive": true,
         "FormattedName": "100D_100_DP"
@@ -1413,7 +1413,7 @@
         "Facility": "T30",
         "RoomNumber": "100D1",
         "ConnectingRoom": "",
-        "SQ": 173,
+        "Sq": 173,
         "RoomName": "Clean Vestibule",
         "IsActive": true,
         "FormattedName": "100D1__DP"
@@ -1424,7 +1424,7 @@
         "Facility": "T30",
         "RoomNumber": "100D1",
         "ConnectingRoom": "100C4",
-        "SQ": 173,
+        "Sq": 173,
         "RoomName": "Clean Vestibule To Gown-in",
         "IsActive": true,
         "FormattedName": "100D1_100C4_DP"
@@ -1435,7 +1435,7 @@
         "Facility": "T30",
         "RoomNumber": "100D1",
         "ConnectingRoom": "100D",
-        "SQ": 173,
+        "Sq": 173,
         "RoomName": "Clean Vestibule To Cold Storage Room",
         "IsActive": true,
         "FormattedName": "100D1_100D_DP"
@@ -1446,7 +1446,7 @@
         "Facility": "T30",
         "RoomNumber": "100D1",
         "ConnectingRoom": "100D5",
-        "SQ": 173,
+        "Sq": 173,
         "RoomName": "Clean Vestibule To Goods-in",
         "IsActive": true,
         "FormattedName": "100D1_100D5_DP"
@@ -1457,7 +1457,7 @@
         "Facility": "T30",
         "RoomNumber": "100D1",
         "ConnectingRoom": "VEST1-2",
-        "SQ": 173,
+        "Sq": 173,
         "RoomName": "Clean Vestibule To Gown Out",
         "IsActive": true,
         "FormattedName": "100D1_VEST1-2_DP"
@@ -1468,7 +1468,7 @@
         "Facility": "T30",
         "RoomNumber": "100D1-1",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Gown Out",
         "IsActive": true,
         "FormattedName": "100D1-1__DP"
@@ -1479,7 +1479,7 @@
         "Facility": "T30",
         "RoomNumber": "100D2",
         "ConnectingRoom": "",
-        "SQ": 92,
+        "Sq": 92,
         "RoomName": "Ante-Room 2",
         "IsActive": true,
         "FormattedName": "100D2__DP"
@@ -1490,7 +1490,7 @@
         "Facility": "T30",
         "RoomNumber": "100D2",
         "ConnectingRoom": "100D1",
-        "SQ": 92,
+        "Sq": 92,
         "RoomName": "Ante-Room 2 To Clean Vestibule",
         "IsActive": true,
         "FormattedName": "100D2_100D1_DP"
@@ -1501,7 +1501,7 @@
         "Facility": "T30",
         "RoomNumber": "100D2A",
         "ConnectingRoom": "",
-        "SQ": 502,
+        "Sq": 502,
         "RoomName": "Manufacturing Suite 2",
         "IsActive": true,
         "FormattedName": "100D2A__DP"
@@ -1512,7 +1512,7 @@
         "Facility": "T30",
         "RoomNumber": "100D2A",
         "ConnectingRoom": "100D2",
-        "SQ": 502,
+        "Sq": 502,
         "RoomName": "Manufacturing Suite 2 To Ante-Room 2",
         "IsActive": true,
         "FormattedName": "100D2A_100D2_DP"
@@ -1523,7 +1523,7 @@
         "Facility": "T30",
         "RoomNumber": "100D3",
         "ConnectingRoom": "",
-        "SQ": 113,
+        "Sq": 113,
         "RoomName": "Ante-Room 3",
         "IsActive": true,
         "FormattedName": "100D3__DP"
@@ -1534,7 +1534,7 @@
         "Facility": "T30",
         "RoomNumber": "100D3",
         "ConnectingRoom": "100D1",
-        "SQ": 113,
+        "Sq": 113,
         "RoomName": "Ante-Room 3 To Clean Vestibule",
         "IsActive": true,
         "FormattedName": "100D3_100D1_DP"
@@ -1545,7 +1545,7 @@
         "Facility": "T30",
         "RoomNumber": "100D3A",
         "ConnectingRoom": "",
-        "SQ": 411,
+        "Sq": 411,
         "RoomName": "Cell Processing",
         "IsActive": true,
         "FormattedName": "100D3A__DP"
@@ -1556,7 +1556,7 @@
         "Facility": "T30",
         "RoomNumber": "100D3A",
         "ConnectingRoom": "100D3",
-        "SQ": 411,
+        "Sq": 411,
         "RoomName": "Cell Processing To Ante-Room 3",
         "IsActive": true,
         "FormattedName": "100D3A_100D3_DP"
@@ -1567,7 +1567,7 @@
         "Facility": "T30",
         "RoomNumber": "100D4",
         "ConnectingRoom": "",
-        "SQ": 102,
+        "Sq": 102,
         "RoomName": "Ante-Room 1",
         "IsActive": true,
         "FormattedName": "100D4__DP"
@@ -1578,7 +1578,7 @@
         "Facility": "T30",
         "RoomNumber": "100D4",
         "ConnectingRoom": "100D1",
-        "SQ": 102,
+        "Sq": 102,
         "RoomName": "Ante-Room 1 To Clean Vestibule",
         "IsActive": true,
         "FormattedName": "100D4_100D1_DP"
@@ -1589,7 +1589,7 @@
         "Facility": "T30",
         "RoomNumber": "100D4A",
         "ConnectingRoom": "",
-        "SQ": 502,
+        "Sq": 502,
         "RoomName": "Manufacturing Suite 1",
         "IsActive": true,
         "FormattedName": "100D4A__DP"
@@ -1600,7 +1600,7 @@
         "Facility": "T30",
         "RoomNumber": "100D4A",
         "ConnectingRoom": "100D4",
-        "SQ": 502,
+        "Sq": 502,
         "RoomName": "Manufacturing Suite 1 To Ante-Room 1",
         "IsActive": true,
         "FormattedName": "100D4A_100D4_DP"
@@ -1611,7 +1611,7 @@
         "Facility": "T30",
         "RoomNumber": "100D5",
         "ConnectingRoom": "",
-        "SQ": 92,
+        "Sq": 92,
         "RoomName": "Goods-in",
         "IsActive": true,
         "FormattedName": "100D5__DP"
@@ -1622,7 +1622,7 @@
         "Facility": "T30",
         "RoomNumber": "100D5",
         "ConnectingRoom": "100D5A",
-        "SQ": 92,
+        "Sq": 92,
         "RoomName": "Goods-in To Released Goods",
         "IsActive": true,
         "FormattedName": "100D5_100D5A_DP"
@@ -1633,7 +1633,7 @@
         "Facility": "T30",
         "RoomNumber": "100D5A",
         "ConnectingRoom": "",
-        "SQ": 353,
+        "Sq": 353,
         "RoomName": "Released Goods",
         "IsActive": true,
         "FormattedName": "100D5A__DP"
@@ -1644,7 +1644,7 @@
         "Facility": "T30",
         "RoomNumber": "100D5A",
         "ConnectingRoom": "100",
-        "SQ": 353,
+        "Sq": 353,
         "RoomName": "Released Goods To Main Entry",
         "IsActive": true,
         "FormattedName": "100D5A_100_DP"
@@ -1655,7 +1655,7 @@
         "Facility": "T30",
         "RoomNumber": "100D5A",
         "ConnectingRoom": "Outdoor",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Released Goods To Outdoor",
         "IsActive": true,
         "FormattedName": "100D5A_Outdoor_DP"
@@ -1666,7 +1666,7 @@
         "Facility": "T30",
         "RoomNumber": "101",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Cylinder Gas",
         "IsActive": true,
         "FormattedName": "101__DP"
@@ -1677,7 +1677,7 @@
         "Facility": "T30",
         "RoomNumber": "102",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Mechanical Room",
         "IsActive": true,
         "FormattedName": "102__DP"
@@ -1688,7 +1688,7 @@
         "Facility": "T30",
         "RoomNumber": "102A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "IT Room",
         "IsActive": true,
         "FormattedName": "102A__DP"
@@ -1699,7 +1699,7 @@
         "Facility": "T30",
         "RoomNumber": "VEST1-2",
         "ConnectingRoom": "",
-        "SQ": 53,
+        "Sq": 53,
         "RoomName": "Gown Out",
         "IsActive": true,
         "FormattedName": "VEST1-2__DP"
@@ -1710,7 +1710,7 @@
         "Facility": "T30",
         "RoomNumber": "VEST1-2",
         "ConnectingRoom": "100C",
-        "SQ": 53,
+        "Sq": 53,
         "RoomName": "Gown Out To Locker Room",
         "IsActive": true,
         "FormattedName": "VEST1-2_100C_DP"
@@ -1721,7 +1721,7 @@
         "Facility": "Tr1",
         "RoomNumber": "100",
         "ConnectingRoom": "",
-        "SQ": 133,
+        "Sq": 133,
         "RoomName": "Vestibule",
         "IsActive": true,
         "FormattedName": "100__DP"
@@ -1732,7 +1732,7 @@
         "Facility": "Tr1",
         "RoomNumber": "100",
         "ConnectingRoom": "101",
-        "SQ": 133,
+        "Sq": 133,
         "RoomName": "Vestibule to Entry Room",
         "IsActive": true,
         "FormattedName": "101_100_DP"
@@ -1743,7 +1743,7 @@
         "Facility": "Tr1",
         "RoomNumber": "101",
         "ConnectingRoom": "",
-        "SQ": 72,
+        "Sq": 72,
         "RoomName": "Entry Room",
         "IsActive": true,
         "FormattedName": "101__DP"
@@ -1754,7 +1754,7 @@
         "Facility": "Tr1",
         "RoomNumber": "101",
         "ConnectingRoom": "103",
-        "SQ": 72,
+        "Sq": 72,
         "RoomName": "Entry Room to Anteroom",
         "IsActive": true,
         "FormattedName": "101_103_DP"
@@ -1765,7 +1765,7 @@
         "Facility": "Tr1",
         "RoomNumber": "103",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "103__DP"
@@ -1776,7 +1776,7 @@
         "Facility": "Tr1",
         "RoomNumber": "103",
         "ConnectingRoom": "105",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Anteroom to Clean Room",
         "IsActive": true,
         "FormattedName": "105_103_DP"
@@ -1787,7 +1787,7 @@
         "Facility": "Tr1",
         "RoomNumber": "105",
         "ConnectingRoom": "",
-        "SQ": 220,
+        "Sq": 220,
         "RoomName": "Clean room",
         "IsActive": true,
         "FormattedName": "105__DP"
@@ -1798,7 +1798,7 @@
         "Facility": "Tr2",
         "RoomNumber": "100",
         "ConnectingRoom": "102",
-        "SQ": 133,
+        "Sq": 133,
         "RoomName": "Vestibule to Entry Room",
         "IsActive": true,
         "FormattedName": "100_102_DP"
@@ -1809,7 +1809,7 @@
         "Facility": "Tr2",
         "RoomNumber": "102",
         "ConnectingRoom": "",
-        "SQ": 72,
+        "Sq": 72,
         "RoomName": "Entry Room",
         "IsActive": true,
         "FormattedName": "102__DP"
@@ -1820,7 +1820,7 @@
         "Facility": "Tr2",
         "RoomNumber": "102",
         "ConnectingRoom": "104",
-        "SQ": 72,
+        "Sq": 72,
         "RoomName": "Entry Room to Anteroom",
         "IsActive": true,
         "FormattedName": "102_104_DP"
@@ -1831,7 +1831,7 @@
         "Facility": "Tr2",
         "RoomNumber": "104",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "104__DP"
@@ -1842,7 +1842,7 @@
         "Facility": "Tr2",
         "RoomNumber": "104",
         "ConnectingRoom": "106",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Anteroom to Clean Room",
         "IsActive": true,
         "FormattedName": "104_106_DP"
@@ -1853,7 +1853,7 @@
         "Facility": "Tr2",
         "RoomNumber": "106",
         "ConnectingRoom": "",
-        "SQ": 220,
+        "Sq": 220,
         "RoomName": "Clean room",
         "IsActive": true,
         "FormattedName": "106__DP"
@@ -1864,7 +1864,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor",
         "IsActive": true,
         "FormattedName": "1C166A__DP"
@@ -1875,7 +1875,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A10",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Secure Storage",
         "IsActive": true,
         "FormattedName": "1C166A_1C166A10_DP"
@@ -1886,7 +1886,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A3",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Changing",
         "IsActive": true,
         "FormattedName": "1C166A3_1C166A_DP"
@@ -1897,7 +1897,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A4",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Changing",
         "IsActive": true,
         "FormattedName": "1C166A4_1C166A_DP"
@@ -1908,7 +1908,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A5",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Gowning",
         "IsActive": true,
         "FormattedName": "1C166A5_1C166A_DP"
@@ -1919,7 +1919,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A6",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Storage",
         "IsActive": true,
         "FormattedName": "1C166A6_1C166A_DP"
@@ -1930,7 +1930,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A7A",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Gowning",
         "IsActive": true,
         "FormattedName": "1C166A_1C166A7A_DP"
@@ -1941,7 +1941,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A9",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Corridor",
         "IsActive": true,
         "FormattedName": "1C166A9_1C166A_DP"
@@ -1952,7 +1952,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166A9B",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Corridor to Bulk Comp",
         "IsActive": true,
         "FormattedName": "1C166A9B_1C166A_DP"
@@ -1963,7 +1963,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166C",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Storage",
         "IsActive": true,
         "FormattedName": "1C166C_1C166A_DP"
@@ -1974,7 +1974,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166C1",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Sink 7 Room",
         "IsActive": true,
         "FormattedName": "1C166C1_1C166A_DP"
@@ -1985,7 +1985,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166D",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "1C166D_1C166A_DP"
@@ -1996,7 +1996,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A",
         "ConnectingRoom": "1C166G",
-        "SQ": 515,
+        "Sq": 515,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "1C166G_1C166A_DP"
@@ -2007,7 +2007,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A1",
         "ConnectingRoom": "1C166B",
-        "SQ": 166,
+        "Sq": 166,
         "RoomName": "Drug Storage",
         "IsActive": true,
         "FormattedName": "1C166B_1C166A1_DP"
@@ -2018,7 +2018,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A10",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Secure Storage",
         "IsActive": true,
         "FormattedName": "1C166A10__DP"
@@ -2029,7 +2029,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A3",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Changing",
         "IsActive": true,
         "FormattedName": "1C166A3__DP"
@@ -2040,7 +2040,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A3",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Changing Room",
         "IsActive": true,
         "FormattedName": "1C166A3__DP"
@@ -2051,7 +2051,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A4",
         "ConnectingRoom": "",
-        "SQ": 48,
+        "Sq": 48,
         "RoomName": "Changing",
         "IsActive": true,
         "FormattedName": "1C166A4__DP"
@@ -2062,7 +2062,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A4",
         "ConnectingRoom": "",
-        "SQ": 48,
+        "Sq": 48,
         "RoomName": "Changing Room",
         "IsActive": true,
         "FormattedName": "1C166A4__DP"
@@ -2073,7 +2073,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5",
         "ConnectingRoom": "",
-        "SQ": 46,
+        "Sq": 46,
         "RoomName": "Gowning",
         "IsActive": true,
         "FormattedName": "1C166A5__DP"
@@ -2084,7 +2084,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5",
         "ConnectingRoom": "1C166A5A",
-        "SQ": 46,
+        "Sq": 46,
         "RoomName": "Gowning to IV Prep Anteroom",
         "IsActive": true,
         "FormattedName": "1C166A5A_1C166A5_DP"
@@ -2095,7 +2095,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5A",
         "ConnectingRoom": "",
-        "SQ": 296,
+        "Sq": 296,
         "RoomName": "IV Prep Anteroom",
         "IsActive": true,
         "FormattedName": "1C166A5A__DP"
@@ -2106,7 +2106,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5A",
         "ConnectingRoom": "1C166A5A1",
-        "SQ": 296,
+        "Sq": 296,
         "RoomName": "IV Prep Anteroom to IV Prep Gowning",
         "IsActive": true,
         "FormattedName": "1C166A5A1_1C166A5A_DP"
@@ -2117,7 +2117,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5A1",
         "ConnectingRoom": "",
-        "SQ": 74,
+        "Sq": 74,
         "RoomName": "IV Prep Gowning",
         "IsActive": true,
         "FormattedName": "1C166A5A1__DP"
@@ -2128,7 +2128,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5A1",
         "ConnectingRoom": "1C166A5B",
-        "SQ": 74,
+        "Sq": 74,
         "RoomName": "IV Prep Gowning to Sterile IV Prep",
         "IsActive": true,
         "FormattedName": "1C166A5B_1C166A5A1_DP"
@@ -2139,7 +2139,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5B",
         "ConnectingRoom": "",
-        "SQ": 306,
+        "Sq": 306,
         "RoomName": "Sterile IV Prep",
         "IsActive": true,
         "FormattedName": "1C166A5B__DP"
@@ -2150,7 +2150,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A5B1",
         "ConnectingRoom": "",
-        "SQ": 32,
+        "Sq": 32,
         "RoomName": "Storage",
         "IsActive": true,
         "FormattedName": "1C166A5B1__DP"
@@ -2161,7 +2161,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A6",
         "ConnectingRoom": "",
-        "SQ": 52,
+        "Sq": 52,
         "RoomName": "Storage",
         "IsActive": true,
         "FormattedName": "1C166A6__DP"
@@ -2172,7 +2172,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor",
         "IsActive": true,
         "FormattedName": "1C166A7__DP"
@@ -2183,7 +2183,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "1C166A7A",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor to Gowning",
         "IsActive": true,
         "FormattedName": "1C166A7_1C166A7A_DP"
@@ -2194,7 +2194,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "1C166A7B",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor to Sterile HD Prep",
         "IsActive": true,
         "FormattedName": "1C166A7B_1C166A7_DP"
@@ -2205,7 +2205,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "1C166A7C",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor to Verification Room",
         "IsActive": true,
         "FormattedName": "1C166A7C_1C166A7_DP"
@@ -2216,7 +2216,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "1C166A7D",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor to Immuno Prep",
         "IsActive": true,
         "FormattedName": "1C166A7D_1C166A7_DP"
@@ -2227,7 +2227,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "1C166A7E",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor to Haz Drug Storage",
         "IsActive": true,
         "FormattedName": "1C166A7E_1C166A7_DP"
@@ -2238,7 +2238,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7",
         "ConnectingRoom": "1C166A7F",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Corridor to Janitor",
         "IsActive": true,
         "FormattedName": "1C166A7F_1C166A7_DP"
@@ -2249,7 +2249,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7A",
         "ConnectingRoom": "",
-        "SQ": 78,
+        "Sq": 78,
         "RoomName": "Gowning",
         "IsActive": true,
         "FormattedName": "1C166A7A__DP"
@@ -2260,7 +2260,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7A",
         "ConnectingRoom": "1C166A",
-        "SQ": 78,
+        "Sq": 78,
         "RoomName": "Corridor to Gowning",
         "IsActive": true,
         "FormattedName": "1C166A7A_1C166A_DP"
@@ -2271,7 +2271,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7B",
         "ConnectingRoom": "",
-        "SQ": 173,
+        "Sq": 173,
         "RoomName": "Sterile HD Prep",
         "IsActive": true,
         "FormattedName": "1C166A7B__DP"
@@ -2282,7 +2282,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7C",
         "ConnectingRoom": "",
-        "SQ": 117,
+        "Sq": 117,
         "RoomName": "Verification Room",
         "IsActive": true,
         "FormattedName": "1C166A7C__DP"
@@ -2293,7 +2293,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7D",
         "ConnectingRoom": "",
-        "SQ": 104,
+        "Sq": 104,
         "RoomName": "Immuno Prep",
         "IsActive": true,
         "FormattedName": "1C166A7D__DP"
@@ -2304,7 +2304,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7E",
         "ConnectingRoom": "",
-        "SQ": 103,
+        "Sq": 103,
         "RoomName": "Haz Drug Storage",
         "IsActive": true,
         "FormattedName": "1C166A7E__DP"
@@ -2315,7 +2315,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A7F",
         "ConnectingRoom": "",
-        "SQ": 82,
+        "Sq": 82,
         "RoomName": "Janitor",
         "IsActive": true,
         "FormattedName": "1C166A7F__DP"
@@ -2326,7 +2326,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A9",
         "ConnectingRoom": "",
-        "SQ": 88,
+        "Sq": 88,
         "RoomName": "Corridor",
         "IsActive": true,
         "FormattedName": "1C166A9__DP"
@@ -2337,7 +2337,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A9",
         "ConnectingRoom": "1C166A9A",
-        "SQ": 88,
+        "Sq": 88,
         "RoomName": "Corridor to Hazard Prep Room",
         "IsActive": true,
         "FormattedName": "1C166A9A_1C166A9_DP"
@@ -2348,7 +2348,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A9",
         "ConnectingRoom": "1C166A9B",
-        "SQ": 88,
+        "Sq": 88,
         "RoomName": "Corridor to Bulk Comp",
         "IsActive": true,
         "FormattedName": "1C166A9B_1C166A9_DP"
@@ -2359,7 +2359,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A9A",
         "ConnectingRoom": "",
-        "SQ": 149,
+        "Sq": 149,
         "RoomName": "Hazard Prep Room",
         "IsActive": true,
         "FormattedName": "1C166A9A__DP"
@@ -2370,7 +2370,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A9B",
         "ConnectingRoom": "",
-        "SQ": 204,
+        "Sq": 204,
         "RoomName": "Bulk Comp",
         "IsActive": true,
         "FormattedName": "1C166A9B__DP"
@@ -2381,7 +2381,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166A9B",
         "ConnectingRoom": "",
-        "SQ": 204,
+        "Sq": 204,
         "RoomName": "Hazard Prep Room",
         "IsActive": true,
         "FormattedName": "1C166A9B__DP"
@@ -2392,7 +2392,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166B",
         "ConnectingRoom": "",
-        "SQ": 590,
+        "Sq": 590,
         "RoomName": "Drug Storage",
         "IsActive": true,
         "FormattedName": "1C166B__DP"
@@ -2403,7 +2403,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166B",
         "ConnectingRoom": "1C166B1",
-        "SQ": 590,
+        "Sq": 590,
         "RoomName": "HD Storage",
         "IsActive": true,
         "FormattedName": "1C166B1_1C166B_DP"
@@ -2414,7 +2414,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166B1",
         "ConnectingRoom": "",
-        "SQ": 406,
+        "Sq": 406,
         "RoomName": "HD Storage",
         "IsActive": true,
         "FormattedName": "1C166B1__DP"
@@ -2425,7 +2425,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166B1",
         "ConnectingRoom": "",
-        "SQ": 406,
+        "Sq": 406,
         "RoomName": "Storage",
         "IsActive": true,
         "FormattedName": "1C166B1__DP"
@@ -2436,7 +2436,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166C",
         "ConnectingRoom": "",
-        "SQ": 107,
+        "Sq": 107,
         "RoomName": "Storage",
         "IsActive": true,
         "FormattedName": "1C166C__DP"
@@ -2447,7 +2447,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166C1",
         "ConnectingRoom": "",
-        "SQ": 53,
+        "Sq": 53,
         "RoomName": "Sink 7 Room",
         "IsActive": true,
         "FormattedName": "1C166C1__DP"
@@ -2458,7 +2458,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166D",
         "ConnectingRoom": "",
-        "SQ": 65,
+        "Sq": 65,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "1C166D__DP"
@@ -2469,7 +2469,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166D",
         "ConnectingRoom": "1C166D1",
-        "SQ": 65,
+        "Sq": 65,
         "RoomName": "Airlock",
         "IsActive": true,
         "FormattedName": "1C166D1_1C166D_DP"
@@ -2480,7 +2480,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166D1",
         "ConnectingRoom": "",
-        "SQ": 66,
+        "Sq": 66,
         "RoomName": "Air Lock",
         "IsActive": true,
         "FormattedName": "1C166D1__DP"
@@ -2491,7 +2491,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166D1",
         "ConnectingRoom": "",
-        "SQ": 66,
+        "Sq": 66,
         "RoomName": "Airlock",
         "IsActive": true,
         "FormattedName": "1C166D1__DP"
@@ -2502,7 +2502,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166D1",
         "ConnectingRoom": "1C166D1A",
-        "SQ": 66,
+        "Sq": 66,
         "RoomName": "Buffer",
         "IsActive": true,
         "FormattedName": "1C166D1A_1C166D1_DP"
@@ -2513,7 +2513,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166D1A",
         "ConnectingRoom": "",
-        "SQ": 180,
+        "Sq": 180,
         "RoomName": "Buffer",
         "IsActive": true,
         "FormattedName": "1C166D1A__DP"
@@ -2524,7 +2524,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166G",
         "ConnectingRoom": "",
-        "SQ": 54,
+        "Sq": 54,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "1C166G__DP"
@@ -2535,7 +2535,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166G",
         "ConnectingRoom": "1C166G1",
-        "SQ": 54,
+        "Sq": 54,
         "RoomName": "Airlock",
         "IsActive": true,
         "FormattedName": "1C166G1_1C166G_DP"
@@ -2546,7 +2546,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166G1",
         "ConnectingRoom": "",
-        "SQ": 61,
+        "Sq": 61,
         "RoomName": "Air Lock",
         "IsActive": true,
         "FormattedName": "1C166G1__DP"
@@ -2557,7 +2557,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166G1",
         "ConnectingRoom": "",
-        "SQ": 61,
+        "Sq": 61,
         "RoomName": "Airlock",
         "IsActive": true,
         "FormattedName": "1C166G1__DP"
@@ -2568,7 +2568,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166G1",
         "ConnectingRoom": "1C166G1A",
-        "SQ": 61,
+        "Sq": 61,
         "RoomName": "Buffer",
         "IsActive": true,
         "FormattedName": "1C166G1A_1C166G1_DP"
@@ -2579,7 +2579,7 @@
         "Facility": "IIVAU",
         "RoomNumber": "1C166G1A",
         "ConnectingRoom": "",
-        "SQ": 186,
+        "Sq": 186,
         "RoomName": "Buffer",
         "IsActive": true,
         "FormattedName": "1C166G1A__DP"
@@ -2590,7 +2590,7 @@
         "Facility": "HPP",
         "RoomNumber": "B3B402",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Anteroom/Gowning",
         "IsActive": true,
         "FormattedName": "B3B402__DP"
@@ -2601,7 +2601,7 @@
         "Facility": "HPP",
         "RoomNumber": "B3B402",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Antiroom/Gowning",
         "IsActive": true,
         "FormattedName": "B3B402__DP"
@@ -2612,7 +2612,7 @@
         "Facility": "HPP",
         "RoomNumber": "B3B402",
         "ConnectingRoom": "CORR",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Anteroom/Gowning",
         "IsActive": true,
         "FormattedName": "B3B402_CORR_DP"
@@ -2623,7 +2623,7 @@
         "Facility": "HPP",
         "RoomNumber": "B3B402A",
         "ConnectingRoom": "",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Hyper-Polarization Lab",
         "IsActive": true,
         "FormattedName": "B3B402A__DP"
@@ -2634,7 +2634,7 @@
         "Facility": "HPP",
         "RoomNumber": "B3B402A",
         "ConnectingRoom": "B3B402",
-        "SQ": null,
+        "Sq": null,
         "RoomName": "Hyper-Polarization Lab",
         "IsActive": true,
         "FormattedName": "B3B402A_B3B402_DP"
@@ -2645,7 +2645,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413",
         "ConnectingRoom": "",
-        "SQ": 170,
+        "Sq": 170,
         "RoomName": "Source Cabinet Room",
         "IsActive": true,
         "FormattedName": "1C413__DP"
@@ -2656,7 +2656,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413",
         "ConnectingRoom": "1C413A",
-        "SQ": 170,
+        "Sq": 170,
         "RoomName": "Source Cabinet Room to Non-Sterile Prep Room",
         "IsActive": true,
         "FormattedName": "1C413_1C413A_DP"
@@ -2667,7 +2667,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413A",
         "ConnectingRoom": "",
-        "SQ": 208,
+        "Sq": 208,
         "RoomName": "Non-Sterile Prep Room",
         "IsActive": true,
         "FormattedName": "1C413A__DP"
@@ -2678,7 +2678,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413A",
         "ConnectingRoom": "1C413B",
-        "SQ": 208,
+        "Sq": 208,
         "RoomName": "Non-Sterile Prep Room to Anteroom",
         "IsActive": true,
         "FormattedName": "1C413A_1C413B_DP"
@@ -2689,7 +2689,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413B",
         "ConnectingRoom": "",
-        "SQ": 71,
+        "Sq": 71,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "1C413B__DP"
@@ -2700,7 +2700,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413B",
         "ConnectingRoom": "1C413C",
-        "SQ": 71,
+        "Sq": 71,
         "RoomName": "Anteroom to Clean Room",
         "IsActive": true,
         "FormattedName": "1C413B_1C413C_DP"
@@ -2711,7 +2711,7 @@
         "Facility": "RP",
         "RoomNumber": "1C413C",
         "ConnectingRoom": "",
-        "SQ": 100,
+        "Sq": 100,
         "RoomName": "Anteroom",
         "IsActive": true,
         "FormattedName": "1C413C__DP"

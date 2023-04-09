@@ -194,8 +194,8 @@ export class ApfPortfolioIcDashboardService {
       .subscribe(([facilityId, currentStatusValues, parameterValues]) => {
         const backGroundImageUrl =
           facilityId == 0
-            ? '/assets/images/floor-plans/apf_facility_all_background.png'
-            : `/assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
+            ? 'assets/images/floor-plans/apf_facility_all_background.png'
+            : `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
         this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
 
         this._currentStatusValues$.next(currentStatusValues);

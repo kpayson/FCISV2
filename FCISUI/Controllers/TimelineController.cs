@@ -63,7 +63,7 @@ namespace FCISUI.Controllers
         public async Task<IEnumerable<FacilityTimelineData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams)
         {
             var facilities =
-                this._context.Facilities.Where(x => x.IsActive && x.FacilityIc.ToLower() == timelineParams.IC.ToLower())
+                this._context.Facilities.Where(x => x.IsActive && x.FacilityIC.ToLower() == timelineParams.IC.ToLower())
                 .ToList();
 
             var timelineData = await Task.WhenAll(facilities.Select(async f =>
@@ -158,7 +158,7 @@ namespace FCISUI.Controllers
             var locationQueries = facilities.Select(f =>
             {
                 var piPath = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check"; //ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
-                return new LocationQuery { LocationName = f.Circleid!, Tag = piPath, Attribute = "Composite" };
+                return new LocationQuery { LocationName = f.CircleId!, Tag = piPath, Attribute = "Composite" };
             }).ToList();
             var currentData = await this._piDataService.CurrentStatusData(locationQueries);
             return currentData;
