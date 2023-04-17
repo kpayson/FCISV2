@@ -401,7 +401,7 @@ export class ApfPortfolioIcDashboardService {
 
           x.points.sort((a, b) => a.timestamp - b.timestamp);
           let startTime = x.points[0].timestamp;
-          for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
+          for (const y of x.points) {
             if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
               console.log('error - timestamp before request time');
             }

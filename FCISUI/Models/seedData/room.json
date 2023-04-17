@@ -140,7 +140,7 @@
         "Sq": 470,
         "RoomName": "Hallway to Clean Freezer",
         "IsActive": true,
-        "FormattedName": "2N307_2N307A_DP"
+        "FormattedName": "2N307A_2N3073_DP"
     },
     {
         "RoomId": 14,
@@ -513,7 +513,7 @@
         "ConnectingRoom": "1CM100",
         "Sq": null,
         "RoomName": "Clean Suppy to Admin",
-        "IsActive": true,
+        "IsActive": false,
         "FormattedName": "1CM100A_1CM100_DP"
     },
     {
@@ -968,20 +968,9 @@
         "FormattedName": "REST1-2__DP"
     },
     {
-        "RoomId": 89,
-        "FacilityId": 6,
-        "Facility": "DLM-SL",
-        "RoomNumber": "2C450",
-        "ConnectingRoom": "",
-        "Sq": null,
-        "RoomName": "Entry Anteroom",
-        "IsActive": true,
-        "FormattedName": "2C450__DP"
-    },
-    {
         "RoomId": 90,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C450",
         "ConnectingRoom": "",
         "Sq": null,
@@ -992,7 +981,7 @@
     {
         "RoomId": 91,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C450",
         "ConnectingRoom": "2C452C",
         "Sq": null,
@@ -1001,20 +990,9 @@
         "FormattedName": "2C450_2C452C_DP"
     },
     {
-        "RoomId": 92,
-        "FacilityId": 6,
-        "Facility": "DLM-SL",
-        "RoomNumber": "2C451A",
-        "ConnectingRoom": "",
-        "Sq": null,
-        "RoomName": "Sterility Anteroom",
-        "IsActive": true,
-        "FormattedName": "2C451A__DP"
-    },
-    {
         "RoomId": 93,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C451A",
         "ConnectingRoom": "",
         "Sq": null,
@@ -1025,7 +1003,7 @@
     {
         "RoomId": 94,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C451A",
         "ConnectingRoom": "2C450",
         "Sq": null,
@@ -1034,20 +1012,9 @@
         "FormattedName": "2C451A_2C450_DP"
     },
     {
-        "RoomId": 95,
-        "FacilityId": 6,
-        "Facility": "DLM-SL",
-        "RoomNumber": "2C451B",
-        "ConnectingRoom": "",
-        "Sq": null,
-        "RoomName": "Sterility Lab",
-        "IsActive": true,
-        "FormattedName": "2C451B__DP"
-    },
-    {
         "RoomId": 96,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C451B",
         "ConnectingRoom": "",
         "Sq": null,
@@ -1058,7 +1025,7 @@
     {
         "RoomId": 97,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C451B",
         "ConnectingRoom": "2C451A",
         "Sq": null,
@@ -1067,20 +1034,9 @@
         "FormattedName": "2C451B_2C451A_DP"
     },
     {
-        "RoomId": 98,
-        "FacilityId": 6,
-        "Facility": "DLM-SL",
-        "RoomNumber": "2C452A",
-        "ConnectingRoom": "",
-        "Sq": null,
-        "RoomName": "Culture Anteroom",
-        "IsActive": true,
-        "FormattedName": "2C452A__DP"
-    },
-    {
         "RoomId": 99,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C452A",
         "ConnectingRoom": "",
         "Sq": null,
@@ -1091,7 +1047,7 @@
     {
         "RoomId": 100,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C452A",
         "ConnectingRoom": "2C450",
         "Sq": null,
@@ -1100,20 +1056,9 @@
         "FormattedName": "2C452A_2C450_DP"
     },
     {
-        "RoomId": 101,
-        "FacilityId": 6,
-        "Facility": "DLM-SL",
-        "RoomNumber": "2C452B",
-        "ConnectingRoom": "",
-        "Sq": null,
-        "RoomName": "Culture Lab",
-        "IsActive": true,
-        "FormattedName": "2C452B__DP"
-    },
-    {
         "RoomId": 102,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C452B",
         "ConnectingRoom": "",
         "Sq": null,
@@ -1124,7 +1069,7 @@
     {
         "RoomId": 103,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C452B",
         "ConnectingRoom": "2C452A",
         "Sq": null,
@@ -1135,7 +1080,7 @@
     {
         "RoomId": 104,
         "FacilityId": 6,
-        "Facility": "DLM-SL",
+        "Facility": "DLM_SL",
         "RoomNumber": "2C452C",
         "ConnectingRoom": "",
         "Sq": null,
@@ -1877,7 +1822,7 @@
         "ConnectingRoom": "1C166A10",
         "Sq": 515,
         "RoomName": "Corridor to Secure Storage",
-        "IsActive": true,
+        "IsActive": false,
         "FormattedName": "1C166A_1C166A10_DP"
     },
     {
@@ -1933,7 +1878,7 @@
         "Sq": 515,
         "RoomName": "Corridor to Gowning",
         "IsActive": true,
-        "FormattedName": "1C166A_1C166A7A_DP"
+        "FormattedName": "1C166A7A_1C166A_DP"
     },
     {
         "RoomId": 177,
@@ -2020,19 +1965,8 @@
         "ConnectingRoom": "",
         "Sq": null,
         "RoomName": "Secure Storage",
-        "IsActive": true,
+        "IsActive": false,
         "FormattedName": "1C166A10__DP"
-    },
-    {
-        "RoomId": 185,
-        "FacilityId": 17,
-        "Facility": "IIVAU",
-        "RoomNumber": "1C166A3",
-        "ConnectingRoom": "",
-        "Sq": 52,
-        "RoomName": "Changing",
-        "IsActive": true,
-        "FormattedName": "1C166A3__DP"
     },
     {
         "RoomId": 186,
@@ -2044,17 +1978,6 @@
         "RoomName": "Changing Room",
         "IsActive": true,
         "FormattedName": "1C166A3__DP"
-    },
-    {
-        "RoomId": 187,
-        "FacilityId": 17,
-        "Facility": "IIVAU",
-        "RoomNumber": "1C166A4",
-        "ConnectingRoom": "",
-        "Sq": 48,
-        "RoomName": "Changing",
-        "IsActive": true,
-        "FormattedName": "1C166A4__DP"
     },
     {
         "RoomId": 188,
@@ -2365,17 +2288,6 @@
         "FormattedName": "1C166A9A__DP"
     },
     {
-        "RoomId": 216,
-        "FacilityId": 17,
-        "Facility": "IIVAU",
-        "RoomNumber": "1C166A9B",
-        "ConnectingRoom": "",
-        "Sq": 204,
-        "RoomName": "Bulk Comp",
-        "IsActive": true,
-        "FormattedName": "1C166A9B__DP"
-    },
-    {
         "RoomId": 217,
         "FacilityId": 17,
         "Facility": "IIVAU",
@@ -2407,17 +2319,6 @@
         "RoomName": "HD Storage",
         "IsActive": true,
         "FormattedName": "1C166B1_1C166B_DP"
-    },
-    {
-        "RoomId": 220,
-        "FacilityId": 17,
-        "Facility": "IIVAU",
-        "RoomNumber": "1C166B1",
-        "ConnectingRoom": "",
-        "Sq": 406,
-        "RoomName": "HD Storage",
-        "IsActive": true,
-        "FormattedName": "1C166B1__DP"
     },
     {
         "RoomId": 221,
@@ -2475,17 +2376,6 @@
         "FormattedName": "1C166D1_1C166D_DP"
     },
     {
-        "RoomId": 226,
-        "FacilityId": 17,
-        "Facility": "IIVAU",
-        "RoomNumber": "1C166D1",
-        "ConnectingRoom": "",
-        "Sq": 66,
-        "RoomName": "Air Lock",
-        "IsActive": true,
-        "FormattedName": "1C166D1__DP"
-    },
-    {
         "RoomId": 227,
         "FacilityId": 17,
         "Facility": "IIVAU",
@@ -2541,17 +2431,6 @@
         "FormattedName": "1C166G1_1C166G_DP"
     },
     {
-        "RoomId": 232,
-        "FacilityId": 17,
-        "Facility": "IIVAU",
-        "RoomNumber": "1C166G1",
-        "ConnectingRoom": "",
-        "Sq": 61,
-        "RoomName": "Air Lock",
-        "IsActive": true,
-        "FormattedName": "1C166G1__DP"
-    },
-    {
         "RoomId": 233,
         "FacilityId": 17,
         "Facility": "IIVAU",
@@ -2583,17 +2462,6 @@
         "RoomName": "Buffer",
         "IsActive": true,
         "FormattedName": "1C166G1A__DP"
-    },
-    {
-        "RoomId": 236,
-        "FacilityId": 19,
-        "Facility": "HPP",
-        "RoomNumber": "B3B402",
-        "ConnectingRoom": "",
-        "Sq": null,
-        "RoomName": "Anteroom/Gowning",
-        "IsActive": true,
-        "FormattedName": "B3B402__DP"
     },
     {
         "RoomId": 237,

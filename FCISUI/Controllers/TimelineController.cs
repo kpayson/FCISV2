@@ -66,19 +66,25 @@ namespace FCISUI.Controllers
                 this._context.Facilities.Where(x => x.IsActive && x.FacilityIC.ToLower() == timelineParams.IC.ToLower())
                 .ToList();
 
-            var timelineData = await Task.WhenAll(facilities.Select(async f =>
-            {
-                var pp = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check";
-                var piPath = f.PiPath!; // ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
-                var points = (await this._piDataService.TimeSeriesData(
-                        piPath,
-                        timelineParams.StartDate.ToUniversalTime(),
-                        timelineParams.EndDate.ToUniversalTime(),
-                        timelineParams.Interval)).ToList();
-                return new FacilityTimelineData { Points = points, Facility = f, Tag = piPath };
-            })) ?? new FacilityTimelineData[] { };
+            var tags = facilities.Select(f=>$@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check").ToList();
+            var batchData = await this._piDataService.TimeSeriesDataBatch(tags,timelineParams.StartDate.ToUniversalTime(),timelineParams.EndDate.ToUniversalTime(),timelineParams.Interval);
 
-            return timelineData;
+
+            var facilityData = batchData.Select(x=>{
+                var parts = x.tag.Split('\\');
+                var lastPart = parts.Last();
+                var pipeIndex = lastPart.IndexOf('|');
+                var facilitySection = lastPart.Substring(0,pipeIndex);
+                return new FacilityTimelineData {
+                    Points=x.data,
+                    Facility=facilities.First(y=>y.FacilitySection == facilitySection),
+                    Tag=x.tag
+                };
+
+            }).ToList();
+
+            return facilityData;
+
         }
 
         [HttpPost("FacilityTimelineData")]
@@ -92,20 +98,34 @@ namespace FCISUI.Controllers
                     // &start_time=2023-03-14T21:19:10&end_time=2023-03-15T21:19:10&rectype=interpolated&interval=10m
                     var connectedRooms =
                         this._context.Rooms.Where(r => r.FacilityId == timelineParams.FacilityId && r.IsActive && !String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
-                    var timelineData = await Task.WhenAll(connectedRooms.Select(async r =>
-                    {
-                        var formattedName = !String.IsNullOrWhiteSpace(r.FormattedName) ? r.FormattedName :  $"{r.ConnectingRoom}_{r.RoomNumber}_DP";
+
+                    if(! connectedRooms.Any()) {
+                        return new List<FacilityRoomTimelineData>();
+                    }
+                    
+                    var tags = (connectedRooms).Select(r=>{
+                        var formattedName = r.FormattedName; //!String.IsNullOrWhiteSpace(r.FormattedName) ? r.FormattedName :  $"{r.ConnectingRoom}_{r.RoomNumber}_DP";
                         var piPath =  $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{formattedName}|DP|Status";
+                        return piPath;
+                    }).ToList();
 
-                        var points = (await this._piDataService.TimeSeriesData(
-                                piPath,
-                                timelineParams.StartDate.ToUniversalTime(),
-                                timelineParams.EndDate.ToUniversalTime(),
-                                timelineParams.Interval)).ToList();
+                    var batchData = await this._piDataService.TimeSeriesDataBatch(tags,timelineParams.StartDate.ToUniversalTime(),timelineParams.EndDate.ToUniversalTime(),timelineParams.Interval);
+                    
+                    var facilityRoomData = batchData.Select(x=>{
+                        var parts = x.tag.Split('\\');
+                        var lastPart = parts.Last();
+                        var pipeIndex = lastPart.IndexOf('|');
+                        var roomPair = lastPart.Substring(0,pipeIndex);
+                        var room = connectedRooms.First(y=>y.FormattedName==roomPair);
+                        return new FacilityRoomTimelineData {
+                            Points=x.data,
+                            Room= new Room { RoomNumber = room.FormattedName, RoomName = room.RoomName },
+                            Tag=x.tag
+                        };
 
-                        return new FacilityRoomTimelineData { Points = points, Room = new Room { RoomNumber = formattedName, RoomName = r.RoomName }, Tag = piPath };
-                    })) ?? new FacilityRoomTimelineData[] { };
-                    return timelineData;
+                    }).ToList();
+
+                    return facilityRoomData;
                 }
 
                 else
@@ -115,30 +135,30 @@ namespace FCISUI.Controllers
                     var rooms =
                         this._context.Rooms.Where(r => r.FacilityId == timelineParams.FacilityId &&r.IsActive && String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
 
+                    if(! rooms.Any()) {
+                        return new List<FacilityRoomTimelineData>();
+                    }
+
                     var sw = System.Diagnostics.Stopwatch.StartNew();
-//                     var tags = rooms.Select(r=>$@"{piPathEnv}\{r.Facility}\{r.RoomNumber}|{attributeStatus}").ToList();
-//                     var batchData = await this._piDataService.TimeSeriesDataBatch(tags,timelineParams.StartDate.ToUniversalTime(),timelineParams.EndDate.ToUniversalTime(),timelineParams.Interval);
-// sw.Stop();
-//                     //var sw = System.Diagnostics.Stopwatch.StartNew();
+                    var tags = rooms.Select(r=>$@"{piPathEnv}\{r.Facility}\{r.RoomNumber}|{attributeStatus}").ToList();
+                    var batchData = await this._piDataService.TimeSeriesDataBatch(tags,timelineParams.StartDate.ToUniversalTime(),timelineParams.EndDate.ToUniversalTime(),timelineParams.Interval);
+                    var facilityRoomData = batchData.Select(x=>{
+                        var parts = x.tag.Split('\\');
+                        var lastPart = parts.Last();
+                        var pipeIndex = lastPart.IndexOf('|');
+                        var roomNumber = lastPart.Substring(0,pipeIndex);
+                        return new FacilityRoomTimelineData {
+                            Points=x.data,
+                            Room=rooms.First(y=>y.RoomNumber==roomNumber),
+                            Tag=x.tag
+                        };
 
-//                     Console.Write(sw.ElapsedMilliseconds);
-//                     sw.Reset();
-                    sw.Start();
-                    var timelineData = await Task.WhenAll(rooms.Select(async r =>
-                    {
-                        var piPath = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}|{attributeStatus}";
-                        var points = (await this._piDataService.TimeSeriesData(
-                                piPath,
-                                timelineParams.StartDate.ToUniversalTime(),
-                                timelineParams.EndDate.ToUniversalTime(),
-                                timelineParams.Interval)).ToList();
-
-                        return new FacilityRoomTimelineData { Points = points, Room = r, Tag = piPath };
-                    })) ?? new FacilityRoomTimelineData[] { };
+                    }).ToList();
 
                     sw.Stop();
-                    Console.Write(sw.ElapsedMilliseconds);
-                    return timelineData;
+
+                    return facilityRoomData;
+                    
                 }
 
             }
@@ -154,47 +174,81 @@ namespace FCISUI.Controllers
         public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData()
         {
             var facilities =
-                this._context.Facilities.Where(x => !String.IsNullOrWhiteSpace(x.FacilitySection)).ToList();
-            var locationQueries = facilities.Select(f =>
+                this._context.Facilities.Where(x => x.IsActive && !String.IsNullOrWhiteSpace(x.FacilitySection)).ToList();
+            
+            var tags = facilities.Select(f =>
             {
-                var piPath = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check"; //ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
-                return new LocationQuery { LocationName = f.CircleId!, Tag = piPath, Attribute = "Composite" };
+                var tag = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check"; //ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
+                return tag;
             }).ToList();
-            var currentData = await this._piDataService.CurrentStatusData(locationQueries);
-            return currentData;
+
+            var currentData = (await this._piDataService.CurrentStatusDataBatch(tags));
+            var locationStatusValues = currentData.Select(x=>{
+                var parts = x.Tag.Split('\\');
+                var lastPart = parts.Last();
+                var pipeIndex = lastPart.IndexOf('|');
+                var facilitySection = lastPart.Substring(0,pipeIndex);
+                var facility = facilities.First(x=>x.FacilitySection == facilitySection);
+                return new LocationCurrentStatus {
+                    Attribute="Composite",
+                    LocationName=facility.CircleId!,
+                    StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                };
+            });
+            return locationStatusValues;
+
         }
 
         [HttpGet("FacilityCurrentData/{facilityId}")]
         public async Task<IEnumerable<LocationCurrentStatus>> FacilityCurrentStatusData(int facilityId)
         {
-            var singleRooms =
-                this._context.Rooms.Where(r => r.FacilityId == facilityId && String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
+            try {
+                var singleRooms =
+                    this._context.Rooms.Where(r => r.FacilityId == facilityId && r.IsActive && String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
 
-            var connectedRooms =
-                this._context.Rooms.Where(r => r.FacilityId == facilityId && !String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
+                var connectedRooms =
+                    this._context.Rooms.Where(r => r.FacilityId == facilityId && r.IsActive && !String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
+                
+                var roomTags = singleRooms.SelectMany(r=>{
+                    var piPathRoom = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}";
+                    return new List<string> {
+                        $"{piPathRoom}|Status",
+                        $"{piPathRoom}|Temp|Status",
+                        $"{piPathRoom}|Airx|Status",
+                        $"{piPathRoom}|Hum|Status"
+                    };
+                });
 
-            var roomStatusQueries = singleRooms.SelectMany(r =>
-            {
-                var piPathRoom = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}";
-                return new List<LocationQuery>() {
-                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Status", Attribute="Composite" },
-                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Temp|Status", Attribute="Temp" },
-                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Airx|Status", Attribute="Airx" },
-                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|Hum|Status", Attribute="Hum" },
-                    new LocationQuery { LocationName = r.RoomNumber!, Tag = $"{piPathRoom}|DP|Status", Attribute="DP" },
-                };
-            }).ToList();
+                var dpStatusTags = connectedRooms.Select(r => {
+                    var piPath = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{r.FormattedName}|DP|Status";
+                    return piPath;
+                });
 
-            var dpStatusQueries = connectedRooms.Select(r =>
-            {
-                var formattedName = !String.IsNullOrWhiteSpace(r.FormattedName) ? r.FormattedName :  $"{r.ConnectingRoom}_{r.RoomNumber}_DP";
-                var piPath = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{formattedName}|DP|Status";
-                return new LocationQuery { LocationName = $"{r.FormattedName}", Tag = piPath, Attribute = "DP" };
-            }).ToList();
+                var allTags = roomTags.Union(dpStatusTags).ToList();
+                var currentData = (await this._piDataService.CurrentStatusDataBatch(allTags));
 
-            var allQueries = roomStatusQueries.Union(dpStatusQueries).ToList();
-            var currentData = await this._piDataService.CurrentStatusData(allQueries);
-            return currentData;
+                var locationStatusValues = currentData.Select(x=>{
+                    var parts = x.Tag.Split('\\');
+                    var lastPart = parts.Last();
+                    var pipeIndex = lastPart.IndexOf('|');
+                    var locationName = lastPart.Substring(0,pipeIndex);
+                    var pipeDelimParts = x.Tag.Split('|').ToList();
+                    var attribute = pipeDelimParts[1] == "Status" ? "Composite" : pipeDelimParts[1];
+  
+                    return new LocationCurrentStatus {
+                        Attribute=attribute,
+                        LocationName=locationName,
+                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                    };
+                }).ToList();
+
+                return locationStatusValues;
+
+            }
+            catch(Exception ex) {
+                Console.Write(ex);
+                throw ex;
+            }
         }
 
         [HttpGet("APFLimits")]

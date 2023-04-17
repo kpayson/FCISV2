@@ -85,3 +85,7 @@ SELECT [RoomId]
         INCLUDE_NULL_VALUES
 
 https://stackoverflow.com/questions/22209499/sql-server-error-exclusive-access-could-not-be-obtained-because-the-database
+
+nih-dtr
+dtrAdmin
+DTRpwd@1

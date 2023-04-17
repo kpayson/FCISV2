@@ -22,5 +22,7 @@ namespace FCISUI.Models
         public bool IsActive { get; set; }
         public string? FacilityRepName { get; set; }
         public string? FacilityFullName { get; set; }
+
+        // public virtual ICollection<Room> Rooms {get;set;}
     }
 }

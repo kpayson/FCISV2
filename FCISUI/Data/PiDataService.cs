@@ -11,20 +11,26 @@ namespace FCISUI.Data
     {
         // Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes);
         Task<IEnumerable<LocationCurrentStatus>> CurrentStatusData(IList<LocationQuery> locationQueries);
+        Task<List<CurrentValue>> CurrentStatusDataBatch(IList<string> tags); 
         Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval);
 
-         Task<List<dynamic>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval);
+        Task<List<TimeSeriesBatch>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval);
         Task<List<dynamic>> APFLimits();
-        // Task<IEnumerable<LocationTimeSeriesData>>  AllFacilityTimeSeriesData(IList<Facility> facilities, DateTime startTime, DateTime endTime, int intervalInMinutes);
-        // Task<IEnumerable<LocationTimeSeriesData>> FacilityTimeSeriesData(IList<Room> rooms, DateTime startTime, DateTime endTime, int intervalInMinutes);
     }
 
     public class TimeSeriesPoint
     {
         public long Timestamp { get; set; }
         public double? numeric_value { get; set; }
+        public double? raw_value {get; set;}
     }
 
+
+    public class TimeSeriesBatch
+    {
+        public string tag {get; set;}
+        public List<TimeSeriesPoint> data {get; set;}
+    }
 
 
     public class LocationCurrentStatus
@@ -40,6 +46,12 @@ namespace FCISUI.Data
         public string LocationName {get; set;} //Facility or Room
         public string Attribute {get;set;} 
         public string Tag {get; set;}
+    }
+
+    public class CurrentValue
+    {
+        public string Tag {get; set;}
+        public int numeric_value {get; set;}
     }
 
     public class PIDataService : IPIDataService
@@ -61,34 +73,30 @@ namespace FCISUI.Data
                 var currentDataPath = $"pi-api/current-value?tag={loc.Tag}";
                 var res = await this._httpClient.GetAsync(currentDataPath);
                 if(res.IsSuccessStatusCode) {
-                    var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>();
-                    var point = new LocationCurrentStatus {
-                        LocationName = loc.LocationName,
-                        Attribute = loc.Attribute,
-                        StatusPoint = timeSeries.First()
-                    }; 
-                    statusPoints.Add(point);
+                    try {
+                        var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>();
+                        var point = new LocationCurrentStatus {
+                            LocationName = loc.LocationName,
+                            Attribute = loc.Attribute,
+                            StatusPoint = timeSeries.First()
+                        }; 
+                        statusPoints.Add(point);
+                    }
+                    catch(Exception ex) {
+                        Console.Write(ex);
+                    }
                 }
 
             }
             return statusPoints;
         }
 
-        // public async Task<IEnumerable<LocationTimeSeriesData>> LocationTimeSeriesData(IList<LocationQuery> locationQueries, DateTime startTime, DateTime endTime, int intervalInMinutes) {
+        public async Task<List<CurrentValue>> CurrentStatusDataBatch(IList<string> tags) {
+            var res = await this._httpClient.PostAsJsonAsync("/pi-api/current-value-batch", tags);
+            var statusValues = await res.Content.ReadFromJsonAsync<List<CurrentValue>>() ?? new List<CurrentValue>();
+            return statusValues;
+        }
 
-        //     // tag=\\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP&start_time=2022-11-26&end_time=2022-11-27&rectype=interpolated&interval=10m
-        //     var facilityPoints = new List<LocationTimeSeriesData>();
-        //     foreach(var loc in locationQueries) {
-        //         var points = await TimeSeriesData(loc.Tag!,startTime,endTime,intervalInMinutes);
-        //         var facPoints = new LocationTimeSeriesData{
-        //             LocationName = loc.LocationName,
-        //             Tag = loc.Tag!,
-        //             Points = points.ToList()
-        //         };
-        //         facilityPoints.Add(facPoints);
-        //     }
-        //     return facilityPoints;
-        // }
 
         public async Task<List<TimeSeriesPoint>> TimeSeriesData(string tag, DateTime startTime, DateTime endTime, int interval) {
             //var sw = System.Diagnostics.
@@ -97,6 +105,7 @@ namespace FCISUI.Data
             var timeSeriesPath = $"pi-api/time-series?tag={tag}&start_time={startUTC}&end_time={endUTC}&rectype=interpolated&interval={interval}m";
             try {
                 var res = await this._httpClient.GetAsync(timeSeriesPath);
+                var resString = await res.Content.ReadAsStringAsync();
                 var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
                 var nonEmptyPoints = timeSeries.Where(p=>p.numeric_value != null).ToList();
                 return nonEmptyPoints;
@@ -107,7 +116,7 @@ namespace FCISUI.Data
             }
         }
 
-        public async Task<List<dynamic>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval) {
+        public async Task<List<TimeSeriesBatch>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval) {
             var startUTC = startTime.ToString("s");
             var endUTC = endTime.ToString("s");
 
@@ -120,20 +129,16 @@ namespace FCISUI.Data
                     interval=$"{interval}m",
                     rectype="interpolated"
                 };
-                // var postDataJson = JsonSerializer.Serialize(postData);
-                
-                // var content = new StringContent(postDataJson, System.Text.Encoding.UTF8, "application/json");
 
                 var res = await this._httpClient.PostAsJsonAsync("/pi-api/time-series-batch", postData);
-                var timeSeries = (await res.Content.ReadFromJsonAsync<IEnumerable<dynamic>>()).ToList(); //?? new List<TimeSeriesPoint>(); 
-                // ex "{"Timestamp":1679861329000,"\\\\ORF-COGENAF\\cGMP\\cGMP\\Pet_1\\1C482-1|Hum|Status":0.0,"\\\\ORF-COGENAF\\cGMP\\cGMP\\Pet_1\\1C482-2|Hum|Status":0.0}"
-                // var nonEmptyPoints = timeSeries!.Where(p => p.numeric_value != null).ToList();
-                return timeSeries;
+                var timeSeries = await res.Content.ReadFromJsonAsync<TimeSeriesBatch[]>() ?? new TimeSeriesBatch[]{};
+                var timeSeriesList = timeSeries.ToList();
+
+                return timeSeriesList; //timeSeries.ToList(); //timeSeries;
            }
             catch (Exception ex) {
                 Console.Write(ex);
                 throw ex;
-                //return new List<TimeSeriesPoint>();
             }
         }
 
@@ -149,62 +154,6 @@ namespace FCISUI.Data
                 throw ex;
            }
         }
-
-
-
-// return https://orfd-cogen.ors.nih.gov/pi-api/time-series?tag=\\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check&start_time=${startDate.toISOString()}&end_time=${endDate.toISOString()}&rectype=interpolated&interval=10m
-
-
-        // public async Task AllFacilityCurrentStatus() {}
-        // public async Task<IEnumerable<LocationTimeSeriesData>> AllFacilityTimeSeriesData(IList<Facility> facilities, DateTime startTime, DateTime endTime, int intervalInMinutes) {
-
-        //     var facilityPoints = new List<LocationTimeSeriesData>();
-        //     foreach(var fac in facilities) {
-        //         var points = await TimeSeriesData(fac.PiPath!,startTime,endTime,intervalInMinutes);
-        //         var facPoints = new LocationTimeSeriesData{
-        //             LocationName = fac.FacilityName,
-        //             Tag = fac.PiPath!,
-        //             Points = points.ToList()
-        //         };
-        //         facilityPoints.Add(facPoints);
-        //     }
-        //     return facilityPoints;
-        // }
-
-
-        // public async Task<IEnumerable<LocationTimeSeriesData>> FacilityTimeSeriesData(IList<Room> rooms, DateTime startTime, DateTime endTime, int intervalInMinutes)
-        // {
-        //     var roomPoints = new List<LocationTimeSeriesData>();
-        //     foreach(var rm in rooms) {
-        //         var points = await TimeSeriesData(rm.PiPath!,startTime,endTime,intervalInMinutes);
-        //         var facPoints = new LocationTimeSeriesData{
-        //             LocationName = rm.RoomNumber,
-        //             Tag = rm.PiPath!,
-        //             Points = points.ToList()
-        //         };
-        //         roomPoints.Add(facPoints);
-        //     }
-        //     return roomPoints;
-
-        //     // tag=\\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP&start_time=2022-11-26&end_time=2022-11-27&rectype=interpolated&interval=10m
-        //     // var timeSeriesPath = $"pi-api/time-series?tag={tag}&start_time={startTime}&end_time={endTime}&rectype=interpolated&interval={interval}";
-        //     // var res = await httpClient.GetAsync(timeSeriesPath);
-        //     // var timeSeries = await res.Content.ReadFromJsonAsync<IEnumerable<TimeSeriesPoint>>() ?? new List<TimeSeriesPoint>(); 
-
-        //     // return timeSeries!;
-        // }
-
-
-// <select name="ctl00$cph_main$ddlStatusSelector" id="ddlStatusSelector" class="form-control" style="height:40px;width:180px;">
-// 					<option value="Sum All">Composite Status</option>
-// 					<option value="Temp">Temp Status</option>
-// 					<option value="DP">dP Status</option>
-// 					<option value="Hum">RH Status</option>
-// 					<option selected="selected" value="Airx">ACH Status</option>
-
-// 				</select>
-
-
 
     }
 }
