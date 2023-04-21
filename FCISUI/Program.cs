@@ -191,6 +191,7 @@ namespace FCISUI
             //builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddScoped<IPIDataService, PIDataService>();
             builder.Services.AddScoped<ISvgDataService, SvgDataService>();
+            builder.Services.AddScoped<IErrorLogService, ErrorLogService>();
 
             // Repositories
             // builder.Services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
@@ -261,6 +262,10 @@ namespace FCISUI
 
                 endpoints.MapFallbackToFile("index.html");
             });
+
+            // app.UseExceptionHandler(appError=>{
+            //     //appError.
+            // });
         }
 
         private static void SeedRoomData(string seedDataFolder, FCISPortalContext context, ILogger<Program> logger) {

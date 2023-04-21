@@ -1,3 +1,4 @@
+export * from './errorLog';
 export * from './facility';
 export * from './gsfChart';
 export * from './svgMap';

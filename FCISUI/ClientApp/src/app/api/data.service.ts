@@ -1,4 +1,5 @@
 import {
+  ErrorLog,
   Facility,
   FacilityGsf,
   FacilityTimeSeriesData,
@@ -138,5 +139,9 @@ export class DataService {
 
   apfLimits() {
     return this.get<any[]>(`Timeline/ApfLimits`);
+  }
+
+  errors() {
+    return this.get<ErrorLog[]>(`ErrorLog`);
   }
 }

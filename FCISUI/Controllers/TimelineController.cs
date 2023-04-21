@@ -62,28 +62,41 @@ namespace FCISUI.Controllers
         [HttpPost("AllFacilityTimelineData")]
         public async Task<IEnumerable<FacilityTimelineData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams)
         {
-            var facilities =
-                this._context.Facilities.Where(x => x.IsActive && x.FacilityIC.ToLower() == timelineParams.IC.ToLower())
-                .ToList();
+            try {
+                var facilities =
+                    this._context.Facilities.Where(x => x.IsActive && x.FacilityIC.ToLower() == timelineParams.IC.ToLower())
+                    .ToList();
 
-            var tags = facilities.Select(f=>$@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check").ToList();
-            var batchData = await this._piDataService.TimeSeriesDataBatch(tags,timelineParams.StartDate.ToUniversalTime(),timelineParams.EndDate.ToUniversalTime(),timelineParams.Interval);
+                var tags = facilities.Select(f=>$@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check").ToList();
+                var batchData = await this._piDataService.TimeSeriesDataBatch(tags,timelineParams.StartDate.ToUniversalTime(),timelineParams.EndDate.ToUniversalTime(),timelineParams.Interval);
 
 
-            var facilityData = batchData.Select(x=>{
-                var parts = x.tag.Split('\\');
-                var lastPart = parts.Last();
-                var pipeIndex = lastPart.IndexOf('|');
-                var facilitySection = lastPart.Substring(0,pipeIndex);
-                return new FacilityTimelineData {
-                    Points=x.data,
-                    Facility=facilities.First(y=>y.FacilitySection == facilitySection),
-                    Tag=x.tag
-                };
+                var facilityData = batchData.Select(x=>{
+                    var parts = x.tag.Split('\\');
+                    var lastPart = parts.Last();
+                    var pipeIndex = lastPart.IndexOf('|');
+                    var facilitySection = lastPart.Substring(0,pipeIndex);
+                    return new FacilityTimelineData {
+                        Points=x.data,
+                        Facility=facilities.First(y=>y.FacilitySection == facilitySection),
+                        Tag=x.tag
+                    };
 
-            }).ToList();
+                }).ToList();
 
-            return facilityData;
+                return facilityData;
+            }
+            catch(Exception ex) {
+                Console.Write(ex);
+                this._context.Add<Errorlog>(new Errorlog {
+                    Errordate = DateTime.Now,
+                    Errormessage = "Error AllFacilityTimelineData post with data: " + System.Text.Json.JsonSerializer.Serialize(timelineParams),
+                    Errortrace = ex.ToString()
+                });
+
+                _context.SaveChanges();
+                throw ex;
+            }
 
         }
 
@@ -165,6 +178,13 @@ namespace FCISUI.Controllers
             catch (Exception ex)
             {
                 Console.Write(ex);
+                this._context.Add<Errorlog>(new Errorlog {
+                    Errordate = DateTime.Now,
+                    Errormessage = "Error FacilityTimelineData post with data: " + System.Text.Json.JsonSerializer.Serialize(timelineParams),
+                    Errortrace = ex.ToString()
+                });
+
+                _context.SaveChanges();
                 throw ex;
             }
         }
@@ -173,29 +193,43 @@ namespace FCISUI.Controllers
         [HttpGet("AllFacilityCurrentData")]
         public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData()
         {
-            var facilities =
-                this._context.Facilities.Where(x => x.IsActive && !String.IsNullOrWhiteSpace(x.FacilitySection)).ToList();
-            
-            var tags = facilities.Select(f =>
-            {
-                var tag = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check"; //ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
-                return tag;
-            }).ToList();
+            try {
+                var facilities =
+                    this._context.Facilities.Where(x => x.IsActive && !String.IsNullOrWhiteSpace(x.FacilitySection)).ToList();
+                
+                var tags = facilities.Select(f =>
+                {
+                    var tag = $@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check"; //ex \\ORF-COGENAF\cGMP\cGMP\PET_1|Facility_Status_Check
+                    return tag;
+                }).ToList();
 
-            var currentData = (await this._piDataService.CurrentStatusDataBatch(tags));
-            var locationStatusValues = currentData.Select(x=>{
-                var parts = x.Tag.Split('\\');
-                var lastPart = parts.Last();
-                var pipeIndex = lastPart.IndexOf('|');
-                var facilitySection = lastPart.Substring(0,pipeIndex);
-                var facility = facilities.First(x=>x.FacilitySection == facilitySection);
-                return new LocationCurrentStatus {
-                    Attribute="Composite",
-                    LocationName=facility.CircleId!,
-                    StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
-                };
-            });
-            return locationStatusValues;
+                var currentData = (await this._piDataService.CurrentStatusDataBatch(tags));
+                var locationStatusValues = currentData.Select(x=>{
+                    var parts = x.Tag.Split('\\');
+                    var lastPart = parts.Last();
+                    var pipeIndex = lastPart.IndexOf('|');
+                    var facilitySection = lastPart.Substring(0,pipeIndex);
+                    var facility = facilities.First(x=>x.FacilitySection == facilitySection);
+                    return new LocationCurrentStatus {
+                        Attribute="Composite",
+                        LocationName=facility.CircleId!,
+                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                    };
+                });
+                return locationStatusValues;
+            }
+            catch(Exception ex) {
+                Console.Write(ex);
+                this._context.Add<Errorlog>(new Errorlog {
+                    Errordate = DateTime.Now,
+                    Errormessage = "Error AllFacilityCurrentData",
+                    Errortrace = ex.ToString()
+                });
+
+                _context.SaveChanges();
+                throw ex;
+            }
+
 
         }
 
@@ -247,6 +281,13 @@ namespace FCISUI.Controllers
             }
             catch(Exception ex) {
                 Console.Write(ex);
+                this._context.Add<Errorlog>(new Errorlog {
+                    Errordate = DateTime.Now,
+                    Errormessage = "Error FacilityCurrentData - facilityId=" + facilityId,
+                    Errortrace = ex.ToString()
+                });
+
+                _context.SaveChanges();
                 throw ex;
             }
         }

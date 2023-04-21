@@ -25,7 +25,7 @@ namespace FCISUI.Models
 
         // public virtual DbSet<DocCategory> DocCategories { get; set; } = null!;
         // public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
-        // public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
+        public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
         public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
         // public virtual DbSet<Person> People { get; set; } = null!;

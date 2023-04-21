@@ -1,0 +1,21 @@
+<h2>Error Log</h2>
+
+<p-table [value]="errors">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="errorlogid">Id</th>
+            <th pSortableColumn="errordate">Date</th>
+            <th pSortableColumn="errormessage">Message</th>
+            <th pSortableColumn="errortrace">Trace</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-error>
+        <tr>
+            <td>{{error.errorlogid}}</td>
+            <td [width]="180">{{error.errordate | date:'short'}}</td>
+            <td>{{error.errormessage}}</td>
+            <td [title]="error.errortrace"> {{error.errortrace.substring(0,138)}}...</td>
+        </tr>
+    </ng-template>
+</p-table>
+ 

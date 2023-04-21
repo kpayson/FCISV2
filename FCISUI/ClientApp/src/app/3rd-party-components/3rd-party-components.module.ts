@@ -5,6 +5,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { NgModule } from '@angular/core';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     CalendarModule,
     DropdownModule,
     EditorModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    TableModule
   ],
   providers: [],
   bootstrap: []

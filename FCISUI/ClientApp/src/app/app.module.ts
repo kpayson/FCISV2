@@ -29,6 +29,7 @@ import { StaticContentEditorComponent } from './static-content-editor/static-con
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
+import { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dashboard.component';
 
 // import { DataService } from './data.service';
 
@@ -54,7 +55,8 @@ import { appRoutes } from './routes';
     SvgStatusMapComponent,
     StaticContentEditorComponent,
     RoomInfoDisplayComponent,
-    RoomDataTableComponent
+    RoomDataTableComponent,
+    ErrorLogDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
