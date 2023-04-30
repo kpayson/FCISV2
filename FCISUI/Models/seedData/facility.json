@@ -34,7 +34,7 @@
         "PiPath": "\\\\ORF-COGENAF\\cGMP\\cGMP\\PET_B3|Facility_Status_Check",
         "Attribute": "Facility_Status_Check",
         "CircleId": "NCI_Facility_PET_B3",
-        "IsActive": true,
+        "IsActive": false,
         "FacilityRepName": "CC PET B3 Radiochemistry\r\n",
         "FacilityFullName": "Clinical Center Positron Emission Tomography (PET) B3 Radiochemistry\r\n",
         "SvgMapPinId": "B3_PET"
