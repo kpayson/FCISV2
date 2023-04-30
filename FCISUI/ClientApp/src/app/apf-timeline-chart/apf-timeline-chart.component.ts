@@ -77,6 +77,8 @@ export class ApfTimelineChartComponent {
     document
       .querySelector('text[data-locationId="' + v + '"]')
       ?.setAttribute('fill', 'red');
+
+    this.scrollIntoView(v);
   }
   
   @Input()
@@ -217,9 +219,15 @@ export class ApfTimelineChartComponent {
         me.handleLabelMouseOut(text);
       });
 
+      
+
       // document.querySelectorAll()
       // data-toggle="tooltip" data-placement="right" title="Tooltip on right"
     });
+  }
+
+  scrollIntoView(locationId: string) {
+    document.querySelector(`google-chart [data-locationId="${locationId}"]`)?.scrollIntoView();
   }
 
   handleLabelMouseOver(locationId: string) {

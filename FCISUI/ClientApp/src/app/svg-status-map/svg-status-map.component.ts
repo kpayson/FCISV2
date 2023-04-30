@@ -76,6 +76,19 @@ export class SvgStatusMapComponent implements OnChanges {
       //   });
       // }
     }
+
+    for (const pin of this.svgMap.svgMapArrows) {
+      window.setTimeout(() => {
+        const pinElem = document.getElementById('pin_' + pin.locationId);
+        if (pinElem) {
+          const tooltip = new bootstrap.Tooltip(pinElem, {
+            placement: 'right',
+            html: true,
+            title: '<div>' + pin.locationId + '</div>'
+          });
+        }
+      }, 100);
+    }
   }
 
   @Input()
