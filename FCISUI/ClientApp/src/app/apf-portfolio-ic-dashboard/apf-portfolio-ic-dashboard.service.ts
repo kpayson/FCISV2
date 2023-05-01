@@ -24,7 +24,7 @@ import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 
-interface PiDataFilter {
+export interface PiDataFilter {
   facility: { repName: string; sectionName: string; value: number };
   status: string;
   startDate: Date;

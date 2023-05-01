@@ -3,8 +3,11 @@ import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { GalleriaModule } from 'primeng/galleria';
 import { NgModule } from '@angular/core';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { TableModule } from 'primeng/table';
 
 @NgModule({
@@ -16,8 +19,11 @@ import { TableModule } from 'primeng/table';
     CalendarModule,
     DropdownModule,
     EditorModule,
+    GalleriaModule,
+    OverlayPanelModule,
     ProgressSpinnerModule,
-    TableModule
+    TableModule,
+    TabMenuModule
   ],
   providers: [],
   bootstrap: []

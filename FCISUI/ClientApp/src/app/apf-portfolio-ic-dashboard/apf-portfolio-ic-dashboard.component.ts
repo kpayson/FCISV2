@@ -9,6 +9,7 @@ import { Observable, filter, map } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
+import { PiDataFilter } from './apf-portfolio-ic-dashboard.service';
 import { SvgMap } from '../api/models';
 
 @Component({
@@ -61,6 +62,17 @@ export class ApfPortfolioIcDashboardComponent {
 
     this.timelineChartData$.subscribe(()=>{
       this.isLoading = false;
+    });
+
+    service.piDataFilter$.subscribe((x)=>{
+      this.filterParams = {
+        facility: x.facility.repName || 'All Facility',
+        startDate: `${x.startDate.getMonth() + 1}/${x.startDate.getDate()}/${x.startDate.getFullYear()}`,
+        endDate: `${x.endDate.getMonth() + 1}/${x.endDate.getDate()}/${x.endDate.getFullYear()}`,
+        status: x.status === 'Sum All' ? 'Composite' :  x.status === 'DP' ? 'dP' : x.status,
+        interval: x.interval        
+      }
+
     })
   }
 
@@ -91,6 +103,14 @@ export class ApfPortfolioIcDashboardComponent {
 
   hasSelectedRoom$: Observable<boolean>;
 
+  filterParams: any = {
+    facility:'',
+    startDate:'',
+    endDate:'',
+    status:'',
+    interval:''
+  };
+
   filterChange($event: any) {
     this.isLoading = true;
     setTimeout(() => {
@@ -99,6 +119,10 @@ export class ApfPortfolioIcDashboardComponent {
   }
 
   isLoading=false;
+
+  showFilterToolbar=false;
+
+  showMapKey=false;
 
 
   chartLabelClick($event: any) {
@@ -125,4 +149,5 @@ export class ApfPortfolioIcDashboardComponent {
   pinMouseOut($event: any) {
     this.service.setHoveredPin('');
   }
+
 }

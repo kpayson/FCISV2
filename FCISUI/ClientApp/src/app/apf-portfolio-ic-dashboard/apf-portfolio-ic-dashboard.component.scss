@@ -1,3 +1,4 @@
+a { cursor: pointer;}
 .chart-label {
   margin-top: -4px;
   text-align: center;
@@ -7,10 +8,12 @@
 
 .filter-toolbar-container {
   margin-bottom: 8px;
+  z-index: 999;
 }
 
 .timeline-chart-container {
   margin-top: 8px;
+  // position:fixed;
 }
 
 .svg-map-container {
@@ -20,4 +23,33 @@
 
 .room-info-display-container {
   padding: 4px;
+}
+
+
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 8px;
+  padding-left:8px;
+  background-color: black;
+  color:white;
+  }
+  
+.sidebar div {
+  padding: 8px;
+  font-size: small;
+  display: block;
+  }
+  
+.body-text {
+  // margin-left: 200px;
+  font-size: 18px;
+}
+
+.floor-plan-key {
+  display: block;
+
 }

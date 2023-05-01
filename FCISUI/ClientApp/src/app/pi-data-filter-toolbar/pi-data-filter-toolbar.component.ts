@@ -94,16 +94,11 @@ export class PiDataFilterToolbarComponent implements OnInit {
     interval: 0
   });
 
-  selectedCity = {};
-
-  filterStyle = {
-    width: '200px'
-  };
 
   private roomStatusOptions = [
     { name: 'Composite Status', value: 'Sum All' },
     { name: 'Temp Status', value: 'Temp' },
-    { name: 'dp Status', value: 'DP' },
+    { name: 'dP Status', value: 'DP' },
     { name: 'RH Status', value: 'Hum' },
     { name: 'ACH Status', value: 'Airx' }
   ];
