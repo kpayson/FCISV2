@@ -116,8 +116,8 @@ namespace FCISUI.Controllers
 
         [HttpGet("RoomParameterInfo/facility/{facilityId}")]
         public ActionResult<IEnumerable<Room>> RoomParameterInfo(int facilityId) {
-            var rooms = this._context.Rooms.Where(r=>r.FacilityId == facilityId).ToList();
-            //.Include(room => room.RoomParameters).Where(r=>r.FacilityId == facilityId).ToList();
+            var rooms = this._context.Rooms.Where(r=>r.FacilityId == facilityId)
+                .Include(room => room.RoomParameters).Where(r=>r.FacilityId == facilityId).ToList();
             return rooms;
         }
 
