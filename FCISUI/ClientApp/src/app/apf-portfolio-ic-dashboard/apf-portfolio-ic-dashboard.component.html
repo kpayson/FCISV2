@@ -25,40 +25,37 @@
   <div class="body-text">
     <div class="row" style="position:relative;">
 
-      <div style="display:flex">
-        <div style="display:flex; position:relative">
-          <div style="border:1px solid lightgray; padding:4px 16px;"><a (click)="opFilter.toggle($event)"><i
-                class="pi pi-search" style="font-size: 2rem; cursor:pointer"></i></a></div>
-          <div style="border:1px solid lightgray; padding:4px 16px;"><a (click)="opKey.toggle($event)"><i class="pi pi-key"
-                style="font-size: 2rem"></i></a></div>
-        </div>
-        <div style="display:flex; justify-content: center;  width:35%;">
-          <div style="padding-left:8px; border:0px solid lightgray; width:380px; color: #b3172c; font-weight:bold;">
-            {{filterParams.facility}}<br>
-            
-          </div>
-        </div>
-
-      </div>
-
-
-      <p-overlayPanel #opFilter>
-        <app-pi-data-filter-toolbar [facilities]="(facilityFilterOptions$ | async)!" [defaultFacilityId]="0"
-          [defaultInterval]="30" (filterChange)="filterChange($event)"></app-pi-data-filter-toolbar>
-      </p-overlayPanel>
-
-      <p-overlayPanel #opKey>
-        <div class="floor-plan-key">
-          <img
-          src="assets/images/floor-plans/FloorPlanColorKey.svg"
-          style="width: 500px; border: 1px solid red"/>
-        </div>
-
-      </p-overlayPanel>
-
-
-
       <div class="col-md-6">
+
+        <div style="display:flex; width:100%;">
+          <div style="display:flex; position:relative">
+            <div style="border:1px solid lightgray; padding:4px 16px;"><a (click)="opFilter.toggle($event)"><i
+                  class="pi pi-filter" style="font-size: 2rem; cursor:pointer"></i></a></div>
+            <div style="border:1px solid lightgray; padding:4px 16px;"><a (click)="opKey.toggle($event)"><i class="pi pi-key"
+                  style="font-size: 2rem"></i></a></div>
+          </div>
+  
+          <div style="color: #b3172c; font-weight:bold; display:flex; justify-content: center; align-items:center; width:100%;">
+            <h4>{{filterParams.facility}}</h4>      
+          </div>
+  
+  
+        </div>
+  
+  
+        <p-overlayPanel #opFilter>
+          <app-pi-data-filter-toolbar [facilities]="(facilityFilterOptions$ | async)!" [defaultFacilityId]="0"
+            [defaultInterval]="30" (filterChange)="filterChange($event)"></app-pi-data-filter-toolbar>
+        </p-overlayPanel>
+  
+        <p-overlayPanel #opKey>
+          <div class="floor-plan-key">
+            <img
+            src="assets/images/floor-plans/FloorPlanColorKey.svg"
+            style="width: 500px; border: 1px solid red"/>
+          </div>
+  
+        </p-overlayPanel>
 
         <div class="svg-map-container">
           <app-svg-status-map [svgMap]="(svgMap$ | async) || defaultSvgMap" [pinStates]="(pinStates$ | async) || {}"
