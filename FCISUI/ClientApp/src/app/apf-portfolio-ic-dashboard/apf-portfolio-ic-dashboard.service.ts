@@ -11,12 +11,9 @@ import {
   zip
 } from 'rxjs';
 import {
-  Facility,
   LocationCurrentStatus,
-  LocationTimeSeriesData,
   Room,
   SvgMap,
-  TimeSeriesPoint
 } from 'src/app/api/models';
 import { keyBy, reduce } from 'lodash';
 
@@ -186,8 +183,9 @@ export class ApfPortfolioIcDashboardService {
         mergeMap((facility) =>
           zip(
             of(facility.value),
+            // of([] as any),
             this.dataService.facilityCurrentStatusData(facility.value), // status for each room and attribute in facility
-            this.dataService.roomParameterInfo(facility.value) // parameter info from dastabase for each room and attribute in facility
+            this.dataService.roomParameterInfo(facility.value) // parameter info from database for each room and attribute in facility
           )
         )
       )
@@ -231,8 +229,13 @@ export class ApfPortfolioIcDashboardService {
       });
 
     // when a map pin is selected, prepare room info display data using the apf limits query, current status values, and the room parameters
-    this._selectedPin$.pipe(filter(Boolean)).subscribe((pin) => {
-      const statusValues = this._currentStatusValues$.value;
+    this._selectedPin$.pipe(
+      filter(Boolean),
+      mergeMap((pin:string)=>zip(
+        of(pin),
+        this.dataService.roomCurrentAttributeData(this._piDataFilter$.value.facility.value,pin)
+      ))
+    ).subscribe(([pin,roomStatusValues]) => {
       const facility =
         this._piDataFilter$.value.facility.sectionName.toLowerCase();
       const key = `${facility}|${pin.toLowerCase()}`; // pin = room number
@@ -245,9 +248,7 @@ export class ApfPortfolioIcDashboardService {
         this._parameterValues$.value.find(
           (r) => (r.roomNumber.toLowerCase() === pin.toLowerCase())
         );
-      const roomStatusValues = statusValues.filter(
-        (x) => x.locationName === pin
-      );
+
       const info = {
         ...apfLimits,
         gsf: room?.sq,

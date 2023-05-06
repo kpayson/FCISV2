@@ -191,6 +191,7 @@ namespace FCISUI.Controllers
 
 
         [HttpGet("AllFacilityCurrentData")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 600)]
         public async Task<IEnumerable<LocationCurrentStatus>> AllFacilityCurrentStatusData()
         {
             try {
@@ -233,33 +234,77 @@ namespace FCISUI.Controllers
 
         }
 
-        [HttpGet("FacilityCurrentData/{facilityId}")]
-        public async Task<IEnumerable<LocationCurrentStatus>> FacilityCurrentStatusData(int facilityId)
+        [HttpGet("FacilityCurrentCompositeData/{facilityId}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 600)]
+        public async Task<IEnumerable<LocationCurrentStatus>> FacilityCurrentCompositeStatusData(int facilityId)
         {
             try {
-                var singleRooms =
-                    this._context.Rooms.Where(r => r.FacilityId == facilityId && r.IsActive && String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
+                var rooms =
+                    this._context.Rooms.Where(r => r.FacilityId == facilityId && r.IsActive).ToList();
 
-                var connectedRooms =
-                    this._context.Rooms.Where(r => r.FacilityId == facilityId && r.IsActive && !String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
-                
-                var roomTags = singleRooms.SelectMany(r=>{
-                    var piPathRoom = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}";
-                    return new List<string> {
-                        $"{piPathRoom}|Status",
+                var roomTags = rooms.Select(r=>{
+                    return String.IsNullOrEmpty(r.ConnectingRoom) ?
+                        $@"{piPathEnv}\{r.Facility}\{r.FormattedName}|Status" :
+                        $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{r.FormattedName}|DP|Status";
+                }).ToList();
+
+                var currentData = (await this._piDataService.CurrentStatusDataBatch(roomTags));
+
+                var locationStatusValues = currentData.Select(x=>{
+                    var parts = x.Tag.Split('\\');
+                    var lastPart = parts.Last();
+                    var pipeIndex = lastPart.IndexOf('|');
+                    var locationName = lastPart.Substring(0,pipeIndex);
+                    var pipeDelimParts = x.Tag.Split('|').ToList();
+                    var attribute = pipeDelimParts[1] == "Status" ? "Composite" : pipeDelimParts[1];
+  
+                    return new LocationCurrentStatus {
+                        Attribute=attribute,
+                        LocationName=locationName,
+                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                    };
+                }).ToList();
+
+                return locationStatusValues;
+            }
+            catch(Exception ex) {
+                Console.Write(ex);
+                this._context.Add<Errorlog>(new Errorlog {
+                    Errordate = DateTime.Now,
+                    Errormessage = "Error FacilityCurrentData - facilityId=" + facilityId,
+                    Errortrace = ex.ToString()
+                });
+
+                _context.SaveChanges();
+                throw ex;
+            }
+        }
+
+        [HttpGet("RoomCurrentAttributeData/facility/{facilityId}/room/{formattedRoomName}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 600)]
+        public async Task<IEnumerable<LocationCurrentStatus>> FacilityCurrentAttributeStatusData(int facilityId, string formattedRoomName)
+        {
+            try {
+                var room = this._context.Rooms.FirstOrDefault(r=>r.FacilityId == facilityId && r.FormattedName == formattedRoomName);
+                if(room == null) {
+                    throw new Exception("Room name" + formattedRoomName + " not found");
+                }
+
+                List<string> tags;
+                if(formattedRoomName.EndsWith("_DP")) {
+                    tags = new List<string> {$@"{piPathEnv}\{room.Facility}\{room.RoomNumber}\{room.FormattedName}|DP|Status"};
+                }
+                else {
+                    var piPathRoom = $@"{piPathEnv}\{room.Facility}\{room.RoomNumber}";
+                    tags =new List<string> {
+                        $"{piPathRoom}|Status",  //composite status
                         $"{piPathRoom}|Temp|Status",
                         $"{piPathRoom}|Airx|Status",
                         $"{piPathRoom}|Hum|Status"
                     };
-                });
+                }
 
-                var dpStatusTags = connectedRooms.Select(r => {
-                    var piPath = $@"{piPathEnv}\{r.Facility}\{r.RoomNumber}\{r.FormattedName}|DP|Status";
-                    return piPath;
-                });
-
-                var allTags = roomTags.Union(dpStatusTags).ToList();
-                var currentData = (await this._piDataService.CurrentStatusDataBatch(allTags));
+                var currentData = (await this._piDataService.CurrentStatusDataBatch(tags));
 
                 var locationStatusValues = currentData.Select(x=>{
                     var parts = x.Tag.Split('\\');
@@ -283,7 +328,7 @@ namespace FCISUI.Controllers
                 Console.Write(ex);
                 this._context.Add<Errorlog>(new Errorlog {
                     Errordate = DateTime.Now,
-                    Errormessage = "Error FacilityCurrentData - facilityId=" + facilityId,
+                    Errormessage = "Error RoomCurrentAttributeData - room=" + formattedRoomName,
                     Errortrace = ex.ToString()
                 });
 
@@ -291,6 +336,8 @@ namespace FCISUI.Controllers
                 throw ex;
             }
         }
+
+
 
         [HttpGet("APFLimits")]
         public async Task<IEnumerable<dynamic>> APFLimits()

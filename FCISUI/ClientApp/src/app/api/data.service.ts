@@ -133,7 +133,13 @@ export class DataService {
       );
     }
     return this.get<LocationCurrentStatus[]>(
-      `Timeline/FacilityCurrentData/${facilityId}`
+      `Timeline/FacilityCurrentCompositeData/${facilityId}`
+    );
+  }
+
+  roomCurrentAttributeData(facilityId: number, roomFormattedName: string) {
+    return this.get<LocationCurrentStatus[]>(
+      `Timeline/RoomCurrentAttributeData/facility/${facilityId}/room/${roomFormattedName}`
     );
   }
 

@@ -8,7 +8,7 @@
         "Sq": 382,
         "RoomName": "Radiochemistry Lab",
         "IsActive": true,
-        "FormattedName": "1C482-1__DP"
+        "FormattedName": "1C482-1"
     },
     {
         "RoomId": 2,
@@ -19,7 +19,7 @@
         "Sq": 215,
         "RoomName": "Radiochemistry Lab",
         "IsActive": true,
-        "FormattedName": "1C482-2__DP"
+        "FormattedName": "1C482-2"
     },
     {
         "RoomId": 3,
@@ -30,7 +30,7 @@
         "Sq": 42,
         "RoomName": "Air Lock",
         "IsActive": true,
-        "FormattedName": "5640__DP"
+        "FormattedName": "5640"
     },
     {
         "RoomId": 4,
@@ -41,7 +41,7 @@
         "Sq": 102,
         "RoomName": "Clean Room",
         "IsActive": true,
-        "FormattedName": "5642__DP"
+        "FormattedName": "5642"
     },
     {
         "RoomId": 5,
@@ -52,7 +52,7 @@
         "Sq": 48,
         "RoomName": "Laminar Hood Room",
         "IsActive": true,
-        "FormattedName": "6624__DP"
+        "FormattedName": "6624"
     },
     {
         "RoomId": 6,
@@ -63,7 +63,7 @@
         "Sq": 97,
         "RoomName": "Exit",
         "IsActive": true,
-        "FormattedName": "2N2J1__DP"
+        "FormattedName": "2N2J1"
     },
     {
         "RoomId": 7,
@@ -74,7 +74,7 @@
         "Sq": 195,
         "RoomName": "Airlock #1",
         "IsActive": true,
-        "FormattedName": "2N3071__DP"
+        "FormattedName": "2N3071"
     },
     {
         "RoomId": 8,
@@ -96,7 +96,7 @@
         "Sq": 130,
         "RoomName": "Airlock #2",
         "IsActive": true,
-        "FormattedName": "2N3072__DP"
+        "FormattedName": "2N3072"
     },
     {
         "RoomId": 10,
@@ -118,7 +118,7 @@
         "Sq": 470,
         "RoomName": "Hallway",
         "IsActive": true,
-        "FormattedName": "2N3073__DP"
+        "FormattedName": "2N3073"
     },
     {
         "RoomId": 12,
@@ -250,7 +250,7 @@
         "Sq": 65,
         "RoomName": "Exit Airlock",
         "IsActive": true,
-        "FormattedName": "2N3074__DP"
+        "FormattedName": "2N3074"
     },
     {
         "RoomId": 24,
@@ -272,7 +272,7 @@
         "Sq": 171,
         "RoomName": "Clean Freezer",
         "IsActive": true,
-        "FormattedName": "2N307A__DP"
+        "FormattedName": "2N307A"
     },
     {
         "RoomId": 26,
@@ -283,7 +283,7 @@
         "Sq": 220,
         "RoomName": "Tissue Culture",
         "IsActive": true,
-        "FormattedName": "2N307B__DP"
+        "FormattedName": "2N307B"
     },
     {
         "RoomId": 27,
@@ -294,7 +294,7 @@
         "Sq": 214,
         "RoomName": "Tissue Culture",
         "IsActive": true,
-        "FormattedName": "2N307C__DP"
+        "FormattedName": "2N307C"
     },
     {
         "RoomId": 28,
@@ -305,7 +305,7 @@
         "Sq": 52,
         "RoomName": "Clean Supply",
         "IsActive": true,
-        "FormattedName": "2N307D__DP"
+        "FormattedName": "2N307D"
     },
     {
         "RoomId": 29,
@@ -316,7 +316,7 @@
         "Sq": 169,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
-        "FormattedName": "2N307G__DP"
+        "FormattedName": "2N307G"
     },
     {
         "RoomId": 30,
@@ -327,7 +327,7 @@
         "Sq": 155,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
-        "FormattedName": "2N307H__DP"
+        "FormattedName": "2N307H"
     },
     {
         "RoomId": 31,
@@ -338,7 +338,7 @@
         "Sq": 155,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
-        "FormattedName": "2N307J__DP"
+        "FormattedName": "2N307J"
     },
     {
         "RoomId": 32,
@@ -349,7 +349,7 @@
         "Sq": 60,
         "RoomName": "Clean JC",
         "IsActive": true,
-        "FormattedName": "2N307JC__DP"
+        "FormattedName": "2N307JC"
     },
     {
         "RoomId": 33,
@@ -360,7 +360,7 @@
         "Sq": 157,
         "RoomName": "Small Tissue Culture",
         "IsActive": true,
-        "FormattedName": "2N307K__DP"
+        "FormattedName": "2N307K"
     },
     {
         "RoomId": 34,
@@ -371,7 +371,7 @@
         "Sq": 240,
         "RoomName": "Large Equipment Room",
         "IsActive": true,
-        "FormattedName": "2N307L__DP"
+        "FormattedName": "2N307L"
     },
     {
         "RoomId": 35,
@@ -382,7 +382,7 @@
         "Sq": 147,
         "RoomName": "Degown",
         "IsActive": true,
-        "FormattedName": "2N308__DP"
+        "FormattedName": "2N308"
     },
     {
         "RoomId": 36,
@@ -404,7 +404,7 @@
         "Sq": 101,
         "RoomName": "Degown Airlock",
         "IsActive": true,
-        "FormattedName": "2N308A__DP"
+        "FormattedName": "2N308A"
     },
     {
         "RoomId": 38,
@@ -426,7 +426,7 @@
         "Sq": 277,
         "RoomName": "Infectious Suite",
         "IsActive": true,
-        "FormattedName": "2N308C__DP"
+        "FormattedName": "2N308C"
     },
     {
         "RoomId": 40,
@@ -448,7 +448,7 @@
         "Sq": 87,
         "RoomName": "Entry Airlock",
         "IsActive": true,
-        "FormattedName": "2N308D__DP"
+        "FormattedName": "2N308D"
     },
     {
         "RoomId": 42,
@@ -470,7 +470,7 @@
         "Sq": 278,
         "RoomName": "Freezer Room",
         "IsActive": true,
-        "FormattedName": "2N312__DP"
+        "FormattedName": "2N312"
     },
     {
         "RoomId": 44,
@@ -481,7 +481,7 @@
         "Sq": 172,
         "RoomName": "Supply",
         "IsActive": true,
-        "FormattedName": "2N316__DP"
+        "FormattedName": "2N316"
     },
     {
         "RoomId": 45,
@@ -492,7 +492,7 @@
         "Sq": null,
         "RoomName": "Admin",
         "IsActive": true,
-        "FormattedName": "1CM100__DP"
+        "FormattedName": "1CM100"
     },
     {
         "RoomId": 46,
@@ -503,7 +503,7 @@
         "Sq": null,
         "RoomName": "Clean Supply",
         "IsActive": true,
-        "FormattedName": "1CM100A__DP"
+        "FormattedName": "1CM100A"
     },
     {
         "RoomId": 47,
@@ -525,7 +525,7 @@
         "Sq": null,
         "RoomName": "Locker Room",
         "IsActive": true,
-        "FormattedName": "1CM100B__DP"
+        "FormattedName": "1CM100B"
     },
     {
         "RoomId": 49,
@@ -547,7 +547,7 @@
         "Sq": null,
         "RoomName": "Cryo-Freezer",
         "IsActive": true,
-        "FormattedName": "1CM100D__DP"
+        "FormattedName": "1CM100D"
     },
     {
         "RoomId": 51,
@@ -580,7 +580,7 @@
         "Sq": null,
         "RoomName": "Gowning",
         "IsActive": true,
-        "FormattedName": "1CM102__DP"
+        "FormattedName": "1CM102"
     },
     {
         "RoomId": 54,
@@ -613,7 +613,7 @@
         "Sq": null,
         "RoomName": "Ante Room 1",
         "IsActive": true,
-        "FormattedName": "1CM104__DP"
+        "FormattedName": "1CM104"
     },
     {
         "RoomId": 57,
@@ -635,7 +635,7 @@
         "Sq": null,
         "RoomName": "Tissue Culture 1",
         "IsActive": true,
-        "FormattedName": "1CM104A__DP"
+        "FormattedName": "1CM104A"
     },
     {
         "RoomId": 59,
@@ -668,7 +668,7 @@
         "Sq": null,
         "RoomName": "Ante Room 5",
         "IsActive": true,
-        "FormattedName": "1CM104B__DP"
+        "FormattedName": "1CM104B"
     },
     {
         "RoomId": 62,
@@ -690,7 +690,7 @@
         "Sq": null,
         "RoomName": "Ante Room 2",
         "IsActive": true,
-        "FormattedName": "1CM106__DP"
+        "FormattedName": "1CM106"
     },
     {
         "RoomId": 64,
@@ -712,7 +712,7 @@
         "Sq": null,
         "RoomName": "Tissue Culture 2",
         "IsActive": true,
-        "FormattedName": "1CM106A__DP"
+        "FormattedName": "1CM106A"
     },
     {
         "RoomId": 66,
@@ -745,7 +745,7 @@
         "Sq": null,
         "RoomName": "Ante Room 6",
         "IsActive": true,
-        "FormattedName": "1CM106B__DP"
+        "FormattedName": "1CM106B"
     },
     {
         "RoomId": 69,
@@ -767,7 +767,7 @@
         "Sq": null,
         "RoomName": "Ante Room 3",
         "IsActive": true,
-        "FormattedName": "1CM108__DP"
+        "FormattedName": "1CM108"
     },
     {
         "RoomId": 71,
@@ -789,7 +789,7 @@
         "Sq": null,
         "RoomName": "Tissue Culture 3",
         "IsActive": true,
-        "FormattedName": "1CM108A__DP"
+        "FormattedName": "1CM108A"
     },
     {
         "RoomId": 73,
@@ -822,7 +822,7 @@
         "Sq": null,
         "RoomName": "Ante Room 7",
         "IsActive": true,
-        "FormattedName": "1CM108B__DP"
+        "FormattedName": "1CM108B"
     },
     {
         "RoomId": 76,
@@ -844,7 +844,7 @@
         "Sq": null,
         "RoomName": "Ante Room 4",
         "IsActive": true,
-        "FormattedName": "1CM110__DP"
+        "FormattedName": "1CM110"
     },
     {
         "RoomId": 78,
@@ -866,7 +866,7 @@
         "Sq": null,
         "RoomName": "Tissue Culture 4",
         "IsActive": true,
-        "FormattedName": "1CM110A__DP"
+        "FormattedName": "1CM110A"
     },
     {
         "RoomId": 80,
@@ -899,7 +899,7 @@
         "Sq": null,
         "RoomName": "Ante Room 8",
         "IsActive": true,
-        "FormattedName": "1CM110B__DP"
+        "FormattedName": "1CM110B"
     },
     {
         "RoomId": 83,
@@ -921,7 +921,7 @@
         "Sq": null,
         "RoomName": "Supply Corridor",
         "IsActive": true,
-        "FormattedName": "CORR1CM-1__DP"
+        "FormattedName": "CORR1CM-1"
     },
     {
         "RoomId": 85,
@@ -932,7 +932,7 @@
         "Sq": null,
         "RoomName": "Return Corridor",
         "IsActive": true,
-        "FormattedName": "CORR1CM-2__DP"
+        "FormattedName": "CORR1CM-2"
     },
     {
         "RoomId": 86,
@@ -954,7 +954,7 @@
         "Sq": null,
         "RoomName": "Unisex Tlt 1",
         "IsActive": true,
-        "FormattedName": "REST1-1__DP"
+        "FormattedName": "REST1-1"
     },
     {
         "RoomId": 88,
@@ -965,7 +965,7 @@
         "Sq": null,
         "RoomName": "Unisex Tlt 2",
         "IsActive": true,
-        "FormattedName": "REST1-2__DP"
+        "FormattedName": "REST1-2"
     },
     {
         "RoomId": 90,
@@ -976,7 +976,7 @@
         "Sq": null,
         "RoomName": "Entry Anteroom to Corridor",
         "IsActive": true,
-        "FormattedName": "2C450__DP"
+        "FormattedName": "2C450"
     },
     {
         "RoomId": 91,
@@ -998,7 +998,7 @@
         "Sq": null,
         "RoomName": "Sterility Anteroom to Entry Anteroom",
         "IsActive": true,
-        "FormattedName": "2C451A__DP"
+        "FormattedName": "2C451A"
     },
     {
         "RoomId": 94,
@@ -1020,7 +1020,7 @@
         "Sq": null,
         "RoomName": "Sterility Lab to Sterility Anteroom",
         "IsActive": true,
-        "FormattedName": "2C451B__DP"
+        "FormattedName": "2C451B"
     },
     {
         "RoomId": 97,
@@ -1042,7 +1042,7 @@
         "Sq": null,
         "RoomName": "Culture Anteroom to Entry Anteroom",
         "IsActive": true,
-        "FormattedName": "2C452A__DP"
+        "FormattedName": "2C452A"
     },
     {
         "RoomId": 100,
@@ -1064,7 +1064,7 @@
         "Sq": null,
         "RoomName": "Culture Lab to Culture Anteroom",
         "IsActive": true,
-        "FormattedName": "2C452B__DP"
+        "FormattedName": "2C452B"
     },
     {
         "RoomId": 103,
@@ -1086,7 +1086,7 @@
         "Sq": null,
         "RoomName": "Corridor",
         "IsActive": true,
-        "FormattedName": "2C452C__DP"
+        "FormattedName": "2C452C"
     },
     {
         "RoomId": 105,
@@ -1097,7 +1097,7 @@
         "Sq": 46,
         "RoomName": "Entry Room",
         "IsActive": true,
-        "FormattedName": "1B42__DP"
+        "FormattedName": "1B42"
     },
     {
         "RoomId": 106,
@@ -1119,7 +1119,7 @@
         "Sq": 27,
         "RoomName": "Air Lock",
         "IsActive": true,
-        "FormattedName": "1B42A__DP"
+        "FormattedName": "1B42A"
     },
     {
         "RoomId": 108,
@@ -1141,7 +1141,7 @@
         "Sq": 222,
         "RoomName": "Production Room",
         "IsActive": true,
-        "FormattedName": "1B42A1__DP"
+        "FormattedName": "1B42A1"
     },
     {
         "RoomId": 110,
@@ -1152,7 +1152,7 @@
         "Sq": 127,
         "RoomName": "Mechanical Room",
         "IsActive": true,
-        "FormattedName": "1B44__DP"
+        "FormattedName": "1B44"
     },
     {
         "RoomId": 111,
@@ -1174,7 +1174,7 @@
         "Sq": null,
         "RoomName": "Main Entry/Receiving/Quarantine Area",
         "IsActive": true,
-        "FormattedName": "100__DP"
+        "FormattedName": "100"
     },
     {
         "RoomId": 113,
@@ -1185,7 +1185,7 @@
         "Sq": 317,
         "RoomName": "Multipurpose Room",
         "IsActive": true,
-        "FormattedName": "100A1__DP"
+        "FormattedName": "100A1"
     },
     {
         "RoomId": 114,
@@ -1218,7 +1218,7 @@
         "Sq": null,
         "RoomName": "EVS",
         "IsActive": true,
-        "FormattedName": "100A2__DP"
+        "FormattedName": "100A2"
     },
     {
         "RoomId": 117,
@@ -1229,7 +1229,7 @@
         "Sq": null,
         "RoomName": "Toilet",
         "IsActive": true,
-        "FormattedName": "100A3__DP"
+        "FormattedName": "100A3"
     },
     {
         "RoomId": 118,
@@ -1240,7 +1240,7 @@
         "Sq": null,
         "RoomName": "Toilet",
         "IsActive": true,
-        "FormattedName": "100A4__DP"
+        "FormattedName": "100A4"
     },
     {
         "RoomId": 119,
@@ -1251,7 +1251,7 @@
         "Sq": 52,
         "RoomName": "EVS",
         "IsActive": true,
-        "FormattedName": "100B1__DP"
+        "FormattedName": "100B1"
     },
     {
         "RoomId": 120,
@@ -1273,7 +1273,7 @@
         "Sq": 395,
         "RoomName": "Office",
         "IsActive": true,
-        "FormattedName": "100B2__DP"
+        "FormattedName": "100B2"
     },
     {
         "RoomId": 122,
@@ -1284,7 +1284,7 @@
         "Sq": 128,
         "RoomName": "Office",
         "IsActive": true,
-        "FormattedName": "100B2A__DP"
+        "FormattedName": "100B2A"
     },
     {
         "RoomId": 123,
@@ -1295,7 +1295,7 @@
         "Sq": 129,
         "RoomName": "Locker Room",
         "IsActive": true,
-        "FormattedName": "100C__DP"
+        "FormattedName": "100C"
     },
     {
         "RoomId": 124,
@@ -1306,7 +1306,7 @@
         "Sq": 92,
         "RoomName": "Gown-in",
         "IsActive": true,
-        "FormattedName": "100C4__DP"
+        "FormattedName": "100C4"
     },
     {
         "RoomId": 125,
@@ -1339,7 +1339,7 @@
         "Sq": 277,
         "RoomName": "Cold Storage Room",
         "IsActive": true,
-        "FormattedName": "100D__DP"
+        "FormattedName": "100D"
     },
     {
         "RoomId": 128,
@@ -1361,7 +1361,7 @@
         "Sq": 173,
         "RoomName": "Clean Vestibule",
         "IsActive": true,
-        "FormattedName": "100D1__DP"
+        "FormattedName": "100D1"
     },
     {
         "RoomId": 130,
@@ -1416,7 +1416,7 @@
         "Sq": null,
         "RoomName": "Gown Out",
         "IsActive": true,
-        "FormattedName": "100D1-1__DP"
+        "FormattedName": "100D1-1"
     },
     {
         "RoomId": 135,
@@ -1427,7 +1427,7 @@
         "Sq": 92,
         "RoomName": "Ante-Room 2",
         "IsActive": true,
-        "FormattedName": "100D2__DP"
+        "FormattedName": "100D2"
     },
     {
         "RoomId": 136,
@@ -1449,7 +1449,7 @@
         "Sq": 502,
         "RoomName": "Manufacturing Suite 2",
         "IsActive": true,
-        "FormattedName": "100D2A__DP"
+        "FormattedName": "100D2A"
     },
     {
         "RoomId": 138,
@@ -1471,7 +1471,7 @@
         "Sq": 113,
         "RoomName": "Ante-Room 3",
         "IsActive": true,
-        "FormattedName": "100D3__DP"
+        "FormattedName": "100D3"
     },
     {
         "RoomId": 140,
@@ -1493,7 +1493,7 @@
         "Sq": 411,
         "RoomName": "Cell Processing",
         "IsActive": true,
-        "FormattedName": "100D3A__DP"
+        "FormattedName": "100D3A"
     },
     {
         "RoomId": 142,
@@ -1515,7 +1515,7 @@
         "Sq": 102,
         "RoomName": "Ante-Room 1",
         "IsActive": true,
-        "FormattedName": "100D4__DP"
+        "FormattedName": "100D4"
     },
     {
         "RoomId": 144,
@@ -1537,7 +1537,7 @@
         "Sq": 502,
         "RoomName": "Manufacturing Suite 1",
         "IsActive": true,
-        "FormattedName": "100D4A__DP"
+        "FormattedName": "100D4A"
     },
     {
         "RoomId": 146,
@@ -1559,7 +1559,7 @@
         "Sq": 92,
         "RoomName": "Goods-in",
         "IsActive": true,
-        "FormattedName": "100D5__DP"
+        "FormattedName": "100D5"
     },
     {
         "RoomId": 148,
@@ -1581,7 +1581,7 @@
         "Sq": 353,
         "RoomName": "Released Goods",
         "IsActive": true,
-        "FormattedName": "100D5A__DP"
+        "FormattedName": "100D5A"
     },
     {
         "RoomId": 150,
@@ -1614,7 +1614,7 @@
         "Sq": null,
         "RoomName": "Cylinder Gas",
         "IsActive": true,
-        "FormattedName": "101__DP"
+        "FormattedName": "101"
     },
     {
         "RoomId": 153,
@@ -1625,7 +1625,7 @@
         "Sq": null,
         "RoomName": "Mechanical Room",
         "IsActive": true,
-        "FormattedName": "102__DP"
+        "FormattedName": "102"
     },
     {
         "RoomId": 154,
@@ -1636,7 +1636,7 @@
         "Sq": null,
         "RoomName": "IT Room",
         "IsActive": true,
-        "FormattedName": "102A__DP"
+        "FormattedName": "102A"
     },
     {
         "RoomId": 155,
@@ -1647,7 +1647,7 @@
         "Sq": 53,
         "RoomName": "Gown Out",
         "IsActive": true,
-        "FormattedName": "VEST1-2__DP"
+        "FormattedName": "VEST1-2"
     },
     {
         "RoomId": 156,
@@ -1669,7 +1669,7 @@
         "Sq": 133,
         "RoomName": "Vestibule",
         "IsActive": true,
-        "FormattedName": "100__DP"
+        "FormattedName": "100"
     },
     {
         "RoomId": 158,
@@ -1691,7 +1691,7 @@
         "Sq": 72,
         "RoomName": "Entry Room",
         "IsActive": true,
-        "FormattedName": "101__DP"
+        "FormattedName": "101"
     },
     {
         "RoomId": 160,
@@ -1713,7 +1713,7 @@
         "Sq": 52,
         "RoomName": "Anteroom",
         "IsActive": true,
-        "FormattedName": "103__DP"
+        "FormattedName": "103"
     },
     {
         "RoomId": 162,
@@ -1735,7 +1735,7 @@
         "Sq": 220,
         "RoomName": "Clean room",
         "IsActive": true,
-        "FormattedName": "105__DP"
+        "FormattedName": "105"
     },
     {
         "RoomId": 164,
@@ -1757,7 +1757,7 @@
         "Sq": 72,
         "RoomName": "Entry Room",
         "IsActive": true,
-        "FormattedName": "102__DP"
+        "FormattedName": "102"
     },
     {
         "RoomId": 166,
@@ -1779,7 +1779,7 @@
         "Sq": 52,
         "RoomName": "Anteroom",
         "IsActive": true,
-        "FormattedName": "104__DP"
+        "FormattedName": "104"
     },
     {
         "RoomId": 168,
@@ -1801,7 +1801,7 @@
         "Sq": 220,
         "RoomName": "Clean room",
         "IsActive": true,
-        "FormattedName": "106__DP"
+        "FormattedName": "106"
     },
     {
         "RoomId": 170,
@@ -1812,7 +1812,7 @@
         "Sq": 515,
         "RoomName": "Corridor",
         "IsActive": true,
-        "FormattedName": "1C166A__DP"
+        "FormattedName": "1C166A"
     },
     {
         "RoomId": 171,
@@ -1966,7 +1966,7 @@
         "Sq": null,
         "RoomName": "Secure Storage",
         "IsActive": false,
-        "FormattedName": "1C166A10__DP"
+        "FormattedName": "1C166A10"
     },
     {
         "RoomId": 186,
@@ -1977,7 +1977,7 @@
         "Sq": 52,
         "RoomName": "Changing Room",
         "IsActive": true,
-        "FormattedName": "1C166A3__DP"
+        "FormattedName": "1C166A3"
     },
     {
         "RoomId": 188,
@@ -1988,7 +1988,7 @@
         "Sq": 48,
         "RoomName": "Changing Room",
         "IsActive": true,
-        "FormattedName": "1C166A4__DP"
+        "FormattedName": "1C166A4"
     },
     {
         "RoomId": 189,
@@ -1999,7 +1999,7 @@
         "Sq": 46,
         "RoomName": "Gowning",
         "IsActive": true,
-        "FormattedName": "1C166A5__DP"
+        "FormattedName": "1C166A5"
     },
     {
         "RoomId": 190,
@@ -2021,7 +2021,7 @@
         "Sq": 296,
         "RoomName": "IV Prep Anteroom",
         "IsActive": true,
-        "FormattedName": "1C166A5A__DP"
+        "FormattedName": "1C166A5A"
     },
     {
         "RoomId": 192,
@@ -2043,7 +2043,7 @@
         "Sq": 74,
         "RoomName": "IV Prep Gowning",
         "IsActive": true,
-        "FormattedName": "1C166A5A1__DP"
+        "FormattedName": "1C166A5A1"
     },
     {
         "RoomId": 194,
@@ -2065,7 +2065,7 @@
         "Sq": 306,
         "RoomName": "Sterile IV Prep",
         "IsActive": true,
-        "FormattedName": "1C166A5B__DP"
+        "FormattedName": "1C166A5B"
     },
     {
         "RoomId": 196,
@@ -2076,7 +2076,7 @@
         "Sq": 32,
         "RoomName": "Storage",
         "IsActive": true,
-        "FormattedName": "1C166A5B1__DP"
+        "FormattedName": "1C166A5B1"
     },
     {
         "RoomId": 197,
@@ -2087,7 +2087,7 @@
         "Sq": 52,
         "RoomName": "Storage",
         "IsActive": true,
-        "FormattedName": "1C166A6__DP"
+        "FormattedName": "1C166A6"
     },
     {
         "RoomId": 198,
@@ -2098,7 +2098,7 @@
         "Sq": 180,
         "RoomName": "Corridor",
         "IsActive": true,
-        "FormattedName": "1C166A7__DP"
+        "FormattedName": "1C166A7"
     },
     {
         "RoomId": 199,
@@ -2175,7 +2175,7 @@
         "Sq": 78,
         "RoomName": "Gowning",
         "IsActive": true,
-        "FormattedName": "1C166A7A__DP"
+        "FormattedName": "1C166A7A"
     },
     {
         "RoomId": 206,
@@ -2197,7 +2197,7 @@
         "Sq": 173,
         "RoomName": "Sterile HD Prep",
         "IsActive": true,
-        "FormattedName": "1C166A7B__DP"
+        "FormattedName": "1C166A7B"
     },
     {
         "RoomId": 208,
@@ -2208,7 +2208,7 @@
         "Sq": 117,
         "RoomName": "Verification Room",
         "IsActive": true,
-        "FormattedName": "1C166A7C__DP"
+        "FormattedName": "1C166A7C"
     },
     {
         "RoomId": 209,
@@ -2219,7 +2219,7 @@
         "Sq": 104,
         "RoomName": "Immuno Prep",
         "IsActive": true,
-        "FormattedName": "1C166A7D__DP"
+        "FormattedName": "1C166A7D"
     },
     {
         "RoomId": 210,
@@ -2230,7 +2230,7 @@
         "Sq": 103,
         "RoomName": "Haz Drug Storage",
         "IsActive": true,
-        "FormattedName": "1C166A7E__DP"
+        "FormattedName": "1C166A7E"
     },
     {
         "RoomId": 211,
@@ -2241,7 +2241,7 @@
         "Sq": 82,
         "RoomName": "Janitor",
         "IsActive": true,
-        "FormattedName": "1C166A7F__DP"
+        "FormattedName": "1C166A7F"
     },
     {
         "RoomId": 212,
@@ -2252,7 +2252,7 @@
         "Sq": 88,
         "RoomName": "Corridor",
         "IsActive": true,
-        "FormattedName": "1C166A9__DP"
+        "FormattedName": "1C166A9"
     },
     {
         "RoomId": 213,
@@ -2285,7 +2285,7 @@
         "Sq": 149,
         "RoomName": "Hazard Prep Room",
         "IsActive": true,
-        "FormattedName": "1C166A9A__DP"
+        "FormattedName": "1C166A9A"
     },
     {
         "RoomId": 217,
@@ -2296,7 +2296,7 @@
         "Sq": 204,
         "RoomName": "Hazard Prep Room",
         "IsActive": true,
-        "FormattedName": "1C166A9B__DP"
+        "FormattedName": "1C166A9B"
     },
     {
         "RoomId": 218,
@@ -2307,7 +2307,7 @@
         "Sq": 590,
         "RoomName": "Drug Storage",
         "IsActive": true,
-        "FormattedName": "1C166B__DP"
+        "FormattedName": "1C166B"
     },
     {
         "RoomId": 219,
@@ -2329,7 +2329,7 @@
         "Sq": 406,
         "RoomName": "Storage",
         "IsActive": true,
-        "FormattedName": "1C166B1__DP"
+        "FormattedName": "1C166B1"
     },
     {
         "RoomId": 222,
@@ -2340,7 +2340,7 @@
         "Sq": 107,
         "RoomName": "Storage",
         "IsActive": true,
-        "FormattedName": "1C166C__DP"
+        "FormattedName": "1C166C"
     },
     {
         "RoomId": 223,
@@ -2351,7 +2351,7 @@
         "Sq": 53,
         "RoomName": "Sink 7 Room",
         "IsActive": true,
-        "FormattedName": "1C166C1__DP"
+        "FormattedName": "1C166C1"
     },
     {
         "RoomId": 224,
@@ -2362,7 +2362,7 @@
         "Sq": 65,
         "RoomName": "Anteroom",
         "IsActive": true,
-        "FormattedName": "1C166D__DP"
+        "FormattedName": "1C166D"
     },
     {
         "RoomId": 225,
@@ -2384,7 +2384,7 @@
         "Sq": 66,
         "RoomName": "Airlock",
         "IsActive": true,
-        "FormattedName": "1C166D1__DP"
+        "FormattedName": "1C166D1"
     },
     {
         "RoomId": 228,
@@ -2406,7 +2406,7 @@
         "Sq": 180,
         "RoomName": "Buffer",
         "IsActive": true,
-        "FormattedName": "1C166D1A__DP"
+        "FormattedName": "1C166D1A"
     },
     {
         "RoomId": 230,
@@ -2417,7 +2417,7 @@
         "Sq": 54,
         "RoomName": "Anteroom",
         "IsActive": true,
-        "FormattedName": "1C166G__DP"
+        "FormattedName": "1C166G"
     },
     {
         "RoomId": 231,
@@ -2439,7 +2439,7 @@
         "Sq": 61,
         "RoomName": "Airlock",
         "IsActive": true,
-        "FormattedName": "1C166G1__DP"
+        "FormattedName": "1C166G1"
     },
     {
         "RoomId": 234,
@@ -2461,7 +2461,7 @@
         "Sq": 186,
         "RoomName": "Buffer",
         "IsActive": true,
-        "FormattedName": "1C166G1A__DP"
+        "FormattedName": "1C166G1A"
     },
     {
         "RoomId": 237,
@@ -2472,7 +2472,7 @@
         "Sq": null,
         "RoomName": "Antiroom/Gowning",
         "IsActive": true,
-        "FormattedName": "B3B402__DP"
+        "FormattedName": "B3B402"
     },
     {
         "RoomId": 238,
@@ -2494,7 +2494,7 @@
         "Sq": null,
         "RoomName": "Hyper-Polarization Lab",
         "IsActive": true,
-        "FormattedName": "B3B402A__DP"
+        "FormattedName": "B3B402A"
     },
     {
         "RoomId": 240,
@@ -2516,7 +2516,7 @@
         "Sq": 170,
         "RoomName": "Source Cabinet Room",
         "IsActive": true,
-        "FormattedName": "1C413__DP"
+        "FormattedName": "1C413"
     },
     {
         "RoomId": 242,
@@ -2538,7 +2538,7 @@
         "Sq": 208,
         "RoomName": "Non-Sterile Prep Room",
         "IsActive": true,
-        "FormattedName": "1C413A__DP"
+        "FormattedName": "1C413A"
     },
     {
         "RoomId": 244,
@@ -2560,7 +2560,7 @@
         "Sq": 71,
         "RoomName": "Anteroom",
         "IsActive": true,
-        "FormattedName": "1C413B__DP"
+        "FormattedName": "1C413B"
     },
     {
         "RoomId": 246,
@@ -2582,6 +2582,6 @@
         "Sq": 100,
         "RoomName": "Anteroom",
         "IsActive": true,
-        "FormattedName": "1C413C__DP"
+        "FormattedName": "1C413C"
     }
 ]
