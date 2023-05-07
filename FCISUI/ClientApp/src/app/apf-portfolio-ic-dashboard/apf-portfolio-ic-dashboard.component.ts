@@ -32,6 +32,16 @@ export class ApfPortfolioIcDashboardComponent {
       )
       .subscribe((ic) => {
         this.service.setIC(ic);
+
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        this.service.filterPiData({
+          facility: { value: 0, repName: '', sectionName: '' },
+          interval: 30,
+          status: 'Sum All',
+          startDate: new Date(),
+          endDate: yesterday
+        });
       });
 
     this.svgMap$ = this.service.svgMap$;
@@ -49,16 +59,6 @@ export class ApfPortfolioIcDashboardComponent {
       map((x) => Object.keys(x).length > 0)
     );
     this.facilityFilterOptions$ = this.service.facilityFilterOptions$;
-
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    this.service.filterPiData({
-      facility: { value: 0, repName: '', sectionName: '' },
-      interval: 30,
-      status: 'Sum All',
-      startDate: new Date(),
-      endDate: yesterday
-    });
 
     this.timelineChartData$.subscribe(()=>{
       this.isLoading = false;
