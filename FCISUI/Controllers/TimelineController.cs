@@ -214,7 +214,7 @@ namespace FCISUI.Controllers
                     return new LocationCurrentStatus {
                         Attribute="Composite",
                         LocationName=facility.CircleId!,
-                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=x.Timestamp}
                     };
                 });
                 return locationStatusValues;
@@ -261,7 +261,7 @@ namespace FCISUI.Controllers
                     return new LocationCurrentStatus {
                         Attribute=attribute,
                         LocationName=locationName,
-                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=x.Timestamp}
                     };
                 }).ToList();
 
@@ -317,7 +317,7 @@ namespace FCISUI.Controllers
                     return new LocationCurrentStatus {
                         Attribute=attribute,
                         LocationName=locationName,
-                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=0}
+                        StatusPoint=new TimeSeriesPoint {numeric_value=x.numeric_value,Timestamp=x.Timestamp}
                     };
                 }).ToList();
 

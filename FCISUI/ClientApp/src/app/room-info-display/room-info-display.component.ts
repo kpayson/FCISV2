@@ -76,7 +76,7 @@ export class RoomInfoDisplayComponent {
     return [
       { name: 'Room #', value: roomInfo['Room'] },
       { name: 'Room Name', value: roomInfo['Description'] },
-      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
       { name: 'Classification', value: `ISO-${roomInfo['ISO']}` },
       { name: 'GSF', value: roomInfo['gsf'] },
       {
@@ -123,7 +123,7 @@ export class RoomInfoDisplayComponent {
         value: status.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'Target', value: roomInfo['Target'] || '' },
@@ -151,7 +151,7 @@ export class RoomInfoDisplayComponent {
         value: status.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'Target', value: roomInfo['Target'] || '' },
@@ -181,7 +181,7 @@ export class RoomInfoDisplayComponent {
         value: status.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'RH Target Range', value: roomInfo['Target'] || '' },
@@ -213,7 +213,7 @@ export class RoomInfoDisplayComponent {
         value: status.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timeStamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'Target', value: roomInfo['Target'] || '' },
