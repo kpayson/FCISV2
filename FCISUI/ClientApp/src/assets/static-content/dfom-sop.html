@@ -1,0 +1,625 @@
+<style>
+    .dropdown-item {
+        display: block;
+        width: 100%;
+        padding: .25rem 1.5rem;
+        clear: both;
+        font-weight: 400;
+        color: #212529;
+        text-align: inherit;
+        white-space: normal;
+        /*This is what changes the word-wrap for ALL dropdown-items*/
+        border-bottom-style: solid;
+        border-bottom-color: lightgray;
+        border-bottom-width: thin;
+        background-color: transparent;
+        /*border: 0;*/
+        /*uncomment this to override border-bottom = remove the black line*/
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 10rem;
+        padding: 0 0 0 0;
+        margin: .125rem 0 0;
+        font-size: 1rem;
+        color: #212529;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: .25rem;
+    }
+
+    .sidebar .nav-item .dropdown-menu {
+        position: static !important;
+        margin: 0 0 0 0;
+        top: 0;
+    }
+</style>
+
+<div class="card-body whoweAreCardBody">
+    <div class="row">
+        <div class="col-9">
+            <div id="apf" style=" text-align:left;">
+                <img src="/assets/images/SOPs2.jpg">
+            </div>
+            <br>
+
+            <table id="cph_main_tblSOP" class="wiznavbuttons" cellspacing="0" cellpadding="0" align="Center"
+                style="border-width:0px;width:100%;border-collapse:collapse;">
+                <tbody>
+                    <tr>
+                        <td>
+                            <table id="cph_main_Table3" cellspacing="0" cellpadding="0" align="Center"
+                                style="border-width:0px;width:100%;border-collapse:collapse;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div id="cph_main_pnlActive">
+                                                <b>Effective SOPs</b>
+                                                <table id="cph_main_tblActive" cellspacing="0" cellpadding="0"
+                                                    style="width:100%;border-collapse:collapse;">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <table class="listing" cellspacing="0" cellpadding="4"
+                                                                    align="Left" rules="all" border="1"
+                                                                    id="cph_main_GrSOP"
+                                                                    style="border-color:Black;font-size:Medium;border-collapse:collapse;">
+                                                                    <tbody>
+                                                                        <tr class="columnhead">
+                                                                            <th scope="col">Title</th>
+                                                                            <th scope="col">Description</th>
+                                                                            <th scope="col" style="width:110px;">Actions
+                                                                            </th>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM WI-30009</td>
+                                                                            <td>&nbsp;</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl02$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_0"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-PROG-20021</td>
+                                                                            <td>DFOM Training Policy for Aseptic
+                                                                                Processing Facilities</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl03$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_1"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20001</td>
+                                                                            <td>Entry and Exit Procedures</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl04$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_2"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-200012</td>
+                                                                            <td>Calibration &amp; Certification
+                                                                                Management Program of Aseptic Processing
+                                                                                Facilities (APFs)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl05$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_3"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20002</td>
+                                                                            <td>Utility Shutdown Procedure</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl06$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_4"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20003</td>
+                                                                            <td>Facility Operations and Maintenance
+                                                                                Program for Maintenance</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl07$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_5"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20004</td>
+                                                                            <td>Procedure for Responding to Liquid Leak
+                                                                                Events in Aseptic Processing Facilities
+                                                                                (APF's)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl08$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_6"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20004</td>
+                                                                            <td>Procedure for Responding to Liquid Leak
+                                                                                Events in Aseptic Processing Facilities
+                                                                                (APFs)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl09$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_7"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20005</td>
+                                                                            <td>Alarm Response Procedure for Maintenance
+                                                                                of Aseptic Processing Facilities (APF's)
+                                                                            </td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl10$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_8"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20006</td>
+                                                                            <td>Building Automation System (BAS) for
+                                                                                Maintenance of APFs</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl11$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_9"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20012</td>
+                                                                            <td>Calibration and Certification Management
+                                                                                for (APF's)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl12$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_10"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20025</td>
+                                                                            <td>Procedure for Developing and Executing
+                                                                                Work Plans associated with (APF's)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl13$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_11"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20026</td>
+                                                                            <td>DFOM Work Order Process for APF's</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl14$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_12"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-20027</td>
+                                                                            <td>Preventive Maintenance Procedures</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl15$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_13"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-30012</td>
+                                                                            <td>Updating a Work Order in the
+                                                                                Computerized Maintenance Management
+                                                                                System (CMMS)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl16$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_14"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-30018</td>
+                                                                            <td>Search for Exceptions in the
+                                                                                Computerized Maintenance Management
+                                                                                System (CMMS)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl17$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_15"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-SOP-30019</td>
+                                                                            <td>Creating Exceptions in the Computerized
+                                                                                Maintenance Management System (CMMS)
+                                                                            </td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl18$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_16"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-WI-30001</td>
+                                                                            <td>Work Instructions for the Alarm Response
+                                                                                Procedure for Maintenance of Aseptic
+                                                                                Production Facilities (APF's)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl19$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_17"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-WI-30002</td>
+                                                                            <td>Work Instructions for Recording Log
+                                                                                Entries in the CMMS for Cleaning
+                                                                                Activities in Aseptic Production
+                                                                                Facilities (APF's)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl20$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_18"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-WI-30006</td>
+                                                                            <td>Out of Service Tagging</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl21$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_19"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-WI-30009</td>
+                                                                            <td>ESPEC Environmental Chamber 3 Point
+                                                                                Calibration Instructions</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl22$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_20"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-WI-30011</td>
+                                                                            <td>Creating New Work Orders in the
+                                                                                Computerized Maintenance Management
+                                                                                System (CMMS)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl23$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_21"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DFOM-WI-30013</td>
+                                                                            <td>Creating New Work Orders in the
+                                                                                Computerized Maintenance Management
+                                                                                System (CMMS)</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl24$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_22"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR SOP-10001</td>
+                                                                            <td>Standard Operating Procedures for the
+                                                                                Development, Publication and Maintenance
+                                                                                of DTR &amp; DFOM SOP's and Work
+                                                                                Instructions (WI's) for Aseptic
+                                                                                Processing Facilities</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl25$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_23"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR SOP-10002</td>
+                                                                            <td>Standard Operating Procedures (SOP) for
+                                                                                Good Documentation Practices</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl26$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_24"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10004</td>
+                                                                            <td>Engineering Change Management Procedure
+                                                                                for Facilities Operation and Maintenance
+                                                                                of Aseptic Processing Facilities (APFs)
+                                                                            </td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl27$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_25"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10005</td>
+                                                                            <td>Corrective Action and Preventive Action
+                                                                                (CAPA) Procedure
+                                                                            </td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl28$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_26"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10006</td>
+                                                                            <td>Design Review Procedure</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl29$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_27"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10007</td>
+                                                                            <td>Generation and Distribution of the
+                                                                                DTR-FCIS Facility Monitoring Daily
+                                                                                Report of APF Critical Parameters</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl30$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_28"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10011</td>
+                                                                            <td>FCIS Training Program for APFs</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl31$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_29"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10012</td>
+                                                                            <td>Use of FCIS S Drive Directory</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl32$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_30"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10013</td>
+                                                                            <td>System and Component Level Impact
+                                                                                Assessment Procedure</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl33$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_31"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10016</td>
+                                                                            <td>Lessons Learned Procedures for Aseptic
+                                                                                Production Facility Projects</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl34$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_32"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10018</td>
+                                                                            <td>Internal Compliance Audit Procedure for
+                                                                                Maintenance of APFs</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl35$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_33"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10020</td>
+                                                                            <td>Aseptic Production Facility Project
+                                                                                Turnover Checklist</td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl36$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_34"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>DTR-SOP-10021</td>
+                                                                            <td>DTR / FCIS Document Management Procedure
+                                                                                for Aseptic Production Facilities (APFs)
+                                                                            </td>
+                                                                            <td style="width:110px;">
+                                                                                <span class="buttonColumn">
+                                                                                    <input type="image"
+                                                                                        name="ctl00$cph_main$GrSOP$ctl37$btnView"
+                                                                                        id="cph_main_GrSOP_btnView_35"
+                                                                                        src="/assets/images/actionbutton_view_off.gif"
+                                                                                        alt="View This Document">
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+            <div class="row">
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

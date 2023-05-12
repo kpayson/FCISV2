@@ -140,7 +140,8 @@
                     <p class="mb-0 list-group-item font-weight-bold">
                       <b>SOP & WI</b>
                     </p>
-                    <a href="" class="list-group-item list-group-item-action"
+                    <a [routerLink]="['resource', 'dfom-sop']"
+                      class="list-group-item list-group-item-action"
                       >DFOM SOP & WI</a
                     >
                     <a href="" class="list-group-item list-group-item-action"
@@ -211,7 +212,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact US</a>
+          <a class="nav-link" (click)="contactUsClick()">Contact US</a>
         </li>
       </ul>
     </div>

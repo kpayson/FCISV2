@@ -1,4 +1,5 @@
 import {
+  ContactUsMessage,
   ErrorLog,
   Facility,
   FacilityGsf,
@@ -149,5 +150,9 @@ export class DataService {
 
   errors() {
     return this.get<ErrorLog[]>(`ErrorLog`);
+  }
+
+  contactUs(message:ContactUsMessage) {
+    return this.post('Message/ContactUs',message);
   }
 }
