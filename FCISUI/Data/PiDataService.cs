@@ -52,6 +52,7 @@ namespace FCISUI.Data
     {
         public string Tag {get; set;}
         public int numeric_value {get; set;}
+        public long Timestamp {get;set;}
     }
 
     public class PIDataService : IPIDataService

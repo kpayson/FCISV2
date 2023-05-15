@@ -24,5 +24,7 @@ namespace FCISUI.Models
         public int? UploadPersonRoleId { get; set; }
         public int? LastEditPersonRoleId { get; set; }
         public DateTime? LastEditDate { get; set; }
+
+        public virtual AttachmentType? AttachmentType {get;set;}
     }
 }

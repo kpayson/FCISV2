@@ -4,9 +4,10 @@
       <a
         class="far fa-lab3"
         data-toggle="tooltip"
-        id="twojtooltip"
-        title="CC CCE 2J Cell Therapy Lab"
-        href="CC-CCE-2J_Main.aspx"
+        id="pin_3"
+        data-title="CC CCE 2J Cell Therapy Lab"
+        data-title="CC CCE 2J Cell Therapy Lab"
+        (click)="pinClick(3)"
       >
         <path
           class="st3"
@@ -23,11 +24,11 @@
     </g>
 
     <g id="Pin_Facility_3E">
-      <a
+      <a id="pin_16"
         class="far fa-lab4"
         data-toggle="tooltip"
-        title="CC CCE 3T Cell Therapy Lab"
-        href="CC-CCE-3T_Main.aspx"
+        data-title="CC CCE 3T Cell Therapy Lab"
+        (click)="pinClick(16)"
       >
         <path
           class="st3"
@@ -44,8 +45,7 @@
     </g>
 
     <g id="Pin_Facility_10A">
-      <a class="far fa-lab6" href="" title="NCI Trailer 10A">
-        <!-- NCI-Trailer1_Main.aspx -->
+      <a id="pin_13" class="far fa-lab6" data-title="NCI Trailer 10A" (click)="pinClick(13)">
         <path
           class="st3"
           d="M1568.89 3340.55c95-95 114.25-236.99 57.93-351.13l221.41-359.26-360.5 220.34c-114.09-56.13-255.89-36.82-350.8 58.09-119.28 119.28-119.28 312.68 0 431.96 119.28 119.28 312.68 119.28 431.96 0zm-353.51-353.52c75.96-75.96 199.11-75.96 275.06 0 75.96 75.96 75.96 199.11 0 275.06-75.96 75.96-199.11 75.96-275.06 0-75.96-75.95-75.96-199.1 0-275.06z"
@@ -62,9 +62,10 @@
 
     <g id="Pin_Facility_10B">
       <a
+        id="pin_12"
         class="far fa-lab5"
-        href="NCI-Trailer2_Main.aspx"
-        title="NCI Trailer 10B"
+        data-title="NCI Trailer 10B"
+        (click)="pinClick(12)"
       >
         <path
           class="st3"
@@ -81,10 +82,10 @@
     </g>
 
     <g id="Pin_Facility_PET_B3">
-      <a
+      <a id="pin_2"
         class="far fa-lab8"
-        href="B3-PET_Main.aspx"
-        title="CC PET B3 Radiochemistry"
+        data-title="CC PET B3 Radiochemistry"
+        (click)="pinClick(2)"
       >
         <path
           class="st3"
@@ -101,10 +102,10 @@
     </g>
 
     <g id="Pin_Facility_NMD">
-      <a
+      <a id="pin_7"
         class="far fa-labten"
-        href="CC-NMD_Radio_Main.aspx"
-        title="CC NMD Radiopharmacy"
+        data-title="CC NMD Radiopharmacy"
+        (click)="pinClick(7)"
       >
         <path
           class="st3"
@@ -121,11 +122,10 @@
     </g>
 
     <g id="Pin_Facility_P-IVAU">
-      <a
+      <a id="pin_9"
         class="far fa-lab15"
-        title="CC Pharmacy P-IVAU"
-        href="P-IVAU_Main.aspx"
-      >
+        data-title="CC Pharmacy P-IVAU"
+        (click)="pinClick(9)" >
         <path
           class="st3"
           d="M6028.59 1181.75c-95 95-114.25 236.99-57.93 351.13l-221.41 359.26 360.5-220.34c114.09 56.13 255.89 36.82 350.8-58.09 119.28-119.28 119.28-312.68 0-431.96-119.28-119.28-312.67-119.28-431.96 0zm353.52 353.52c-75.96 75.96-199.11 75.96-275.06 0-75.96-75.96-75.96-199.11 0-275.06 75.96-75.96 199.11-75.96 275.06 0s75.95 199.1 0 275.06z"
@@ -141,10 +141,10 @@
     </g>
 
     <g id="Pin_Facility_East_Terrace">
-      <a
+      <a id="pin_5"
         class="far fa-lab16"
-        title="CC CCE East Terrace Modular"
-        href="CC-CCE-NCI_Main.aspx"
+        data-title="CC CCE East Terrace Modular"
+        (click)="pinClick(5)"
       >
         <path
           class="st3"
@@ -161,11 +161,11 @@
     </g>
 
     <g id="Pin_Facility_I-IVAU">
-      <a
-        href="I-IVAU_Main.aspx"
+      <a id="pin_8"
         class="far fa-ivau"
         data-toggle="tooltip"
-        title="CC Pharmacy I-IVAU"
+        data-title="CC Pharmacy I-IVAU"
+        (click)="pinClick(8)"
       >
         <path
           class="st3"
@@ -182,10 +182,10 @@
     </g>
 
     <g id="Pin_Facility_2E">
-      <a
+      <a id="pin_4"
         class="far fa-lab13"
-        title="CC CCE 12 East Cell Therapy"
-        href="CC-CCE-12E_Main.aspx"
+        data-title="CC CCE 12 East Cell Therapy"
+        (click)="pinClick(4)"
       >
         <path
           class="st3"
@@ -202,10 +202,10 @@
     </g>
 
     <g id="Pin_Facility_HPC13">
-      <a
+      <a id="pin_19"
         class="far fa-lab7"
-        href="NCY_Hyperpolarized_C13_Main.aspx"
-        title="NCI Hyperpolarized Cell Labeling Lab"
+        data-title="NCI Hyperpolarized Cell Labeling Lab"
+        (click)="pinClick(19)"
       >
         <path
           class="st3"
@@ -222,10 +222,10 @@
     </g>
 
     <g id="Ownership_Facility_Other">
-      <a
+      <a id="pin_11"
         class="far fa-labOne"
-        title="NCI Surgery Branch TIL Modular"
-        href="NCI-Mod_Main.aspx"
+        data-title="NCI Surgery Branch TIL Modular"
+        (click)="pinClick(11)"
       >
         <path
           class="st3"
@@ -242,10 +242,10 @@
     </g>
 
     <g id="Ownership_Facility_NIAID">
-      <a
+      <a id="pin_20"
         class="far fa-lab2"
-        href="NIAID_29B_Bio_Facility_Main.aspx"
-        title="NIAID 29B Bioreactor Pilot Plant"
+        data-title="NIAID 29B Bioreactor Pilot Plant"
+        (click)="pinClick(20)"
       >
         <path
           class="st3"
@@ -263,10 +263,10 @@
     </g>
 
     <g id="Pin_Facility_1B42">
-      <a
+      <a id="pin_10"
         class="far fa-lab11"
-        href="NCI-1B42_Main.aspx"
-        title="NCI Surgery Branch 1B42"
+        data-title="NCI Surgery Branch 1B42"
+        (click)="pinClick(10)"
       >
         <path
           class="st3"
@@ -283,10 +283,10 @@
     </g>
 
     <g id="Pin_Facility_DLM_Image">
-      <a
+      <a id="pin_6"
         class="far fa-lab14"
-        href="CC-DLM-Lab_Main.aspx"
-        title="CC DLM Sterility Lab"
+        data-title="CC DLM Sterility Lab"
+        (click)="pinClick(6)"
       >
         <path
           class="st3"
@@ -303,10 +303,10 @@
     </g>
 
     <g id="Pin_Facility_PET_Radiopharm">
-      <a
+      <a id="pin_1"
         class="far fa-lab9"
-        href="B1-PET_Main.aspx"
-        title="CC PET Radiopharmacy"
+        data-title="CC PET Radiopharmacy"
+        (click)="pinClick(1)"
       >
         <path
           class="st3"

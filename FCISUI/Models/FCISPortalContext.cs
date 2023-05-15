@@ -20,8 +20,8 @@ namespace FCISUI.Models
 
         }
 
-        // public virtual DbSet<Attachment> Attachments { get; set; } = null!;
-        // public virtual DbSet<AttachmentType> AttachmentTypes { get; set; } = null!;
+        public virtual DbSet<Attachment> Attachments { get; set; } = null!;
+        public virtual DbSet<AttachmentType> AttachmentTypes { get; set; } = null!;
 
         // public virtual DbSet<DocCategory> DocCategories { get; set; } = null!;
         // public virtual DbSet<DocPhase> DocPhases { get; set; } = null!;
@@ -112,50 +112,39 @@ namespace FCISUI.Models
             {
                 entity.ToTable("AttachmentType");
 
-                entity.Property(e => e.AttachmentTypeId).HasColumnName("AttachmentTypeID");
-
-                entity.Property(e => e.AttachmentType1)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("AttachmentType");
-
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.DocCategoryId).HasColumnName("DocCategoryID");
+                entity.Property(e => e.Description).HasMaxLength(255);
             });
 
-            modelBuilder.Entity<DocCategory>(entity =>
-            {
-                entity.ToTable("DocCategory");
+            // modelBuilder.Entity<DocCategory>(entity =>
+            // {
+            //     entity.ToTable("DocCategory");
 
-                entity.Property(e => e.DocCategoryId).HasColumnName("DocCategoryID");
+            //     entity.Property(e => e.DocCategoryId).HasColumnName("DocCategoryID");
 
-                entity.Property(e => e.Category)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.Category)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-            });
+            //     entity.Property(e => e.Comments)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
+            // });
 
-            modelBuilder.Entity<DocPhase>(entity =>
-            {
-                entity.ToTable("DocPhase");
+            // modelBuilder.Entity<DocPhase>(entity =>
+            // {
+            //     entity.ToTable("DocPhase");
 
-                entity.Property(e => e.DocPhaseId).HasColumnName("DocPhaseID");
+            //     entity.Property(e => e.DocPhaseId).HasColumnName("DocPhaseID");
 
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
+            //     entity.Property(e => e.Comments)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false);
 
-                entity.Property(e => e.DocPhase1)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("DocPhase");
-            });
+            //     entity.Property(e => e.DocPhase1)
+            //         .HasMaxLength(255)
+            //         .IsUnicode(false)
+            //         .HasColumnName("DocPhase");
+            // });
 
             modelBuilder.Entity<Errorlog>(entity =>
             {
@@ -496,6 +485,18 @@ namespace FCISUI.Models
 
             var gsfGrowth = loader.GetGsfGrowth();
             modelBuilder.Entity<Gsfgrowth>().HasData(gsfGrowth);
+
+            try{
+                var attachmentTypes = loader.GetAttachmentTypes();
+                modelBuilder.Entity<AttachmentType>().HasData(attachmentTypes);
+
+                var attachments = loader.GetAttachments().ToList();
+                modelBuilder.Entity<Attachment>().HasData(attachments);
+            }
+            catch(Exception ex) {
+                Console.Write(ex);
+            }
+
 
 
             OnModelCreatingPartial(modelBuilder);

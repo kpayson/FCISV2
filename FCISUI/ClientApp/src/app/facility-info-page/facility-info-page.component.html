@@ -1,0 +1,141 @@
+<div class="card-body designCardBody">
+    <div>
+        <div style="position: relative; left: 0; top: 0;">
+            <img id="apf1" src="/assets/images/I-IVAU.jpg">
+        </div>
+    </div>
+
+    <p-tabMenu [model]="items"></p-tabMenu>
+
+    <div id="about-tab" *ngIf="selectedTab=='about'">
+        <h2>
+            <!-- Clinical Center Permanent-Intravenous Admixture Unit (P-IVAU) Pharmacy -->
+            {{facilityNameTitle}}
+        </h2>
+        <app-static-content-container [page]="'about/B1-PET.about.html'"></app-static-content-container>
+        <!-- <p>
+            {{beginingDescription}}
+            The National Institute of Health Clinical Center (CC) Pharmacy will operate the Permanent
+            Intravenous Admixture Unit (I-IVAU) which will provide a wide variety of compounded sterile drug
+            products to Clinical Center patients. The P-IVAU space will be located within the Building 10
+            Clinical Center on the first floor. The overall P-IVAU space will be approximately 10,000 gross
+            square feet of program space, with 5,500 gross square of APF spaces. The facility will prepare drugs
+            according to the requirements of USP&lt;797&gt;, USP&lt;800&gt;, USP&lt;795&gt; and BSL-2 standards.
+        </p>
+        <div *ngIf="showAllMessage">
+            <p>
+                The APF spaces consists of one (1) &lt;797&gt; suite for sterile non-hazardous IV preparations, one (1)
+                &lt;800&gt; suite for preparation of sterile hazardous preparations, and one (1) BSL-2 suite for
+                hazardous sterile preparations.
+
+            </p>
+            <p>The &lt;797&gt; sterile non-hazardous suite consists of six (6) ISO 7 compounding rooms, each with a Type
+                A2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will have separate
+                gowning and de-gowning rooms with a common ISO 7 corridor that serves the compounding rooms. The rooms
+                will be arranged so pressure is cascading out from the ISO 7 Sterile Prep room out to the common
+                corridor and to the ISO 8 gowning and de-gowning room. </p>
+            <p>
+                The &lt;800&gt; sterile hazardous suite consists of four (4) ISO 7 compounding rooms, each with a Type
+                B2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the
+                entry gowning room with the BSL-2 suite but will be have dedicated entry to a common corridor that
+                serves the four (4) rooms. The two (2) &lt;800&gt; rooms will share a common de-gowning room. The suite
+                is unidirectional so the worker will exit the compounding room through a de-gowning room, thus avoiding
+                re-entry into the entry corridor where cross contamination could occur between compounding rooms. The
+                rooms will be arranged so the &lt;800&gt; rooms are negatively pressurized relative to the common
+                corridor, but the suite itself is possible to common spaces.
+
+            </p>
+
+            <p>
+                The BSL-2 sterile hazardous suite consists of two (2) ISO 7 compounding rooms, each with a Type B2 ISO 5
+                BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the entry gowning
+                room with the &lt;800&gt; suite but will be have dedicated entry to a common corridor that serves the
+                two (2) rooms. The two (2) BSL-2 rooms will share a common de-gowning room. The suite is unidirectional
+                so the worker will exit the compounding room through a de-gowning room, thus avoiding re-entry into the
+                entry corridor where cross contamination could occur between compounding rooms. The rooms will be
+                arranged so the BSL-2 rooms are negatively pressurized relative to the common corridor, but the suite
+                itself is positive to common spaces.
+
+            </p>
+            <p>
+                There will be two (2) kitting rooms in the pharmacy where drug and supplies will be stored. One (1)
+                kitting room is for non-hazardous drug and supply storage, and one (1) kitting room for &lt;800&gt;
+                Hazardous drug storage. Each kitting room will have a high-density storage carousel designed for use in
+                a cleanroom environment.
+
+            </p>
+            <p>
+                Next to the APF area there will be an Inpatient Unit Dose Section that serves patients that are staying
+                and being treated in the hospital. This area will feature a large robotic prescription dispensing
+                system, a high-density carousel, refrigerators, shelves, and a workstation area for 4-6 people. There
+                will also be an Outpatient Section which serves medications to patients that are being treated as
+                outpatients. This section includes an Outpatient Waiting Area with three (3) consultation windows for
+                outpatients for pick up. Finally, there will be two (2) additional high-density carousels that will
+                store Investigational drugs and drugs that are shared between Inpatient and Outpatient departments.
+            </p>
+            <p>
+                A new mechanical penthouse will be installed above an adjacent roof to house (2) dedicated air handling
+                units and other necessary HVAC and electrical equipment. The terminal air units that supply and control
+                air changes, temperature, humidity, and differential pressure will be located in the mechanical
+                interstitial space above the program spaces. All supply air to the classified rooms is HEPA filtered.
+                There will be two (2) sets of dedicated exhaust systems, one set for the general exhaust and one set for
+                the hazardous exhaust.
+            </p>
+            <strong>This facility is under development.</strong>
+            {{remainingDescription}}
+
+        </div>
+        <a (click)="toggleMessageClick()" class="nav-toggle">{{toggleMessage}}</a> -->
+
+    </div>
+
+    <div id="documents-tab" *ngIf="selectedTab=='documents'">
+        <span class="cardContent">
+            <p style="width:80em"> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for
+                this APF, provided for your convenience. For access to the full archive of documents, or for access to
+                the controlled version of any of these documents, please <a href="contactus.aspx">contact</a> FCIS.
+
+                The documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been
+                verified.</p>
+
+            <div>
+                <div *ngFor="let docGroup of (service.documents$ | async) || []">
+                    <b>{{docGroup.description}}</b>
+                    <ul>
+                        <li *ngFor="let atch of docGroup.attachments">
+                            <a [href]="atch.url" target="_blank">{{atch.docTitle}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="((service.documents$ | async) || []).length == 0">
+                    <span>No Documents Available</span>
+                </div>
+            </div>
+        </span>
+    </div>
+
+    <div id="diagram-tab" *ngIf="selectedTab=='diagram'" style="height:800px">
+        <a> Open in new tab</a>
+        <object data="/assets/images/CCE_2J_Cell_Therapy_Lab.pdf" type="application/pdf" width="100%" height="100%">
+            alt : <a href="test.pdf">test.pdf</a>
+        </object>
+    </div>
+
+    <div id="documents-tab" *ngIf="selectedTab=='pictures'">
+        <div class="card">
+            <div style="display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;">
+                <div *ngFor="let photo of (service.pictures$ | async) || []"
+                    style="border:1px solid black; padding:4px;">
+                    <p-image [src]="photo.url" [preview]="true" width="219" height="200"
+                        [alt]="photo.docTitle"></p-image><br />
+                    <span style="font-size:smaller">{{photo.docTitle}}</span>
+                </div>
+                <div *ngIf="((service.pictures$ | async) || []).length == 0">
+                    <span>No Pictures Available</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

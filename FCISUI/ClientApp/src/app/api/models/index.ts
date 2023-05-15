@@ -1,3 +1,5 @@
+export * from './attachment';
+export * from './contactUsMessage';
 export * from './errorLog';
 export * from './facility';
 export * from './gsfChart';

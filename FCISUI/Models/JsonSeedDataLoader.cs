@@ -52,5 +52,15 @@ namespace FCISUI.Models
             var svgMapArrows = getEntities<SvgMapArrow>("svgMapArrow.json").ToList();
             return svgMapArrows;
         }
+
+        public List<AttachmentType> GetAttachmentTypes() {
+            var attachmentTypes = getEntities<AttachmentType>("attachmentType.json").ToList();
+            return attachmentTypes;
+        }
+
+        public List<Attachment> GetAttachments() {
+            var attachments = getEntities<Attachment>("attachment.json").ToList();
+            return attachments;
+        }
     }
 }

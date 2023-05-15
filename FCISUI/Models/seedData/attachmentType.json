@@ -1,0 +1,127 @@
+[
+    {
+        "AttachmentTypeId": 1,
+        "Description": "Airflow Visualization Study (AVS) ",
+        "SortOrder": 10
+    },
+    {
+        "AttachmentTypeId": 2,
+        "Description": "APF Project Weekly Status Reports",
+        "SortOrder": 20
+    },
+    {
+        "AttachmentTypeId": 3,
+        "Description": "Basis Of Design (BOD)",
+        "SortOrder": 30
+    },
+    {
+        "AttachmentTypeId": 4,
+        "Description": "BSC Certification Records",
+        "SortOrder": 40
+    },
+    {
+        "AttachmentTypeId": 5,
+        "Description": "Calibration Record",
+        "SortOrder": 50
+    },
+    {
+        "AttachmentTypeId": 6,
+        "Description": "Clean Room Certification",
+        "SortOrder": 60
+    },
+    {
+        "AttachmentTypeId": 7,
+        "Description": "Commissioning",
+        "SortOrder": 70
+    },
+    {
+        "AttachmentTypeId": 9,
+        "Description": "Control Logic Diagrams",
+        "SortOrder": 90
+    },
+    {
+        "AttachmentTypeId": 13,
+        "Description": "Facility Equipment Submittals",
+        "SortOrder": 130
+    },
+    {
+        "AttachmentTypeId": 16,
+        "Description": "Gases Certification",
+        "SortOrder": 160
+    },
+    {
+        "AttachmentTypeId": 17,
+        "Description": "HEPA Certification Record",
+        "SortOrder": 170
+    },
+    {
+        "AttachmentTypeId": 18,
+        "Description": "Project\/Validation Masterplan",
+        "SortOrder": 180
+    },
+    {
+        "AttachmentTypeId": 19,
+        "Description": "Record Drawings",
+        "SortOrder": 190
+    },
+    {
+        "AttachmentTypeId": 20,
+        "Description": "Record Specifications",
+        "SortOrder": 200
+    },
+    {
+        "AttachmentTypeId": 21,
+        "Description": "Risk Assessment",
+        "SortOrder": 210
+    },
+    {
+        "AttachmentTypeId": 22,
+        "Description": "SOPs & SWIs",
+        "SortOrder": 220
+    },
+    {
+        "AttachmentTypeId": 24,
+        "Description": "System Level Impact Assessments (SLIA)",
+        "SortOrder": 240
+    },
+    {
+        "AttachmentTypeId": 25,
+        "Description": "Testing and Balancing (TAB)",
+        "SortOrder": 250
+    },
+    {
+        "AttachmentTypeId": 26,
+        "Description": "Training Documents",
+        "SortOrder": 260
+    },
+    {
+        "AttachmentTypeId": 27,
+        "Description": "User Requirement Specifications (URS)",
+        "SortOrder": 270
+    },
+    {
+        "AttachmentTypeId": 28,
+        "Description": "Other",
+        "SortOrder": 500
+    },
+    {
+        "AttachmentTypeId": 29,
+        "Description": "Pictures ",
+        "SortOrder": 1000
+    },
+    {
+        "AttachmentTypeId": 30,
+        "Description": "HVAC IOQ",
+        "SortOrder": 175
+    },
+    {
+        "AttachmentTypeId": 31,
+        "Description": "Qualification Documents",
+        "SortOrder": 185
+    },
+    {
+        "AttachmentTypeId": 1030,
+        "Description": "Facility Diagram",
+        "SortOrder": 135
+    }
+]

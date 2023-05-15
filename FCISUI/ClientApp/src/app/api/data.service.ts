@@ -1,4 +1,6 @@
 import {
+  Attachment,
+  AttachmentGroup,
   ContactUsMessage,
   ErrorLog,
   Facility,
@@ -154,5 +156,13 @@ export class DataService {
 
   contactUs(message:ContactUsMessage) {
     return this.post('Message/ContactUs',message);
+  }
+
+  facilityPictures(facilityId:number) {
+    return this.get<Attachment[]>(`Attachment/pictures/facility/${facilityId}`);
+  }
+
+  facilityDocuments(facilityId:number) {
+    return this.get<AttachmentGroup[]>(`Attachment/documents/facility/${facilityId}`);
   }
 }

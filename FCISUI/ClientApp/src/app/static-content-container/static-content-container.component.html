@@ -1,1 +1,33 @@
-<div [innerHTML]="safeHtml"></div>
+<div [innerHTML]="safeHtml | sanitizedHtml"></div>
+
+
+<script>
+    // $(document).ready(function () {
+    //     $('.nav-toggle').click(function () {
+    //         var collapse_content_selector = $(this).attr('href');
+    //         var toggle_switch = $(this);
+    //         $(collapse_content_selector).toggle(function () {
+    //             if ($(this).css('display') == 'none') {
+    //                 toggle_switch.html('Read More ...');
+    //             } else {
+    //                 toggle_switch.html('Read Less...');
+    //             }
+    //         });
+    //     });
+    // });
+// window.setTimeout(()=>{
+//     $('.nav-toggle').click( () => {
+//         alert('click');
+//         // var collapse_content_selector = $(this).attr('href');
+//         // var toggle_switch = $(this);
+//         // $(collapse_content_selector).toggle( () => {
+//         //     if ($(this).css('display') == 'none') {
+//         //         toggle_switch.html('Read More ...');
+//         //     } else {
+//         //         toggle_switch.html('Read Less...');
+//         //     }
+//         // });
+//       });
+// },10)
+
+</script>

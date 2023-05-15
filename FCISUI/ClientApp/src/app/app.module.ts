@@ -30,6 +30,9 @@ import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
 import { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dashboard.component';
+import { LeftNavComponent } from './left-nav/left-nav.component';
+import { FacilityInfoPageComponent } from './facility-info-page/facility-info-page.component';
+import { ContactUsDialogComponent } from './contact-us-dialog/contact-us-dialog.component';
 
 // import { DataService } from './data.service';
 
@@ -56,7 +59,10 @@ import { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dash
     StaticContentEditorComponent,
     RoomInfoDisplayComponent,
     RoomDataTableComponent,
-    ErrorLogDashboardComponent
+    ErrorLogDashboardComponent,
+    LeftNavComponent,
+    FacilityInfoPageComponent,
+    ContactUsDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
