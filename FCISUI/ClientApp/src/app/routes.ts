@@ -4,7 +4,7 @@ import { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dash
 import { FacilityInfoPageComponent } from './facility-info-page/facility-info-page.component';
 import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
-import { StaticContentContainerComponent } from './static-content-container/static-content-container.component';
+import { StaticContentPageComponent } from './static-content-page/static-content-page.component';
 
 export const appRoutes: Routes = [
   {
@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
       },
       {
         path: 'resource/:page',
-        component: StaticContentContainerComponent
+        component: StaticContentPageComponent
       },
       {
         path: '',

@@ -46,6 +46,79 @@
     ],
     "interfaces": [
         {
+            "name": "Attachment",
+            "id": "interface-Attachment-e392728a391e307f9d802b84ad7da807cd98e088812896f9583423553b9b2a9d21468594f9105d6054c57eadcac5a1c6dbcd35e0783c2564c1936dd00508f980",
+            "file": "src/app/api/models/attachment.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface Attachment\r\n{\r\n    storedFileName:string,\r\n    docTitle:string,\r\n    url:string\r\n}\r\nexport interface AttachmentGroup\r\n{\r\n    description:string;\r\n    attachments: Attachment[];\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "docTitle",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                },
+                {
+                    "name": "storedFileName",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 3
+                },
+                {
+                    "name": "url",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "AttachmentGroup",
+            "id": "interface-AttachmentGroup-e392728a391e307f9d802b84ad7da807cd98e088812896f9583423553b9b2a9d21468594f9105d6054c57eadcac5a1c6dbcd35e0783c2564c1936dd00508f980",
+            "file": "src/app/api/models/attachment.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "export interface Attachment\r\n{\r\n    storedFileName:string,\r\n    docTitle:string,\r\n    url:string\r\n}\r\nexport interface AttachmentGroup\r\n{\r\n    description:string;\r\n    attachments: Attachment[];\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "attachments",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Attachment[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "description",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
             "name": "ContactUsMessage",
             "id": "interface-ContactUsMessage-7212cc6f0e622e37437aee5b13091a6c44d658061fd6dcc16b0e9d49d756d5ee70dd03b329ba79611c54a1032c0e85f4693fd9b0bfbd6404537c5e23c84cc5f4",
             "file": "src/app/api/models/contactUsMessage.ts",
@@ -328,12 +401,12 @@
         },
         {
             "name": "FacilityInfoPageData",
-            "id": "interface-FacilityInfoPageData-a4f0432cc17cc34a0695fd62183cd7198a3a6f7294c548a4b5c4243ec0360b4c9245e8e42f452bf2e79ff0f8200003fe8e5270eb2835b6ed1385ebdecf6db380",
+            "id": "interface-FacilityInfoPageData-4dd3f020967bf2c613ff4d0033da721bbf7b5f08c9aa9a23aad3da4341f21fa3d7d43b348cb3b7bad799337c0298947f00be97fb599b157907b7a3543da7d253",
             "file": "src/app/facility-info-page/facility-info-page.component.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\n\r\ninterface FacilityInfoPageData {\r\n  facilityNameTitle: string;\r\n  aboutBeginningDescription: string;\r\n  aboutRemainingDescription: string;\r\n  diagramUrl: string;\r\n  images: {title:string, url:string}[];\r\n  documents: {description: string, url: string}[]\r\n} \r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css']\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  facilityNameTitle='';\r\n  beginingDescription='';\r\n  remainingDescription='';\r\n\r\n  constructor() { }\r\n\r\n  @Input()\r\n  facilityInfoPageData: FacilityInfoPageData = {\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n \r\n showAllMessage = false;\r\n toggleMessage=\"read more...\";\r\n \r\n selectedTab = 'about';\r\n\r\n activeIndex=0;\r\n displayCustom: boolean = false;\r\n\r\n images: any[] = [\r\n  {\r\n    itemImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG',\r\n    thumbnailImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG',\r\n    title:'Clean Freezer Room 2N307A',\r\n    alt:'Clean Freezer Room 2N307A'\r\n  },\r\n  {\r\n    itemImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG',\r\n    thumbnailImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG',\r\n    title:'Corridor 2N307-3',\r\n    alt:'Corridor 2N307-3'\r\n  },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1s.jpg',\r\n  //     alt: 'Description for Image 1',\r\n  //     title: 'Title 1'\r\n  // },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',\r\n  //     alt: 'Description for Image 2',\r\n  //     title: 'Title 2'\r\n  // },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',\r\n  //     alt: 'Description for Image 3',\r\n  //     title: 'Title 3'\r\n  // }\r\n];\r\n\r\nresponsiveOptions: any[] = [\r\n  // {\r\n  //     breakpoint: '1500px',\r\n  //     numVisible: 5\r\n  // },\r\n  // {\r\n  //     breakpoint: '1024px',\r\n  //     numVisible: 3\r\n  // },\r\n  // {\r\n  //     breakpoint: '768px',\r\n  //     numVisible: 2\r\n  // },\r\n  // {\r\n  //     breakpoint: '560px',\r\n  //     numVisible: 1\r\n  // }\r\n];\r\n\r\nimageClick(index: number) {\r\n  this.activeIndex = index;\r\n  this.displayCustom = true;\r\n}\r\n \r\n items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n  toggleMessageClick() {\r\n    this.showAllMessage = !this.showAllMessage;\r\n    this.toggleMessage = this.showAllMessage ? \"show less\" : \"show more...\";\r\n  }\r\n\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { Observable, filter, map } from 'rxjs';\r\n\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport {FacilityInfoPageService} from './facility-info-page.service';\r\n\r\ninterface FacilityInfoPageData {\r\n  facilityNameTitle: string;\r\n  aboutBeginningDescription: string;\r\n  aboutRemainingDescription: string;\r\n  diagramUrl: string;\r\n  images: {title:string, url:string}[];\r\n  documents: {description: string, url: string}[]\r\n} \r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css'],\r\n  providers: [FacilityInfoPageService]\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  facilityNameTitle='';\r\n  beginingDescription='';\r\n  remainingDescription='';\r\n\r\n  constructor(private activatedRoute: ActivatedRoute,public service:FacilityInfoPageService) { \r\n\r\n    this.activatedRoute.params\r\n    .pipe(\r\n      filter(Boolean)\r\n    )\r\n    .subscribe((params) => {\r\n      this.service.Load(params.facilityId)\r\n    });\r\n  }\r\n\r\n  @Input()\r\n  facilityInfoPageData: FacilityInfoPageData = {\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n \r\n showAllMessage = false;\r\n toggleMessage=\"read more...\";\r\n \r\n selectedTab = 'about';\r\n\r\n\r\n items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n  toggleMessageClick() {\r\n    this.showAllMessage = !this.showAllMessage;\r\n    this.toggleMessage = this.showAllMessage ? \"show less\" : \"show more...\";\r\n  }\r\n\r\n\r\n}\r\n",
             "properties": [
                 {
                     "name": "aboutBeginningDescription",
@@ -342,7 +415,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 5
+                    "line": 9
                 },
                 {
                     "name": "aboutRemainingDescription",
@@ -351,7 +424,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 6
+                    "line": 10
                 },
                 {
                     "name": "diagramUrl",
@@ -360,7 +433,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 7
+                    "line": 11
                 },
                 {
                     "name": "documents",
@@ -369,7 +442,7 @@
                     "type": "literal type[]",
                     "optional": false,
                     "description": "",
-                    "line": 9
+                    "line": 13
                 },
                 {
                     "name": "facilityNameTitle",
@@ -378,7 +451,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 4
+                    "line": 8
                 },
                 {
                     "name": "images",
@@ -387,7 +460,7 @@
                     "type": "literal type[]",
                     "optional": false,
                     "description": "",
-                    "line": 8
+                    "line": 12
                 }
             ],
             "indexSignatures": [],
@@ -2096,7 +2169,7 @@
         },
         {
             "name": "DataService",
-            "id": "injectable-DataService-da8c8a036e68ebfea0c9ec576aa4d9df434d7476d397ee2b02fa64dc90654f1ee1f285ba1e1dadf5e58e46b1ff88611246eab4ebef78791cc809fa647db0d1cd",
+            "id": "injectable-DataService-00e41f1d9596ccdad7c30098b9d7dfe8205b2a5e285638f4a5c9cb65f5e10ac4a6c244f473c48fbae4d7d6084b9c0d679e268ebdd8f68fc847a520bd4c011ff5",
             "file": "src/app/api/data.service.ts",
             "properties": [],
             "methods": [
@@ -2106,7 +2179,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 147,
+                    "line": 149,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2123,7 +2196,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 155,
+                    "line": 157,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2144,7 +2217,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 151,
+                    "line": 153,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2154,7 +2227,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2171,7 +2244,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2217,7 +2290,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 97,
+                    "line": 99,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2272,7 +2345,63 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 130,
+                    "line": 132,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "facilityId",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "facilityDocuments",
+                    "args": [
+                        {
+                            "name": "facilityId",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 165,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "facilityId",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "facilityPictures",
+                    "args": [
+                        {
+                            "name": "facilityId",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 161,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2324,7 +2453,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 114,
+                    "line": 116,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2390,7 +2519,7 @@
                     "typeParameters": [
                         "T"
                     ],
-                    "line": 27,
+                    "line": 29,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2414,7 +2543,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 43,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2424,7 +2553,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 47,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2434,7 +2563,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 51,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2459,7 +2588,7 @@
                     "typeParameters": [
                         "T"
                     ],
-                    "line": 31,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -2505,7 +2634,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 141,
+                    "line": 143,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2542,7 +2671,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 63,
+                    "line": 65,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2577,7 +2706,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 55,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2615,7 +2744,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 59,
+                    "line": 61,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2667,7 +2796,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 67,
+                    "line": 69,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2723,7 +2852,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {\r\n  ContactUsMessage,\r\n  ErrorLog,\r\n  Facility,\r\n  FacilityGsf,\r\n  FacilityTimeSeriesData,\r\n  GsfGrowth,\r\n  ICGsf,\r\n  LocationCurrentStatus,\r\n  LocationTimeSeriesData,\r\n  Room,\r\n  RoomTimeSeriesData,\r\n  SvgMap,\r\n  SvgMapPin\r\n} from './models';\r\n\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class DataService {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  private get<T>(url: string) {\r\n    return this.http.get<T>(`${environment.apiRootUrl}/${url}`);\r\n  }\r\n\r\n  private post<T>(url: string, body: any) {\r\n    return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);\r\n  }\r\n\r\n  facilities() {\r\n    return this.get<Facility[]>(`Facilities`);\r\n  }\r\n\r\n  facilitiesByIC(ic: string) {\r\n    return this.get<Facility[]>(`Facilities/ic/${ic}`);\r\n  }\r\n\r\n  gsfByFacility() {\r\n    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);\r\n  }\r\n\r\n  gsfByIC() {\r\n    return this.get<ICGsf[]>(`GsfChart/GsfByIC`);\r\n  }\r\n\r\n  gsfGrowthByClassification() {\r\n    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);\r\n  }\r\n\r\n  svgMap(facId: number, marker: string = 'pin') {\r\n    return this.get<SvgMap>(`SvgMap/${facId}?marker=${marker}`);\r\n  }\r\n\r\n  svgMapBackgroundUrl(facId: number) {\r\n    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;\r\n  }\r\n\r\n  roomParameterInfo(facilityId: number) {\r\n    return this.get<Room[]>(`SvgMap/RoomParameterInfo/facility/${facilityId}`);\r\n  }\r\n\r\n  timelineData(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    if (facilityId == 0) {\r\n      return this.post<LocationTimeSeriesData<Facility>[]>(\r\n        `Timeline/AllFacilityTimelineData`,\r\n        {\r\n          startDate,\r\n          endDate,\r\n          interval\r\n        }\r\n      );\r\n    }\r\n\r\n    return this.post<LocationTimeSeriesData<Room>[]>(\r\n      `Timeline/FacilityTimelineData`,\r\n      {\r\n        facilityId,\r\n        attr,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityAlltimelineData(\r\n    ic: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<FacilityTimeSeriesData[]>(\r\n      `Timeline/AllFacilityTimelineData`,\r\n      {\r\n        ic,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityRoomsTimelineDate(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<RoomTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {\r\n      facilityId,\r\n      attr,\r\n      startDate,\r\n      endDate,\r\n      interval\r\n    });\r\n  }\r\n\r\n  facilityCurrentStatusData(facilityId: number) {\r\n    if (facilityId == 0) {\r\n      return this.get<LocationCurrentStatus[]>(\r\n        `Timeline/AllFacilityCurrentData`\r\n      );\r\n    }\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/FacilityCurrentCompositeData/${facilityId}`\r\n    );\r\n  }\r\n\r\n  roomCurrentAttributeData(facilityId: number, roomFormattedName: string) {\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/RoomCurrentAttributeData/facility/${facilityId}/room/${roomFormattedName}`\r\n    );\r\n  }\r\n\r\n  apfLimits() {\r\n    return this.get<any[]>(`Timeline/ApfLimits`);\r\n  }\r\n\r\n  errors() {\r\n    return this.get<ErrorLog[]>(`ErrorLog`);\r\n  }\r\n\r\n  contactUs(message:ContactUsMessage) {\r\n    return this.post('Message/ContactUs',message);\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Attachment,\r\n  AttachmentGroup,\r\n  ContactUsMessage,\r\n  ErrorLog,\r\n  Facility,\r\n  FacilityGsf,\r\n  FacilityTimeSeriesData,\r\n  GsfGrowth,\r\n  ICGsf,\r\n  LocationCurrentStatus,\r\n  LocationTimeSeriesData,\r\n  Room,\r\n  RoomTimeSeriesData,\r\n  SvgMap,\r\n  SvgMapPin\r\n} from './models';\r\n\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class DataService {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  private get<T>(url: string) {\r\n    return this.http.get<T>(`${environment.apiRootUrl}/${url}`);\r\n  }\r\n\r\n  private post<T>(url: string, body: any) {\r\n    return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);\r\n  }\r\n\r\n  facilities() {\r\n    return this.get<Facility[]>(`Facilities`);\r\n  }\r\n\r\n  facilitiesByIC(ic: string) {\r\n    return this.get<Facility[]>(`Facilities/ic/${ic}`);\r\n  }\r\n\r\n  gsfByFacility() {\r\n    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);\r\n  }\r\n\r\n  gsfByIC() {\r\n    return this.get<ICGsf[]>(`GsfChart/GsfByIC`);\r\n  }\r\n\r\n  gsfGrowthByClassification() {\r\n    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);\r\n  }\r\n\r\n  svgMap(facId: number, marker: string = 'pin') {\r\n    return this.get<SvgMap>(`SvgMap/${facId}?marker=${marker}`);\r\n  }\r\n\r\n  svgMapBackgroundUrl(facId: number) {\r\n    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;\r\n  }\r\n\r\n  roomParameterInfo(facilityId: number) {\r\n    return this.get<Room[]>(`SvgMap/RoomParameterInfo/facility/${facilityId}`);\r\n  }\r\n\r\n  timelineData(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    if (facilityId == 0) {\r\n      return this.post<LocationTimeSeriesData<Facility>[]>(\r\n        `Timeline/AllFacilityTimelineData`,\r\n        {\r\n          startDate,\r\n          endDate,\r\n          interval\r\n        }\r\n      );\r\n    }\r\n\r\n    return this.post<LocationTimeSeriesData<Room>[]>(\r\n      `Timeline/FacilityTimelineData`,\r\n      {\r\n        facilityId,\r\n        attr,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityAlltimelineData(\r\n    ic: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<FacilityTimeSeriesData[]>(\r\n      `Timeline/AllFacilityTimelineData`,\r\n      {\r\n        ic,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityRoomsTimelineDate(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<RoomTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {\r\n      facilityId,\r\n      attr,\r\n      startDate,\r\n      endDate,\r\n      interval\r\n    });\r\n  }\r\n\r\n  facilityCurrentStatusData(facilityId: number) {\r\n    if (facilityId == 0) {\r\n      return this.get<LocationCurrentStatus[]>(\r\n        `Timeline/AllFacilityCurrentData`\r\n      );\r\n    }\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/FacilityCurrentCompositeData/${facilityId}`\r\n    );\r\n  }\r\n\r\n  roomCurrentAttributeData(facilityId: number, roomFormattedName: string) {\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/RoomCurrentAttributeData/facility/${facilityId}/room/${roomFormattedName}`\r\n    );\r\n  }\r\n\r\n  apfLimits() {\r\n    return this.get<any[]>(`Timeline/ApfLimits`);\r\n  }\r\n\r\n  errors() {\r\n    return this.get<ErrorLog[]>(`ErrorLog`);\r\n  }\r\n\r\n  contactUs(message:ContactUsMessage) {\r\n    return this.post('Message/ContactUs',message);\r\n  }\r\n\r\n  facilityPictures(facilityId:number) {\r\n    return this.get<Attachment[]>(`Attachment/pictures/facility/${facilityId}`);\r\n  }\r\n\r\n  facilityDocuments(facilityId:number) {\r\n    return this.get<AttachmentGroup[]>(`Attachment/documents/facility/${facilityId}`);\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2737,7 +2866,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 24,
+                "line": 26,
                 "jsdoctags": [
                     {
                         "name": "http",
@@ -2749,6 +2878,121 @@
                         }
                     }
                 ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "FacilityInfoPageService",
+            "id": "injectable-FacilityInfoPageService-8d7e8aa3b2c2dc5747342d10fed5941b797055418d5d5a88e8c33854a8f49097ab9e0233529f504dec7a990fe5bb26bc1f0d051be7bb5d1d57362516fc7909e1",
+            "file": "src/app/facility-info-page/facility-info-page.service.ts",
+            "properties": [
+                {
+                    "name": "_documents$",
+                    "defaultValue": "new BehaviorSubject<AttachmentGroup[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_pictures$",
+                    "defaultValue": "new BehaviorSubject<Attachment[]>([])",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "Load",
+                    "args": [
+                        {
+                            "name": "facilityId",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "facilityId",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import { Attachment, AttachmentGroup } from '../api/models';\r\nimport {\r\n    BehaviorSubject,\r\n    Observable,\r\n    Subject,\r\n    combineLatest,\r\n    distinctUntilChanged,\r\n    filter,\r\n    map,\r\n    mergeMap,\r\n    of,\r\n    zip\r\n} from 'rxjs';\r\n\r\nimport { DataService } from 'src/app/api/data.service';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable()\r\nexport class FacilityInfoPageService {\r\n    private _pictures$ = new BehaviorSubject<Attachment[]>([]);\r\n    private _documents$ = new BehaviorSubject<AttachmentGroup[]>([]);\r\n\r\n    constructor(private dataService: DataService) {\r\n    }\r\n\r\n    Load(facilityId: number) {\r\n\r\n        this.dataService.facilityPictures(facilityId).subscribe((pictures: Attachment[]) => {\r\n            const picturesWithUrls = pictures.map(p => ({ ...p, url: `${environment.attachmentRootUrl}/${p.storedFileName}` }));\r\n            this._pictures$.next(picturesWithUrls);\r\n        });\r\n\r\n        this.dataService.facilityDocuments(facilityId).subscribe((documents: AttachmentGroup[]) => {\r\n            const docs = documents.map(d => ({\r\n                ...d,\r\n                attachments: d.attachments.map(a => ({ \r\n                    ...a, \r\n                    url: `${environment.attachmentRootUrl}/${a.storedFileName}` }))\r\n            }));\r\n            this._documents$.next(docs);\r\n        });\r\n    }\r\n\r\n    public get pictures$() {\r\n        return this._pictures$ as Observable<Attachment[]>;\r\n    }\r\n\r\n    public get documents$() {\r\n        return this._documents$ as Observable<AttachmentGroup[]>;\r\n    }\r\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "dataService",
+                        "type": "DataService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 22,
+                "jsdoctags": [
+                    {
+                        "name": "dataService",
+                        "type": "DataService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "accessors": {
+                "pictures$": {
+                    "name": "pictures$",
+                    "getSignature": {
+                        "name": "pictures$",
+                        "type": "",
+                        "returnType": "",
+                        "line": 45
+                    }
+                },
+                "documents$": {
+                    "name": "documents$",
+                    "getSignature": {
+                        "name": "documents$",
+                        "type": "",
+                        "returnType": "",
+                        "line": 49
+                    }
+                }
             },
             "type": "injectable"
         }
@@ -4828,13 +5072,17 @@
         },
         {
             "name": "FacilityInfoPageComponent",
-            "id": "component-FacilityInfoPageComponent-a4f0432cc17cc34a0695fd62183cd7198a3a6f7294c548a4b5c4243ec0360b4c9245e8e42f452bf2e79ff0f8200003fe8e5270eb2835b6ed1385ebdecf6db380",
+            "id": "component-FacilityInfoPageComponent-4dd3f020967bf2c613ff4d0033da721bbf7b5f08c9aa9a23aad3da4341f21fa3d7d43b348cb3b7bad799337c0298947f00be97fb599b157907b7a3543da7d253",
             "file": "src/app/facility-info-page/facility-info-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
-            "providers": [],
+            "providers": [
+                {
+                    "name": "FacilityInfoPageService"
+                }
+            ],
             "selector": "app-facility-info-page",
             "styleUrls": [
                 "./facility-info-page.component.css"
@@ -4850,23 +5098,13 @@
                     "defaultValue": "{\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 26,
+                    "line": 40,
                     "type": "FacilityInfoPageData",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
-                {
-                    "name": "activeIndex",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 43
-                },
                 {
                     "name": "beginingDescription",
                     "defaultValue": "''",
@@ -4875,17 +5113,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 20
-                },
-                {
-                    "name": "displayCustom",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "boolean",
-                    "optional": false,
-                    "description": "",
-                    "line": 44
+                    "line": 25
                 },
                 {
                     "name": "facilityNameTitle",
@@ -4895,17 +5123,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 19
-                },
-                {
-                    "name": "images",
-                    "defaultValue": "[\r\n  {\r\n    itemImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG',\r\n    thumbnailImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG',\r\n    title:'Clean Freezer Room 2N307A',\r\n    alt:'Clean Freezer Room 2N307A'\r\n  },\r\n  {\r\n    itemImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG',\r\n    thumbnailImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG',\r\n    title:'Corridor 2N307-3',\r\n    alt:'Corridor 2N307-3'\r\n  },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1s.jpg',\r\n  //     alt: 'Description for Image 1',\r\n  //     title: 'Title 1'\r\n  // },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',\r\n  //     alt: 'Description for Image 2',\r\n  //     title: 'Title 2'\r\n  // },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',\r\n  //     alt: 'Description for Image 3',\r\n  //     title: 'Title 3'\r\n  // }\r\n]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "any[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 46
+                    "line": 24
                 },
                 {
                     "name": "items",
@@ -4915,7 +5133,7 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 103
+                    "line": 58
                 },
                 {
                     "name": "remainingDescription",
@@ -4925,17 +5143,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 21
-                },
-                {
-                    "name": "responsiveOptions",
-                    "defaultValue": "[\r\n  // {\r\n  //     breakpoint: '1500px',\r\n  //     numVisible: 5\r\n  // },\r\n  // {\r\n  //     breakpoint: '1024px',\r\n  //     numVisible: 3\r\n  // },\r\n  // {\r\n  //     breakpoint: '768px',\r\n  //     numVisible: 2\r\n  // },\r\n  // {\r\n  //     breakpoint: '560px',\r\n  //     numVisible: 1\r\n  // }\r\n]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "any[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 79
+                    "line": 26
                 },
                 {
                     "name": "selectedTab",
@@ -4945,7 +5153,19 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 41
+                    "line": 55
+                },
+                {
+                    "name": "service",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "FacilityInfoPageService",
+                    "optional": false,
+                    "description": "",
+                    "line": 28,
+                    "modifierKind": [
+                        123
+                    ]
                 },
                 {
                     "name": "showAllMessage",
@@ -4955,7 +5175,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 38
+                    "line": 52
                 },
                 {
                     "name": "toggleMessage",
@@ -4965,45 +5185,17 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 39
+                    "line": 53
                 }
             ],
             "methodsClass": [
-                {
-                    "name": "imageClick",
-                    "args": [
-                        {
-                            "name": "index",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 98,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "index",
-                            "type": "number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -5013,7 +5205,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 133,
+                    "line": 88,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -5025,7 +5217,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\n\r\ninterface FacilityInfoPageData {\r\n  facilityNameTitle: string;\r\n  aboutBeginningDescription: string;\r\n  aboutRemainingDescription: string;\r\n  diagramUrl: string;\r\n  images: {title:string, url:string}[];\r\n  documents: {description: string, url: string}[]\r\n} \r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css']\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  facilityNameTitle='';\r\n  beginingDescription='';\r\n  remainingDescription='';\r\n\r\n  constructor() { }\r\n\r\n  @Input()\r\n  facilityInfoPageData: FacilityInfoPageData = {\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n \r\n showAllMessage = false;\r\n toggleMessage=\"read more...\";\r\n \r\n selectedTab = 'about';\r\n\r\n activeIndex=0;\r\n displayCustom: boolean = false;\r\n\r\n images: any[] = [\r\n  {\r\n    itemImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG',\r\n    thumbnailImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG',\r\n    title:'Clean Freezer Room 2N307A',\r\n    alt:'Clean Freezer Room 2N307A'\r\n  },\r\n  {\r\n    itemImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG',\r\n    thumbnailImageSrc: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG',\r\n    title:'Corridor 2N307-3',\r\n    alt:'Corridor 2N307-3'\r\n  },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria1s.jpg',\r\n  //     alt: 'Description for Image 1',\r\n  //     title: 'Title 1'\r\n  // },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria2s.jpg',\r\n  //     alt: 'Description for Image 2',\r\n  //     title: 'Title 2'\r\n  // },\r\n  // {\r\n  //     itemImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3.jpg',\r\n  //     thumbnailImageSrc: 'https://primefaces.org/cdn/primeng/images/galleria/galleria3s.jpg',\r\n  //     alt: 'Description for Image 3',\r\n  //     title: 'Title 3'\r\n  // }\r\n];\r\n\r\nresponsiveOptions: any[] = [\r\n  // {\r\n  //     breakpoint: '1500px',\r\n  //     numVisible: 5\r\n  // },\r\n  // {\r\n  //     breakpoint: '1024px',\r\n  //     numVisible: 3\r\n  // },\r\n  // {\r\n  //     breakpoint: '768px',\r\n  //     numVisible: 2\r\n  // },\r\n  // {\r\n  //     breakpoint: '560px',\r\n  //     numVisible: 1\r\n  // }\r\n];\r\n\r\nimageClick(index: number) {\r\n  this.activeIndex = index;\r\n  this.displayCustom = true;\r\n}\r\n \r\n items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n  toggleMessageClick() {\r\n    this.showAllMessage = !this.showAllMessage;\r\n    this.toggleMessage = this.showAllMessage ? \"show less\" : \"show more...\";\r\n  }\r\n\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { Observable, filter, map } from 'rxjs';\r\n\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport {FacilityInfoPageService} from './facility-info-page.service';\r\n\r\ninterface FacilityInfoPageData {\r\n  facilityNameTitle: string;\r\n  aboutBeginningDescription: string;\r\n  aboutRemainingDescription: string;\r\n  diagramUrl: string;\r\n  images: {title:string, url:string}[];\r\n  documents: {description: string, url: string}[]\r\n} \r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css'],\r\n  providers: [FacilityInfoPageService]\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  facilityNameTitle='';\r\n  beginingDescription='';\r\n  remainingDescription='';\r\n\r\n  constructor(private activatedRoute: ActivatedRoute,public service:FacilityInfoPageService) { \r\n\r\n    this.activatedRoute.params\r\n    .pipe(\r\n      filter(Boolean)\r\n    )\r\n    .subscribe((params) => {\r\n      this.service.Load(params.facilityId)\r\n    });\r\n  }\r\n\r\n  @Input()\r\n  facilityInfoPageData: FacilityInfoPageData = {\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n \r\n showAllMessage = false;\r\n toggleMessage=\"read more...\";\r\n \r\n selectedTab = 'about';\r\n\r\n\r\n items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n  toggleMessageClick() {\r\n    this.showAllMessage = !this.showAllMessage;\r\n    this.toggleMessage = this.showAllMessage ? \"show less\" : \"show more...\";\r\n  }\r\n\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -5039,13 +5231,46 @@
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "args": [],
-                "line": 21
+                "args": [
+                    {
+                        "name": "activatedRoute",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "service",
+                        "type": "FacilityInfoPageService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 26,
+                "jsdoctags": [
+                    {
+                        "name": "activatedRoute",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "service",
+                        "type": "FacilityInfoPageService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"card-body designCardBody\">\r\n    <div>\r\n        <div style=\"position: relative; left: 0; top: 0;\">\r\n            <img id=\"apf1\" src=\"/assets/images/I-IVAU.jpg\">\r\n        </div>\r\n    </div>\r\n\r\n    <p-tabMenu [model]=\"items\"></p-tabMenu>\r\n\r\n    <div id=\"about-tab\" *ngIf=\"selectedTab=='about'\">\r\n        <h2>\r\n            <!-- Clinical Center Permanent-Intravenous Admixture Unit (P-IVAU) Pharmacy -->\r\n            {{facilityNameTitle}}\r\n        </h2>\r\n        <p>\r\n            {{beginingDescription}}\r\n            The National Institute of Health Clinical Center (CC) Pharmacy will operate the Permanent\r\n            Intravenous Admixture Unit (I-IVAU) which will provide a wide variety of compounded sterile drug\r\n            products to Clinical Center patients. The P-IVAU space will be located within the Building 10\r\n            Clinical Center on the first floor. The overall P-IVAU space will be approximately 10,000 gross\r\n            square feet of program space, with 5,500 gross square of APF spaces. The facility will prepare drugs\r\n            according to the requirements of USP&lt;797&gt;, USP&lt;800&gt;, USP&lt;795&gt; and BSL-2 standards.\r\n        </p>\r\n        <div *ngIf=\"showAllMessage\">\r\n            <p>\r\n                The APF spaces consists of one (1) &lt;797&gt; suite for sterile non-hazardous IV preparations, one (1) &lt;800&gt; suite for preparation of sterile hazardous preparations, and one (1) BSL-2 suite for hazardous sterile preparations.  \r\n\r\n            </p>\r\n            <p>The &lt;797&gt; sterile non-hazardous suite consists of six (6) ISO 7 compounding rooms, each with a Type A2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will have separate gowning and de-gowning rooms with a common ISO 7 corridor that serves the compounding rooms. The rooms will be arranged so pressure is cascading out from the ISO 7 Sterile Prep room out to the common corridor and to the ISO 8 gowning and de-gowning room.  </p>\r\n            <p>\r\n                The &lt;800&gt; sterile hazardous suite consists of four (4) ISO 7 compounding rooms, each with a Type B2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the entry gowning room with the BSL-2 suite but will be have dedicated entry to a common corridor that serves the four (4) rooms. The two (2) &lt;800&gt; rooms will share a common de-gowning room. The suite is unidirectional so the worker will exit the compounding room through a de-gowning room, thus avoiding re-entry into the entry corridor where cross contamination could occur between compounding rooms. The rooms will be arranged so the &lt;800&gt; rooms are negatively pressurized relative to the common corridor, but the suite itself is possible to common spaces.\r\n\r\n            </p>\r\n\r\n            <p>\r\n                The BSL-2 sterile hazardous suite consists of two (2) ISO 7 compounding rooms, each with a Type B2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the entry gowning room with the &lt;800&gt; suite but will be have dedicated entry to a common corridor that serves the two (2) rooms. The two (2) BSL-2 rooms will share a common de-gowning room. The suite is unidirectional so the worker will exit the compounding room through a de-gowning room, thus avoiding re-entry into the entry corridor where cross contamination could occur between compounding rooms. The rooms will be arranged so the BSL-2 rooms are negatively pressurized relative to the common corridor, but the suite itself is positive to common spaces.\r\n\r\n            </p>\r\n            <p>\r\n                There will be two (2) kitting rooms in the pharmacy where drug and supplies will be stored. One (1) kitting room is for non-hazardous drug and supply storage, and one (1) kitting room for &lt;800&gt; Hazardous drug storage. Each kitting room will have a high-density storage carousel designed for use in a cleanroom environment.  \r\n\r\n            </p>\r\n            <p>\r\n                Next to the APF area there will be an Inpatient Unit Dose Section that serves patients that are staying and being treated in the hospital. This area will feature a large robotic prescription dispensing system, a high-density carousel, refrigerators, shelves, and a workstation area for 4-6 people. There will also be an Outpatient Section which serves medications to patients that are being treated as outpatients.  This section includes an Outpatient Waiting Area with three (3) consultation windows for outpatients for pick up. Finally, there will be two (2) additional high-density carousels that will store Investigational drugs and drugs that are shared between Inpatient and Outpatient departments.\r\n            </p>\r\n            <p>\r\n                A new mechanical penthouse will be installed above an adjacent roof to house (2) dedicated air handling units and other necessary HVAC and electrical equipment. The terminal air units that supply and control air changes, temperature, humidity, and differential pressure will be located in the mechanical interstitial space above the program spaces. All supply air to the classified rooms is HEPA filtered. There will be two (2) sets of dedicated exhaust systems, one set for the general exhaust and one set for the hazardous exhaust.  \r\n            </p>\r\n            <strong>This facility is under development.</strong>\r\n            {{remainingDescription}}\r\n\r\n        </div>\r\n        <a (click)=\"toggleMessageClick()\" class=\"nav-toggle\">{{toggleMessage}}</a>\r\n\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='documents'\">\r\n        <span class=\"cardContent\">\r\n            <h2>Clinical Center, Center for Cellular Engineering (CCE) 2J Facility (10/2J)</h2><br>\r\n            <h3>Documents</h3>\r\n               <p> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for this APF, provided for your convenience. For access to the full archive of documents, or for access to the controlled version of any of these documents, please <a href=\"contactus.aspx\">contact</a> FCIS.\r\n\r\nThe documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been verified.</p>\r\n\r\n                \r\n                <li><strong> Basis Of Design (BOD)</strong></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/1a1f15f3-c652-4323-ab00-5288e6b803d6.pdf\" target=\"_blank\">ROWAC-Basis of Design (BOD)</a><br><li><strong> Facility Diagram</strong></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/78a760d8-4cd4-4e55-93f8-32717098d149.pdf\" target=\"_blank\">Facility Diagram</a><br><li><strong> Record Drawings</strong></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/89d3e5ae-735e-448a-a16c-b7e35bb21695.pdf\" target=\"_blank\">ROWAC-ARCH_Doors &amp; Hardware</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/adae20da-0250-482b-a541-19258cbc7e03.pdf\" target=\"_blank\">ROWAC-ARCH_Equipment Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3574a61a-b718-4662-acf1-c62ae4ec7352.pdf\" target=\"_blank\">ROWAC-ARCH_Finish Schedule</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/91753e07-f55d-492a-90d8-d08f7ec19b9d.pdf\" target=\"_blank\">ROWAC-ARCH_Floor Plan</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/4374d76c-ba58-4ed9-ba69-89fa294d807d.pdf\" target=\"_blank\">ROWAC-ARCH_Reflected Ceiling Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/88d05a1f-f293-471a-9276-09089e23ee5f.pdf\" target=\"_blank\">ROWAC-ELEC_Lighting Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/fb5b689b-95b3-4c86-9503-8314d2817e26.pdf\" target=\"_blank\">ROWAC-ELEC_Power Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/f1c27cbb-4c1a-4ba1-94aa-0b16ff46cc90.pdf\" target=\"_blank\">ROWAC-ELEC_Power Roof Plan</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/08e13b89-2d07-4c1f-a02c-4c9a40e76a0b.pdf\" target=\"_blank\">ROWAC-ELEC_Schedules</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/535e3621-5ac0-40ef-b7e9-964d00ebaa27.pdf\" target=\"_blank\">ROWAC-ELEC_Single-Line Diagrams</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/c1dd1fae-18e3-4eb3-9320-a753b04fea3c.pdf\" target=\"_blank\">ROWAC-Fire Protection Plan</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/593333ff-3c3c-4ead-8232-e0f73cd9499b.pdf\" target=\"_blank\">ROWAC-LN2_P&amp;ID</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/a14fc24b-1215-4884-ae74-8d971a5a7750.pdf\" target=\"_blank\">ROWAC-MECH_Classification &amp; Pressurization Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/8f21edf8-5968-45de-9f81-2c9bd11a90a7.pdf\" target=\"_blank\">ROWAC-MECH_HVAC AHU Generation Diagrams</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/741ad8a7-268b-4403-8c35-f0869d1e7457.pdf\" target=\"_blank\">ROWAC-MECH_HVAC Air Distribution Diagrams</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/119012dd-c5e6-4d18-8139-f1a3a93154ab.pdf\" target=\"_blank\">ROWAC-MECH_HVAC Ductwork Diffuser Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/4e414ef5-1a6d-4a1f-a108-f2d4f30eacfa.pdf\" target=\"_blank\">ROWAC-MECH_HVAC Ductwork Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e3391fc4-4bae-4548-8220-7cedfd3bd881.pdf\" target=\"_blank\">ROWAC-MECH_HVAC Ductwork Roof Plan</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/363139fc-cbab-4195-870f-cbdb3c627b92.pdf\" target=\"_blank\">ROWAC-MECH_HVAC Piping Plans</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/384f0050-ad64-4e25-9489-3e396daae26c.pdf\" target=\"_blank\">ROWAC-MECH_HVAC Schedules</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/a1f53714-9a05-4f77-a521-5bd736a5ff29.pdf\" target=\"_blank\">ROWAC-PLUM_Floor Plan</a><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/18f79d16-4c21-4f03-940c-ce87dd3e0196.pdf\" target=\"_blank\">ROWAC-PLUM_Riser Diagrams</a><br><li><strong> Record Specifications</strong></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/00de2fdd-3502-4abd-abe8-c19da309efdd.pdf\" target=\"_blank\">ROWAC-Specifications</a><br><li><strong> Testing and Balancing (TAB)</strong></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/645fefb3-6d8a-4d72-a21d-3da60042c4fd.pdf\" target=\"_blank\">Testing And Balancing (TAB) Report</a><br><li><strong> User Requirement Specifications (URS)</strong></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/cd319650-4262-4125-80b4-d6ef6903ca82.pdf\" target=\"_blank\">User Requirement Specifications (URS)</a><br>\r\n            </span>\r\n    </div>\r\n\r\n    <div id=\"diagram-tab\" *ngIf=\"selectedTab=='diagram'\" style=\"height:800px\">\r\n        <a> Open in new tab</a>\r\n        <object data=\"/assets/images/CCE_2J_Cell_Therapy_Lab.pdf\" type=\"application/pdf\" width=\"100%\" height=\"100%\">\r\n            alt : <a href=\"test.pdf\">test.pdf</a>\r\n        </object>\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='pictures'\">\r\n        <!-- <table style=\"width:100%; border:1px solid black;\">\r\n            <tbody><tr><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> \r\n                <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG\" target=\"_blank\"> \r\n                    <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/3ec9d136-6cc9-469b-b0ee-4aa6d4f689f2.JPG\" alt=\"edit\" title=\"Clean Freezer Room 2N307A\" height=\"150\" width=\"150\"></a>\r\n                    <br> <strong>Clean Freezer Room 2N307A</strong></td><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> \r\n                        <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG\" target=\"_blank\"> \r\n                            <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/e2747784-c7b8-4084-a4e9-5d91cfd53ee0.JPG\" alt=\"edit\" title=\"Corridor 2N307-3\" height=\"150\" width=\"150\"></a>\r\n                            \r\n                            <br> <strong>Corridor 2N307-3</strong></td><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/9c80d5dd-828b-44a5-bb06-41e0dcb55672.JPG\" target=\"_blank\"><img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/9c80d5dd-828b-44a5-bb06-41e0dcb55672.JPG\" alt=\"edit\" title=\"Degown 2N308\" height=\"150\" width=\"150\"></a><br> <strong> Degown 2N308</strong></td></tr><tr><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/018cf25b-32d4-42c6-9d71-3ad0a61c1a4c.JPG\" target=\"_blank\"> <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/018cf25b-32d4-42c6-9d71-3ad0a61c1a4c.JPG\" alt=\"edit\" title=\"Degown Exit Airlock 2N308A\" height=\"150\" width=\"150\"></a><br> <strong>Degown Exit Airlock 2N308A</strong></td><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/35fb7c73-1448-40a6-8d62-133e9f653d23.JPG\" target=\"_blank\"> <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/35fb7c73-1448-40a6-8d62-133e9f653d23.JPG\" alt=\"edit\" title=\"Exit Airlock 2N307-4\" height=\"150\" width=\"150\"></a><br> <strong>Exit Airlock 2N307-4</strong></td><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/cd467d53-b4e2-47ad-ac61-048bd88a39ff.JPG\" target=\"_blank\"><img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/cd467d53-b4e2-47ad-ac61-048bd88a39ff.JPG\" alt=\"edit\" title=\"Infectious Suite 2N308C\" height=\"150\" width=\"150\"></a><br> <strong> Infectious Suite 2N308C</strong></td></tr><tr><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/b22cd2ee-c7e0-4723-9e6b-a89c92f9c1c1.JPG\" target=\"_blank\"> <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/b22cd2ee-c7e0-4723-9e6b-a89c92f9c1c1.JPG\" alt=\"edit\" title=\"Large Equipment Room 2N307L\" height=\"150\" width=\"150\"></a><br> <strong>Large Equipment Room 2N307L</strong></td><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/77c24c75-c3b6-4909-9ccf-580f0391118c.jpg\" target=\"_blank\"> <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/77c24c75-c3b6-4909-9ccf-580f0391118c.jpg\" alt=\"edit\" title=\"Large Tissue Culture 2N307B\" height=\"150\" width=\"150\"></a><br> <strong>Large Tissue Culture 2N307B</strong></td><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/8095398c-7265-4c1b-aeb9-f49f39df0ada.JPG\" target=\"_blank\"><img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/8095398c-7265-4c1b-aeb9-f49f39df0ada.JPG\" alt=\"edit\" title=\"Large Tissue Culture 2N307C\" height=\"150\" width=\"150\"></a><br> <strong> Large Tissue Culture 2N307C</strong></td></tr><tr><td style=\"width:33%; padding-top:20px; padding-left:40px; padding-bottom:20px;\"> <a href=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/953fe684-891a-4657-8923-e7eb7e46f8e5.JPG\" target=\"_blank\"> <img src=\"https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS/953fe684-891a-4657-8923-e7eb7e46f8e5.JPG\" alt=\"edit\" title=\"Mechanical Room 2N325 MR\" height=\"150\" width=\"150\"></a><br> <strong>Mechanical Room 2N325 MR</strong></td></tr></tbody></table> -->\r\n\r\n\r\n        <div class=\"card\">\r\n            <div *ngIf=\"images\" class=\"grid\" style=\"max-width: 800px;\">\r\n                <div *ngFor=\"let image of images; let index = index\" class=\"col-3\" key=\"index\">\r\n                    <img [src]=\"image.thumbnailImageSrc\" [alt]=\"image.alt\" style=\"cursor: pointer\" (click)=\"imageClick(index)\" height=\"150\" width=\"150\" />\r\n                    <div>{{image.title}}</div>\r\n                </div>\r\n            </div>\r\n            <p-galleria\r\n                [value]=\"images\"\r\n                [(visible)]=\"displayCustom\"\r\n                [(activeIndex)]=\"activeIndex\"\r\n                [responsiveOptions]=\"responsiveOptions\"\r\n                [containerStyle]=\"{ 'max-width': '850px' }\"\r\n                [numVisible]=\"7\"\r\n                [circular]=\"true\"\r\n                [fullScreen]=\"true\"\r\n                [showItemNavigators]=\"true\"\r\n                [showThumbnails]=\"false\"\r\n            >\r\n            <ng-template pTemplate=\"item\" let-item>\r\n                <img [src]=\"item.itemImageSrc\" style=\"width: 100%; display: block;\" />\r\n            </ng-template>\r\n            <ng-template pTemplate=\"thumbnail\" let-item>\r\n                <div class=\"grid grid-nogutter justify-content-center\">\r\n                    <img [src]=\"item.thumbnailImageSrc\" style=\"display: block;\" />\r\n                </div>\r\n            </ng-template>\r\n            <ng-template pTemplate=\"caption\" let-item>\r\n                <h4 style=\"margin-bottom: .5rem; color: #ffffff;\">{{ item.title }}</h4>\r\n                <!-- <p>{{ item.alt }}</p> -->\r\n            </ng-template>\r\n            </p-galleria>\r\n        </div>\r\n                \r\n        </div>\r\n\r\n</div>"
+            "templateData": "<div class=\"card-body designCardBody\">\r\n    <div>\r\n        <div style=\"position: relative; left: 0; top: 0;\">\r\n            <img id=\"apf1\" src=\"/assets/images/I-IVAU.jpg\">\r\n        </div>\r\n    </div>\r\n\r\n    <p-tabMenu [model]=\"items\"></p-tabMenu>\r\n\r\n    <div id=\"about-tab\" *ngIf=\"selectedTab=='about'\">\r\n        <h2>\r\n            <!-- Clinical Center Permanent-Intravenous Admixture Unit (P-IVAU) Pharmacy -->\r\n            {{facilityNameTitle}}\r\n        </h2>\r\n        <app-static-content-container [page]=\"'about/B1-PET.about.html'\"></app-static-content-container>\r\n        <!-- <p>\r\n            {{beginingDescription}}\r\n            The National Institute of Health Clinical Center (CC) Pharmacy will operate the Permanent\r\n            Intravenous Admixture Unit (I-IVAU) which will provide a wide variety of compounded sterile drug\r\n            products to Clinical Center patients. The P-IVAU space will be located within the Building 10\r\n            Clinical Center on the first floor. The overall P-IVAU space will be approximately 10,000 gross\r\n            square feet of program space, with 5,500 gross square of APF spaces. The facility will prepare drugs\r\n            according to the requirements of USP&lt;797&gt;, USP&lt;800&gt;, USP&lt;795&gt; and BSL-2 standards.\r\n        </p>\r\n        <div *ngIf=\"showAllMessage\">\r\n            <p>\r\n                The APF spaces consists of one (1) &lt;797&gt; suite for sterile non-hazardous IV preparations, one (1)\r\n                &lt;800&gt; suite for preparation of sterile hazardous preparations, and one (1) BSL-2 suite for\r\n                hazardous sterile preparations.\r\n\r\n            </p>\r\n            <p>The &lt;797&gt; sterile non-hazardous suite consists of six (6) ISO 7 compounding rooms, each with a Type\r\n                A2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will have separate\r\n                gowning and de-gowning rooms with a common ISO 7 corridor that serves the compounding rooms. The rooms\r\n                will be arranged so pressure is cascading out from the ISO 7 Sterile Prep room out to the common\r\n                corridor and to the ISO 8 gowning and de-gowning room. </p>\r\n            <p>\r\n                The &lt;800&gt; sterile hazardous suite consists of four (4) ISO 7 compounding rooms, each with a Type\r\n                B2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the\r\n                entry gowning room with the BSL-2 suite but will be have dedicated entry to a common corridor that\r\n                serves the four (4) rooms. The two (2) &lt;800&gt; rooms will share a common de-gowning room. The suite\r\n                is unidirectional so the worker will exit the compounding room through a de-gowning room, thus avoiding\r\n                re-entry into the entry corridor where cross contamination could occur between compounding rooms. The\r\n                rooms will be arranged so the &lt;800&gt; rooms are negatively pressurized relative to the common\r\n                corridor, but the suite itself is possible to common spaces.\r\n\r\n            </p>\r\n\r\n            <p>\r\n                The BSL-2 sterile hazardous suite consists of two (2) ISO 7 compounding rooms, each with a Type B2 ISO 5\r\n                BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the entry gowning\r\n                room with the &lt;800&gt; suite but will be have dedicated entry to a common corridor that serves the\r\n                two (2) rooms. The two (2) BSL-2 rooms will share a common de-gowning room. The suite is unidirectional\r\n                so the worker will exit the compounding room through a de-gowning room, thus avoiding re-entry into the\r\n                entry corridor where cross contamination could occur between compounding rooms. The rooms will be\r\n                arranged so the BSL-2 rooms are negatively pressurized relative to the common corridor, but the suite\r\n                itself is positive to common spaces.\r\n\r\n            </p>\r\n            <p>\r\n                There will be two (2) kitting rooms in the pharmacy where drug and supplies will be stored. One (1)\r\n                kitting room is for non-hazardous drug and supply storage, and one (1) kitting room for &lt;800&gt;\r\n                Hazardous drug storage. Each kitting room will have a high-density storage carousel designed for use in\r\n                a cleanroom environment.\r\n\r\n            </p>\r\n            <p>\r\n                Next to the APF area there will be an Inpatient Unit Dose Section that serves patients that are staying\r\n                and being treated in the hospital. This area will feature a large robotic prescription dispensing\r\n                system, a high-density carousel, refrigerators, shelves, and a workstation area for 4-6 people. There\r\n                will also be an Outpatient Section which serves medications to patients that are being treated as\r\n                outpatients. This section includes an Outpatient Waiting Area with three (3) consultation windows for\r\n                outpatients for pick up. Finally, there will be two (2) additional high-density carousels that will\r\n                store Investigational drugs and drugs that are shared between Inpatient and Outpatient departments.\r\n            </p>\r\n            <p>\r\n                A new mechanical penthouse will be installed above an adjacent roof to house (2) dedicated air handling\r\n                units and other necessary HVAC and electrical equipment. The terminal air units that supply and control\r\n                air changes, temperature, humidity, and differential pressure will be located in the mechanical\r\n                interstitial space above the program spaces. All supply air to the classified rooms is HEPA filtered.\r\n                There will be two (2) sets of dedicated exhaust systems, one set for the general exhaust and one set for\r\n                the hazardous exhaust.\r\n            </p>\r\n            <strong>This facility is under development.</strong>\r\n            {{remainingDescription}}\r\n\r\n        </div>\r\n        <a (click)=\"toggleMessageClick()\" class=\"nav-toggle\">{{toggleMessage}}</a> -->\r\n\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='documents'\">\r\n        <span class=\"cardContent\">\r\n            <p style=\"width:80em\"> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for\r\n                this APF, provided for your convenience. For access to the full archive of documents, or for access to\r\n                the controlled version of any of these documents, please <a href=\"contactus.aspx\">contact</a> FCIS.\r\n\r\n                The documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been\r\n                verified.</p>\r\n\r\n            <div>\r\n                <div *ngFor=\"let docGroup of (service.documents$ | async) || []\">\r\n                    <b>{{docGroup.description}}</b>\r\n                    <ul>\r\n                        <li *ngFor=\"let atch of docGroup.attachments\">\r\n                            <a [href]=\"atch.url\" target=\"_blank\">{{atch.docTitle}}</a>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                <div *ngIf=\"((service.documents$ | async) || []).length == 0\">\r\n                    <span>No Documents Available</span>\r\n                </div>\r\n            </div>\r\n        </span>\r\n    </div>\r\n\r\n    <div id=\"diagram-tab\" *ngIf=\"selectedTab=='diagram'\" style=\"height:800px\">\r\n        <a> Open in new tab</a>\r\n        <object data=\"/assets/images/CCE_2J_Cell_Therapy_Lab.pdf\" type=\"application/pdf\" width=\"100%\" height=\"100%\">\r\n            alt : <a href=\"test.pdf\">test.pdf</a>\r\n        </object>\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='pictures'\">\r\n        <div class=\"card\">\r\n            <div style=\"display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;\">\r\n                <div *ngFor=\"let photo of (service.pictures$ | async) || []\"\r\n                    style=\"border:1px solid black; padding:4px;\">\r\n                    <p-image [src]=\"photo.url\" [preview]=\"true\" width=\"219\" height=\"200\"\r\n                        [alt]=\"photo.docTitle\"></p-image><br />\r\n                    <span style=\"font-size:smaller\">{{photo.docTitle}}</span>\r\n                </div>\r\n                <div *ngIf=\"((service.pictures$ | async) || []).length == 0\">\r\n                    <span>No Pictures Available</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
         },
         {
             "name": "FormulaHeaderComponent",
@@ -6453,7 +6678,7 @@
         },
         {
             "name": "StaticContentContainerComponent",
-            "id": "component-StaticContentContainerComponent-b954b4346bc93bd572cc06a046f7cb511fb107a33d245f8f51be3673204a8f7ada001c04df653797054affff5427b1512d2e09dbe9a63bae5568582309454c71",
+            "id": "component-StaticContentContainerComponent-3d12d323d3f4f36686c5ae47bfbf6fc4eba9eb8349c4dddd77a09b7c621cef8ccfafb48b4250e3c85921033cdad83d5eb16930d7ff991d549bdc1c242141ffc1",
             "file": "src/app/static-content-container/static-content-container.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6469,9 +6694,28 @@
                 "./static-content-container.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "page",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                }
+            ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "page$",
+                    "defaultValue": "new BehaviorSubject('')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "BehaviorSubject<string>",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
                 {
                     "name": "safeHtml",
                     "deprecated": false,
@@ -6479,10 +6723,21 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 11
+                    "line": 15
                 }
             ],
-            "methodsClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 23,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -6490,7 +6745,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\nimport { ActivatedRoute, Params } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-static-content-container',\r\n  templateUrl: './static-content-container.component.html',\r\n  styleUrls: ['./static-content-container.component.scss']\r\n})\r\nexport class StaticContentContainerComponent {\r\n  safeHtml: any;\r\n\r\n  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute) {\r\n    route.params.subscribe((params: Params) => {\r\n      const page = `assets/static-content/${params.page}.html`;\r\n\r\n      (async (url) => {\r\n        const response = await fetch(url);\r\n        const text = await response.text();\r\n        this.safeHtml = text;\r\n      })(page);\r\n    });\r\n  }\r\n}\r\n",
+            "sourceCode": "import { ActivatedRoute, Params } from '@angular/router';\r\nimport { AfterViewInit, Component, Input } from '@angular/core';\r\n\r\nimport { BehaviorSubject } from 'rxjs';\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\n\r\ndeclare const $: any;\r\n\r\n@Component({\r\n  selector: 'app-static-content-container',\r\n  templateUrl: './static-content-container.component.html',\r\n  styleUrls: ['./static-content-container.component.scss']\r\n})\r\nexport class StaticContentContainerComponent implements AfterViewInit {\r\n  safeHtml: any;\r\n\r\n  page$: BehaviorSubject<string> = new BehaviorSubject('');\r\n  @Input()\r\n  set page(v: string) {\r\n    this.page$.next(v);\r\n  }\r\n\r\n  ngAfterViewInit() {\r\n\r\n  }\r\n  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute) {\r\n    this.page$.subscribe((p) => {\r\n      const pagePath = `assets/static-content/${p}`;\r\n\r\n      (async (url) => {\r\n        const response = await fetch(url);\r\n        const text = await response.text();\r\n        this.safeHtml = text;\r\n\r\n        window.setTimeout(()=>{\r\n          const navToggle = document.querySelector('.nav-toggle');\r\n          navToggle?.addEventListener('click', ()=>{alert('Hello');})\r\n        },10);\r\n\r\n      })(pagePath);\r\n      \r\n\r\n\r\n      // $('.nav-toggle').click( () => {\r\n      //   alert('click');\r\n      //   // var collapse_content_selector = $(this).attr('href');\r\n      //   // var toggle_switch = $(this);\r\n      //   // $(collapse_content_selector).toggle( () => {\r\n      //   //     if ($(this).css('display') == 'none') {\r\n      //   //         toggle_switch.html('Read More ...');\r\n      //   //     } else {\r\n      //   //         toggle_switch.html('Read Less...');\r\n      //   //     }\r\n      //   // });\r\n      // });\r\n\r\n\r\n    });\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6518,7 +6773,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 11,
+                "line": 25,
                 "jsdoctags": [
                     {
                         "name": "sanitizer",
@@ -6540,7 +6795,42 @@
                     }
                 ]
             },
-            "templateData": "<div [innerHTML]=\"safeHtml\"></div>\r\n"
+            "implements": [
+                "AfterViewInit"
+            ],
+            "accessors": {
+                "page": {
+                    "name": "page",
+                    "setSignature": {
+                        "name": "page",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "v",
+                                "type": "string",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 19,
+                        "jsdoctags": [
+                            {
+                                "name": "v",
+                                "type": "string",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "templateData": "<div [innerHTML]=\"safeHtml | sanitizedHtml\"></div>\r\n\r\n\r\n<script>\r\n    // $(document).ready(function () {\r\n    //     $('.nav-toggle').click(function () {\r\n    //         var collapse_content_selector = $(this).attr('href');\r\n    //         var toggle_switch = $(this);\r\n    //         $(collapse_content_selector).toggle(function () {\r\n    //             if ($(this).css('display') == 'none') {\r\n    //                 toggle_switch.html('Read More ...');\r\n    //             } else {\r\n    //                 toggle_switch.html('Read Less...');\r\n    //             }\r\n    //         });\r\n    //     });\r\n    // });\r\n// window.setTimeout(()=>{\r\n//     $('.nav-toggle').click( () => {\r\n//         alert('click');\r\n//         // var collapse_content_selector = $(this).attr('href');\r\n//         // var toggle_switch = $(this);\r\n//         // $(collapse_content_selector).toggle( () => {\r\n//         //     if ($(this).css('display') == 'none') {\r\n//         //         toggle_switch.html('Read More ...');\r\n//         //     } else {\r\n//         //         toggle_switch.html('Read Less...');\r\n//         //     }\r\n//         // });\r\n//       });\r\n// },10)\r\n\r\n</script>"
         },
         {
             "name": "StaticContentEditorComponent",
@@ -7152,13 +7442,13 @@
         },
         {
             "name": "ThirdPartyComponentsModule",
-            "id": "module-ThirdPartyComponentsModule-1c3acc04f58c50a7874cad1a26657199fd400032398934a8aba4109d5564b64182829b40db96e542a52a44b92f73cfc6d1f42e74a62620d2ed6c682e0e36e65c",
+            "id": "module-ThirdPartyComponentsModule-0d24ae45e420071e912b681f29ad3c9f05f1a7b3d838a2c5a9e3272078110db4337e97912c8c98266bc7a5e949eae8280a83eb4ba77170b041ed87fd76f84885",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/3rd-party-components/3rd-party-components.module.ts",
             "methods": [],
-            "sourceCode": "import { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { ButtonModule } from 'primeng/button';\r\nimport { CalendarModule } from 'primeng/calendar';\r\nimport { DropdownModule } from 'primeng/dropdown';\r\nimport { DynamicDialogModule } from 'primeng/dynamicdialog';\r\nimport { EditorModule } from '@tinymce/tinymce-angular';\r\nimport { GalleriaModule } from 'primeng/galleria';\r\nimport { NgModule } from '@angular/core';\r\nimport { OverlayPanelModule } from 'primeng/overlaypanel';\r\nimport { ProgressSpinnerModule } from 'primeng/progressspinner';\r\nimport { TabMenuModule } from 'primeng/tabmenu';\r\nimport { TableModule } from 'primeng/table';\r\n\r\n@NgModule({\r\n  declarations: [],\r\n  imports: [],\r\n  exports: [\r\n    BrowserAnimationsModule,\r\n    ButtonModule,\r\n    CalendarModule,\r\n    DropdownModule,\r\n    DynamicDialogModule,\r\n    EditorModule,\r\n    GalleriaModule,\r\n    OverlayPanelModule,\r\n    ProgressSpinnerModule,\r\n    TableModule,\r\n    TabMenuModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: []\r\n})\r\nexport class ThirdPartyComponentsModule {}\r\n",
+            "sourceCode": "import { BrowserAnimationsModule } from '@angular/platform-browser/animations';\r\nimport { ButtonModule } from 'primeng/button';\r\nimport { CalendarModule } from 'primeng/calendar';\r\nimport { DropdownModule } from 'primeng/dropdown';\r\nimport { DynamicDialogModule } from 'primeng/dynamicdialog';\r\nimport { EditorModule } from '@tinymce/tinymce-angular';\r\nimport { GalleriaModule } from 'primeng/galleria';\r\nimport { ImageModule } from 'primeng/image';\r\nimport { NgModule } from '@angular/core';\r\nimport { OverlayPanelModule } from 'primeng/overlaypanel';\r\nimport { ProgressSpinnerModule } from 'primeng/progressspinner';\r\nimport { TabMenuModule } from 'primeng/tabmenu';\r\nimport { TableModule } from 'primeng/table';\r\n\r\n@NgModule({\r\n  declarations: [],\r\n  imports: [],\r\n  exports: [\r\n    BrowserAnimationsModule,\r\n    ButtonModule,\r\n    CalendarModule,\r\n    DropdownModule,\r\n    DynamicDialogModule,\r\n    EditorModule,\r\n    GalleriaModule,\r\n    ImageModule,\r\n    OverlayPanelModule,\r\n    ProgressSpinnerModule,\r\n    TableModule,\r\n    TabMenuModule\r\n  ],\r\n  providers: [],\r\n  bootstrap: []\r\n})\r\nexport class ThirdPartyComponentsModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -7194,6 +7484,15 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/apf-portfolio-all-map/apf-portfolio-all-map.component.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "any"
+            },
+            {
+                "name": "$",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/static-content-container/static-content-container.component.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "any"
@@ -7289,7 +7588,7 @@
                 "name": "LoggedIn",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
+                "file": "src/stories/Page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7299,16 +7598,6 @@
                 "name": "LoggedIn",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -7320,6 +7609,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7428,21 +7727,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/Page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<Page>",
                 "defaultValue": "(args: Page) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Header>",
+                "defaultValue": "(args: Header) => ({\r\n  props: args\r\n})"
             }
         ],
         "functions": [
@@ -7520,6 +7819,17 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/apf-portfolio-all-map/apf-portfolio-all-map.component.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "any"
+                }
+            ],
+            "src/app/static-content-container/static-content-container.component.ts": [
+                {
+                    "name": "$",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/static-content-container/static-content-container.component.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "any"
@@ -7678,38 +7988,6 @@
                     "defaultValue": "(args: Button) => ({\r\n  props: args\r\n})"
                 }
             ],
-            "src/stories/Header.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Header.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\r\n  props: args\r\n})"
-                }
-            ],
             "src/stories/Page.stories.ts": [
                 {
                     "name": "LoggedIn",
@@ -7740,6 +8018,38 @@
                     "deprecationMessage": "",
                     "type": "Story<Page>",
                     "defaultValue": "(args: Page) => ({\r\n  props: args\r\n})"
+                }
+            ],
+            "src/stories/Header.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<Header>",
+                    "defaultValue": "(args: Header) => ({\r\n  props: args\r\n})"
                 }
             ],
             "src/app/contact-us-dialog/contact-us-dialog.stories.ts": [
@@ -7859,7 +8169,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 1,
+        "count": 0,
         "status": "low",
         "files": [
             {
@@ -8015,7 +8325,25 @@
                 "linktype": "injectable",
                 "name": "DataService",
                 "coveragePercent": 0,
-                "coverageCount": "0/20",
+                "coverageCount": "0/22",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/api/models/attachment.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "Attachment",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/api/models/attachment.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "AttachmentGroup",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
                 "status": "low"
             },
             {
@@ -8233,7 +8561,7 @@
                 "linktype": "component",
                 "name": "FacilityInfoPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/17",
+                "coverageCount": "0/13",
                 "status": "low"
             },
             {
@@ -8243,6 +8571,15 @@
                 "name": "FacilityInfoPageData",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/facility-info-page/facility-info-page.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "FacilityInfoPageService",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -8380,7 +8717,17 @@
                 "linktype": "component",
                 "name": "StaticContentContainerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/static-content-container/static-content-container.component.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "$",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

@@ -9,12 +9,12 @@ import { DataService } from '../api/data.service';
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.scss'],
-  providers: [DialogService]
+  providers: [DialogService, DataService]
 })
 export class NavMenuComponent {
   ref!: DynamicDialogRef;
-    
-  constructor(public dialogService: DialogService, private dataService: DataService) {}
+
+  constructor(public dialogService: DialogService, private dataService: DataService) { }
   isExpanded = false;
 
   collapse() {
@@ -26,12 +26,12 @@ export class NavMenuComponent {
   }
 
   contactUsClick() {
-    this.ref = this.dialogService.open(ContactUsDialogComponent, { header: 'Contact Us'});
+    this.ref = this.dialogService.open(ContactUsDialogComponent, { header: 'Contact Us' });
 
     this.ref.onClose.subscribe((message: ContactUsMessage) => {
       if (message) {
         this.dataService.contactUs(message).subscribe();
       }
-  });
+    });
   }
 }

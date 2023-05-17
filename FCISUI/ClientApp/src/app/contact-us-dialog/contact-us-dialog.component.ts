@@ -1,19 +1,17 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../api/data.service';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-contact-us-dialog',
   templateUrl: './contact-us-dialog.component.html',
   styleUrls: ['./contact-us-dialog.component.scss'],
-  providers: []
+  providers: [DialogService]
 })
 export class ContactUsDialogComponent implements OnDestroy {
-  
-  @Output() onClose = new EventEmitter();
-  
+
   constructor(public ref: DynamicDialogRef) {}
   
   emailForm = new FormGroup({
@@ -41,7 +39,6 @@ export class ContactUsDialogComponent implements OnDestroy {
 
   sendEmail() {
     if (this.emailForm.valid) {
-      this.onClose.emit();
       this.ref.close(this.emailForm.value);
     }
   }
