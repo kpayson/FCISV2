@@ -12,7 +12,6 @@ export class StaticContentPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe((params: Params) => {
       this.page = `${params.page}.html`;
-      //`assets/static-content/${params.page}.html`;
     });
   }
 
