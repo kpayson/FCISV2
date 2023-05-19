@@ -40,15 +40,19 @@ namespace FCISUI.Controllers
         }
 
         [HttpGet("appSettings")]
-        public async Task<ActionResult<AppSettings>> GetSettings() {
-            var settings = new AppSettings {
-                PIServer=_config.GetValue<string>("PIServer"),
-                PIDatabaseEnv=_config.GetValue<string>("PIDatabaseEnv"),
-                PIDatabase=_config.GetValue<string>("PIDatabase"),
-                PIDataServiceBaseUrl=_config.GetValue<string>("piDataServiceBaseUrl")
-            };
+        public async Task<ActionResult<dynamic>> GetSettings() {
 
-            return settings;
+            // var settings = new AppSettings {
+            //     PIServer=_config.GetValue<string>("PIServer"),
+            //     PIDatabaseEnv=_config.GetValue<string>("PIDatabaseEnv"),
+            //     PIDatabase=_config.GetValue<string>("PIDatabase"),
+            //     PIDataServiceBaseUrl=_config.GetValue<string>("piDataServiceBaseUrl")
+            // };
+
+            // return settings;
+
+            var configVals = _config.AsEnumerable().ToList();
+            return configVals;
         }
 
 

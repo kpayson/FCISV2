@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-
+  siteRootUrl: 'https://localhost:44420',
   apiRootUrl: 'https://localhost:44420/api',
   attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'
 };

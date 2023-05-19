@@ -153,6 +153,10 @@ export class DataService {
   errors() {
     return this.get<ErrorLog[]>(`ErrorLog`);
   }
+  
+  appSettings() {
+    return this.get<any>('ErrorLog/appSettings')
+  }
 
   contactUs(message:ContactUsMessage) {
     return this.post('Message/ContactUs',message);

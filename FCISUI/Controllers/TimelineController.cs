@@ -52,7 +52,7 @@ namespace FCISUI.Controllers
             _mapper = mapper;
             _piDataService = piDataService;
 
-            var piServer = config.GetValue<string>("PIServer");
+            var piServer = config.GetValue<string>("ORFPIServer");
             var piDatabase = config.GetValue<string>("PIDatabase");
             var piDatabaseEnv = config.GetValue<string>("PIDatabaseEnv");
             piPathEnv = $@"\\{piServer}\{piDatabaseEnv}\{piDatabase}"; //ex \\ORFD-COGEN\Dev_cGMP\cGMP
