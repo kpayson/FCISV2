@@ -87,7 +87,7 @@ namespace FCISUI.Controllers
             }
             catch(Exception ex) {
                 Console.Write(ex);
-                throw ex;
+                throw;
             }
 
         }

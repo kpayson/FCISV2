@@ -95,7 +95,7 @@ namespace FCISUI.Controllers
                 });
 
                 _context.SaveChanges();
-                throw ex;
+                throw;
             }
 
         }
@@ -105,6 +105,11 @@ namespace FCISUI.Controllers
         {
             try
             {
+                    // this._context.Add<Errorlog>(new Errorlog {
+                    //     Errordate = DateTime.Now,
+                    //     Errormessage = "FacilityTimelineData: Begin " + System.Text.Json.JsonSerializer.Serialize(timelineParams),
+                    // });
+                    // _context.SaveChanges();
                 if (timelineParams.Attr.ToLower() == "dp")
                 {
                     // \\ORF-COGENAF\cGMP\cGMP\2J\2N3074\2N2J1_2N3074_DP|DP|Maximum
@@ -148,6 +153,12 @@ namespace FCISUI.Controllers
                     var rooms =
                         this._context.Rooms.Where(r => r.FacilityId == timelineParams.FacilityId &&r.IsActive && String.IsNullOrEmpty(r.ConnectingRoom)).ToList();
 
+                    // this._context.Add<Errorlog>(new Errorlog {
+                    //     Errordate = DateTime.Now,
+                    //     Errormessage = "FacilityTimelineData: Rooms Count " + rooms.Count(),
+                    // });
+                    // _context.SaveChanges();
+
                     if(! rooms.Any()) {
                         return new List<FacilityRoomTimelineData>();
                     }
@@ -170,6 +181,14 @@ namespace FCISUI.Controllers
 
                     sw.Stop();
 
+                    
+                    // this._context.Add<Errorlog>(new Errorlog {
+                    //     Errordate = DateTime.Now,
+                    //     Errormessage = "FacilityTimelineData: facilityRoomData Length" + facilityRoomData.Count(),
+                    // });
+
+                    // _context.SaveChanges();
+
                     return facilityRoomData;
                     
                 }
@@ -185,7 +204,7 @@ namespace FCISUI.Controllers
                 });
 
                 _context.SaveChanges();
-                throw ex;
+                throw;
             }
         }
 
@@ -228,7 +247,7 @@ namespace FCISUI.Controllers
                 });
 
                 _context.SaveChanges();
-                throw ex;
+                throw;
             }
 
 
@@ -276,7 +295,7 @@ namespace FCISUI.Controllers
                 });
 
                 _context.SaveChanges();
-                throw ex;
+                throw;
             }
         }
 
@@ -333,7 +352,7 @@ namespace FCISUI.Controllers
                 });
 
                 _context.SaveChanges();
-                throw ex;
+                throw;
             }
         }
 

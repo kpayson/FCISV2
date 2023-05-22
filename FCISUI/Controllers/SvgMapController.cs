@@ -91,7 +91,8 @@ namespace FCISUI.Controllers
 
                 return svgMap;
             }
-            catch(Exception ex) {
+            catch (Exception)
+            {
                 return StatusCode(500);
             }
         }

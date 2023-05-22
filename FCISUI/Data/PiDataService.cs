@@ -139,7 +139,7 @@ namespace FCISUI.Data
            }
             catch (Exception ex) {
                 Console.Write(ex);
-                throw ex;
+                throw;
             }
         }
 
@@ -152,7 +152,7 @@ namespace FCISUI.Data
             }
             catch (Exception ex) {
                 Console.Write(ex);
-                throw ex;
+                throw;
            }
         }
 
