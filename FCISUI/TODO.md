@@ -1,12 +1,10 @@
 # FCIS TODO
 
 ## Active
-- Facility Landing Page about
-- Facility Landing Page diagram
-- scale headers to match existing to save realestate
-- fix dfom sop page - make title column wider.  Normal direct download links.  (just need the one SOP screen)
-- add remaining static content links
-- left nav on facility all page
+- facility description page
+    - create generic facility all page
+    - about text width percentage?
+    - image sizes
 - NCI 1B42 dP data ?
 
 

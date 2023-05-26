@@ -1,8 +1,51 @@
 {
     "pipes": [
         {
+            "name": "SafeUrlPipe",
+            "id": "pipe-SafeUrlPipe-64598a6ad7e24f699ae45481c63d65a5e0186667e8025ff515473cc9387fbef0b906ed097a0c00016d20c31865741bb0bd0cf6f89aa4cf324b4e94d88e26058e",
+            "file": "src/app/safe-url.pipe.ts",
+            "type": "pipe",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "transform",
+                    "args": [
+                        {
+                            "name": "url",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "url",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "ngname": "safeurl",
+            "sourceCode": "import { Pipe, PipeTransform } from '@angular/core';\r\n\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\n\r\n@Pipe({\r\n    name: 'safeurl'\r\n  })\r\n  \r\n  export class SafeUrlPipe implements PipeTransform {\r\n    constructor(private sanitizer: DomSanitizer) { }\r\n  \r\n    transform(url:string) {\r\n      return this.sanitizer.bypassSecurityTrustResourceUrl(url);\r\n    }\r\n  }\r\n  "
+        },
+        {
             "name": "SanitizedHtmlPipe",
-            "id": "pipe-SanitizedHtmlPipe-00558f885b08e9c8a1a003a24c5e8c461aa7cce2fcfa83a840a061c5df1082663fac7230d978c1220f3cfc8091cd1fb661fb42a625f582ebe312dbbe82bf617a",
+            "id": "pipe-SanitizedHtmlPipe-273a256e9599f0e82c3389478533ede0e2139bb4594c33f83a6038b51cd2c93d6de91570fca38708253f11391664f61cfc7744502a8f3c2fb9d288bfe5569589",
             "file": "src/app/sanitized-html.pipe.ts",
             "type": "pipe",
             "deprecated": false,
@@ -24,7 +67,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 8,
+                    "line": 10,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -41,7 +84,7 @@
                 }
             ],
             "ngname": "sanitizedHtml",
-            "sourceCode": "import { Pipe, PipeTransform } from '@angular/core';\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\n@Pipe({\r\n  name: 'sanitizedHtml'\r\n})\r\nexport class SanitizedHtmlPipe implements PipeTransform {\r\n  constructor(private sanitized: DomSanitizer) {}\r\n  transform(value: any): any {\r\n    return this.sanitized.bypassSecurityTrustHtml(value);\r\n  }\r\n}\r\n"
+            "sourceCode": "import { Pipe, PipeTransform } from '@angular/core';\r\n\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\n\r\n@Pipe({\r\n  name: 'sanitizedHtml'\r\n})\r\nexport class SanitizedHtmlPipe implements PipeTransform {\r\n  constructor(private sanitized: DomSanitizer) {}\r\n  transform(value: any): any {\r\n    return this.sanitized.bypassSecurityTrustHtml(value);\r\n  }\r\n}\r\n\r\n"
         }
     ],
     "interfaces": [
@@ -393,74 +436,6 @@
                     "optional": false,
                     "description": "",
                     "line": 3
-                }
-            ],
-            "indexSignatures": [],
-            "kind": 165,
-            "methods": []
-        },
-        {
-            "name": "FacilityInfoPageData",
-            "id": "interface-FacilityInfoPageData-4dd3f020967bf2c613ff4d0033da721bbf7b5f08c9aa9a23aad3da4341f21fa3d7d43b348cb3b7bad799337c0298947f00be97fb599b157907b7a3543da7d253",
-            "file": "src/app/facility-info-page/facility-info-page.component.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "interface",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { Observable, filter, map } from 'rxjs';\r\n\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport {FacilityInfoPageService} from './facility-info-page.service';\r\n\r\ninterface FacilityInfoPageData {\r\n  facilityNameTitle: string;\r\n  aboutBeginningDescription: string;\r\n  aboutRemainingDescription: string;\r\n  diagramUrl: string;\r\n  images: {title:string, url:string}[];\r\n  documents: {description: string, url: string}[]\r\n} \r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css'],\r\n  providers: [FacilityInfoPageService]\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  facilityNameTitle='';\r\n  beginingDescription='';\r\n  remainingDescription='';\r\n\r\n  constructor(private activatedRoute: ActivatedRoute,public service:FacilityInfoPageService) { \r\n\r\n    this.activatedRoute.params\r\n    .pipe(\r\n      filter(Boolean)\r\n    )\r\n    .subscribe((params) => {\r\n      this.service.Load(params.facilityId)\r\n    });\r\n  }\r\n\r\n  @Input()\r\n  facilityInfoPageData: FacilityInfoPageData = {\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n \r\n showAllMessage = false;\r\n toggleMessage=\"read more...\";\r\n \r\n selectedTab = 'about';\r\n\r\n\r\n items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n  toggleMessageClick() {\r\n    this.showAllMessage = !this.showAllMessage;\r\n    this.toggleMessage = this.showAllMessage ? \"show less\" : \"show more...\";\r\n  }\r\n\r\n\r\n}\r\n",
-            "properties": [
-                {
-                    "name": "aboutBeginningDescription",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 9
-                },
-                {
-                    "name": "aboutRemainingDescription",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 10
-                },
-                {
-                    "name": "diagramUrl",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 11
-                },
-                {
-                    "name": "documents",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 13
-                },
-                {
-                    "name": "facilityNameTitle",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 8
-                },
-                {
-                    "name": "images",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 12
                 }
             ],
             "indexSignatures": [],
@@ -2169,7 +2144,7 @@
         },
         {
             "name": "DataService",
-            "id": "injectable-DataService-00e41f1d9596ccdad7c30098b9d7dfe8205b2a5e285638f4a5c9cb65f5e10ac4a6c244f473c48fbae4d7d6084b9c0d679e268ebdd8f68fc847a520bd4c011ff5",
+            "id": "injectable-DataService-e88db0947895e1f3b9419cb95e9e2d5dee8f0b14e9bd30573ddc1c48b5818ebc910fa88638430d252acd2a2a89b545b7883146c87935eb0f59c9ddafbd3ea5c1",
             "file": "src/app/api/data.service.ts",
             "properties": [],
             "methods": [
@@ -2180,6 +2155,16 @@
                     "returnType": "any",
                     "typeParameters": [],
                     "line": 149,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "appSettings",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 157,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -2196,7 +2181,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 157,
+                    "line": 161,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2373,7 +2358,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 165,
+                    "line": 169,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2401,7 +2386,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 161,
+                    "line": 165,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2852,7 +2837,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {\r\n  Attachment,\r\n  AttachmentGroup,\r\n  ContactUsMessage,\r\n  ErrorLog,\r\n  Facility,\r\n  FacilityGsf,\r\n  FacilityTimeSeriesData,\r\n  GsfGrowth,\r\n  ICGsf,\r\n  LocationCurrentStatus,\r\n  LocationTimeSeriesData,\r\n  Room,\r\n  RoomTimeSeriesData,\r\n  SvgMap,\r\n  SvgMapPin\r\n} from './models';\r\n\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class DataService {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  private get<T>(url: string) {\r\n    return this.http.get<T>(`${environment.apiRootUrl}/${url}`);\r\n  }\r\n\r\n  private post<T>(url: string, body: any) {\r\n    return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);\r\n  }\r\n\r\n  facilities() {\r\n    return this.get<Facility[]>(`Facilities`);\r\n  }\r\n\r\n  facilitiesByIC(ic: string) {\r\n    return this.get<Facility[]>(`Facilities/ic/${ic}`);\r\n  }\r\n\r\n  gsfByFacility() {\r\n    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);\r\n  }\r\n\r\n  gsfByIC() {\r\n    return this.get<ICGsf[]>(`GsfChart/GsfByIC`);\r\n  }\r\n\r\n  gsfGrowthByClassification() {\r\n    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);\r\n  }\r\n\r\n  svgMap(facId: number, marker: string = 'pin') {\r\n    return this.get<SvgMap>(`SvgMap/${facId}?marker=${marker}`);\r\n  }\r\n\r\n  svgMapBackgroundUrl(facId: number) {\r\n    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;\r\n  }\r\n\r\n  roomParameterInfo(facilityId: number) {\r\n    return this.get<Room[]>(`SvgMap/RoomParameterInfo/facility/${facilityId}`);\r\n  }\r\n\r\n  timelineData(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    if (facilityId == 0) {\r\n      return this.post<LocationTimeSeriesData<Facility>[]>(\r\n        `Timeline/AllFacilityTimelineData`,\r\n        {\r\n          startDate,\r\n          endDate,\r\n          interval\r\n        }\r\n      );\r\n    }\r\n\r\n    return this.post<LocationTimeSeriesData<Room>[]>(\r\n      `Timeline/FacilityTimelineData`,\r\n      {\r\n        facilityId,\r\n        attr,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityAlltimelineData(\r\n    ic: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<FacilityTimeSeriesData[]>(\r\n      `Timeline/AllFacilityTimelineData`,\r\n      {\r\n        ic,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityRoomsTimelineDate(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<RoomTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {\r\n      facilityId,\r\n      attr,\r\n      startDate,\r\n      endDate,\r\n      interval\r\n    });\r\n  }\r\n\r\n  facilityCurrentStatusData(facilityId: number) {\r\n    if (facilityId == 0) {\r\n      return this.get<LocationCurrentStatus[]>(\r\n        `Timeline/AllFacilityCurrentData`\r\n      );\r\n    }\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/FacilityCurrentCompositeData/${facilityId}`\r\n    );\r\n  }\r\n\r\n  roomCurrentAttributeData(facilityId: number, roomFormattedName: string) {\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/RoomCurrentAttributeData/facility/${facilityId}/room/${roomFormattedName}`\r\n    );\r\n  }\r\n\r\n  apfLimits() {\r\n    return this.get<any[]>(`Timeline/ApfLimits`);\r\n  }\r\n\r\n  errors() {\r\n    return this.get<ErrorLog[]>(`ErrorLog`);\r\n  }\r\n\r\n  contactUs(message:ContactUsMessage) {\r\n    return this.post('Message/ContactUs',message);\r\n  }\r\n\r\n  facilityPictures(facilityId:number) {\r\n    return this.get<Attachment[]>(`Attachment/pictures/facility/${facilityId}`);\r\n  }\r\n\r\n  facilityDocuments(facilityId:number) {\r\n    return this.get<AttachmentGroup[]>(`Attachment/documents/facility/${facilityId}`);\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  Attachment,\r\n  AttachmentGroup,\r\n  ContactUsMessage,\r\n  ErrorLog,\r\n  Facility,\r\n  FacilityGsf,\r\n  FacilityTimeSeriesData,\r\n  GsfGrowth,\r\n  ICGsf,\r\n  LocationCurrentStatus,\r\n  LocationTimeSeriesData,\r\n  Room,\r\n  RoomTimeSeriesData,\r\n  SvgMap,\r\n  SvgMapPin\r\n} from './models';\r\n\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class DataService {\r\n  constructor(private http: HttpClient) {}\r\n\r\n  private get<T>(url: string) {\r\n    return this.http.get<T>(`${environment.apiRootUrl}/${url}`);\r\n  }\r\n\r\n  private post<T>(url: string, body: any) {\r\n    return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);\r\n  }\r\n\r\n  facilities() {\r\n    return this.get<Facility[]>(`Facilities`);\r\n  }\r\n\r\n  facilitiesByIC(ic: string) {\r\n    return this.get<Facility[]>(`Facilities/ic/${ic}`);\r\n  }\r\n\r\n  gsfByFacility() {\r\n    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);\r\n  }\r\n\r\n  gsfByIC() {\r\n    return this.get<ICGsf[]>(`GsfChart/GsfByIC`);\r\n  }\r\n\r\n  gsfGrowthByClassification() {\r\n    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);\r\n  }\r\n\r\n  svgMap(facId: number, marker: string = 'pin') {\r\n    return this.get<SvgMap>(`SvgMap/${facId}?marker=${marker}`);\r\n  }\r\n\r\n  svgMapBackgroundUrl(facId: number) {\r\n    return `${environment.apiRootUrl}/SvgMap/backgroundImage/${facId}`;\r\n  }\r\n\r\n  roomParameterInfo(facilityId: number) {\r\n    return this.get<Room[]>(`SvgMap/RoomParameterInfo/facility/${facilityId}`);\r\n  }\r\n\r\n  timelineData(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    if (facilityId == 0) {\r\n      return this.post<LocationTimeSeriesData<Facility>[]>(\r\n        `Timeline/AllFacilityTimelineData`,\r\n        {\r\n          startDate,\r\n          endDate,\r\n          interval\r\n        }\r\n      );\r\n    }\r\n\r\n    return this.post<LocationTimeSeriesData<Room>[]>(\r\n      `Timeline/FacilityTimelineData`,\r\n      {\r\n        facilityId,\r\n        attr,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityAlltimelineData(\r\n    ic: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<FacilityTimeSeriesData[]>(\r\n      `Timeline/AllFacilityTimelineData`,\r\n      {\r\n        ic,\r\n        startDate,\r\n        endDate,\r\n        interval\r\n      }\r\n    );\r\n  }\r\n\r\n  facilityRoomsTimelineDate(\r\n    facilityId: number,\r\n    attr: string,\r\n    startDate: Date,\r\n    endDate: Date,\r\n    interval: number\r\n  ) {\r\n    return this.post<RoomTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {\r\n      facilityId,\r\n      attr,\r\n      startDate,\r\n      endDate,\r\n      interval\r\n    });\r\n  }\r\n\r\n  facilityCurrentStatusData(facilityId: number) {\r\n    if (facilityId == 0) {\r\n      return this.get<LocationCurrentStatus[]>(\r\n        `Timeline/AllFacilityCurrentData`\r\n      );\r\n    }\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/FacilityCurrentCompositeData/${facilityId}`\r\n    );\r\n  }\r\n\r\n  roomCurrentAttributeData(facilityId: number, roomFormattedName: string) {\r\n    return this.get<LocationCurrentStatus[]>(\r\n      `Timeline/RoomCurrentAttributeData/facility/${facilityId}/room/${roomFormattedName}`\r\n    );\r\n  }\r\n\r\n  apfLimits() {\r\n    return this.get<any[]>(`Timeline/ApfLimits`);\r\n  }\r\n\r\n  errors() {\r\n    return this.get<ErrorLog[]>(`ErrorLog`);\r\n  }\r\n  \r\n  appSettings() {\r\n    return this.get<any>('ErrorLog/appSettings')\r\n  }\r\n\r\n  contactUs(message:ContactUsMessage) {\r\n    return this.post('Message/ContactUs',message);\r\n  }\r\n\r\n  facilityPictures(facilityId:number) {\r\n    return this.get<Attachment[]>(`Attachment/pictures/facility/${facilityId}`);\r\n  }\r\n\r\n  facilityDocuments(facilityId:number) {\r\n    return this.get<AttachmentGroup[]>(`Attachment/documents/facility/${facilityId}`);\r\n  }\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2883,9 +2868,35 @@
         },
         {
             "name": "FacilityInfoPageService",
-            "id": "injectable-FacilityInfoPageService-8d7e8aa3b2c2dc5747342d10fed5941b797055418d5d5a88e8c33854a8f49097ab9e0233529f504dec7a990fe5bb26bc1f0d051be7bb5d1d57362516fc7909e1",
+            "id": "injectable-FacilityInfoPageService-55b8ad79a8a7359d3de3beaf797cc99ac9f9ad87562ff0e77248d0276780a2516c7f17a2380bc586dae0f4be90efc13503004b97b2fe4121b150be4828f48799",
             "file": "src/app/facility-info-page/facility-info-page.service.ts",
             "properties": [
+                {
+                    "name": "_aboutPage$",
+                    "defaultValue": "new BehaviorSubject<string>('')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "_diagram$",
+                    "defaultValue": "new BehaviorSubject<string>('')",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 24,
+                    "modifierKind": [
+                        121
+                    ]
+                },
                 {
                     "name": "_documents$",
                     "defaultValue": "new BehaviorSubject<AttachmentGroup[]>([])",
@@ -2911,6 +2922,26 @@
                     "modifierKind": [
                         121
                     ]
+                },
+                {
+                    "name": "aboutPages",
+                    "defaultValue": "{\r\n        1: \"B1-PET.about.html\",\r\n        2: \"B3-PET.about.html\",\r\n        3: \"CC-CCE-2J.about.html\",\r\n        4: \"CC-CCE-12E.about.html\",\r\n        5: \"CC-CCE-NCI.about.html\",\r\n        6: \"CC-DLM-LAB.about.html\",\r\n        7: \"CC-NMD_RADIO.about.html\",\r\n        8: \"I-IVAU.about.html\",\r\n        9: \"P-IVAU.about.html\",\r\n        10: \"NCI-1B42.about.html\",\r\n        11: \"NCI_3W_TIL_LAB.about.html\",\r\n        12: \"NCI-Trailer1.about.html\",\r\n        13: \"NCI-Trailer2.about.html\",\r\n        16: \"CC-CCE-3T.about.html\",\r\n        17: \"I-IVAU_Ext.about.html\",\r\n        18: \"NIAID_Viral.about.html\",\r\n        19: \"NCY_Hyperpolarized.about.html\",\r\n        20: \"NIAID_29B_Bio_Facility.about.html\"\r\n    }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 29
+                },
+                {
+                    "name": "diagrams",
+                    "defaultValue": "{\r\n        1: \"CC_PET_Radiopharmacy.pdf\",\r\n        2: \"CC_PET_B3_Radiochemistry.pdf\",\r\n        3: \"CCE_2J_Cell_Therapy_Lab.pdf\",\r\n        4: \"CC_CCE_12E_Cell_Therapy_Lab.pdf\",\r\n        5: \"CC_CCE_East_Terrace_Modular.pdf\",\r\n        6:\"CC_DLM_Sterility_Lab.pdf\",\r\n        8:\"CC_PHARMACY_I-IVAU.pdf\",\r\n        9:\"P-IVAU_Diagram.pdf\",\r\n        10:\"NCI_SB_1B42.pdf\",\r\n        11:\"NCI_SB_TIL_Modular.pdf\",\r\n        12:\"NCI_Trailer1-10A.pdf\",\r\n        13:\"NCI_Trailer1-10B.pdf\",\r\n        19:\"HPP_Diagram.pdf\"\r\n    }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 51
                 }
             ],
             "methods": [
@@ -2927,7 +2958,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 27,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2947,7 +2978,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Attachment, AttachmentGroup } from '../api/models';\r\nimport {\r\n    BehaviorSubject,\r\n    Observable,\r\n    Subject,\r\n    combineLatest,\r\n    distinctUntilChanged,\r\n    filter,\r\n    map,\r\n    mergeMap,\r\n    of,\r\n    zip\r\n} from 'rxjs';\r\n\r\nimport { DataService } from 'src/app/api/data.service';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable()\r\nexport class FacilityInfoPageService {\r\n    private _pictures$ = new BehaviorSubject<Attachment[]>([]);\r\n    private _documents$ = new BehaviorSubject<AttachmentGroup[]>([]);\r\n\r\n    constructor(private dataService: DataService) {\r\n    }\r\n\r\n    Load(facilityId: number) {\r\n\r\n        this.dataService.facilityPictures(facilityId).subscribe((pictures: Attachment[]) => {\r\n            const picturesWithUrls = pictures.map(p => ({ ...p, url: `${environment.attachmentRootUrl}/${p.storedFileName}` }));\r\n            this._pictures$.next(picturesWithUrls);\r\n        });\r\n\r\n        this.dataService.facilityDocuments(facilityId).subscribe((documents: AttachmentGroup[]) => {\r\n            const docs = documents.map(d => ({\r\n                ...d,\r\n                attachments: d.attachments.map(a => ({ \r\n                    ...a, \r\n                    url: `${environment.attachmentRootUrl}/${a.storedFileName}` }))\r\n            }));\r\n            this._documents$.next(docs);\r\n        });\r\n    }\r\n\r\n    public get pictures$() {\r\n        return this._pictures$ as Observable<Attachment[]>;\r\n    }\r\n\r\n    public get documents$() {\r\n        return this._documents$ as Observable<AttachmentGroup[]>;\r\n    }\r\n}",
+            "sourceCode": "import { Attachment, AttachmentGroup } from '../api/models';\r\nimport {\r\n    BehaviorSubject,\r\n    Observable,\r\n    Subject,\r\n    combineLatest,\r\n    distinctUntilChanged,\r\n    filter,\r\n    map,\r\n    mergeMap,\r\n    of,\r\n    zip\r\n} from 'rxjs';\r\n\r\nimport { DataService } from 'src/app/api/data.service';\r\nimport { Injectable } from '@angular/core';\r\nimport { environment } from 'src/environments/environment';\r\n\r\n@Injectable()\r\nexport class FacilityInfoPageService {\r\n    private _pictures$ = new BehaviorSubject<Attachment[]>([]);\r\n    private _documents$ = new BehaviorSubject<AttachmentGroup[]>([]);\r\n    private _aboutPage$ = new BehaviorSubject<string>('');\r\n    private _diagram$ = new BehaviorSubject<string>('')\r\n\r\n    constructor(private dataService: DataService) {\r\n    }\r\n\r\n    aboutPages:{[key:number]:string} = {\r\n        1: \"B1-PET.about.html\",\r\n        2: \"B3-PET.about.html\",\r\n        3: \"CC-CCE-2J.about.html\",\r\n        4: \"CC-CCE-12E.about.html\",\r\n        5: \"CC-CCE-NCI.about.html\",\r\n        6: \"CC-DLM-LAB.about.html\",\r\n        7: \"CC-NMD_RADIO.about.html\",\r\n        8: \"I-IVAU.about.html\",\r\n        9: \"P-IVAU.about.html\",\r\n        10: \"NCI-1B42.about.html\",\r\n        11: \"NCI_3W_TIL_LAB.about.html\",\r\n        12: \"NCI-Trailer1.about.html\",\r\n        13: \"NCI-Trailer2.about.html\",\r\n        16: \"CC-CCE-3T.about.html\",\r\n        17: \"I-IVAU_Ext.about.html\",\r\n        18: \"NIAID_Viral.about.html\",\r\n        19: \"NCY_Hyperpolarized.about.html\",\r\n        20: \"NIAID_29B_Bio_Facility.about.html\"\r\n    }\r\n\r\n\r\n    diagrams:{[key:number]:string} = {\r\n        1: \"CC_PET_Radiopharmacy.pdf\",\r\n        2: \"CC_PET_B3_Radiochemistry.pdf\",\r\n        3: \"CCE_2J_Cell_Therapy_Lab.pdf\",\r\n        4: \"CC_CCE_12E_Cell_Therapy_Lab.pdf\",\r\n        5: \"CC_CCE_East_Terrace_Modular.pdf\",\r\n        6:\"CC_DLM_Sterility_Lab.pdf\",\r\n        8:\"CC_PHARMACY_I-IVAU.pdf\",\r\n        9:\"P-IVAU_Diagram.pdf\",\r\n        10:\"NCI_SB_1B42.pdf\",\r\n        11:\"NCI_SB_TIL_Modular.pdf\",\r\n        12:\"NCI_Trailer1-10A.pdf\",\r\n        13:\"NCI_Trailer1-10B.pdf\",\r\n        19:\"HPP_Diagram.pdf\"\r\n    }\r\n      \r\n    Load(facilityId: number) {\r\n\r\n        this.dataService.facilityPictures(facilityId).subscribe((pictures: Attachment[]) => {\r\n            const picturesWithUrls = pictures.map(p => ({ ...p, url: `${environment.attachmentRootUrl}/${p.storedFileName}` }));\r\n            this._pictures$.next(picturesWithUrls);\r\n        });\r\n\r\n        this.dataService.facilityDocuments(facilityId).subscribe((documents: AttachmentGroup[]) => {\r\n            const docs = documents.map(d => ({\r\n                ...d,\r\n                attachments: d.attachments.map(a => ({ \r\n                    ...a, \r\n                    url: `${environment.attachmentRootUrl}/${a.storedFileName}` }))\r\n            }));\r\n            this._documents$.next(docs.filter(d=>d.description !== 'Facility Digram'));\r\n\r\n            \r\n        });\r\n\r\n        const aboutPage = this.aboutPages[facilityId] ? 'about/'+this.aboutPages[facilityId] : '';\r\n        const diagram = this.diagrams[facilityId] ? 'assets/diagrams/'+this.diagrams[facilityId] : '';\r\n        this._aboutPage$.next(aboutPage);\r\n        this._diagram$.next(diagram)\r\n    }\r\n\r\n    public get pictures$() {\r\n        return this._pictures$ as Observable<Attachment[]>;\r\n    }\r\n\r\n    public get documents$() {\r\n        return this._documents$ as Observable<AttachmentGroup[]>;\r\n    }\r\n\r\n    public get aboutPage$() {\r\n        return this._aboutPage$ as Observable<string>;\r\n    }\r\n    \r\n    public get diagram$() {\r\n        return this._diagram$ as Observable<string>;\r\n    }\r\n}",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2961,7 +2992,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 22,
+                "line": 24,
                 "jsdoctags": [
                     {
                         "name": "dataService",
@@ -2981,7 +3012,7 @@
                         "name": "pictures$",
                         "type": "",
                         "returnType": "",
-                        "line": 45
+                        "line": 92
                     }
                 },
                 "documents$": {
@@ -2990,7 +3021,25 @@
                         "name": "documents$",
                         "type": "",
                         "returnType": "",
-                        "line": 49
+                        "line": 96
+                    }
+                },
+                "aboutPage$": {
+                    "name": "aboutPage$",
+                    "getSignature": {
+                        "name": "aboutPage$",
+                        "type": "",
+                        "returnType": "",
+                        "line": 100
+                    }
+                },
+                "diagram$": {
+                    "name": "diagram$",
+                    "getSignature": {
+                        "name": "diagram$",
+                        "type": "",
+                        "returnType": "",
+                        "line": 104
                     }
                 }
             },
@@ -4811,13 +4860,17 @@
         },
         {
             "name": "ContactUsDialogComponent",
-            "id": "component-ContactUsDialogComponent-fbc3d6c726ae054b0b43a86c03e05f9680fd6ebcdd3cca7f34c1c01e8c838ac09fb8af00981574e4ec085f3d40bc9c644369b1b62da0566fe6f7fe017f6c81a6",
+            "id": "component-ContactUsDialogComponent-952e08ce0375cae3dd301c0bbdec186bb202ebe2d3ff089595df23c6acb50b944fb843184c0fe360a21995ce9d8a410b2045dc414c7fa5edd89aae3e8b634e13",
             "file": "src/app/contact-us-dialog/contact-us-dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
-            "providers": [],
+            "providers": [
+                {
+                    "name": "DialogService"
+                }
+            ],
             "selector": "app-contact-us-dialog",
             "styleUrls": [
                 "./contact-us-dialog.component.scss"
@@ -4828,16 +4881,7 @@
             ],
             "viewProviders": [],
             "inputsClass": [],
-            "outputsClass": [
-                {
-                    "name": "onClose",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "EventEmitter"
-                }
-            ],
+            "outputsClass": [],
             "propertiesClass": [
                 {
                     "name": "emailForm",
@@ -4847,7 +4891,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 17
                 },
                 {
                     "name": "ref",
@@ -4856,7 +4900,7 @@
                     "type": "DynamicDialogRef",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 15,
                     "modifierKind": [
                         123
                     ]
@@ -4869,7 +4913,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 46,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4879,7 +4923,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4891,7 +4935,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\n\nimport { DataService } from '../api/data.service';\nimport { DynamicDialogRef } from 'primeng/dynamicdialog';\n\n@Component({\n  selector: 'app-contact-us-dialog',\n  templateUrl: './contact-us-dialog.component.html',\n  styleUrls: ['./contact-us-dialog.component.scss'],\n  providers: []\n})\nexport class ContactUsDialogComponent implements OnDestroy {\n  \n  @Output() onClose = new EventEmitter();\n  \n  constructor(public ref: DynamicDialogRef) {}\n  \n  emailForm = new FormGroup({\n    name: new FormControl('', [Validators.required]),\n    fromAddress: new FormControl('', [Validators.required, Validators.email]),\n    subjectLine: new FormControl('', [Validators.required]),\n    messageBody: new FormControl('', [Validators.required])\n  });\n\n  get name() {\n    return this.emailForm.get('name');\n  }\n\n  get fromAddress() {\n    return this.emailForm.get('fromAddress');\n  }\n\n  get subjectLine() {\n    return this.emailForm.get('subjectLine');\n  }\n\n  get messageBody() {\n    return this.emailForm.get('messageBody');\n  }\n\n  sendEmail() {\n    if (this.emailForm.valid) {\n      this.onClose.emit();\n      this.ref.close(this.emailForm.value);\n    }\n  }\n\n  ngOnDestroy() {\n    if (this.ref) {\n        this.ref.close();\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';\nimport { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';\nimport { FormControl, FormGroup, Validators } from '@angular/forms';\n\nimport { DataService } from '../api/data.service';\n\n@Component({\n  selector: 'app-contact-us-dialog',\n  templateUrl: './contact-us-dialog.component.html',\n  styleUrls: ['./contact-us-dialog.component.scss'],\n  providers: [DialogService]\n})\nexport class ContactUsDialogComponent implements OnDestroy {\n\n  constructor(public ref: DynamicDialogRef) {}\n  \n  emailForm = new FormGroup({\n    name: new FormControl('', [Validators.required]),\n    fromAddress: new FormControl('', [Validators.required, Validators.email]),\n    subjectLine: new FormControl('', [Validators.required]),\n    messageBody: new FormControl('', [Validators.required])\n  });\n\n  get name() {\n    return this.emailForm.get('name');\n  }\n\n  get fromAddress() {\n    return this.emailForm.get('fromAddress');\n  }\n\n  get subjectLine() {\n    return this.emailForm.get('subjectLine');\n  }\n\n  get messageBody() {\n    return this.emailForm.get('messageBody');\n  }\n\n  sendEmail() {\n    if (this.emailForm.valid) {\n      this.ref.close(this.emailForm.value);\n    }\n  }\n\n  ngOnDestroy() {\n    if (this.ref) {\n        this.ref.close();\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4913,7 +4957,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 15,
+                "line": 13,
                 "jsdoctags": [
                     {
                         "name": "ref",
@@ -4936,7 +4980,7 @@
                         "name": "name",
                         "type": "",
                         "returnType": "",
-                        "line": 26
+                        "line": 24
                     }
                 },
                 "fromAddress": {
@@ -4945,7 +4989,7 @@
                         "name": "fromAddress",
                         "type": "",
                         "returnType": "",
-                        "line": 30
+                        "line": 28
                     }
                 },
                 "subjectLine": {
@@ -4954,7 +4998,7 @@
                         "name": "subjectLine",
                         "type": "",
                         "returnType": "",
-                        "line": 34
+                        "line": 32
                     }
                 },
                 "messageBody": {
@@ -4963,7 +5007,7 @@
                         "name": "messageBody",
                         "type": "",
                         "returnType": "",
-                        "line": 38
+                        "line": 36
                     }
                 }
             },
@@ -4971,7 +5015,7 @@
         },
         {
             "name": "ErrorLogDashboardComponent",
-            "id": "component-ErrorLogDashboardComponent-2f3e5555d0a932be51af96cff49f487fcd7db46a517738cda18fb98b6d5356c8561f9849979930a92196493e866a3287e1c0905eff4303d3a388621e66a5524a",
+            "id": "component-ErrorLogDashboardComponent-d06fb002c47a46949f887a058395bc875c12ad5d5efe1198d018d73a6ebb06733a1a8644e0bdfac1c5c93ffde789fe016c12585369be3a7285835cfbb6bdb4a7",
             "file": "src/app/error-log-dashboard/error-log-dashboard.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4990,6 +5034,16 @@
             "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "appSettings",
+                    "defaultValue": "\"\"",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                },
                 {
                     "name": "errors",
                     "defaultValue": "[]",
@@ -5018,7 +5072,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 18,
+                    "line": 19,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -5030,7 +5084,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\nimport { DataService } from 'src/app/api/data.service';\nimport { ErrorLog } from '../api/models';\n\n@Component({\n  selector: 'app-error-log-dashboard',\n  templateUrl: './error-log-dashboard.component.html',\n  styleUrls: ['./error-log-dashboard.component.scss']\n})\nexport class ErrorLogDashboardComponent implements OnInit {\n\n  constructor(private dataService: DataService) { }\n\n  errors:  any[] = [] //ErrorLog[] = []\n  errorsJSON = \"\"\n\n  ngOnInit(): void {\n    this.dataService.errors().subscribe(errors=>{\n      this.errors = errors\n      this.errorsJSON = JSON.stringify(errors);\n    })\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\nimport { DataService } from 'src/app/api/data.service';\nimport { ErrorLog } from '../api/models';\n\n@Component({\n  selector: 'app-error-log-dashboard',\n  templateUrl: './error-log-dashboard.component.html',\n  styleUrls: ['./error-log-dashboard.component.scss']\n})\nexport class ErrorLogDashboardComponent implements OnInit {\n\n  constructor(private dataService: DataService) { }\n\n  errors:  any[] = [] //ErrorLog[] = []\n  errorsJSON = \"\"\n  appSettings = \"\"\n\n  ngOnInit(): void {\n    this.dataService.errors().subscribe(errors=>{\n      this.errors = errors\n      this.errorsJSON = JSON.stringify(errors);\n    });\n\n    this.dataService.appSettings().subscribe(settings=>{\n    this.appSettings = JSON.stringify(settings);\n    })\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -5068,11 +5122,73 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<h2>Error Log</h2>\n\n<p-table [value]=\"errors\">\n    <ng-template pTemplate=\"header\">\n        <tr>\n            <th pSortableColumn=\"errorlogid\">Id</th>\n            <th pSortableColumn=\"errordate\">Date</th>\n            <th pSortableColumn=\"errormessage\">Message</th>\n            <th pSortableColumn=\"errortrace\">Trace</th>\n        </tr>\n    </ng-template>\n    <ng-template pTemplate=\"body\" let-error>\n        <tr>\n            <td>{{error.errorlogid}}</td>\n            <td [width]=\"180\">{{error.errordate | date:'short'}}</td>\n            <td>{{error.errormessage}}</td>\n            <td [title]=\"error.errortrace\"> {{error.errortrace.substring(0,138)}}...</td>\n        </tr>\n    </ng-template>\n</p-table>\n \n"
+            "templateData": "<h2>Error Log</h2>\n\n<p-table [value]=\"errors\">\n    <ng-template pTemplate=\"header\">\n        <tr>\n            <th pSortableColumn=\"errorlogid\">Id</th>\n            <th pSortableColumn=\"errordate\">Date</th>\n            <th pSortableColumn=\"errormessage\">Message</th>\n            <th pSortableColumn=\"errortrace\">Trace</th>\n        </tr>\n    </ng-template>\n    <ng-template pTemplate=\"body\" let-error>\n        <tr>\n            <td>{{error.errorlogid}}</td>\n            <td [width]=\"180\">{{error.errordate | date:'short'}}</td>\n            <td>{{error.errormessage}}</td>\n            <td [title]=\"error.errortrace\"> {{error.errortrace.substring(0,138)}}...</td>\n        </tr>\n    </ng-template>\n</p-table>\n\n<h2>App Settings</h2>\n<div>\n    {{appSettings}}\n</div>\n \n"
+        },
+        {
+            "name": "FacilityDescriptionComponent",
+            "id": "component-FacilityDescriptionComponent-78cdde864cdf8b82cb3bfa64fe96d286b86a0f1cf3eb04f58586d609b7a98e5dde86e9d7d340bda0f87c8478daf4bc6f30f5ca37f2c4737cdc64ca532f7f3863",
+            "file": "src/app/facility-description/facility-description.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-facility-description",
+            "styleUrls": [
+                "./facility-description.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./facility-description.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-facility-description',\n  templateUrl: './facility-description.component.html',\n  styleUrls: ['./facility-description.component.css']\n})\nexport class FacilityDescriptionComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".container {\r\n    display:block;\r\n    border:2px solid grey;\r\n}\r\n\r\n.overflow-scroll {\r\n    overflow: scroll;\r\n}",
+                    "styleUrl": "./facility-description.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "\n<div class=\"flex\">\n    <div id=\"about-container\" class=\"container overflow-scroll\">\n        \n    </div>\n    <div class=\"container\">\n        <div id=\"map-container\">\n            facility map\n        </div>\n        <div id=\"images-container\">\n            images\n        </div>\n    </div>\n\n</div>"
         },
         {
             "name": "FacilityInfoPageComponent",
-            "id": "component-FacilityInfoPageComponent-4dd3f020967bf2c613ff4d0033da721bbf7b5f08c9aa9a23aad3da4341f21fa3d7d43b348cb3b7bad799337c0298947f00be97fb599b157907b7a3543da7d253",
+            "id": "component-FacilityInfoPageComponent-fa107ab94de213163b771160398d1df639d7ce32c6b049dcd357fbb15c6a09ec2bfaf539b4698e1a2b99d11182d373561fccfba8e71721709e7151cea7371413",
             "file": "src/app/facility-info-page/facility-info-page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5080,7 +5196,13 @@
             "outputs": [],
             "providers": [
                 {
+                    "name": "DialogService"
+                },
+                {
                     "name": "FacilityInfoPageService"
+                },
+                {
+                    "name": "DataService"
                 }
             ],
             "selector": "app-facility-info-page",
@@ -5092,31 +5214,33 @@
                 "./facility-info-page.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "facilityInfoPageData",
-                    "defaultValue": "{\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 40,
-                    "type": "FacilityInfoPageData",
-                    "decorators": []
-                }
-            ],
+            "inputsClass": [],
             "outputsClass": [],
             "propertiesClass": [
                 {
-                    "name": "beginingDescription",
+                    "name": "diagramUrl",
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "SafeResourceUrl",
                     "optional": false,
                     "description": "",
                     "line": 25
                 },
                 {
-                    "name": "facilityNameTitle",
+                    "name": "dialogService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "DialogService",
+                    "optional": false,
+                    "description": "",
+                    "line": 31,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "documentPage",
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -5126,24 +5250,33 @@
                     "line": 24
                 },
                 {
+                    "name": "hasDiagram",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
                     "name": "items",
-                    "defaultValue": "[\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ]",
+                    "defaultValue": "[\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 58
+                    "line": 57
                 },
                 {
-                    "name": "remainingDescription",
-                    "defaultValue": "''",
+                    "name": "ref",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "string",
+                    "type": "DynamicDialogRef",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 22
                 },
                 {
                     "name": "selectedTab",
@@ -5162,50 +5295,30 @@
                     "type": "FacilityInfoPageService",
                     "optional": false,
                     "description": "",
-                    "line": 28,
+                    "line": 30,
                     "modifierKind": [
                         123
                     ]
-                },
-                {
-                    "name": "showAllMessage",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 52
-                },
-                {
-                    "name": "toggleMessage",
-                    "defaultValue": "\"read more...\"",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 53
                 }
             ],
             "methodsClass": [
+                {
+                    "name": "contactUsClick",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 88,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
                 {
                     "name": "ngOnInit",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "toggleMessageClick",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 88,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -5217,11 +5330,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\r\nimport { Observable, filter, map } from 'rxjs';\r\n\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport {FacilityInfoPageService} from './facility-info-page.service';\r\n\r\ninterface FacilityInfoPageData {\r\n  facilityNameTitle: string;\r\n  aboutBeginningDescription: string;\r\n  aboutRemainingDescription: string;\r\n  diagramUrl: string;\r\n  images: {title:string, url:string}[];\r\n  documents: {description: string, url: string}[]\r\n} \r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css'],\r\n  providers: [FacilityInfoPageService]\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  facilityNameTitle='';\r\n  beginingDescription='';\r\n  remainingDescription='';\r\n\r\n  constructor(private activatedRoute: ActivatedRoute,public service:FacilityInfoPageService) { \r\n\r\n    this.activatedRoute.params\r\n    .pipe(\r\n      filter(Boolean)\r\n    )\r\n    .subscribe((params) => {\r\n      this.service.Load(params.facilityId)\r\n    });\r\n  }\r\n\r\n  @Input()\r\n  facilityInfoPageData: FacilityInfoPageData = {\r\n    facilityNameTitle:'',\r\n    aboutBeginningDescription:'',\r\n    aboutRemainingDescription:'',\r\n    diagramUrl:'',\r\n    images:[],\r\n    documents:[]\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n \r\n showAllMessage = false;\r\n toggleMessage=\"read more...\";\r\n \r\n selectedTab = 'about';\r\n\r\n\r\n items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event:any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n  toggleMessageClick() {\r\n    this.showAllMessage = !this.showAllMessage;\r\n    this.toggleMessage = this.showAllMessage ? \"show less\" : \"show more...\";\r\n  }\r\n\r\n\r\n}\r\n",
+            "sourceCode": "import { } from '../safe-url.pipe';\r\n\r\nimport { Component, OnInit } from '@angular/core';\r\nimport { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';\r\nimport { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';\r\n\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport { ContactUsDialogComponent } from '../contact-us-dialog/contact-us-dialog.component';\r\nimport { ContactUsMessage } from '../api/models';\r\nimport { DataService } from '../api/data.service';\r\nimport { FacilityInfoPageService } from './facility-info-page.service';\r\nimport { filter } from 'rxjs';\r\n\r\n@Component({\r\n  selector: 'app-facility-info-page',\r\n  templateUrl: './facility-info-page.component.html',\r\n  styleUrls: ['./facility-info-page.component.css'],\r\n  providers: [DialogService, FacilityInfoPageService, DataService]\r\n})\r\nexport class FacilityInfoPageComponent implements OnInit {\r\n\r\n  ref!: DynamicDialogRef;\r\n\r\n  documentPage: string = '';\r\n  diagramUrl: SafeResourceUrl = '';\r\n  hasDiagram = false;\r\n\r\n  constructor(\r\n    private activatedRoute: ActivatedRoute,\r\n    public service: FacilityInfoPageService,\r\n    public dialogService: DialogService,\r\n    private dataService: DataService,\r\n    private sanitizer: DomSanitizer\r\n  ) {\r\n\r\n    this.activatedRoute.params\r\n      .pipe(\r\n        filter(Boolean)\r\n      )\r\n      .subscribe((params) => {\r\n        this.service.Load(params.facilityId)\r\n      });\r\n\r\n    this.service.diagram$.subscribe(d => {\r\n      this.diagramUrl = this.sanitizer.bypassSecurityTrustResourceUrl(d);\r\n      this.hasDiagram = Boolean(d);\r\n    })\r\n\r\n  }\r\n\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  selectedTab = 'about';\r\n\r\n  items = [\r\n    {\r\n      label: \"About\",\r\n      icon: \"pi pi-fw pi-home\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'about';\r\n      }\r\n    },\r\n    {\r\n      label: \"Diagram\",\r\n      icon: \"pi pi-map\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'diagram';\r\n      }\r\n    },\r\n    {\r\n      label: \"Documents\",\r\n      icon: \"pi pi-fw pi-file\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'documents'\r\n      }\r\n    }, {\r\n      label: \"Pictures\",\r\n      icon: \"pi pi-fw pi-images\",\r\n      command: (event: any) => {\r\n        this.selectedTab = 'pictures'\r\n      }\r\n    }\r\n  ];\r\n\r\n\r\n  contactUsClick() {\r\n    this.ref = this.dialogService.open(ContactUsDialogComponent, { header: 'Contact Us' });\r\n\r\n    this.ref.onClose.subscribe((message: ContactUsMessage) => {\r\n      if (message) {\r\n        this.dataService.contactUs(message).subscribe();\r\n      }\r\n    });\r\n  }\r\n\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".nav-toggle { cursor: pointer;}",
+                    "data": ".nav-toggle { cursor: pointer;}\r\n.contact-link { cursor: pointer; text-decoration: underline;}",
                     "styleUrl": "./facility-info-page.component.css"
                 }
             ],
@@ -5241,6 +5354,24 @@
                     {
                         "name": "service",
                         "type": "FacilityInfoPageService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "dialogService",
+                        "type": "DialogService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "dataService",
+                        "type": "DataService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "sanitizer",
+                        "type": "DomSanitizer",
                         "deprecated": false,
                         "deprecationMessage": ""
                     }
@@ -5264,13 +5395,151 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "dialogService",
+                        "type": "DialogService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "dataService",
+                        "type": "DataService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "sanitizer",
+                        "type": "DomSanitizer",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"card-body designCardBody\">\r\n    <div>\r\n        <div style=\"position: relative; left: 0; top: 0;\">\r\n            <img id=\"apf1\" src=\"/assets/images/I-IVAU.jpg\">\r\n        </div>\r\n    </div>\r\n\r\n    <p-tabMenu [model]=\"items\"></p-tabMenu>\r\n\r\n    <div id=\"about-tab\" *ngIf=\"selectedTab=='about'\">\r\n        <h2>\r\n            <!-- Clinical Center Permanent-Intravenous Admixture Unit (P-IVAU) Pharmacy -->\r\n            {{facilityNameTitle}}\r\n        </h2>\r\n        <app-static-content-container [page]=\"'about/B1-PET.about.html'\"></app-static-content-container>\r\n        <!-- <p>\r\n            {{beginingDescription}}\r\n            The National Institute of Health Clinical Center (CC) Pharmacy will operate the Permanent\r\n            Intravenous Admixture Unit (I-IVAU) which will provide a wide variety of compounded sterile drug\r\n            products to Clinical Center patients. The P-IVAU space will be located within the Building 10\r\n            Clinical Center on the first floor. The overall P-IVAU space will be approximately 10,000 gross\r\n            square feet of program space, with 5,500 gross square of APF spaces. The facility will prepare drugs\r\n            according to the requirements of USP&lt;797&gt;, USP&lt;800&gt;, USP&lt;795&gt; and BSL-2 standards.\r\n        </p>\r\n        <div *ngIf=\"showAllMessage\">\r\n            <p>\r\n                The APF spaces consists of one (1) &lt;797&gt; suite for sterile non-hazardous IV preparations, one (1)\r\n                &lt;800&gt; suite for preparation of sterile hazardous preparations, and one (1) BSL-2 suite for\r\n                hazardous sterile preparations.\r\n\r\n            </p>\r\n            <p>The &lt;797&gt; sterile non-hazardous suite consists of six (6) ISO 7 compounding rooms, each with a Type\r\n                A2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will have separate\r\n                gowning and de-gowning rooms with a common ISO 7 corridor that serves the compounding rooms. The rooms\r\n                will be arranged so pressure is cascading out from the ISO 7 Sterile Prep room out to the common\r\n                corridor and to the ISO 8 gowning and de-gowning room. </p>\r\n            <p>\r\n                The &lt;800&gt; sterile hazardous suite consists of four (4) ISO 7 compounding rooms, each with a Type\r\n                B2 ISO 5 BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the\r\n                entry gowning room with the BSL-2 suite but will be have dedicated entry to a common corridor that\r\n                serves the four (4) rooms. The two (2) &lt;800&gt; rooms will share a common de-gowning room. The suite\r\n                is unidirectional so the worker will exit the compounding room through a de-gowning room, thus avoiding\r\n                re-entry into the entry corridor where cross contamination could occur between compounding rooms. The\r\n                rooms will be arranged so the &lt;800&gt; rooms are negatively pressurized relative to the common\r\n                corridor, but the suite itself is possible to common spaces.\r\n\r\n            </p>\r\n\r\n            <p>\r\n                The BSL-2 sterile hazardous suite consists of two (2) ISO 7 compounding rooms, each with a Type B2 ISO 5\r\n                BSC and dedicated incoming and outgoing ventilated pass-throughs. The suite will share the entry gowning\r\n                room with the &lt;800&gt; suite but will be have dedicated entry to a common corridor that serves the\r\n                two (2) rooms. The two (2) BSL-2 rooms will share a common de-gowning room. The suite is unidirectional\r\n                so the worker will exit the compounding room through a de-gowning room, thus avoiding re-entry into the\r\n                entry corridor where cross contamination could occur between compounding rooms. The rooms will be\r\n                arranged so the BSL-2 rooms are negatively pressurized relative to the common corridor, but the suite\r\n                itself is positive to common spaces.\r\n\r\n            </p>\r\n            <p>\r\n                There will be two (2) kitting rooms in the pharmacy where drug and supplies will be stored. One (1)\r\n                kitting room is for non-hazardous drug and supply storage, and one (1) kitting room for &lt;800&gt;\r\n                Hazardous drug storage. Each kitting room will have a high-density storage carousel designed for use in\r\n                a cleanroom environment.\r\n\r\n            </p>\r\n            <p>\r\n                Next to the APF area there will be an Inpatient Unit Dose Section that serves patients that are staying\r\n                and being treated in the hospital. This area will feature a large robotic prescription dispensing\r\n                system, a high-density carousel, refrigerators, shelves, and a workstation area for 4-6 people. There\r\n                will also be an Outpatient Section which serves medications to patients that are being treated as\r\n                outpatients. This section includes an Outpatient Waiting Area with three (3) consultation windows for\r\n                outpatients for pick up. Finally, there will be two (2) additional high-density carousels that will\r\n                store Investigational drugs and drugs that are shared between Inpatient and Outpatient departments.\r\n            </p>\r\n            <p>\r\n                A new mechanical penthouse will be installed above an adjacent roof to house (2) dedicated air handling\r\n                units and other necessary HVAC and electrical equipment. The terminal air units that supply and control\r\n                air changes, temperature, humidity, and differential pressure will be located in the mechanical\r\n                interstitial space above the program spaces. All supply air to the classified rooms is HEPA filtered.\r\n                There will be two (2) sets of dedicated exhaust systems, one set for the general exhaust and one set for\r\n                the hazardous exhaust.\r\n            </p>\r\n            <strong>This facility is under development.</strong>\r\n            {{remainingDescription}}\r\n\r\n        </div>\r\n        <a (click)=\"toggleMessageClick()\" class=\"nav-toggle\">{{toggleMessage}}</a> -->\r\n\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='documents'\">\r\n        <span class=\"cardContent\">\r\n            <p style=\"width:80em\"> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for\r\n                this APF, provided for your convenience. For access to the full archive of documents, or for access to\r\n                the controlled version of any of these documents, please <a href=\"contactus.aspx\">contact</a> FCIS.\r\n\r\n                The documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been\r\n                verified.</p>\r\n\r\n            <div>\r\n                <div *ngFor=\"let docGroup of (service.documents$ | async) || []\">\r\n                    <b>{{docGroup.description}}</b>\r\n                    <ul>\r\n                        <li *ngFor=\"let atch of docGroup.attachments\">\r\n                            <a [href]=\"atch.url\" target=\"_blank\">{{atch.docTitle}}</a>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                <div *ngIf=\"((service.documents$ | async) || []).length == 0\">\r\n                    <span>No Documents Available</span>\r\n                </div>\r\n            </div>\r\n        </span>\r\n    </div>\r\n\r\n    <div id=\"diagram-tab\" *ngIf=\"selectedTab=='diagram'\" style=\"height:800px\">\r\n        <a> Open in new tab</a>\r\n        <object data=\"/assets/images/CCE_2J_Cell_Therapy_Lab.pdf\" type=\"application/pdf\" width=\"100%\" height=\"100%\">\r\n            alt : <a href=\"test.pdf\">test.pdf</a>\r\n        </object>\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='pictures'\">\r\n        <div class=\"card\">\r\n            <div style=\"display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;\">\r\n                <div *ngFor=\"let photo of (service.pictures$ | async) || []\"\r\n                    style=\"border:1px solid black; padding:4px;\">\r\n                    <p-image [src]=\"photo.url\" [preview]=\"true\" width=\"219\" height=\"200\"\r\n                        [alt]=\"photo.docTitle\"></p-image><br />\r\n                    <span style=\"font-size:smaller\">{{photo.docTitle}}</span>\r\n                </div>\r\n                <div *ngIf=\"((service.pictures$ | async) || []).length == 0\">\r\n                    <span>No Pictures Available</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
+            "templateData": "<div class=\"card-body designCardBody\">\r\n    <div>\r\n        <div style=\"position: relative; left: 0; top: 0;\">\r\n            <img id=\"apf1\" src=\"/assets/images/I-IVAU.jpg\">\r\n        </div>\r\n    </div>\r\n\r\n    <p-tabMenu [model]=\"items\"></p-tabMenu>\r\n\r\n    <div id=\"about-tab\" *ngIf=\"selectedTab=='about'\" style=\"width:80em\">\r\n        <app-static-content-container [page]=\"(service.aboutPage$ | async) || ''\"></app-static-content-container>\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='documents'\">\r\n        <span class=\"cardContent\">\r\n            <p style=\"width:80em\"> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for\r\n                this APF, provided for your convenience. For access to the full archive of documents, or for access to\r\n                the controlled version of any of these documents, please <a (click)=\"contactUsClick()\" class=\"contact-link\">contact</a> FCIS.\r\n\r\n                The documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been\r\n                verified.</p>\r\n\r\n            <div>\r\n                <div *ngFor=\"let docGroup of (service.documents$ | async) || []\">\r\n                    <div *ngIf=\"docGroup.description !== 'FacilityDiagram'\">\r\n                    <b>{{docGroup.description}}</b>\r\n                    <ul>\r\n                        <li *ngFor=\"let atch of docGroup.attachments\">\r\n                            <a [href]=\"atch.url\" target=\"_blank\">{{atch.docTitle}}</a>\r\n                        </li>\r\n                    </ul>\r\n                    </div>\r\n                </div>\r\n                <div *ngIf=\"((service.documents$ | async) || []).length == 0\">\r\n                    <span>No Documents Available</span>\r\n                </div>\r\n            </div>\r\n        </span>\r\n    </div>\r\n\r\n    <div id=\"diagram-tab\" *ngIf=\"selectedTab=='diagram'\" style=\"height:800px\">\r\n        <a *ngIf=\"hasDiagram\"[href]=\"diagramUrl\" target=\"_blank\">Open in new tab</a>\r\n        <object *ngIf=\"hasDiagram\" [data]=\"diagramUrl\" type=\"application/pdf\" width=\"100%\" height=\"100%\"></object>\r\n        <div *ngIf=\"!hasDiagram\">No Diagram Available</div>\r\n    </div>\r\n\r\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='pictures'\">\r\n        <div class=\"card\">\r\n            <div style=\"display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;\">\r\n                <div *ngFor=\"let photo of (service.pictures$ | async) || []\"\r\n                    style=\"border:1px solid black; padding:4px;\">\r\n                    <p-image [src]=\"photo.url\" [preview]=\"true\" width=\"219\" height=\"200\"\r\n                        [alt]=\"photo.docTitle\"></p-image><br />\r\n                    <span style=\"font-size:smaller\">{{photo.docTitle}}</span>\r\n                </div>\r\n                <div *ngIf=\"((service.pictures$ | async) || []).length == 0\">\r\n                    <span>No Pictures Available</span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
+        },
+        {
+            "name": "FacilityLayoutComponent",
+            "id": "component-FacilityLayoutComponent-91b53a5508160c8d2c1ff8edf13af43627489b7dcd6e7bca26c332bd969e5b0057cc67b43737968ff23fb4dd51d3bc288088c3bc2ffe426e0fb16b67c420b729",
+            "file": "src/app/facility-layout/facility-layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-facility-layout",
+            "styleUrls": [
+                "./facility-layout.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./facility-layout.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "facility",
+                    "defaultValue": "{\n    title:'Clinical Center - DLM Sterility Lab'\n  }",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "items",
+                    "defaultValue": "[\n    {\n      label: \"Description\",\n      command: (event: any) => {\n        this.selectedTab = 'description';\n      }\n    },\n    {\n      label: \"Dashboard\",\n      command: (event: any) => {\n        this.selectedTab = 'dashboard';\n      }\n    },\n    {\n      label: \"Facility Reports\",\n      command: (event: any) => {\n        this.selectedTab = 'facility_reports'\n      }\n    }, \n    {\n      label: \"Documents\",\n      command: (event: any) => {\n        this.selectedTab = 'documents'\n      }\n    },\n    {\n      label: \"Condition Reports\",\n      command: (event: any) => {\n        this.selectedTab = 'condition_reports'\n      }\n    },\n    {\n      label: \"FCIS Resources\",\n      command: (event: any) => {\n        this.selectedTab = 'fcis_resources'\n      }\n    }\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                },
+                {
+                    "name": "selectedTab",
+                    "defaultValue": "'about'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 17
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\nimport { ActivatedRoute } from '@angular/router';\n\n@Component({\n  selector: 'app-facility-layout',\n  templateUrl: './facility-layout.component.html',\n  styleUrls: ['./facility-layout.component.css']\n})\nexport class FacilityLayoutComponent implements OnInit {\n\n  constructor(private activatedRoute: ActivatedRoute,) { }\n\n  ngOnInit(): void {\n  }\n  \n  selectedTab = 'about';\n\n  facility = {\n    title:'Clinical Center - DLM Sterility Lab'\n  };\n\n  items = [\n    {\n      label: \"Description\",\n      command: (event: any) => {\n        this.selectedTab = 'description';\n      }\n    },\n    {\n      label: \"Dashboard\",\n      command: (event: any) => {\n        this.selectedTab = 'dashboard';\n      }\n    },\n    {\n      label: \"Facility Reports\",\n      command: (event: any) => {\n        this.selectedTab = 'facility_reports'\n      }\n    }, \n    {\n      label: \"Documents\",\n      command: (event: any) => {\n        this.selectedTab = 'documents'\n      }\n    },\n    {\n      label: \"Condition Reports\",\n      command: (event: any) => {\n        this.selectedTab = 'condition_reports'\n      }\n    },\n    {\n      label: \"FCIS Resources\",\n      command: (event: any) => {\n        this.selectedTab = 'fcis_resources'\n      }\n    }\n  ];\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".facility-title{\r\n    color: darkred;\r\n}",
+                    "styleUrl": "./facility-layout.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "activatedRoute",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 10,
+                "jsdoctags": [
+                    {
+                        "name": "activatedRoute",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"card-body designCardBody\">\n\n    <h2 class=\"facility-title\">{{facility.title}}</h2>\n    <p-tabMenu [model]=\"items\"></p-tabMenu>\n\n    <div id=\"description-tab\" *ngIf=\"selectedTab=='description'\">\n        <h2>Description</h2>\n       <app-facility-description></app-facility-description>\n    </div>\n\n    <div id=\"dashboard-tab\" *ngIf=\"selectedTab=='dashboard'\">\n        <h2>Dashboard</h2>\n    </div>\n\n    <div id=\"facility-reports-tab\" *ngIf=\"selectedTab=='facility_reports'\">\n        <h2>Facility Reports</h2>\n    </div>\n\n    <div id=\"documents-tab\" *ngIf=\"selectedTab=='documents'\">\n        <h2>Documents</h2>\n    </div>\n\n    <div id=\"condition-reports-tab\" *ngIf=\"selectedTab=='condition_reports'\">\n        <h2>Condition Reports</h2>\n    </div>\n\n    <div id=\"fcis-resources-tab\" *ngIf=\"selectedTab=='fcis_resources'\">\n        <h2>FCIS Resources</h2>\n    </div>\n\n</div>"
         },
         {
             "name": "FormulaHeaderComponent",
@@ -5751,7 +6020,7 @@
         },
         {
             "name": "NavMenuComponent",
-            "id": "component-NavMenuComponent-50af7244af99a517baa348839b947e84e932dc0788912a14ef6da0878a6d304acab757b4fe8b3295cf8a8dfd57b663ab75445837d12cf395a1bb1914c4a2125e",
+            "id": "component-NavMenuComponent-f4f1279b19806eb0a61b4a36a54e83f0ca40eb4607a38fbe6a7eb8834e151dad98ea52330bfc2b16db9913d3bac90680186e54e4d4585db86cf96a741323d941",
             "file": "src/app/nav-menu/nav-menu.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5760,6 +6029,9 @@
             "providers": [
                 {
                     "name": "DialogService"
+                },
+                {
+                    "name": "DataService"
                 }
             ],
             "selector": "app-nav-menu",
@@ -5845,7 +6117,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';\r\n\r\nimport { Component } from '@angular/core';\r\nimport { ContactUsDialogComponent } from '../contact-us-dialog/contact-us-dialog.component';\r\nimport { ContactUsMessage } from '../api/models';\r\nimport { DataService } from '../api/data.service';\r\n\r\n@Component({\r\n  selector: 'app-nav-menu',\r\n  templateUrl: './nav-menu.component.html',\r\n  styleUrls: ['./nav-menu.component.scss'],\r\n  providers: [DialogService]\r\n})\r\nexport class NavMenuComponent {\r\n  ref!: DynamicDialogRef;\r\n    \r\n  constructor(public dialogService: DialogService, private dataService: DataService) {}\r\n  isExpanded = false;\r\n\r\n  collapse() {\r\n    this.isExpanded = false;\r\n  }\r\n\r\n  toggle() {\r\n    this.isExpanded = !this.isExpanded;\r\n  }\r\n\r\n  contactUsClick() {\r\n    this.ref = this.dialogService.open(ContactUsDialogComponent, { header: 'Contact Us'});\r\n\r\n    this.ref.onClose.subscribe((message: ContactUsMessage) => {\r\n      if (message) {\r\n        this.dataService.contactUs(message).subscribe();\r\n      }\r\n  });\r\n  }\r\n}\r\n",
+            "sourceCode": "import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';\r\n\r\nimport { Component } from '@angular/core';\r\nimport { ContactUsDialogComponent } from '../contact-us-dialog/contact-us-dialog.component';\r\nimport { ContactUsMessage } from '../api/models';\r\nimport { DataService } from '../api/data.service';\r\n\r\n@Component({\r\n  selector: 'app-nav-menu',\r\n  templateUrl: './nav-menu.component.html',\r\n  styleUrls: ['./nav-menu.component.scss'],\r\n  providers: [DialogService, DataService]\r\n})\r\nexport class NavMenuComponent {\r\n  ref!: DynamicDialogRef;\r\n\r\n  constructor(public dialogService: DialogService, private dataService: DataService) { }\r\n  isExpanded = false;\r\n\r\n  collapse() {\r\n    this.isExpanded = false;\r\n  }\r\n\r\n  toggle() {\r\n    this.isExpanded = !this.isExpanded;\r\n  }\r\n\r\n  contactUsClick() {\r\n    this.ref = this.dialogService.open(ContactUsDialogComponent, { header: 'Contact Us' });\r\n\r\n    this.ref.onClose.subscribe((message: ContactUsMessage) => {\r\n      if (message) {\r\n        this.dataService.contactUs(message).subscribe();\r\n      }\r\n    });\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -5947,7 +6219,7 @@
         },
         {
             "name": "PageComponent",
-            "id": "component-PageComponent-826c9d3321f0dbf4724ccc9af5c6427e38074e28d17394c32bbaea59827a31c6138f8d1d456e9439d6e78d7515702715ce54299a1660967626891b684aeaf4d3",
+            "id": "component-PageComponent-59838d204801fdba4e6be58ad8511f0f6ce8616c7d3db2bd4403d9b2414283b6c782ce447de98ec6be3a27fca527e40964440db2824cde6c11faba4e6f661bd7",
             "file": "src/stories/page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5959,7 +6231,7 @@
                 "./page.css"
             ],
             "styles": [],
-            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a\n          href=\"https://componentdriven.org\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n        >\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page\n        states without needing to navigate to them in your app. Here are some\n        handy patterns for managing page data in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose\n          such data from the \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock\n          these services out using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a\n          href=\"https://storybook.js.org/tutorials/\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n        >\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a\n          href=\"https://storybook.js.org/docs\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n        >\n          docs\n        </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg\n          width=\"10\"\n          height=\"10\"\n          viewBox=\"0 0 12 12\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n        >\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "template": "<article>    <!-- <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"doLogout()\"\n      (onLogin)=\"doLogin()\"\n      (onCreateAccount)=\"doCreateAccount()\"\n    ></storybook-header> -->\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a\n          href=\"https://componentdriven.org\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n        >\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page\n        states without needing to navigate to them in your app. Here are some\n        handy patterns for managing page data in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose\n          such data from the \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock\n          these services out using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a\n          href=\"https://storybook.js.org/tutorials/\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n        >\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a\n          href=\"https://storybook.js.org/docs\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n        >\n          docs\n        </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg\n          width=\"10\"\n          height=\"10\"\n          viewBox=\"0 0 12 12\"\n          xmlns=\"http://www.w3.org/2000/svg\"\n        >\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [],
@@ -6015,7 +6287,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport { User } from './User';\r\n\r\n@Component({\r\n  selector: 'storybook-page',\r\n  template: `<article>\r\n    <storybook-header\r\n      [user]=\"user\"\r\n      (onLogout)=\"doLogout()\"\r\n      (onLogin)=\"doLogin()\"\r\n      (onCreateAccount)=\"doCreateAccount()\"\r\n    ></storybook-header>\r\n    <section>\r\n      <h2>Pages in Storybook</h2>\r\n      <p>\r\n        We recommend building UIs with a\r\n        <a\r\n          href=\"https://componentdriven.org\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          <strong>component-driven</strong>\r\n        </a>\r\n        process starting with atomic components and ending with pages.\r\n      </p>\r\n      <p>\r\n        Render pages with mock data. This makes it easy to build and review page\r\n        states without needing to navigate to them in your app. Here are some\r\n        handy patterns for managing page data in Storybook:\r\n      </p>\r\n      <ul>\r\n        <li>\r\n          Use a higher-level connected component. Storybook helps you compose\r\n          such data from the \"args\" of child component stories\r\n        </li>\r\n        <li>\r\n          Assemble data in the page component from your services. You can mock\r\n          these services out using Storybook.\r\n        </li>\r\n      </ul>\r\n      <p>\r\n        Get a guided tutorial on component-driven development at\r\n        <a\r\n          href=\"https://storybook.js.org/tutorials/\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          Storybook tutorials\r\n        </a>\r\n        . Read more in the\r\n        <a\r\n          href=\"https://storybook.js.org/docs\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          docs\r\n        </a>\r\n        .\r\n      </p>\r\n      <div class=\"tip-wrapper\">\r\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\r\n        <svg\r\n          width=\"10\"\r\n          height=\"10\"\r\n          viewBox=\"0 0 12 12\"\r\n          xmlns=\"http://www.w3.org/2000/svg\"\r\n        >\r\n          <g fill=\"none\" fillRule=\"evenodd\">\r\n            <path\r\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\r\n              id=\"a\"\r\n              fill=\"#999\"\r\n            />\r\n          </g>\r\n        </svg>\r\n        Viewports addon in the toolbar\r\n      </div>\r\n    </section>\r\n  </article>`,\r\n  styleUrls: ['./page.css']\r\n})\r\nexport default class PageComponent {\r\n  user: User | null = null;\r\n\r\n  doLogout() {\r\n    this.user = null;\r\n  }\r\n\r\n  doLogin() {\r\n    this.user = { name: 'Jane Doe' };\r\n  }\r\n\r\n  doCreateAccount() {\r\n    this.user = { name: 'Jane Doe' };\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { User } from './User';\r\n\r\n@Component({\r\n  selector: 'storybook-page',\r\n  template: `<article>\r\n    <!-- <storybook-header\r\n      [user]=\"user\"\r\n      (onLogout)=\"doLogout()\"\r\n      (onLogin)=\"doLogin()\"\r\n      (onCreateAccount)=\"doCreateAccount()\"\r\n    ></storybook-header> -->\r\n    <section>\r\n      <h2>Pages in Storybook</h2>\r\n      <p>\r\n        We recommend building UIs with a\r\n        <a\r\n          href=\"https://componentdriven.org\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          <strong>component-driven</strong>\r\n        </a>\r\n        process starting with atomic components and ending with pages.\r\n      </p>\r\n      <p>\r\n        Render pages with mock data. This makes it easy to build and review page\r\n        states without needing to navigate to them in your app. Here are some\r\n        handy patterns for managing page data in Storybook:\r\n      </p>\r\n      <ul>\r\n        <li>\r\n          Use a higher-level connected component. Storybook helps you compose\r\n          such data from the \"args\" of child component stories\r\n        </li>\r\n        <li>\r\n          Assemble data in the page component from your services. You can mock\r\n          these services out using Storybook.\r\n        </li>\r\n      </ul>\r\n      <p>\r\n        Get a guided tutorial on component-driven development at\r\n        <a\r\n          href=\"https://storybook.js.org/tutorials/\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          Storybook tutorials\r\n        </a>\r\n        . Read more in the\r\n        <a\r\n          href=\"https://storybook.js.org/docs\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          docs\r\n        </a>\r\n        .\r\n      </p>\r\n      <div class=\"tip-wrapper\">\r\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\r\n        <svg\r\n          width=\"10\"\r\n          height=\"10\"\r\n          viewBox=\"0 0 12 12\"\r\n          xmlns=\"http://www.w3.org/2000/svg\"\r\n        >\r\n          <g fill=\"none\" fillRule=\"evenodd\">\r\n            <path\r\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\r\n              id=\"a\"\r\n              fill=\"#999\"\r\n            />\r\n          </g>\r\n        </svg>\r\n        Viewports addon in the toolbar\r\n      </div>\r\n    </section>\r\n  </article>`,\r\n  styleUrls: ['./page.css']\r\n})\r\nexport default class PageComponent {\r\n  user: User | null = null;\r\n\r\n  doLogout() {\r\n    this.user = null;\r\n  }\r\n\r\n  doLogin() {\r\n    this.user = { name: 'Jane Doe' };\r\n  }\r\n\r\n  doCreateAccount() {\r\n    this.user = { name: 'Jane Doe' };\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6678,7 +6950,7 @@
         },
         {
             "name": "StaticContentContainerComponent",
-            "id": "component-StaticContentContainerComponent-3d12d323d3f4f36686c5ae47bfbf6fc4eba9eb8349c4dddd77a09b7c621cef8ccfafb48b4250e3c85921033cdad83d5eb16930d7ff991d549bdc1c242141ffc1",
+            "id": "component-StaticContentContainerComponent-17af2435a8c95202a3a8815f0dc5f089c3ed88021403cf15de6583229c464e4c404b65c991192e2edf86dcca07c773466b4a33b34f4c3ca7018e5d4f749b0b4b",
             "file": "src/app/static-content-container/static-content-container.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -6699,7 +6971,7 @@
                     "name": "page",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 21,
                     "type": "string",
                     "decorators": []
                 }
@@ -6708,13 +6980,13 @@
             "propertiesClass": [
                 {
                     "name": "page$",
-                    "defaultValue": "new BehaviorSubject('')",
+                    "defaultValue": "new Subject()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "BehaviorSubject<string>",
+                    "type": "Subject<string>",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 19
                 },
                 {
                     "name": "safeHtml",
@@ -6723,21 +6995,10 @@
                     "type": "any",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 17
                 }
             ],
-            "methodsClass": [
-                {
-                    "name": "ngAfterViewInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 23,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
+            "methodsClass": [],
             "deprecated": false,
             "deprecationMessage": "",
             "hostBindings": [],
@@ -6745,7 +7006,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ActivatedRoute, Params } from '@angular/router';\r\nimport { AfterViewInit, Component, Input } from '@angular/core';\r\n\r\nimport { BehaviorSubject } from 'rxjs';\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\n\r\ndeclare const $: any;\r\n\r\n@Component({\r\n  selector: 'app-static-content-container',\r\n  templateUrl: './static-content-container.component.html',\r\n  styleUrls: ['./static-content-container.component.scss']\r\n})\r\nexport class StaticContentContainerComponent implements AfterViewInit {\r\n  safeHtml: any;\r\n\r\n  page$: BehaviorSubject<string> = new BehaviorSubject('');\r\n  @Input()\r\n  set page(v: string) {\r\n    this.page$.next(v);\r\n  }\r\n\r\n  ngAfterViewInit() {\r\n\r\n  }\r\n  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute) {\r\n    this.page$.subscribe((p) => {\r\n      const pagePath = `assets/static-content/${p}`;\r\n\r\n      (async (url) => {\r\n        const response = await fetch(url);\r\n        const text = await response.text();\r\n        this.safeHtml = text;\r\n\r\n        window.setTimeout(()=>{\r\n          const navToggle = document.querySelector('.nav-toggle');\r\n          navToggle?.addEventListener('click', ()=>{alert('Hello');})\r\n        },10);\r\n\r\n      })(pagePath);\r\n      \r\n\r\n\r\n      // $('.nav-toggle').click( () => {\r\n      //   alert('click');\r\n      //   // var collapse_content_selector = $(this).attr('href');\r\n      //   // var toggle_switch = $(this);\r\n      //   // $(collapse_content_selector).toggle( () => {\r\n      //   //     if ($(this).css('display') == 'none') {\r\n      //   //         toggle_switch.html('Read More ...');\r\n      //   //     } else {\r\n      //   //         toggle_switch.html('Read Less...');\r\n      //   //     }\r\n      //   // });\r\n      // });\r\n\r\n\r\n    });\r\n  }\r\n}\r\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\nimport { Subject, mergeMap } from 'rxjs';\r\n\r\nimport { ActivatedRoute } from '@angular/router';\r\nimport { DomSanitizer } from '@angular/platform-browser';\r\nimport { HttpClient } from '@angular/common/http';\r\nimport { environment } from 'src/environments/environment';\r\n\r\ndeclare const $: any;\r\n\r\n@Component({\r\n  selector: 'app-static-content-container',\r\n  templateUrl: './static-content-container.component.html',\r\n  styleUrls: ['./static-content-container.component.scss']\r\n})\r\nexport class StaticContentContainerComponent {\r\n  safeHtml: any;\r\n\r\n  page$: Subject<string> = new Subject();\r\n  @Input()\r\n  set page(v: string) {\r\n    this.page$.next(v);\r\n  }\r\n  \r\n  constructor(private sanitizer: DomSanitizer, private route: ActivatedRoute, private http:HttpClient) {\r\n\r\n    this.page$.pipe(mergeMap((p)=>this.http.get(`${environment.siteRootUrl}/assets/static-content/${p}`, {responseType: 'text'}))).subscribe((text) => {\r\n      this.safeHtml = text;\r\n\r\n      window.setTimeout(()=>{\r\n        $('.nav-toggle').click( () => {\r\n            $('#collapse').toggle();\r\n            const collapsed = $('#collapse').css(\"display\") == \"none\";\r\n            $('.nav-toggle').html(collapsed ? 'Read More...' : 'Read Less...');\r\n        });\r\n      },0);\r\n      \r\n    });\r\n\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -6771,9 +7032,15 @@
                         "type": "ActivatedRoute",
                         "deprecated": false,
                         "deprecationMessage": ""
+                    },
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": ""
                     }
                 ],
-                "line": 25,
+                "line": 23,
                 "jsdoctags": [
                     {
                         "name": "sanitizer",
@@ -6792,12 +7059,18 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
-            "implements": [
-                "AfterViewInit"
-            ],
             "accessors": {
                 "page": {
                     "name": "page",
@@ -6815,7 +7088,7 @@
                             }
                         ],
                         "returnType": "void",
-                        "line": 19,
+                        "line": 21,
                         "jsdoctags": [
                             {
                                 "name": "v",
@@ -6951,6 +7224,91 @@
                 "OnInit"
             ],
             "templateData": "<div [formGroup]=\"editorForm\">\r\n  <editor\r\n    apiKey=\"ojb6b43xupdnswfj06s4xwmmscgqq27vxu4a0410zkolh0cs\"\r\n    formControlName=\"editorContent\"\r\n    [init]=\"{ plugins: 'lists link image table code help wordcount' }\"\r\n  ></editor>\r\n\r\n  <button pButton (click)=\"save()\">Save</button>\r\n</div>\r\n"
+        },
+        {
+            "name": "StaticContentPageComponent",
+            "id": "component-StaticContentPageComponent-7efb3e76426ccb453b16eb778a66cf1dd9cfa7833554de5bf37f841819e50522336baeed208361e6e710bfc41dbe4a1725681bcb679d1d6c39cfa4d5e7a26e3b",
+            "file": "src/app/static-content-page/static-content-page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-static-content-page",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<app-static-content-container [page]=\"page\"></app-static-content-container>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "page",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 11,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ActivatedRoute, Params } from '@angular/router';\nimport { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-static-content-page',\n  template: '<app-static-content-container [page]=\"page\"></app-static-content-container>',\n  styleUrls: []\n})\nexport class StaticContentPageComponent implements OnInit {\n\n  public page: string = ''\n  constructor(private route: ActivatedRoute) {\n    this.route.params.subscribe((params: Params) => {\n      this.page = `${params.page}.html`;\n    });\n  }\n\n  ngOnInit(): void {\n  }\n\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "route",
+                        "type": "ActivatedRoute",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ]
         },
         {
             "name": "SvgStatusMapComponent",
@@ -7322,13 +7680,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-6cdd340fabcfea658f7c7124e97848cfdd4aefa555f7cb4518388fc92910b092d0740884abd6d6520544850c080a248d18b3474bd3eb5bbae372ab8f94ffa229",
+            "id": "module-AppModule-4d24e87c5d32ec465b94314f58e6861af24b728721a471c21bf9422ad817aab98d422b5a57a19182fbe5b1d00ec6ebb8a9bbb935ea449ab8fb8ca2b57cadbad2",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\n\r\nimport { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';\r\nimport { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';\r\nimport { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';\r\nimport { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';\r\nimport { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-all-map.component';\r\nimport { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';\r\nimport { AppComponent } from './app.component';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { ChartDemoComponent } from './chart-demo/chart-demo.component';\r\nimport { DataService } from 'src/app/api/data.service';\r\nimport { FormulaHeaderComponent } from './formula-header/formula-header.component';\r\nimport { GoogleChartsModule } from 'angular-google-charts';\r\nimport { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classification-chart/gsf-growth-by-classification-chart.component';\r\nimport { GsfPieChartComponent } from './gsf-pie-chart/gsf-pie-chart.component';\r\nimport { HomeComponent } from './home/home.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { NavMenuComponent } from './nav-menu/nav-menu.component';\r\nimport { NgModule } from '@angular/core';\r\nimport { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';\r\nimport { PiDataFilterToolbarComponent } from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';\r\nimport { RoomDataTableComponent } from './room-data-table/room-data-table.component';\r\nimport { RoomInfoDisplayComponent } from './room-info-display/room-info-display.component';\r\nimport { RouterModule } from '@angular/router';\r\nimport { SanitizedHtmlPipe } from './sanitized-html.pipe';\r\nimport { StaticContentContainerComponent } from './static-content-container/static-content-container.component';\r\nimport { StaticContentEditorComponent } from './static-content-editor/static-content-editor.component';\r\nimport { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';\r\nimport { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';\r\nimport { appRoutes } from './routes';\r\nimport { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dashboard.component';\r\nimport { LeftNavComponent } from './left-nav/left-nav.component';\r\nimport { FacilityInfoPageComponent } from './facility-info-page/facility-info-page.component';\nimport { ContactUsDialogComponent } from './contact-us-dialog/contact-us-dialog.component';\r\n\r\n// import { DataService } from './data.service';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    NavMenuComponent,\r\n    HomeComponent,\r\n    NihLogoHeaderComponent,\r\n    FormulaHeaderComponent,\r\n    ApfPortfolioMapComponent,\r\n    GsfPieChartComponent,\r\n    ChartDemoComponent,\r\n    ApfPortfolioAllDashboardComponent,\r\n    GsfGrowthByClassificationChartComponent,\r\n    ApfPortfolioIcDashboardComponent,\r\n    ApfPortfolioIcMapComponent,\r\n    ApfTimelineChartComponent,\r\n    ApfMonitoredRoomsChartComponent,\r\n    PiDataFilterToolbarComponent,\r\n    SanitizedHtmlPipe,\r\n    StaticContentContainerComponent,\r\n    SvgStatusMapComponent,\r\n    StaticContentEditorComponent,\r\n    RoomInfoDisplayComponent,\r\n    RoomDataTableComponent,\r\n    ErrorLogDashboardComponent,\r\n    LeftNavComponent,\r\n    FacilityInfoPageComponent,\r\n    ContactUsDialogComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),\r\n    HttpClientModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    GoogleChartsModule,\r\n    ThirdPartyComponentsModule,\r\n    RouterModule.forRoot(appRoutes)\r\n  ],\r\n  providers: [DataService],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule {}\r\n",
+            "sourceCode": "import { FormsModule, ReactiveFormsModule } from '@angular/forms';\r\n\r\nimport { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';\r\nimport { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';\r\nimport { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';\r\nimport { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';\r\nimport { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-all-map.component';\r\nimport { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';\r\nimport { AppComponent } from './app.component';\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { ChartDemoComponent } from './chart-demo/chart-demo.component';\r\nimport { ContactUsDialogComponent } from './contact-us-dialog/contact-us-dialog.component';\r\nimport { DataService } from 'src/app/api/data.service';\r\nimport { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dashboard.component';\r\nimport { FacilityInfoPageComponent } from './facility-info-page/facility-info-page.component';\r\nimport { FormulaHeaderComponent } from './formula-header/formula-header.component';\r\nimport { GoogleChartsModule } from 'angular-google-charts';\r\nimport { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classification-chart/gsf-growth-by-classification-chart.component';\r\nimport { GsfPieChartComponent } from './gsf-pie-chart/gsf-pie-chart.component';\r\nimport { HomeComponent } from './home/home.component';\r\nimport { HttpClientModule } from '@angular/common/http';\r\nimport { LeftNavComponent } from './left-nav/left-nav.component';\r\nimport { NavMenuComponent } from './nav-menu/nav-menu.component';\r\nimport { NgModule } from '@angular/core';\r\nimport { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';\r\nimport { PiDataFilterToolbarComponent } from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';\r\nimport { RoomDataTableComponent } from './room-data-table/room-data-table.component';\r\nimport { RoomInfoDisplayComponent } from './room-info-display/room-info-display.component';\r\nimport { RouterModule } from '@angular/router';\r\nimport { SafeUrlPipe } from './safe-url.pipe'\r\nimport { SanitizedHtmlPipe } from './sanitized-html.pipe';\r\nimport { StaticContentContainerComponent } from './static-content-container/static-content-container.component';\r\nimport { StaticContentEditorComponent } from './static-content-editor/static-content-editor.component';\r\nimport { StaticContentPageComponent } from './static-content-page/static-content-page.component';\r\nimport { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';\r\nimport { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';\r\nimport { appRoutes } from './routes';\nimport { FacilityLayoutComponent } from './facility-layout/facility-layout.component';\nimport { FacilityDescriptionComponent } from './facility-description/facility-description.component';\r\n\r\n// import { DataService } from './data.service';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    NavMenuComponent,\r\n    HomeComponent,\r\n    NihLogoHeaderComponent,\r\n    FormulaHeaderComponent,\r\n    ApfPortfolioMapComponent,\r\n    GsfPieChartComponent,\r\n    ChartDemoComponent,\r\n    ApfPortfolioAllDashboardComponent,\r\n    GsfGrowthByClassificationChartComponent,\r\n    ApfPortfolioIcDashboardComponent,\r\n    ApfPortfolioIcMapComponent,\r\n    ApfTimelineChartComponent,\r\n    ApfMonitoredRoomsChartComponent,\r\n    PiDataFilterToolbarComponent,\r\n    SanitizedHtmlPipe,\r\n    SafeUrlPipe,\r\n    StaticContentContainerComponent,\r\n    SvgStatusMapComponent,\r\n    StaticContentEditorComponent,\r\n    RoomInfoDisplayComponent,\r\n    RoomDataTableComponent,\r\n    ErrorLogDashboardComponent,\r\n    LeftNavComponent,\r\n    FacilityInfoPageComponent,\r\n    ContactUsDialogComponent,\r\n    StaticContentPageComponent,\r\n    FacilityLayoutComponent,\r\n    FacilityDescriptionComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),\r\n    HttpClientModule,\r\n    FormsModule,\r\n    ReactiveFormsModule,\r\n    GoogleChartsModule,\r\n    ThirdPartyComponentsModule,\r\n    RouterModule.forRoot(appRoutes)\r\n  ],\r\n  providers: [DataService],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule {}\r\n",
             "children": [
                 {
                     "type": "providers",
@@ -7372,7 +7730,13 @@
                             "name": "ErrorLogDashboardComponent"
                         },
                         {
+                            "name": "FacilityDescriptionComponent"
+                        },
+                        {
                             "name": "FacilityInfoPageComponent"
+                        },
+                        {
+                            "name": "FacilityLayoutComponent"
                         },
                         {
                             "name": "FormulaHeaderComponent"
@@ -7405,6 +7769,9 @@
                             "name": "RoomInfoDisplayComponent"
                         },
                         {
+                            "name": "SafeUrlPipe"
+                        },
+                        {
                             "name": "SanitizedHtmlPipe"
                         },
                         {
@@ -7412,6 +7779,9 @@
                         },
                         {
                             "name": "StaticContentEditorComponent"
+                        },
+                        {
+                            "name": "StaticContentPageComponent"
                         },
                         {
                             "name": "SvgStatusMapComponent"
@@ -7562,7 +7932,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  production: true,\r\n  apiRootUrl: 'https://orfd-cogen.ors.nih.gov/FPV2/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
+                "defaultValue": "{\r\n  production: true,\r\n  siteRootUrl:'https://orfd-cogen.ors.nih.gov/FPV2',\r\n  apiRootUrl: 'https://orfd-cogen.ors.nih.gov/FPV2/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
             },
             {
                 "name": "environment",
@@ -7572,7 +7942,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  production: false,\r\n\r\n  apiRootUrl: 'https://localhost:44420/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
+                "defaultValue": "{\r\n  production: false,\r\n  siteRootUrl: 'https://localhost:44420',\r\n  apiRootUrl: 'https://localhost:44420/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
             },
             {
                 "name": "Large",
@@ -7588,7 +7958,7 @@
                 "name": "LoggedIn",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
+                "file": "src/stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7598,16 +7968,6 @@
                 "name": "LoggedIn",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Header.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "LoggedOut",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/Page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -7619,6 +7979,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -7639,6 +8009,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/contact-us-dialog/contact-us-dialog.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "() => ({\r\n  props: {\r\n    initialContent: 'Hello World'\r\n  }\r\n})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/facility-description/facility-description.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -7727,21 +8107,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/Page.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<Header>",
                 "defaultValue": "(args: Header) => ({\r\n  props: args\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Page>",
+                "defaultValue": "(args: Page) => ({\r\n  props: args\r\n})"
             }
         ],
         "functions": [
@@ -7921,7 +8301,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  production: true,\r\n  apiRootUrl: 'https://orfd-cogen.ors.nih.gov/FPV2/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
+                    "defaultValue": "{\r\n  production: true,\r\n  siteRootUrl:'https://orfd-cogen.ors.nih.gov/FPV2',\r\n  apiRootUrl: 'https://orfd-cogen.ors.nih.gov/FPV2/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
                 }
             ],
             "src/environments/environment.ts": [
@@ -7933,7 +8313,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  production: false,\r\n\r\n  apiRootUrl: 'https://localhost:44420/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
+                    "defaultValue": "{\r\n  production: false,\r\n  siteRootUrl: 'https://localhost:44420',\r\n  apiRootUrl: 'https://localhost:44420/api',\r\n  attachmentRootUrl: 'https://dtrdata.orf.od.nih.gov/FCISPortal/attachmentsGSS'\r\n}"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -7988,38 +8368,6 @@
                     "defaultValue": "(args: Button) => ({\r\n  props: args\r\n})"
                 }
             ],
-            "src/stories/Page.stories.ts": [
-                {
-                    "name": "LoggedIn",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "LoggedOut",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/stories/Page.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\r\n  props: args\r\n})"
-                }
-            ],
             "src/stories/Header.stories.ts": [
                 {
                     "name": "LoggedIn",
@@ -8052,12 +8400,56 @@
                     "defaultValue": "(args: Header) => ({\r\n  props: args\r\n})"
                 }
             ],
+            "src/stories/Page.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<Page>",
+                    "defaultValue": "(args: Page) => ({\r\n  props: args\r\n})"
+                }
+            ],
             "src/app/contact-us-dialog/contact-us-dialog.stories.ts": [
                 {
                     "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/contact-us-dialog/contact-us-dialog.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "() => ({\r\n  props: {\r\n    initialContent: 'Hello World'\r\n  }\r\n})"
+                }
+            ],
+            "src/app/facility-description/facility-description.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/facility-description/facility-description.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -8325,7 +8717,7 @@
                 "linktype": "injectable",
                 "name": "DataService",
                 "coveragePercent": 0,
-                "coverageCount": "0/22",
+                "coverageCount": "0/23",
                 "status": "low"
             },
             {
@@ -8533,7 +8925,7 @@
                 "linktype": "component",
                 "name": "ContactUsDialogComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -8552,7 +8944,26 @@
                 "linktype": "component",
                 "name": "ErrorLogDashboardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/facility-description/facility-description.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FacilityDescriptionComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/facility-description/facility-description.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -8561,16 +8972,7 @@
                 "linktype": "component",
                 "name": "FacilityInfoPageComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/facility-info-page/facility-info-page.component.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "FacilityInfoPageData",
-                "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -8579,7 +8981,16 @@
                 "linktype": "injectable",
                 "name": "FacilityInfoPageService",
                 "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/facility-layout/facility-layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FacilityLayoutComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
                 "status": "low"
             },
             {
@@ -8703,6 +9114,15 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/safe-url.pipe.ts",
+                "type": "pipe",
+                "linktype": "pipe",
+                "name": "SafeUrlPipe",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/sanitized-html.pipe.ts",
                 "type": "pipe",
                 "linktype": "pipe",
@@ -8717,7 +9137,7 @@
                 "linktype": "component",
                 "name": "StaticContentContainerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -8747,6 +9167,15 @@
                 "name": "Primary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/static-content-page/static-content-page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StaticContentPageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
                 "status": "low"
             },
             {

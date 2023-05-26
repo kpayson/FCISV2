@@ -1,0 +1,35 @@
+
+<div class="flex justify-content-between gap-4" style="width:1200px;">
+
+    <div class="container">
+        <div id="map-container" class="flex justify-content-center">
+
+            <div style="width:500px; height:auto;">
+
+                <app-facility-all-map [facilityId]="facilityId"></app-facility-all-map>
+                <div style="background-color:gray; color:black; text-align: center;">
+                    Facility Location Map
+                </div>
+            </div>
+        </div>
+        <div id="images-container" class="flex justify-content-center">
+            <div class="card">
+                <div style="display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;">
+                    <div *ngFor="let photo of photos"
+                        style="border:1px solid black; padding:4px;">
+                        <p-image [src]="photo.url" [preview]="true" height="100" 
+                            [alt]="photo.docTitle"></p-image><br />
+                        <span style="font-size:x-small">{{photo.docTitle}}</span>
+                    </div>
+                    <div *ngIf="photos.length == 0">
+                        <span>No Pictures Available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="about-container" class="container overflow-scroll w-9" >
+        <app-static-content-container [page]="aboutText"></app-static-content-container>
+    </div>
+
+</div>

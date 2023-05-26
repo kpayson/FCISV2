@@ -1,0 +1,59 @@
+<div class="card-body designCardBody">
+
+    <h2 class="facility-title">{{facility.title}}</h2>
+    <p-tabMenu [model]="items"></p-tabMenu>
+
+    <div id="description-tab" *ngIf="selectedTab=='description'">
+       <app-facility-description
+            [facilityId]="facilityId"
+            [aboutText]="(service.aboutPage$ | async) || ''"
+            [photos]="(service.pictures$ | async) || []"
+        >
+        </app-facility-description>
+    </div>
+
+    <div id="dashboard-tab" *ngIf="selectedTab=='dashboard'">
+        <h2>Dashboard</h2>
+        <app-apf-portfolio-ic-dashboard></app-apf-portfolio-ic-dashboard>
+    </div>
+
+    <div id="facility-reports-tab" *ngIf="selectedTab=='facility_reports'">
+        <h2>Facility Reports</h2>
+    </div>
+
+    <div id="documents-tab" *ngIf="selectedTab=='documents'">
+        <span class="cardContent">
+            <p style="width:80em"> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for
+                this APF, provided for your convenience. For access to the full archive of documents, or for access to
+                the controlled version of any of these documents, please <a (click)="contactUsClick()" class="contact-link">contact</a> FCIS.
+
+                The documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been
+                verified.</p>
+
+            <div>
+                <div *ngFor="let docGroup of (service.documents$ | async) || []">
+                    <div *ngIf="docGroup.description !== 'FacilityDiagram'">
+                    <b>{{docGroup.description}}</b>
+                    <ul>
+                        <li *ngFor="let atch of docGroup.attachments">
+                            <a [href]="atch.url" target="_blank">{{atch.docTitle}}</a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                <div *ngIf="((service.documents$ | async) || []).length == 0">
+                    <span>No Documents Available</span>
+                </div>
+            </div>
+        </span>
+    </div>
+
+    <div id="condition-reports-tab" *ngIf="selectedTab=='condition_reports'">
+        <h2>Condition Reports</h2>
+    </div>
+
+    <div id="fcis-resources-tab" *ngIf="selectedTab=='fcis_resources'">
+        <app-fcis-resources></app-fcis-resources>
+    </div>
+
+</div>

@@ -35,6 +35,10 @@ import { StaticContentPageComponent } from './static-content-page/static-content
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
+import { FacilityLayoutComponent } from './facility-layout/facility-layout.component';
+import { FacilityDescriptionComponent } from './facility-description/facility-description.component';
+import { FacilityAllMapComponent } from './facility-all-map/facility-all-map.component';
+import { FcisResourcesComponent } from './fcis-resources/fcis-resources.component';
 
 // import { DataService } from './data.service';
 
@@ -66,7 +70,11 @@ import { appRoutes } from './routes';
     LeftNavComponent,
     FacilityInfoPageComponent,
     ContactUsDialogComponent,
-    StaticContentPageComponent
+    StaticContentPageComponent,
+    FacilityLayoutComponent,
+    FacilityDescriptionComponent,
+    FacilityAllMapComponent,
+    FcisResourcesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
