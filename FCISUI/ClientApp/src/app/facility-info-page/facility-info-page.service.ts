@@ -13,6 +13,7 @@ import {
 } from 'rxjs';
 
 import { DataService } from 'src/app/api/data.service';
+import { Facility } from '../api/models';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -21,7 +22,9 @@ export class FacilityInfoPageService {
     private _pictures$ = new BehaviorSubject<Attachment[]>([]);
     private _documents$ = new BehaviorSubject<AttachmentGroup[]>([]);
     private _aboutPage$ = new BehaviorSubject<string>('');
-    private _diagram$ = new BehaviorSubject<string>('')
+    private _diagram$ = new BehaviorSubject<string>('');
+    private _facility$ = new BehaviorSubject<Partial<Facility>>({})
+    private _title$ = new BehaviorSubject<string>('');
 
     constructor(private dataService: DataService) {
     }
@@ -78,15 +81,18 @@ export class FacilityInfoPageService {
                     ...a, 
                     url: `${environment.attachmentRootUrl}/${a.storedFileName}` }))
             }));
-            this._documents$.next(docs.filter(d=>d.description !== 'Facility Digram'));
+            this._documents$.next(docs.filter(d=>d.description !== 'Facility Digram')); 
+        });
 
-            
+        this.dataService.facilityById(facilityId).subscribe(facility=>{
+            this._facility$.next(facility);
+            //this._title$.next(facility.facilityFullName || '');
         });
 
         const aboutPage = this.aboutPages[facilityId] ? 'about/'+this.aboutPages[facilityId] : '';
         const diagram = this.diagrams[facilityId] ? 'assets/diagrams/'+this.diagrams[facilityId] : '';
         this._aboutPage$.next(aboutPage);
-        this._diagram$.next(diagram)
+        this._diagram$.next(diagram);
     }
 
     public get pictures$() {
@@ -103,5 +109,13 @@ export class FacilityInfoPageService {
     
     public get diagram$() {
         return this._diagram$ as Observable<string>;
+    }
+    
+    public get title$() {
+        return this._facility$.pipe(map(x=>x.facilityFullName)) as Observable<string>;
+    }
+    
+    public get facilitySection$() {
+        return this._facility$.pipe(map(x=>x.facilitySection)) as Observable<string>;
     }
 }

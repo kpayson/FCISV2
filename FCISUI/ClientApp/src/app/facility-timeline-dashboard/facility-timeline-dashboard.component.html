@@ -1,0 +1,106 @@
+<div style="position: relative;">
+
+    <div class="body-text">
+        <div class="row" style="position:relative;">
+
+            <div class="col-md-6">
+
+                <div style="position:absolute; border:0px solid lightgray; padding:4px 16px;background-color:white; z-index:100; opacity: 0.9;"><a (click)="opKey.toggle($event)"><i
+                    class="pi pi-key" style="font-size: 2rem"></i></a></div>
+                <p-overlayPanel #opKey>
+                    <div class="floor-plan-key">
+                        <img src="assets/images/floor-plans/FloorPlanColorKey.svg"
+                            style="width: 500px; border: 1px solid red" />
+                    </div>
+
+                </p-overlayPanel>
+
+                <div class="svg-map-container">
+                    <app-svg-status-map [svgMap]="(svgMap$ | async) || defaultSvgMap"
+                        [pinStates]="(pinStates$ | async) || {}"
+                        [backgroundImageUrl]="(svgBackgroundImageUrl$ | async) || ''"
+                        [highlightedMapPin]="(hoveredTimelineLabel$ | async) || ''" (pinClick)="pinClick($event)"
+                        (pinMouseOver)="pinMouseOver($event)" (pinMouseOut)="pinMouseOut($event)">
+                    </app-svg-status-map>
+                </div>
+
+            </div>
+
+            <div class="col-md-6" style="border: 0px solid black">
+                <div class="row" *ngIf="isFacilityAll$ | async">
+                    <div class="col-md-12" style="border: 0px solid rgb(219, 213, 213)">
+                        <h4 style="color: #b3172c">
+                            Composite Health Status of the APF Portfolio
+                        </h4>
+
+                        <app-apf-monitored-rooms-chart
+                            [chartData]="(monitoredRoomsChartData$ | async) || []"></app-apf-monitored-rooms-chart>
+                        <div class="chart-label">
+                            APF Portfolio: Monitored Rooms and Critical Environmental
+                            Parameter Points
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 justify-content-center" style="height: 520px">
+                        <div id="loadingGif" style="
+                    display: none;
+                    position: fixed;
+                    z-index: 1031;
+                    top: 50%;
+                    right: 30%;
+                    margin-top: 100px;
+                    margin-right: -100px;
+                  ">
+                            <img src="assets/images/giphy.gif" alt="loading" />
+                        </div>
+
+                        <div class="timeline-chart-container">
+                            <h4 style="color: #b3172c">{{$statusDisplay | async}} Health Status</h4>
+                            <div  class="flex gap-2 align-items-end" style="margin-bottom:2px;" [formGroup]="filterForm">
+                                <div>
+                                    <label>Start Date</label><br>
+                                    <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'"
+                                        formControlName="startDate"></p-calendar>
+                                </div>
+                                <div>
+                                    <label>End Date</label><br>
+                                    <p-calendar inputId="basic" [showTime]="true" [hourFormat]="'12'"
+                                        formControlName="endDate"></p-calendar>
+                                </div>
+                                <div>
+                                    <label>Interval</label><br>
+                                    <p-dropdown [options]="intervalOptions" placeholder="" optionLabel="name"
+                                        optionValue="value" formControlName="interval"></p-dropdown>
+                                </div>
+                                <div>
+                                    <button pButton (click)="search()">Search</button>
+                                </div>
+                            </div>
+                            <app-apf-timeline-chart [chartData]="
+                      (timelineChartData$ | async) || {
+                        points: [],
+                        locations: {},
+                        locationType: 'facility'
+                      }
+                    " [highlightedLabel]="(hoveredPin$ | async) || ''" [isLoading]="isLoading"
+                                (chartLabelClick)="chartLabelClick($event)"
+                                (chartLabelMouseOver)="chartLabelMouseOver($event)"
+                                (chartLabelMouseOut)="chartLabelMouseOut($event)"></app-apf-timeline-chart>
+                        </div>
+
+                        <!-- <div class="room-info-display-container" *ngIf="(hasSelectedRoom$ | async) || false">
+                            <app-room-info-display [roomInfo]="(selectedRoomInfo$ | async) || {}"
+                                [attribute]="(selectedAttributeStatus$ | async) || 'composite'"></app-room-info-display>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Room Information" [(visible)]="roomInfoDialogVisible" [style]="{width: '50vw'}" (onHide)="hideRoomInfo($event)">
+    <app-room-info-display [roomInfo]="(selectedRoomInfo$ | async) || {}"
+    [attribute]="(selectedAttributeStatus$ | async) || 'composite'"></app-room-info-display>
+</p-dialog>

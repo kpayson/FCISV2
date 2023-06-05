@@ -34,6 +34,10 @@ export class DataService {
     return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);
   }
 
+  facilityById(id: number) {
+    return this.get<Facility>(`Facilities/${id}`);
+  }
+
   facilities() {
     return this.get<Facility[]>(`Facilities`);
   }

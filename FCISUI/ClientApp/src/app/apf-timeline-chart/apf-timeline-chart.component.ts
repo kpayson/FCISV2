@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { ChartType } from 'angular-google-charts';
-import { TimelineChartData } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.service';
+import { TimelineChartData } from '../facility-timeline-dashboard/facility-timeline-dashboard.service';
 
 declare const bootstrap: any;
 

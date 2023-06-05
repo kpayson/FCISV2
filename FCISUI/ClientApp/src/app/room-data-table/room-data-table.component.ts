@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.service';
+import { RoomDisplayField } from '../facility-timeline-dashboard/facility-timeline-dashboard.service'
 
 @Component({
   selector: 'app-room-data-table',

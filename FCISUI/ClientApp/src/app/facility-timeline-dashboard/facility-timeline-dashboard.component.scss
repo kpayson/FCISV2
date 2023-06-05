@@ -1,0 +1,29 @@
+.filter-bar {
+    display: block;
+
+    label {
+        width: 120px;
+    }
+
+    .filter-control {
+        width: 408;
+    }
+
+    ::ng-deep input.p-component,
+    ::ng-deep div.p-dropdown {
+        width: 208px;
+    }
+}
+
+:host ::ng-deep {
+    .p-dropdown {
+        // width: 400px;
+        height:32px;
+    }
+    .p-inputtext {
+        padding:4px;
+    }
+    .p-button {
+        height:32px;
+    }
+}

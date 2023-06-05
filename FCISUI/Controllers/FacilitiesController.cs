@@ -22,6 +22,8 @@ namespace FCISUI.Controllers
 
         // GET: api/Facilities
         [HttpGet]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 3600)]
+
         public async Task<ActionResult<IEnumerable<Facility>>> GetFacilities()
         {
             var facilities = await _context.Facilities.Where(f=>f.IsActive == true).ToListAsync();
@@ -38,6 +40,7 @@ namespace FCISUI.Controllers
 
         // GET: api/Facilities/5
         [HttpGet("{id}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 3600)]
         public async Task<ActionResult<Facility>> GetFacility(int id)
         {
             var facility = await _context.Facilities.FindAsync(id);

@@ -1,7 +1,9 @@
 import { BehaviorSubject, Subject, combineLatest } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { RoomDisplayField } from '../apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.service';
+import { RoomDisplayField } from '../facility-timeline-dashboard/facility-timeline-dashboard.service';
+
+//'../apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.service';
 
 @Component({
   selector: 'app-room-info-display',
@@ -76,7 +78,7 @@ export class RoomInfoDisplayComponent {
     return [
       { name: 'Room #', value: roomInfo['Room'] },
       { name: 'Room Name', value: roomInfo['Description'] },
-      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status?.timestamp).toLocaleString() },
       { name: 'Classification', value: `ISO-${roomInfo['ISO']}` },
       { name: 'GSF', value: roomInfo['gsf'] },
       {
@@ -120,10 +122,10 @@ export class RoomInfoDisplayComponent {
       { name: 'GSF', value: roomInfo['gsf'] },
       {
         name: 'Room Status',
-        value: status.numeric_value,
+        value: status?.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status?.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'Target', value: roomInfo['Target'] || '' },
@@ -148,10 +150,10 @@ export class RoomInfoDisplayComponent {
       { name: 'Room Name', value: roomInfo['Description'] },
       {
         name: 'Room Status',
-        value: status.numeric_value,
+        value: status?.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status?.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'Target', value: roomInfo['Target'] || '' },
@@ -178,10 +180,10 @@ export class RoomInfoDisplayComponent {
       { name: 'GSF', value: roomInfo['gsf'] },
       {
         name: 'Room Status',
-        value: status.numeric_value,
+        value: status?.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status?.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'RH Target Range', value: roomInfo['Target'] || '' },
@@ -210,10 +212,10 @@ export class RoomInfoDisplayComponent {
       { name: 'Current Value', value: '' },
       {
         name: 'Room Status',
-        value: status.numeric_value,
+        value: status?.numeric_value,
         displayType: 'status'
       },
-      { name: 'Timestamp', value: new Date(status.timestamp).toLocaleString() },
+      { name: 'Timestamp', value: new Date(status?.timestamp).toLocaleString() },
       { name: 'High Alarm Limit', value: roomInfo['HiHi'] || '' },
       { name: 'High Alarm Delay', value: roomInfo['AlmHiDelay'] || '' },
       { name: 'Target', value: roomInfo['Target'] || '' },

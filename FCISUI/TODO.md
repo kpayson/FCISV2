@@ -7,6 +7,24 @@
     - image sizes
 - NCI 1B42 dP data ?
 
+Create new portfolios menu to link to facility pages
+Create the facilities page menu
+Crete the facility description tab/page 
+Rework the facility dashboard/timeline to work with the new layout
+Create the facility documents page
+Create the facility resources page
+Create the condition reporter page
+Convert Pie charts to donuts
+create facility table entry for 
+    CC Interim Nuclear Pharmacy
+
+trim and or adjust menu color to make blend nicer
+facility all map pins link in to facility page. Start on description page like normal
+
+
+
+
+
 
 ## Done
 ### Week 5-1-2003 to 5-5-2003

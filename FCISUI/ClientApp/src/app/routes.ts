@@ -1,5 +1,4 @@
 import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
-import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 import { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dashboard.component';
 import { FacilityLayoutComponent } from './facility-layout/facility-layout.component';
 import { HomeComponent } from './home/home.component';
@@ -12,12 +11,16 @@ export const appRoutes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: 'apf-portfolio/all',
+        path: 'apf-portfolio',
         component: ApfPortfolioAllDashboardComponent
       },
+      // {
+      //   path: 'apf-portfolio/:ic',
+      //   component: ApfPortfolioIcDashboardComponent
+      // },
       {
-        path: 'apf-portfolio/:ic',
-        component: ApfPortfolioIcDashboardComponent
+        path: 'facility-all/:portfolio',
+        component: FacilityLayoutComponent
       },
       {
         path: 'facility/:facilityId',
@@ -29,7 +32,8 @@ export const appRoutes: Routes = [
       },
       {
         path: '',
-        component: ApfPortfolioAllDashboardComponent
+        component: ApfPortfolioAllDashboardComponent,
+        pathMatch: 'full'
       }
     ]
   },

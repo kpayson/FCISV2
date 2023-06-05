@@ -20,3 +20,14 @@
 .navbar .navbar-nav .nav-item:not(:last-child) .nav-link {
   border-right: 0.5px solid gray;
 }
+
+:host ::ng-deep {
+
+  p-menubar > div.p-component {
+    padding:0;
+  }
+
+  .p-submenu-list {
+    width:290px;
+  }
+}
