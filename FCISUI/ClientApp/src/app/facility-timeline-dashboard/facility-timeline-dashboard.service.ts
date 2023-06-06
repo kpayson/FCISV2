@@ -22,14 +22,16 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 
 export interface PiDataFilter {
-    facility: { repName: string; sectionName: string; value: number };
+    facility: { repName?: string; sectionName: string; value: number };
+    portfolioId: string;
+    facilityOrPortfolio: 'facility' | 'portfolio'
     status: string;
     startDate: Date;
     endDate: Date;
     interval: number;
   }
   
-  interface TimelineChartDataPoint {
+  export interface TimelineChartDataPoint {
     locationName: string;
     tag: string;
     // statusValue:number,
@@ -70,6 +72,8 @@ export interface PiDataFilter {
   
       this._piDataFilter$ = new BehaviorSubject<PiDataFilter>({
         facility: { repName: '', sectionName: '', value: 0 },
+        portfolioId: '',
+        facilityOrPortfolio: 'facility',
         status: '',
         startDate: defaultStartDate,
         endDate: defaultEndDate,
@@ -108,36 +112,36 @@ export interface PiDataFilter {
       this._pinStates = new BehaviorSubject<locationStatusLookup>({});
   
       // Set the list of Facilities when the IC changes
-      this._ic$
-        .pipe(
-          filter(Boolean),
-          mergeMap((ic: string) => {
-            return this.dataService.facilitiesByIC(ic).pipe(
-              map((facs) => {
-                const facilityOptions = facs.map((fac: any) => {
-                  const option = {
-                    repName: fac.facilityRepName,
-                    sectionName: fac.facilitySection,
-                    value: fac.facilityId
-                  };
-                  return option;
-                });
-                const all = [
-                  {
-                    repName: `All ${ic.toLocaleUpperCase()}`,
-                    sectionName: '',
-                    value: '0'
-                  },
-                  ...facilityOptions
-                ];
-                return all;
-              })
-            );
-          })
-        )
-        .subscribe((facOptions) => {
-          this._facilityFilterOptions$.next(facOptions);
-        });
+      // this._ic$
+      //   .pipe(
+      //     filter(Boolean),
+      //     mergeMap((ic: string) => {
+      //       return this.dataService.facilitiesByIC(ic).pipe(
+      //         map((facs) => {
+      //           const facilityOptions = facs.map((fac: any) => {
+      //             const option = {
+      //               repName: fac.facilityRepName,
+      //               sectionName: fac.facilitySection,
+      //               value: fac.facilityId
+      //             };
+      //             return option;
+      //           });
+      //           const all = [
+      //             {
+      //               repName: `All ${ic.toLocaleUpperCase()}`,
+      //               sectionName: '',
+      //               value: '0'
+      //             },
+      //             ...facilityOptions
+      //           ];
+      //           return all;
+      //         })
+      //       );
+      //     })
+      //   )
+      //   .subscribe((facOptions) => {
+      //     this._facilityFilterOptions$.next(facOptions);
+      //   });
   
       // Setup APF Limits from PI for all facilities
       this.dataService.apfLimits().subscribe((limits: any[]) => {
@@ -271,33 +275,28 @@ export interface PiDataFilter {
       });
   
       // Prepare timeline data for All Facilities Timeline (facilityId == 0)
-      const facilityAllFilter$ = this._piDataFilter$.pipe(
-        filter((f) => f.facility.value == 0)
-      );
-  
-      combineLatest([this._ic$, facilityAllFilter$])
-        .pipe(
-          filter(([ic, filter]) => Boolean(ic)),
-          mergeMap(([ic, filter]) =>
-            this.dataService
-              .facilityAlltimelineData(
-                ic,
-                filter.startDate,
-                filter.endDate,
-                filter.interval
-              )
-              .pipe(
-                catchError((err) => {
-                  console.log(
-                    'Error from dataService.facilityAlltimelineData:' +
-                      JSON.stringify(err)
-                  );
-                  return of([]);
-                }),
-                map((data) => ({ filter, data }))
-              )
+      this._piDataFilter$.pipe(
+        filter((f) => f.facilityOrPortfolio == 'portfolio'),
+        mergeMap(filter =>
+        this.dataService
+          .facilityAlltimelineData(
+            filter.portfolioId,
+            filter.startDate,
+            filter.endDate,
+            filter.interval
+          )
+          .pipe(
+            catchError((err) => {
+              console.log(
+                'Error from dataService.facilityAlltimelineData:' +
+                  JSON.stringify(err)
+              );
+              return of([]);
+            }),
+            map((data) => ({ filter, data }))
           )
         )
+      )
         .subscribe((dataAndFilter) => {
           const chartDataPoints: TimelineChartDataPoint[] = [];
           const facilities = dataAndFilter.data.map((d) => d.facility);
@@ -353,7 +352,7 @@ export interface PiDataFilter {
       // prepare data for specific facility timeline
       this._piDataFilter$
         .pipe(
-          filter((f) => f.facility.value != 0),
+          filter((f) => f.facilityOrPortfolio == 'facility'),
           mergeMap((filter: PiDataFilter) =>
             this.dataService
               .facilityRoomsTimelineDate(

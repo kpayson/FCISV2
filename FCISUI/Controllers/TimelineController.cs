@@ -63,8 +63,23 @@ namespace FCISUI.Controllers
         public async Task<IEnumerable<FacilityTimelineData>> AllFacilityTimelineData(FacilityAllTimelineParams timelineParams)
         {
             try {
+                var portfolioFacilites = 
+                    timelineParams.PortfolioId == "CC" ?
+                        new int [] {3,5,17,6,1,2} : // 4, 12E, 7 NMD not active, 9 P-IVAU
+                    timelineParams.PortfolioId == "CCE" ?
+                        new int [] {3,5} : // 4 12E
+                    timelineParams.PortfolioId == "CCPharmacy" ?
+                        new int [] {17,19} :
+                    timelineParams.PortfolioId == "CCOther" ?
+                        new int [] {6,7,1,2} : // 7 NMD not active
+                    timelineParams.PortfolioId == "NCI" ?
+                        new int [] {10,11,12,13,19} :
+                    new int [] {};
+
+
                 var facilities =
-                    this._context.Facilities.Where(x => x.IsActive && x.FacilityIC.ToLower() == timelineParams.IC.ToLower())
+                    this._context.Facilities
+                    .Where(x=> x.IsActive && portfolioFacilites.Contains(x.FacilityId))
                     .ToList();
 
                 var tags = facilities.Select(f=>$@"{piPathEnv}\{f.FacilitySection}|Facility_Status_Check").ToList();

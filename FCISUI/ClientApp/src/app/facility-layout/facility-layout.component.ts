@@ -29,8 +29,8 @@ export class FacilityLayoutComponent implements OnInit {
       .subscribe((params) => {
         this.service.Load(params.facilityId);
         this.facilityId = Number.parseInt(params.facilityId) || 0;
-        this.portfolio = params.portfolio || "";
-        this.facilityMenuItems = this.getFacilityMenuItems(String(this.facilityId || this.portfolio))
+        this.portfolioId = params.portfolio || "";
+        this.facilityMenuItems = this.getFacilityMenuItems(String(this.facilityId || this.portfolioId))
         this.selectedTab = 'description';
       });
     }
@@ -40,11 +40,11 @@ export class FacilityLayoutComponent implements OnInit {
   
   ref!: DynamicDialogRef;
   facilityId = 0;
-  portfolio = '';
+  portfolioId = '';
   facilityMenuItems: any[] = [];
 
   portfolioFacilities = {
-    'CC':[1,2,3,4,5,6,17],
+    'CC':[1,2,3,4,5,6,7,17],
     'CCE':[3,4,5],  //2J, 12E, T10B
     'CCPharmacy':[17,9], // CC Pharmacy I-IVAU, CC Pharmacy P-IVAU
     'CCOther':[1,2,6,7], // DLM Sterility Lab, Interim Nuclear Pharmacy, Nuclear Pharmacy, PET Nuclear Pharmacy, PET Radiopharmacy
@@ -116,7 +116,7 @@ export class FacilityLayoutComponent implements OnInit {
     "4": this.allStatusOptionsExceptDP,
     "5": this.allStatusOptions,
     "6": this.allStatusOptions,
-    "7": this.allStatusOptionsExceptDP,
+    "7": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
     "8": this.allStatusOptions,
     "9": this.allStatusOptionsExceptDP,
     "10": this.allStatusOptions,

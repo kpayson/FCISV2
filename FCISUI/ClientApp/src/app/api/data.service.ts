@@ -46,8 +46,8 @@ export class DataService {
     return this.get<Facility[]>(`Facilities/ic/${ic}`);
   }
 
-  gsfByFacility() {
-    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility`);
+  gsfByFacility(portfolioId:string) {
+    return this.get<FacilityGsf[]>(`GsfChart/GsfByFacility/${portfolioId}`);
   }
 
   gsfByIC() {
@@ -101,7 +101,7 @@ export class DataService {
   }
 
   facilityAlltimelineData(
-    ic: string,
+    portfolioId: string,
     startDate: Date,
     endDate: Date,
     interval: number
@@ -109,7 +109,7 @@ export class DataService {
     return this.post<FacilityTimeSeriesData[]>(
       `Timeline/AllFacilityTimelineData`,
       {
-        ic,
+        portfolioId,
         startDate,
         endDate,
         interval

@@ -2,6 +2,7 @@ import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard
 import { ErrorLogDashboardComponent } from './error-log-dashboard/error-log-dashboard.component';
 import { FacilityLayoutComponent } from './facility-layout/facility-layout.component';
 import { HomeComponent } from './home/home.component';
+import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-dashboard.component';
 import { Routes } from '@angular/router';
 import { StaticContentPageComponent } from './static-content-page/static-content-page.component';
 
@@ -19,8 +20,8 @@ export const appRoutes: Routes = [
       //   component: ApfPortfolioIcDashboardComponent
       // },
       {
-        path: 'facility-all/:portfolio',
-        component: FacilityLayoutComponent
+        path: 'facility-all/:portfolioId',
+        component: PortfolioDashboardComponent //FacilityLayoutComponent
       },
       {
         path: 'facility/:facilityId',

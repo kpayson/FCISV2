@@ -212,9 +212,12 @@ export class FacilityTimelineDashboardComponent implements OnInit {
   }
   
   search() {
+
     this.isLoading = true;
       this.service.filterPiData({
         facility:{repName:'',sectionName:this.facilitySection, value:this.facilityId},
+        portfolioId:this.portfolioId,
+        facilityOrPortfolio:this.portfolioId ? 'portfolio' : 'facility',
         status:this._dashboardId$.value,
         startDate:this.startDate,
         endDate:this.endDate,

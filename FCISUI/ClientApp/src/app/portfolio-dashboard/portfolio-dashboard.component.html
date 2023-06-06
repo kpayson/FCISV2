@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+      <div class="row" id="rowTest" style="border: 0px solid red">
+        <div class="col-md-3">
+          <app-apf-portfolio-all-map></app-apf-portfolio-all-map>
+        </div>
+  
+        <div class="panel-center col-md-9" style="border: 0px solid black">
+        <div class="row">
+            <app-apf-timeline-chart [chartData]="
+            (timelineChartData$ | async) || {
+              points: [],
+              locations: {},
+              locationType: 'facility'
+            }"></app-apf-timeline-chart>
+
+        </div>
+  
+          <div class="row">
+
+            <div class="panel-center col-md-6" style="border: 0px solid black">
+              <app-gsf-pie-chart
+                [chartData]="(growthByFacilityData$ | async) || []"></app-gsf-pie-chart>
+              <div class="chart-label">Portfolio GSF by Facility</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

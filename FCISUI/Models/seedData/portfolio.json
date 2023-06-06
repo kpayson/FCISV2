@@ -1,0 +1,33 @@
+[
+    {
+        "portfolioId":1,
+        "portfolioName":"CC",
+        "rootPortfolio":"APF",
+        "facilities":[3,4,5,17,9,6,7,1,2]
+    },
+    {
+        "portfolioId":2,
+        "portfolioName":"CCE",
+        "rootPortfolio":"APF",
+        "facilities":[3,4,5]
+    },
+    {
+        "portfolioId":3,
+        "portfolioName":"CCPharmacy",
+        "rootPortfolio":"APF",
+        "facilities":[17,9]
+    },
+    {
+        "portfolioId":4,
+        "portfolioName":"CCOther",
+        "rootPortfolio":"APF",
+        "facilities":[6,7,1,2]
+    },
+    {
+        "portfolioId":5,
+        "portfolioName":"NCI",
+        "rootPortfolio":"APF",
+        "facilities":[10,11,12,13,19]
+    }
+]
+

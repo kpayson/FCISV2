@@ -8,5 +8,7 @@ namespace FCISUI.Models
         int  PortfolioId {get; set;}
         string PortfolioName {get; set;}
         string IC {get;set;}
+
+        string RootPortfolio {get;set;}
     }
 }

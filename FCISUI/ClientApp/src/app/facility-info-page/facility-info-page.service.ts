@@ -29,7 +29,12 @@ export class FacilityInfoPageService {
     constructor(private dataService: DataService) {
     }
 
-    aboutPages:{[key:number]:string} = {
+    aboutPages:{[key:number|string]:string} = {
+        "CC": "CC-ALL.about.html",
+        "CCE": "CCE-ALL.about.html",
+        "CCPharmacy": "CCPharmacy-ALL.about.html",
+        "CCOther": "CCOther-ALL.about.html",
+        "NCI": "NCI-ALL.about.html",
         1: "B1-PET.about.html",
         2: "B3-PET.about.html",
         3: "CC-CCE-2J.about.html",

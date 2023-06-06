@@ -16,3 +16,22 @@ dotnet publish -c production -o w:/FCISV2
 
 dotnet build
 dotnet run --environment=local
+
+Client Side:
+      Node 18,
+      Angular 14
+      Settings: ClientApp/src/environments/environment.<someenv>.ts
+
+Server Side:
+      .Net Core 6
+      Settings: AppSettings.json
+      pi api url: http://orfd-cogen.ors.nih.gov/pi-api
+
+Database:
+      Sql Server
+      DB Conn: Data Source=ORF-02204227\\SQLEXPRESS;Initial Catalog=FCISPortal514;Integrated Security=SSPI;
+
+Repo: 
+      https://tfs.ors.od.nih.gov/tfs/EXT/DTR/_git/FCISPortal2
+
+

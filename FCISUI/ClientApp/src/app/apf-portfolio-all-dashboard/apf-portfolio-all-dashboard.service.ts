@@ -7,7 +7,7 @@ export class ApfPortfolioAllDashboardService {
   constructor(private dataService: DataService) {}
 
   gsfByFacility$ = this.dataService
-    .gsfByFacility()
+    .gsfByFacility('APF')
     .pipe(map((d: any) => d.map((x: any) => [x.facility, x.gsf])));
 
   gsfByIC$ = this.dataService

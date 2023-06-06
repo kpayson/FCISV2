@@ -2,7 +2,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
 import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
-import { ApfPortfolioIcMapComponent } from './apf-portfolio-ic-map/apf-portfolio-ic-map.component';
 import { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-all-map.component';
 import { ApfTimelineChartComponent } from './apf-timeline-chart/apf-timeline-chart.component';
 import { AppComponent } from './app.component';
@@ -39,6 +38,7 @@ import { StaticContentPageComponent } from './static-content-page/static-content
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
+import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-dashboard.component';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
@@ -55,7 +55,6 @@ import { appRoutes } from './routes';
     ChartDemoComponent,
     ApfPortfolioAllDashboardComponent,
     GsfGrowthByClassificationChartComponent,
-    ApfPortfolioIcMapComponent,
     ApfTimelineChartComponent,
     ApfMonitoredRoomsChartComponent,
     PiDataFilterToolbarComponent,
@@ -75,7 +74,8 @@ import { appRoutes } from './routes';
     FacilityDescriptionComponent,
     FacilityAllMapComponent,
     FcisResourcesComponent,
-    FacilityTimelineDashboardComponent
+    FacilityTimelineDashboardComponent,
+    PortfolioDashboardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

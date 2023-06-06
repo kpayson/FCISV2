@@ -23,10 +23,25 @@ namespace FCISUI.Controllers
         }
 
 
-        [HttpGet("GsfByFacility")]
-        public IEnumerable<FacilityGsf> GetGsfByFacility()
+        [HttpGet("GsfByFacility/{portfolioId}")]
+        public IEnumerable<FacilityGsf> GetGsfByFacility(string portfolioId)
         {
-            var rooms = _context.Rooms;
+            var portfolioFacilites =
+                portfolioId == "APF" ?
+                    new int [] {1,2,3,4,5,6,7,9,10,11,12,13,17,19} : 
+                portfolioId == "CC" ?
+                    new int [] {3,4,5,17,9,6,7,1,2} : 
+                portfolioId == "CCE" ?
+                    new int [] {3,4,5} :
+                portfolioId == "CCPharmacy" ?
+                    new int [] {17,19} :
+                portfolioId == "CCOther" ?
+                    new int [] {6,7,1,2} : 
+                portfolioId == "NCI" ?
+                    new int [] {10,11,12,13,19} :
+                new int [] {};
+
+            var rooms = _context.Rooms.Where(r => portfolioFacilites.Contains(r.FacilityId));
             var result = (rooms)
                 .GroupBy(x => x.Facility)
                 .Select(g => new FacilityGsf
