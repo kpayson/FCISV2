@@ -108,10 +108,10 @@ export class NavMenuComponent {
               label: 'CCE 2J Cell Therapy Facility',
               command: this.routeToFacility(3)
             },
-            {
-              label: 'CCE 12E Cell Therapy Facility',
-              command: this.routeToFacility(4)
-            },
+            // {
+            //   label: 'CCE 12E Cell Therapy Facility',
+            //   command: this.routeToFacility(4)
+            // },
             {
               label: 'CCE East Terrace Modular T10B',
               command: this.routeToFacility(5)

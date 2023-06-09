@@ -40,7 +40,7 @@ export class FacilityInfoPageService {
         3: "CC-CCE-2J.about.html",
         4: "CC-CCE-12E.about.html",
         5: "CC-CCE-NCI.about.html",
-        6: "CC-DLM-LAB.about.html",
+        6: "CC-DLM-Lab.about.html",
         7: "CC-NMD_RADIO.about.html",
         8: "I-IVAU.about.html",
         9: "P-IVAU.about.html",
@@ -120,7 +120,11 @@ export class FacilityInfoPageService {
         return this._facility$.pipe(map(x=>x.facilityFullName)) as Observable<string>;
     }
     
-    public get facilitySection$() {
-        return this._facility$.pipe(map(x=>x.facilitySection)) as Observable<string>;
+    // public get facilitySection$() {
+    //     return this._facility$.pipe(map(x=>x.facilitySection)) as Observable<string>;
+    // }
+
+    public get facility$() {
+        return this._facility$ as Observable<Facility>;
     }
 }

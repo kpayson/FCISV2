@@ -1,6 +1,7 @@
-import { BehaviorSubject, Observable, filter, map } from 'rxjs';
-import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, combineLatest, filter, map } from 'rxjs';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Facility, SvgMap } from '../api/models';
 import {
   FacilityTimelineDashboardService,
   PiDataFilter,
@@ -11,7 +12,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
 import { RoomInfoDisplayComponent } from '../room-info-display/room-info-display.component';
-import { SvgMap } from '../api/models';
 
 @Component({
   selector: 'app-facility-timeline-dashboard',
@@ -19,27 +19,25 @@ import { SvgMap } from '../api/models';
   styleUrls: ['./facility-timeline-dashboard.component.scss'],
   providers: [FacilityTimelineDashboardService]
 })
-export class FacilityTimelineDashboardComponent implements OnInit {
+export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
+
+  private _facility!: Partial<Facility>;
+  @Input()
+  get facility() {
+    return this._facility;
+  }
+  set facility(v: Partial<Facility>) {
+    this._facility$.next(v);
+    this._facility = v;
+  }
 
   @Input()
-  facilityId=0;
-
-  @Input()
-  facilitySection='';
-
-  @Input()
-  portfolioId="";
-
-  @Input()
-  facilityOrPortfolio="facility"
-
-  @Input()
+  get dashboardId() {
+    return this._dashboardId;
+  }
   set dashboardId(v: string) {
-    const curr = this._dashboardId$.value;
     this._dashboardId$.next(v);
-    if(v != curr) {
-      this.search();
-    }
+    this._dashboardId = v;
   }
 
   filterForm = this.fb.group({
@@ -49,16 +47,20 @@ export class FacilityTimelineDashboardComponent implements OnInit {
   });
 
   roomInfoDialogVisible = false;
-
+  private _dashboardId: string = '';
+  
+  
   private _dashboardId$ = new BehaviorSubject<string>('');
   get dashboardId$() { return this._dashboardId$ as Observable<string>; }
 
-  $statusDisplay = this._dashboardId$.pipe(map(x=>{
+  private _facility$ = new BehaviorSubject<Partial<Facility>>({});
+
+  $statusDisplay = this._dashboardId$.pipe(map(x => {
     const id = x.toLowerCase();
-    if(id === 'dp' ) {return 'dP' }
-    if(id === 'ach') {return 'Airx'}
-    if(id === 'hum') {return 'Hum'}
-    if(id === 'temp') {return 'Temp'}
+    if (id === 'dp') { return 'dP' }
+    if (id === 'ach') { return 'Airx' }
+    if (id === 'hum') { return 'Hum' }
+    if (id === 'temp') { return 'Temp' }
     return 'Composite'; // 'Sum All'
   }));
 
@@ -95,12 +97,6 @@ export class FacilityTimelineDashboardComponent implements OnInit {
     interval: ''
   };
 
-  // filterChange($event: any) {
-  //   this.isLoading = true;
-  //   setTimeout(() => {
-  //     this.service.filterPiData($event);
-  //   }, 0);
-  // }
 
   isLoading = false;
 
@@ -131,31 +127,43 @@ export class FacilityTimelineDashboardComponent implements OnInit {
     );
     this.selectedRoomInfo$.pipe(
       map((x) => Object.keys(x).length > 0)
-    ).subscribe(x=>{
+    ).subscribe(x => {
       this.roomInfoDialogVisible = x;
     });
-    
+
     this.facilityFilterOptions$ = this.service.facilityFilterOptions$;
 
-    this.timelineChartData$.subscribe(() => {
-      this.isLoading = false;
-    });
+    // this.timelineChartData$.subscribe(() => {
+    //   this.isLoading = false;
+    // });
 
     
 
+
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      console.log(changes)
   }
 
   ngOnInit(): void {
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
-    
+
     this.filterForm.patchValue({
       startDate: yesterday,
       endDate: new Date(),
       interval: 60
     });
+
+    combineLatest([this._dashboardId$,this._facility$]).subscribe(()=>{
+      this.search();
+    })
+
     
-    this.search();
+
+    //this.search();
   }
 
 
@@ -173,17 +181,6 @@ export class FacilityTimelineDashboardComponent implements OnInit {
 
   pinClick($event: any) {
     this.service.setSelectedPin($event);
-
-    // [roomInfo]="(selectedRoomInfo$ | async) || {}"
-    //                             [attribute]="(selectedAttributeStatus$ | async) || 'composite'"
-
-  //   this.dialogRef = this.dialogService.open(RoomInfoDisplayComponent, { 
-  //     data: {
-  //         id: '51gF3'
-  //     },
-  //     header: 'Select a Product'
-  // });
-    // console.log($event);
   }
 
   pinMouseOver($event: any) {
@@ -201,31 +198,38 @@ export class FacilityTimelineDashboardComponent implements OnInit {
     { name: '24 Hour', value: 1440 }
   ];
 
-  get startDate():Date {
+  get startDate(): Date {
     return this.filterForm.get("startDate")?.value!;
   }
-  get endDate():Date {
+  get endDate(): Date {
     return this.filterForm.get("endDate")?.value!;
   }
-  get interval():number {
+  get interval(): number {
     return this.filterForm.get("interval")?.value!;
   }
-  
+
   search() {
 
-    this.isLoading = true;
-      this.service.filterPiData({
-        facility:{repName:'',sectionName:this.facilitySection, value:this.facilityId},
-        portfolioId:this.portfolioId,
-        facilityOrPortfolio:this.portfolioId ? 'portfolio' : 'facility',
-        status:this._dashboardId$.value,
-        startDate:this.startDate,
-        endDate:this.endDate,
-        interval:this.interval
-      })
+    if(!this.facility.facilityId) {
+      throw "missing facility in dashboard search";
+    }
+    if(!this.dashboardId) {
+      throw "missing dashboardId search";
+    }
+    
+    //this.isLoading = true;
+    this.service.filterPiData({
+      facility: { repName: '', sectionName: this.facility.facilitySection || '', value: this.facility.facilityId! },
+      // portfolioId: this.portfolioId,
+      // facilityOrPortfolio: this.portfolioId ? 'portfolio' : 'facility',
+      status: this.dashboardId,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      interval: this.interval
+    })
   }
 
-  hideRoomInfo(evt:any){
+  hideRoomInfo(evt: any) {
     console.log('You can close me');
   }
 

@@ -23,8 +23,8 @@ import { catchError } from 'rxjs/operators';
 
 export interface PiDataFilter {
     facility: { repName?: string; sectionName: string; value: number };
-    portfolioId: string;
-    facilityOrPortfolio: 'facility' | 'portfolio'
+    //portfolioId: string;
+    //facilityOrPortfolio: 'facility' | 'portfolio'
     status: string;
     startDate: Date;
     endDate: Date;
@@ -70,15 +70,16 @@ export interface PiDataFilter {
   
       const defaultEndDate = new Date();
   
-      this._piDataFilter$ = new BehaviorSubject<PiDataFilter>({
-        facility: { repName: '', sectionName: '', value: 0 },
-        portfolioId: '',
-        facilityOrPortfolio: 'facility',
-        status: '',
-        startDate: defaultStartDate,
-        endDate: defaultEndDate,
-        interval: 10
-      });
+      this._piDataFilter$ = new Subject<PiDataFilter>()
+      // new BehaviorSubject<PiDataFilter>({
+      //   facility: { repName: '', sectionName: '', value: 0 },
+      //   portfolioId: '',
+      //   facilityOrPortfolio: 'facility',
+      //   status: '',
+      //   startDate: defaultStartDate,
+      //   endDate: defaultEndDate,
+      //   interval: 10
+      // });
   
       this._ic$ = new BehaviorSubject<string>('');
       this._facilityFilterOptions$ = new BehaviorSubject<
@@ -184,6 +185,7 @@ export interface PiDataFilter {
       // Update the floor plan, current status values for rooms, and parameter values for rooms when the facility changes
       selectedFacility$
         .pipe(
+          filter(facility=>Boolean(facility?.value)),
           mergeMap((facility) =>
             zip(
               of(facility.value),
@@ -194,10 +196,10 @@ export interface PiDataFilter {
           )
         )
         .subscribe(([facilityId, currentStatusValues, parameterValues]) => {
-          const backGroundImageUrl =
-            facilityId == 0
-              ? 'assets/images/floor-plans/apf_facility_all_background.png'
-              : `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
+          const backGroundImageUrl = `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
+            // facilityId == 0
+            //   ? 'assets/images/floor-plans/apf_facility_all_background.png'
+            //   : `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
           this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
   
           this._currentStatusValues$.next(currentStatusValues);
@@ -233,16 +235,28 @@ export interface PiDataFilter {
         });
   
       // when a map pin is selected, prepare room info display data using the apf limits query, current status values, and the room parameters
-      this._selectedPin$.pipe(
-        filter(Boolean),
-        mergeMap((pin:string)=>zip(
-          of(pin),
-          this.dataService.roomCurrentAttributeData(this._piDataFilter$.value.facility.value,pin)
-        ))
-      ).subscribe(([pin,roomStatusValues]) => {
-        const facility =
-          this._piDataFilter$.value.facility.sectionName.toLowerCase();
-        const key = `${facility}|${pin.toLowerCase()}`; // pin = room number
+      const roomCurrentAttributeData$ = 
+        combineLatest([selectedFacility$, this._selectedPin$])
+          .pipe(
+            filter(([facility,pin])=>Boolean(pin)),
+            mergeMap(([facility,pin])=>zip(
+              of(facility),
+              of(pin),
+              this.dataService.roomCurrentAttributeData(facility.value,pin)))
+          )
+      // this._selectedPin$.pipe(
+      //   filter(Boolean),
+      //   mergeMap((pin:string)=>zip(
+      //     of(pin),
+      //     this.dataService.roomCurrentAttributeData(this._piDataFilter$.value.facility.value,pin)
+      //   ))
+      // )
+      roomCurrentAttributeData$
+      .subscribe(([facility,pin,roomStatusValues]) => {
+        // const facility =
+        //   this._piDataFilter$.value.facility.sectionName.toLowerCase();
+        const sectionName = facility.sectionName.toLowerCase();
+        const key = `${sectionName}|${pin.toLowerCase()}`; // pin = room number
         const apfLimits = this._apfLimits$.value[key];
         const isDP = pin.indexOf('DP') > -1;
         const room = isDP ? 
@@ -274,85 +288,85 @@ export interface PiDataFilter {
         this._selectedRoomInfo$.next(info);
       });
   
-      // Prepare timeline data for All Facilities Timeline (facilityId == 0)
-      this._piDataFilter$.pipe(
-        filter((f) => f.facilityOrPortfolio == 'portfolio'),
-        mergeMap(filter =>
-        this.dataService
-          .facilityAlltimelineData(
-            filter.portfolioId,
-            filter.startDate,
-            filter.endDate,
-            filter.interval
-          )
-          .pipe(
-            catchError((err) => {
-              console.log(
-                'Error from dataService.facilityAlltimelineData:' +
-                  JSON.stringify(err)
-              );
-              return of([]);
-            }),
-            map((data) => ({ filter, data }))
-          )
-        )
-      )
-        .subscribe((dataAndFilter) => {
-          const chartDataPoints: TimelineChartDataPoint[] = [];
-          const facilities = dataAndFilter.data.map((d) => d.facility);
-          const facilityLookup = keyBy(facilities, (f) => f.facilityName);
-          const timestamps = (dataAndFilter.data || [])
-            .filter((x) => x.points.some(Boolean))
-            .map((x) => x.points[0].timestamp);
-          const minTimestamp = timestamps.reduce(function (a, b) {
-            return a < b ? a : b;
-          }, Number.MAX_VALUE);
+      // // Prepare timeline data for All Facilities Timeline (facilityId == 0)
+      // this._piDataFilter$.pipe(
+      //   filter((f) => f.facilityOrPortfolio == 'portfolio'),
+      //   mergeMap(filter =>
+      //   this.dataService
+      //     .facilityAlltimelineData(
+      //       filter.portfolioId,
+      //       filter.startDate,
+      //       filter.endDate,
+      //       filter.interval
+      //     )
+      //     .pipe(
+      //       catchError((err) => {
+      //         console.log(
+      //           'Error from dataService.facilityAlltimelineData:' +
+      //             JSON.stringify(err)
+      //         );
+      //         return of([]);
+      //       }),
+      //       map((data) => ({ filter, data }))
+      //     )
+      //   )
+      // )
+      //   .subscribe((dataAndFilter) => {
+      //     const chartDataPoints: TimelineChartDataPoint[] = [];
+      //     const facilities = dataAndFilter.data.map((d) => d.facility);
+      //     const facilityLookup = keyBy(facilities, (f) => f.facilityName);
+      //     const timestamps = (dataAndFilter.data || [])
+      //       .filter((x) => x.points.some(Boolean))
+      //       .map((x) => x.points[0].timestamp);
+      //     const minTimestamp = timestamps.reduce(function (a, b) {
+      //       return a < b ? a : b;
+      //     }, Number.MAX_VALUE);
   
-          for (const x of dataAndFilter.data) {
-            if (!x.points.some(Boolean)) {
-              x.points = [
-                {
-                  timestamp: minTimestamp,
-                  numeric_value: 1
-                },
-                {
-                  timestamp: dataAndFilter.filter.endDate.getTime(),
-                  numeric_value: 1
-                }
-              ];
-            }
+      //     for (const x of dataAndFilter.data) {
+      //       if (!x.points.some(Boolean)) {
+      //         x.points = [
+      //           {
+      //             timestamp: minTimestamp,
+      //             numeric_value: 1
+      //           },
+      //           {
+      //             timestamp: dataAndFilter.filter.endDate.getTime(),
+      //             numeric_value: 1
+      //           }
+      //         ];
+      //       }
   
-            x.points.sort((a, b) => a.timestamp - b.timestamp);
-            let startTime = x.points[0].timestamp;
-            for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
-              if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
-                console.log('error - timestamp before request time');
-              }
-              const point: TimelineChartDataPoint = {
-                locationName: x.facility.facilityName,
-                tag: x.tag,
-                startDate: new Date(startTime),
-                endDate: new Date(Math.max(y.timestamp, startTime)),
-                statusColor: this.statusColor(y.numeric_value),
-                chillerStatusLabel: this.chillerStatusLabel(y.numeric_value)
-              };
+      //       x.points.sort((a, b) => a.timestamp - b.timestamp);
+      //       let startTime = x.points[0].timestamp;
+      //       for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
+      //         if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
+      //           console.log('error - timestamp before request time');
+      //         }
+      //         const point: TimelineChartDataPoint = {
+      //           locationName: x.facility.facilityName,
+      //           tag: x.tag,
+      //           startDate: new Date(startTime),
+      //           endDate: new Date(Math.max(y.timestamp, startTime)),
+      //           statusColor: this.statusColor(y.numeric_value),
+      //           chillerStatusLabel: this.chillerStatusLabel(y.numeric_value)
+      //         };
   
-              startTime = y.timestamp;
-              chartDataPoints.push(point);
-            }
-          }
+      //         startTime = y.timestamp;
+      //         chartDataPoints.push(point);
+      //       }
+      //     }
   
-          this._timelineChartData$.next({
-            points: chartDataPoints,
-            locations: facilityLookup,
-            locationType: 'facility'
-          });
-        });
+      //     this._timelineChartData$.next({
+      //       points: chartDataPoints,
+      //       locations: facilityLookup,
+      //       locationType: 'facility'
+      //     });
+      //   });
   
       // prepare data for specific facility timeline
       this._piDataFilter$
         .pipe(
-          filter((f) => f.facilityOrPortfolio == 'facility'),
+          // filter((f) => f.facilityOrPortfolio == 'facility'),
           mergeMap((filter: PiDataFilter) =>
             this.dataService
               .facilityRoomsTimelineDate(
@@ -432,7 +446,7 @@ export interface PiDataFilter {
       this._ic$.next(ic);
     }
   
-    private _piDataFilter$: BehaviorSubject<PiDataFilter>;
+    private _piDataFilter$: Subject<PiDataFilter>;
     public filterPiData(filter: PiDataFilter) {
       this._piDataFilter$.next(filter);
     }

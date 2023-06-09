@@ -18,9 +18,6 @@ Convert Pie charts to donuts
 create facility table entry for 
     CC Interim Nuclear Pharmacy
 
-trim and or adjust menu color to make blend nicer
-facility all map pins link in to facility page. Start on description page like normal
-
 
 
 
@@ -41,4 +38,10 @@ facility all map pins link in to facility page. Start on description page like n
 - Create a contact us dialog that open when contact us link is clicked going to FCISQASupport@mail.nih.gov
 - Facility Landing page pictures
 - Facility Landing page documents
+
+### Week 6/5 - 6/9
+trim and or adjust menu color to make blend nicer
+facility all map pins link in to facility page. Start on description page like normal
+
+
 

@@ -1,4 +1,4 @@
-import { BehaviorSubject, Subject, combineLatest } from 'rxjs';
+import { BehaviorSubject, Subject, combineLatest, filter } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { RoomDisplayField } from '../facility-timeline-dashboard/facility-timeline-dashboard.service';
@@ -45,8 +45,9 @@ export class RoomInfoDisplayComponent {
     this._roomInfo$ = new BehaviorSubject<{ [field: string]: string }>({});
     this._attribute$ = new BehaviorSubject<string>('');
 
-    combineLatest([this._roomInfo$, this._attribute$]).subscribe(
-      ([roomInfo, attribute]) => {
+    combineLatest([this._roomInfo$, this._attribute$])
+    .pipe(filter(([roomInfo,attribute])=>Boolean(Object.keys(roomInfo).length && Boolean(attribute))))
+    .subscribe(([roomInfo,attribute]) =>{
         const attr = attribute.toLowerCase();
         const fields =
           attr === 'composite' || attr === 'sum all'

@@ -15,10 +15,7 @@
     <div id="dashboard-tab" *ngIf="selectedTab=='dashboard'">
         <!-- <app-apf-portfolio-ic-dashboard></app-apf-portfolio-ic-dashboard> -->
         <app-facility-timeline-dashboard
-            [facilityId]="facilityId"
-            [portfolioId]="portfolioId"
-            [facilityOrPortfolio]="portfolioId ? 'portfolio' : 'facility'"
-            [facilitySection]="(service.facilitySection$ | async) || ''" 
+            [facility] ="(service.facility$ | async) || {}"            
             [dashboardId]="selectedDashboard"></app-facility-timeline-dashboard>
     </div>
 
