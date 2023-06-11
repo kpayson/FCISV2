@@ -1,7 +1,10 @@
 <!-- <div class="card"> -->
-  <div style="padding-left:20px">
+  <div style="padding-left:20px; padding-right:20px;" class="flex justify-content-between">
     <div class="flex align-items-center">
       <b>Portfolios</b>&nbsp;&nbsp;|&nbsp;&nbsp;<p-menubar [model]="items"></p-menubar>
+    </div>
+    <div class="flex align-items-center">
+      <a (click)="resourcesClick()"><b>Resources</b></a>
     </div>
   </div>
 

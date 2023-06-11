@@ -14,12 +14,12 @@
         </div>
         <div id="images-container" class="flex justify-content-center">
             <div class="card">
-                <div style="display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;">
+                <div style="display:flex;flex-wrap: wrap; justify-content:space-around">
                     <div *ngFor="let photo of photos"
-                        style="border:1px solid black; padding:4px;">
-                        <p-image [src]="photo.url" [preview]="true" height="100" 
+                        style="border:0px solid black; padding:4px;">
+                        <p-image [src]="photo.url" [preview]="true" height="150" width="150" 
                             [alt]="photo.docTitle"></p-image><br />
-                        <span style="font-size:x-small">{{photo.docTitle}}</span>
+                        <span style="font-size:x-small; font-weight:bold;">{{photo.docTitle}}</span>
                     </div>
                     <div *ngIf="photos.length == 0">
                         <span>No Pictures Available</span>

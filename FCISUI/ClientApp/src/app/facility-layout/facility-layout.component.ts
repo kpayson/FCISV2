@@ -170,12 +170,12 @@ export class FacilityLayoutComponent implements OnInit {
           this.selectedTab = 'condition_reports'
         }
       },
-      {
-        label: "FCIS Resources",
-        command: (event: any) => {
-          this.selectedTab = 'fcis_resources'
-        }
-      }
+      // {
+      //   label: "FCIS Resources",
+      //   command: (event: any) => {
+      //     this.selectedTab = 'fcis_resources'
+      //   }
+      // }
     ];
     return items;
   }

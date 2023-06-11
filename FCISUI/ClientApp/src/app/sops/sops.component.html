@@ -1,0 +1,22 @@
+<div>
+
+</div>
+<br>
+<h2 style="color:#9A0000">Standard Operating Procedures</h2>
+<br>
+<p-table [value]="(sops | async) || []">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="docTitle">Title</th>
+            <th pSortableColumn="docDescription">Description</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-sop>
+        <tr>
+            <td>{{sop.docTitle}}</td>
+            <td>{{sop.docDescription}}</td>
+            <td><button (click)="openDoc(sop.storedFileName)">View</button></td>
+        </tr>
+    </ng-template>
+</p-table>

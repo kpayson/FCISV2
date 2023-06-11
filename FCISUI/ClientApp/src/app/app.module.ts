@@ -39,6 +39,7 @@ import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
 import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-dashboard.component';
+import { SopsComponent } from './sops/sops.component';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
@@ -75,7 +76,8 @@ import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-das
     FacilityAllMapComponent,
     FcisResourcesComponent,
     FacilityTimelineDashboardComponent,
-    PortfolioDashboardComponent
+    PortfolioDashboardComponent,
+    SopsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

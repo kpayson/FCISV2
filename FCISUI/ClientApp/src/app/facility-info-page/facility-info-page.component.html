@@ -49,9 +49,9 @@
             <div style="display:flex;flex-wrap: wrap; justify-content:flex-start; gap:8px;">
                 <div *ngFor="let photo of (service.pictures$ | async) || []"
                     style="border:1px solid black; padding:4px;">
-                    <p-image [src]="photo.url" [preview]="true" width="219" height="200"
+                    <p-image [src]="photo.url" [preview]="true" width="200" height="200"
                         [alt]="photo.docTitle"></p-image><br />
-                    <span style="font-size:smaller">{{photo.docTitle}}</span>
+                    <span style="font-size:smaller; font-weight:bold;">{{photo.docTitle}}</span>
                 </div>
                 <div *ngIf="((service.pictures$ | async) || []).length == 0">
                     <span>No Pictures Available</span>

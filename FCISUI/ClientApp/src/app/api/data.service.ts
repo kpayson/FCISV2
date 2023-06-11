@@ -173,4 +173,14 @@ export class DataService {
   facilityDocuments(facilityId:number) {
     return this.get<AttachmentGroup[]>(`Attachment/documents/facility/${facilityId}`);
   }
+
+  sops() {
+    return this.get<Attachment[]>(`Attachment/sops`);
+  }
+
+  statusReports() {
+    return this.get<Attachment[]>(`Attachment/statusReports`);
+  }
+
+  
 }

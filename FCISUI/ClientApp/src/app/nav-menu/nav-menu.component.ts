@@ -222,4 +222,8 @@ export class NavMenuComponent {
       }
     });
   }
+
+  resourcesClick() {
+    this.router.navigate(['/home','resources'])
+  }
 }
