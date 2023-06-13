@@ -5642,7 +5642,7 @@
                 },
                 {
                     "name": "columnNames",
-                    "defaultValue": "[\r\n    'Go Live Date',\r\n    'Area CNC Rooms',\r\n    'Area ISO-8 Rooms',\r\n    'Area ISO-7 Rooms'\r\n  ]",
+                    "defaultValue": "[\r\n    'Go Live Date',\r\n    'CNC Area',\r\n    'ISO-8 Area',\r\n    'ISO-7 Area'\r\n  ]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",

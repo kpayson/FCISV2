@@ -33,6 +33,7 @@
     "@angular/router": "^14.0.3",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@tinymce/tinymce-angular": "^7.0.0",
+    "@types/google.visualization": "^0.0.69",
     "angular-google-charts": "^2.2.3",
     "bootstrap": "^5.2.1",
     "font-awesome": "^4.7.0",

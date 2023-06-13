@@ -27,12 +27,56 @@ export class PortfolioDashboardComponent implements OnInit {
     return this._timelineChartData$ as Observable<TimelineChartData>;
   }
 
+  chartBaseOptions = {
+    pieHole: 0.5,
+    pieSliceText: 'none'
+  }
+  
+  ccAllColors = [
+    '#94762d',  // 2J
+    '#b5fd19', // IIVAU
+    '#fb09bf', // Pet_1
+    'darkviolet', // Pet_B3
+    '#00ffff', // T30
+    '#c9363c'
+  ];
+
+  cceColors = ['#94762d'];
+  ccPharmacyColors = ['#b5fd19'];
+  ccOtherColors = ['#fb09bf'];
+  nciColors = ['#00ffff'];
+
+  chartOptions:any
+  
 
   constructor(private activatedRoute: ActivatedRoute, private dataService: DataService) {
     this.growthByFacilityData$ = this.activatedRoute.params.pipe(
       mergeMap(p => this.dataService.gsfByFacility(p.portfolioId)),
       map((d: any) => d.map((x: any) => [x.facility, x.gsf]))
     )
+
+    this.activatedRoute.params.subscribe(p=>{
+      const portfolioId = p['portfolioId'].toLowerCase();
+      const colors = portfolioId === 'cc' ?
+        [
+          '#94762d',  // 2J
+          'orange', // ??
+          '#b5fd19', // IIVAU,
+          '#fb09bf', // Pet_1
+          'darkviolet', // Pet_B3
+        ] : portfolioId === 'cce' ? ['#94762d'] :
+        portfolioId === 'ccpharmacy' ? ['#b5fd19'] :
+        portfolioId === 'ccother' ? ['#fb09bf','darkviolet'] :
+        portfolioId === 'nci' ? [
+          'lightblue', 
+          '#00ffff', 
+          'deepskyblue',
+          'blue',
+          ] :
+        [];
+
+        this.chartOptions = {...this.chartBaseOptions, colors}
+    })
 
     const twoDaysAgo = new Date();
     twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);

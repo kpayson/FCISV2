@@ -20,7 +20,7 @@
 
             <div class="panel-center col-md-6" style="border: 0px solid black">
               <app-gsf-pie-chart
-                [chartData]="(growthByFacilityData$ | async) || []"></app-gsf-pie-chart>
+                [chartData]="(growthByFacilityData$ | async) || []" [chartOptions]="chartOptions"></app-gsf-pie-chart>
               <div class="chart-label">Portfolio GSF by Facility</div>
             </div>
           </div>

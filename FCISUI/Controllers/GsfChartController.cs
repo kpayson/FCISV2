@@ -48,10 +48,50 @@ namespace FCISUI.Controllers
                 {
                     Facility = g.Key ?? "",
                     Gsf = g.Sum(x => x.Sq.GetValueOrDefault())
-                });
+                })
+                .OrderBy(x=>
+                    // CCE
+                    x.Facility == "2J" ? 101 :
+                    x.Facility == "E_TER" ? 102 :
+
+                    // CC Phamrmacy
+                    x.Facility == "IIVAU" ? 201 :
+
+                    // CC Other
+                    x.Facility == "Pet_1" ? 301 :
+                    x.Facility == "Pet_B3" ? 302 :
+                    x.Facility == "DLM_SL" ? 303 :
+
+                    // NCI
+                    x.Facility == "T30" ? 401 : 
+                    x.Facility == "Tr1" ? 402 : 
+                    x.Facility == "Tr2" ? 403 : 
+                    x.Facility == "VVF" ? 404 : 
+                    x.Facility == "HPP" ? 405 :
+                    
+                    // NIAID
+                    x.Facility == "RP" ? 501 :
+
+                    //Unknown
+                    600
+                )
+                ;
             var resList = result.ToList();
             return resList;
         }
+
+//         2J
+// DLM_SL
+// E_TER
+// HPP
+// IIVAU
+// Pet_1
+// Pet_B3
+// RP
+// T30
+// Tr1
+// Tr2
+// VVF
 
         [HttpGet("GsfByIC")]
         public IEnumerable<ICGsf> GetGsfByIC()
@@ -69,7 +109,15 @@ namespace FCISUI.Controllers
                 {
                     IC = g.Key,
                     Gsf = g.Sum(g => g.Gsf)
-                });
+                })
+                .OrderBy(x=> 
+                    x.IC == "CCE" ? 1 :
+                    x.IC == "CC Pharmacy" ? 2 :
+                    x.IC == "CC Other" ? 3 :
+                    x.IC == "NCI" ? 4 :
+                    x.IC == "NIAID" ? 5 :
+                    100
+                );
             var resList = result.ToList();
             return resList;
         }

@@ -20,14 +20,15 @@
             >
             </app-gsf-growth-by-classification-chart>
             <div class="chart-label">
-              APF Portfolio GSF Growth by Classification
+              APF Portfolio Growth by Area of Classification Type (GSF)
             </div>
           </div>
         </div>
+        <br>
 
         <div class="row">
           <div class="panel-center col-md-6" style="border: 0px solid black">
-            <app-gsf-pie-chart [chartData]="(service.gsfByIC$ | async) || []">
+            <app-gsf-pie-chart [chartData]="(service.gsfByIC$ | async) || []" [chartOptions]="chartByIcOptions">
               <!-- gsfByIcData -->
             </app-gsf-pie-chart>
             <div class="chart-label">APF Portfolio GSF by IC</div>
@@ -35,7 +36,7 @@
 
           <div class="panel-center col-md-6" style="border: 0px solid black">
             <app-gsf-pie-chart
-              [chartData]="(service.gsfByFacility$ | async) || []"
+              [chartData]="(service.gsfByFacility$ | async) || []" [chartOptions]="chartByFacilityOptions"
             ></app-gsf-pie-chart>
             <div class="chart-label">APF Portfolio GSF by Facility</div>
           </div>

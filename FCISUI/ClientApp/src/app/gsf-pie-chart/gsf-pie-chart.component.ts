@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { ChartType } from 'angular-google-charts';
+
+import { ChartType, } from 'angular-google-charts';
+
+//import {PieChartOptions} from 'google.visualization'
 
 @Component({
   selector: 'app-gsf-pie-chart',
@@ -12,6 +15,10 @@ export class GsfPieChartComponent {
   @Input()
   chartData: any[] = [];
 
+  @Input()
+  chartOptions: any
+
   chartType = ChartType.PieChart;
   columnNames = ['Facility', 'GSF'];
+
 }
