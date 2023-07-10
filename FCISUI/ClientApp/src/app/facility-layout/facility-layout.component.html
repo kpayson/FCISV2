@@ -4,30 +4,28 @@
     <p-menubar [model]="facilityMenuItems"></p-menubar>
 
     <div id="description-tab" *ngIf="selectedTab=='description'">
-       <app-facility-description
-            [facilityId]="facilityId"
-            [aboutText]="(service.aboutPage$ | async) || ''"
-            [photos]="(service.pictures$ | async) || []"
-        >
+        <app-facility-description [facilityId]="facilityId" [aboutText]="(service.aboutPage$ | async) || ''"
+            [photos]="(service.pictures$ | async) || []">
         </app-facility-description>
     </div>
 
     <div id="dashboard-tab" *ngIf="selectedTab=='dashboard'">
         <!-- <app-apf-portfolio-ic-dashboard></app-apf-portfolio-ic-dashboard> -->
-        <app-facility-timeline-dashboard
-            [facility] ="(service.facility$ | async) || {}"            
+        <app-facility-timeline-dashboard [facility]="(service.facility$ | async) || {}"
             [dashboardId]="selectedDashboard"></app-facility-timeline-dashboard>
     </div>
 
     <div id="facility-reports-tab" *ngIf="selectedTab=='facility_reports'">
-        <h2>Facility Reports</h2>
+        <app-facility-reports [facilityId]="facilityId"></app-facility-reports>
     </div>
 
     <div id="documents-tab" *ngIf="selectedTab=='documents'">
         <span class="cardContent">
-            <p style="width:80em"> The documents, below, are an excerpt of the full, controlled and uncontrolled facility documents for
+            <p style="width:80em"> The documents, below, are an excerpt of the full, controlled and uncontrolled
+                facility documents for
                 this APF, provided for your convenience. For access to the full archive of documents, or for access to
-                the controlled version of any of these documents, please <a (click)="contactUsClick()" class="contact-link">contact</a> FCIS.
+                the controlled version of any of these documents, please <a (click)="contactUsClick()"
+                    class="contact-link">contact</a> FCIS.
 
                 The documents listed as Record Of Work As Constructed (ROWAC) are As-Built documents that have been
                 verified.</p>
@@ -35,12 +33,12 @@
             <div>
                 <div *ngFor="let docGroup of (service.documents$ | async) || []">
                     <div *ngIf="docGroup.description !== 'FacilityDiagram'">
-                    <b>{{docGroup.description}}</b>
-                    <ul>
-                        <li *ngFor="let atch of docGroup.attachments">
-                            <a [href]="atch.url" target="_blank">{{atch.docTitle}}</a>
-                        </li>
-                    </ul>
+                        <b>{{docGroup.description}}</b>
+                        <ul>
+                            <li *ngFor="let atch of docGroup.attachments">
+                                <a [href]="atch.url" target="_blank">{{atch.docTitle}}</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div *ngIf="((service.documents$ | async) || []).length == 0">

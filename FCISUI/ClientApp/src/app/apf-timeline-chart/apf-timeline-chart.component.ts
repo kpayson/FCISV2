@@ -14,11 +14,12 @@ export class ApfTimelineChartComponent {
   constructor() {}
 
   timelineData: any[] = [];
-  locationLookup: { [key: string]: any } = {};
+  //locationLookup: { [key: string]: any } = {};
 
   private _timelineChartData: TimelineChartData = {
     points: [],
     locations: {},
+
     locationType: 'facility'
   };
   @Input()
@@ -61,7 +62,7 @@ export class ApfTimelineChartComponent {
       ];
     });
 
-    this.locationLookup = this.chartData.locations;
+    //this.locationLookup = this.chartData.locations;
   }
 
   private _highlightedLabel: string = '';

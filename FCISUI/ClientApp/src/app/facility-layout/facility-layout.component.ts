@@ -132,6 +132,20 @@ export class FacilityLayoutComponent implements OnInit {
     "20": this.allStatusOptions
   }
 
+  facilitySections:{[key:string]:string} = {
+    "1": "PET_1",
+    "2": "PET_B3",
+    "3": "2J",
+    "5": "E_TER",
+    "6": "DLM_SL",
+    "9": "P_IVAU",
+    "10": "WF",
+    "11": "T30",
+    "12": "Tr1",
+    "13": "Tr2",
+    "17": "IIVAU",
+    "19": "HPP"
+  }
 
   selectedTab = 'description';
   selectedDashboard = '';

@@ -157,8 +157,8 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
       interval: 60
     });
 
-    combineLatest([this._dashboardId$,this._facility$]).subscribe(()=>{
-      this.search();
+    combineLatest([this._dashboardId$,this._facility$]).subscribe(([dashboardId, facility])=>{
+      this.search(dashboardId);
     })
 
     
@@ -208,7 +208,7 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
     return this.filterForm.get("interval")?.value!;
   }
 
-  search() {
+  search(timelineAtr?:string) {
 
     if(!this.facility.facilityId) {
       throw "missing facility in dashboard search";
@@ -222,7 +222,7 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
       facility: { repName: '', sectionName: this.facility.facilitySection || '', value: this.facility.facilityId! },
       // portfolioId: this.portfolioId,
       // facilityOrPortfolio: this.portfolioId ? 'portfolio' : 'facility',
-      status: this.dashboardId,
+      status: timelineAtr || this.dashboardId,
       startDate: this.startDate,
       endDate: this.endDate,
       interval: this.interval

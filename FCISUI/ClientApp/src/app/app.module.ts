@@ -1,5 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AlmPiService } from './api/alm-pi.service';
 import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
 import { ApfPortfolioAllDashboardComponent } from './apf-portfolio-all-dashboard/apf-portfolio-all-dashboard.component';
 import { ApfPortfolioMapComponent } from './apf-portfolio-all-map/apf-portfolio-all-map.component';
@@ -27,19 +28,22 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NgModule } from '@angular/core';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
 import { PiDataFilterToolbarComponent } from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';
+import {PiWebApiService} from 'src/app/api/pi-webapi.service';
+import { PiWebapiDemoComponent } from './pi-webapi-demo/pi-webapi-demo.component';
+import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-dashboard.component';
 import { RoomDataTableComponent } from './room-data-table/room-data-table.component';
 import { RoomInfoDisplayComponent } from './room-info-display/room-info-display.component';
 import { RouterModule } from '@angular/router';
 import { SafeUrlPipe } from './safe-url.pipe'
 import { SanitizedHtmlPipe } from './sanitized-html.pipe';
+import { SopsComponent } from './sops/sops.component';
 import { StaticContentContainerComponent } from './static-content-container/static-content-container.component';
 import { StaticContentEditorComponent } from './static-content-editor/static-content-editor.component';
 import { StaticContentPageComponent } from './static-content-page/static-content-page.component';
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
-import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-dashboard.component';
-import { SopsComponent } from './sops/sops.component';
+import { FacilityReportsComponent } from './facility-reports/facility-reports.component';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
@@ -77,7 +81,9 @@ import { SopsComponent } from './sops/sops.component';
     FcisResourcesComponent,
     FacilityTimelineDashboardComponent,
     PortfolioDashboardComponent,
-    SopsComponent
+    SopsComponent,
+    PiWebapiDemoComponent,
+    FacilityReportsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -88,7 +94,7 @@ import { SopsComponent } from './sops/sops.component';
     ThirdPartyComponentsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [DataService],
+  providers: [DataService,PiWebApiService, AlmPiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

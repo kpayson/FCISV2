@@ -19,6 +19,7 @@ import { keyBy, reduce } from 'lodash';
 
 import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
+import { PiWebApiService } from '../api/pi-webapi.service';
 import { catchError } from 'rxjs/operators';
 
 export interface PiDataFilter {
@@ -50,6 +51,7 @@ export interface PiDataFilter {
   export interface TimelineChartData {
     points: TimelineChartDataPoint[];
     locations: { [name: string]: any };
+    // locationCount: number;
     locationType: 'room' | 'facility';
   }
   
@@ -64,7 +66,7 @@ export interface PiDataFilter {
   
   @Injectable()
   export class FacilityTimelineDashboardService {
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private piWebApiService:PiWebApiService) {
       const defaultStartDate = new Date();
       defaultStartDate.setDate(defaultStartDate.getDate() - 1);
   
@@ -103,6 +105,7 @@ export interface PiDataFilter {
       this._timelineChartData$ = new BehaviorSubject<TimelineChartData>({
         points: [],
         locations: {},
+        //locationCount:0,
         locationType: 'facility'
       });
       this._selectedPin$ = new BehaviorSubject<string>('');
@@ -145,25 +148,47 @@ export interface PiDataFilter {
       //   });
   
       // Setup APF Limits from PI for all facilities
-      this.dataService.apfLimits().subscribe((limits: any[]) => {
-        const limitsLookup = reduce(limits, (acc, limit) => {
-          
-          if(limit.Conn_Room) {
-            const name1 = limit.Conn_Room ? `${limit.Room}_${limit.Conn_Room}_DP` : limit.Room;
-            const name2 = limit.Conn_Room ? `${limit.Conn_Room}_${limit.Room}_DP` : limit.Room;
-            // hard to know room/conn_room order so add lookup for both directions
-            return{...acc,
-              [`${limit.Facility.toLowerCase()}|${name1.toLowerCase()}`]: limit,
-              [`${limit.Facility.toLowerCase()}|${name2.toLowerCase()}`]: limit,
+      //this.dataService.apfLimits().subscribe((limits: any[]) => {
+      this.piWebApiService.apfLimits().subscribe((limits: any[]) => {
+
+        const limitsLookup:{[key:string]:string} = {};
+
+        try {
+          for(let limit of limits) {
+            if(limit.Conn_Room) {
+              const name1 = limit.Conn_Room ? `${limit.Room}_${limit.Conn_Room}_DP` : limit.Room;
+              const name2 = limit.Conn_Room ? `${limit.Conn_Room}_${limit.Room}_DP` : limit.Room;
+              limitsLookup[`${limit.Facility.toLowerCase()}|${name1.toLowerCase()}`] = limit;
+              limitsLookup[`${limit.Facility.toLowerCase()}|${name2.toLowerCase()}`] = limit;
             }
-          } else {       
-            return{...acc,
-              [`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`]: limit,
+            else {
+              limitsLookup[`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`] = limit
             }
           }
-  
         }
-      );
+        catch(e){
+          console.log(e)
+        }
+
+
+        // const limitsLookup = reduce(limits, (acc, limit) => {
+          
+        //   if(limit.Conn_Room) {
+        //     const name1 = limit.Conn_Room ? `${limit.Room}_${limit.Conn_Room}_DP` : limit.Room;
+        //     const name2 = limit.Conn_Room ? `${limit.Conn_Room}_${limit.Room}_DP` : limit.Room;
+        //     // hard to know room/conn_room order so add lookup for both directions
+        //     return{...acc,
+        //       [`${limit.Facility.toLowerCase()}|${name1.toLowerCase()}`]: limit,
+        //       [`${limit.Facility.toLowerCase()}|${name2.toLowerCase()}`]: limit,
+        //     }
+        //   } else {       
+        //     return{...acc,
+        //       [`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`]: limit,
+        //     }
+        //   }
+  
+        // }
+      //);
   
         this._apfLimits$.next(limitsLookup);
       });
@@ -190,7 +215,8 @@ export interface PiDataFilter {
             zip(
               of(facility.value),
               // of([] as any),
-              this.dataService.facilityCurrentStatusData(facility.value), // status for each room and attribute in facility
+              //this.dataService.facilityCurrentStatusData(facility.value), // status for each room and attribute in facility
+              this.piWebApiService.facilityCurrentStatusData(facility.sectionName),
               this.dataService.roomParameterInfo(facility.value) // parameter info from database for each room and attribute in facility
             )
           )
@@ -205,7 +231,7 @@ export interface PiDataFilter {
           this._currentStatusValues$.next(currentStatusValues);
   
           const compositeStatusValues = currentStatusValues.filter(
-            (x) => x.attribute === 'Composite' || x.locationName.endsWith('_DP')
+            (x:any) => x.attribute === 'Composite' || x.locationName.endsWith('_DP')
           );
           const pinStatusLookup = reduce(
             compositeStatusValues,
@@ -242,7 +268,8 @@ export interface PiDataFilter {
             mergeMap(([facility,pin])=>zip(
               of(facility),
               of(pin),
-              this.dataService.roomCurrentAttributeData(facility.value,pin)))
+              //this.dataService.roomCurrentAttributeData(facility.value,pin)))
+              this.piWebApiService.roomCurrentAttributeData(facility.sectionName,pin)))
           )
       // this._selectedPin$.pipe(
       //   filter(Boolean),
@@ -288,94 +315,27 @@ export interface PiDataFilter {
         this._selectedRoomInfo$.next(info);
       });
   
-      // // Prepare timeline data for All Facilities Timeline (facilityId == 0)
-      // this._piDataFilter$.pipe(
-      //   filter((f) => f.facilityOrPortfolio == 'portfolio'),
-      //   mergeMap(filter =>
-      //   this.dataService
-      //     .facilityAlltimelineData(
-      //       filter.portfolioId,
-      //       filter.startDate,
-      //       filter.endDate,
-      //       filter.interval
-      //     )
-      //     .pipe(
-      //       catchError((err) => {
-      //         console.log(
-      //           'Error from dataService.facilityAlltimelineData:' +
-      //             JSON.stringify(err)
-      //         );
-      //         return of([]);
-      //       }),
-      //       map((data) => ({ filter, data }))
-      //     )
-      //   )
-      // )
-      //   .subscribe((dataAndFilter) => {
-      //     const chartDataPoints: TimelineChartDataPoint[] = [];
-      //     const facilities = dataAndFilter.data.map((d) => d.facility);
-      //     const facilityLookup = keyBy(facilities, (f) => f.facilityName);
-      //     const timestamps = (dataAndFilter.data || [])
-      //       .filter((x) => x.points.some(Boolean))
-      //       .map((x) => x.points[0].timestamp);
-      //     const minTimestamp = timestamps.reduce(function (a, b) {
-      //       return a < b ? a : b;
-      //     }, Number.MAX_VALUE);
-  
-      //     for (const x of dataAndFilter.data) {
-      //       if (!x.points.some(Boolean)) {
-      //         x.points = [
-      //           {
-      //             timestamp: minTimestamp,
-      //             numeric_value: 1
-      //           },
-      //           {
-      //             timestamp: dataAndFilter.filter.endDate.getTime(),
-      //             numeric_value: 1
-      //           }
-      //         ];
-      //       }
-  
-      //       x.points.sort((a, b) => a.timestamp - b.timestamp);
-      //       let startTime = x.points[0].timestamp;
-      //       for (const y of x.points.sort((a, b) => a.timestamp - b.timestamp)) {
-      //         if (y.timestamp < dataAndFilter.filter.startDate.getTime()) {
-      //           console.log('error - timestamp before request time');
-      //         }
-      //         const point: TimelineChartDataPoint = {
-      //           locationName: x.facility.facilityName,
-      //           tag: x.tag,
-      //           startDate: new Date(startTime),
-      //           endDate: new Date(Math.max(y.timestamp, startTime)),
-      //           statusColor: this.statusColor(y.numeric_value),
-      //           chillerStatusLabel: this.chillerStatusLabel(y.numeric_value)
-      //         };
-  
-      //         startTime = y.timestamp;
-      //         chartDataPoints.push(point);
-      //       }
-      //     }
-  
-      //     this._timelineChartData$.next({
-      //       points: chartDataPoints,
-      //       locations: facilityLookup,
-      //       locationType: 'facility'
-      //     });
-      //   });
-  
+
       // prepare data for specific facility timeline
       this._piDataFilter$
         .pipe(
           // filter((f) => f.facilityOrPortfolio == 'facility'),
           mergeMap((filter: PiDataFilter) =>
-            this.dataService
-              .facilityRoomsTimelineDate(
-                filter.facility.value,
-                filter.status,
-                filter.startDate,
-                filter.endDate,
-                filter.interval
-              )
+            // this.dataService
+            //   .facilityRoomsTimelineDate(
+            //     filter.facility.value,
+            //     filter.status,
+            //     filter.startDate,
+            //     filter.endDate,
+            //     filter.interval
+            //   )
+            this.piWebApiService.timelineData(
+              filter.facility.sectionName,
+              filter.status,
+              filter.startDate,
+              filter.endDate,
+              filter.interval
+            )
               .pipe(
                 catchError((err) => {
                   console.log(
@@ -390,7 +350,7 @@ export interface PiDataFilter {
         )
         .subscribe((dataAndFilter) => {
           const chartDataPoints: TimelineChartDataPoint[] = [];
-          const rooms = dataAndFilter.data.map((d) => d.room);
+          const rooms = dataAndFilter.data.map((d) => d.location);
           const roomLookup = keyBy(rooms, (r) => r.roomNumber);
           const timestamps = (dataAndFilter.data || [])
             .filter((x) => x.points.some(Boolean))
@@ -420,7 +380,7 @@ export interface PiDataFilter {
                 console.log('error - timestamp before request time');
               }
               const point: TimelineChartDataPoint = {
-                locationName: x.room.roomNumber,
+                locationName: x.location.roomNumber,
                 tag: x.tag,
                 startDate: new Date(startTime),
                 endDate: new Date(Math.max(y.timestamp, startTime)),
@@ -432,10 +392,16 @@ export interface PiDataFilter {
               chartDataPoints.push(point);
             }
           }
-  
+
+          const locations:any = {};
+          for(let d of dataAndFilter.data) {
+            locations[d.location.roomNumber] =d.location
+          }
+
           this._timelineChartData$.next({
             points: chartDataPoints,
             locations: roomLookup,
+            //locationCount:dataAndFilter.data.length,
             locationType: 'room'
           });
         });
@@ -550,7 +516,7 @@ export interface PiDataFilter {
         case 2:
           return 'Warning';
         case 3:
-          return 'Alarm (our of Spec)';
+          return 'Alarm (out of Spec)';
         default:
           return '';
       }

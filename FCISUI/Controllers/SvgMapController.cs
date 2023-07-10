@@ -48,6 +48,7 @@ namespace FCISUI.Controllers
 
                 if(marker.ToLower() == "arrow") {
                     var arrows = this._context.SvgMapArrows.Where(x=>x.SvgMapId == svgMap.Id).ToList();
+                    
                     svgMap.SvgMapArrows = arrows;
                     svgMap.SvgMapPins = new List<SvgMapPin>();
                 }

@@ -59,12 +59,23 @@ namespace FCISUI.Data
     {
 
         private HttpClient _httpClient;
+        private HttpClient _webApiClient;
 
         public PIDataService(IConfiguration config, IHttpClientFactory httpClientFactory, FCISPortalContext context)
         {
             this._httpClient = httpClientFactory.CreateClient("piDataService");
             var baseUrl = config.GetValue<string>("piDataServiceBaseUrl");
             _httpClient.BaseAddress = new Uri(baseUrl);
+
+            this._webApiClient = httpClientFactory.CreateClient("webApiService");
+            var webapiBaseUrl = config.GetValue<string>("piWebApiBaseUrl");
+            this._webApiClient.BaseAddress = new Uri(webapiBaseUrl);
+
+            var username   = "NIH\\xxxxx";
+            var password="blahblahblah";
+            string encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1")
+                               .GetBytes(username + ":" + password));
+            this._webApiClient.DefaultRequestHeaders.Add("Authorization","Basic " + encoded);
         }
 
         public async Task<IEnumerable<LocationCurrentStatus>> CurrentStatusData(IList<LocationQuery> locationQueries) {
@@ -118,29 +129,45 @@ namespace FCISUI.Data
         }
 
         public async Task<List<TimeSeriesBatch>> TimeSeriesDataBatch(List<string> tags, DateTime startTime, DateTime endTime, int interval) {
+        //     var startUTC = startTime.ToString("s");
+        //     var endUTC = endTime.ToString("s");
+
+        //     try {
+
+        //         var postData = new {
+        //             tags=tags,
+        //             start_time=startUTC,
+        //             end_time=endUTC,
+        //             interval=$"{interval}m",
+        //             rectype="interpolated"
+        //         };
+
+        //         var res = await this._httpClient.PostAsJsonAsync("/pi-api/time-series-batch", postData);
+        //         var timeSeries = await res.Content.ReadFromJsonAsync<TimeSeriesBatch[]>() ?? new TimeSeriesBatch[]{};
+        //         var timeSeriesList = timeSeries.ToList();
+
+        //         return timeSeriesList; //timeSeries.ToList(); //timeSeries;
+        //    }
+        //     catch (Exception ex) {
+        //         Console.Write(ex);
+        //         throw;
+        //     }
+        
             var startUTC = startTime.ToString("s");
             var endUTC = endTime.ToString("s");
 
             try {
-
-                var postData = new {
-                    tags=tags,
-                    start_time=startUTC,
-                    end_time=endUTC,
-                    interval=$"{interval}m",
-                    rectype="interpolated"
-                };
-
-                var res = await this._httpClient.PostAsJsonAsync("/pi-api/time-series-batch", postData);
-                var timeSeries = await res.Content.ReadFromJsonAsync<TimeSeriesBatch[]>() ?? new TimeSeriesBatch[]{};
-                var timeSeriesList = timeSeries.ToList();
-
-                return timeSeriesList; //timeSeries.ToList(); //timeSeries;
-           }
+                var res = await this._webApiClient.GetFromJsonAsync<dynamic>("elements?path=\\\\ORF-COGENAF\\cGMP\\cGMP\\PET_1\\1C482-1");
+                Console.Write(res);
+                return null;
+            }
             catch (Exception ex) {
                 Console.Write(ex);
                 throw;
             }
+
+
+
         }
 
         public async Task<List<dynamic>> APFLimits() {
