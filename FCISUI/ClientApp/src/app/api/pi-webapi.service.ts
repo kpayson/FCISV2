@@ -326,21 +326,6 @@ export class PiWebApiService {
     return timelines;
   }
 
-  facilityRoomsTimelineDate(
-    facilityId: number,
-    attr: string,
-    startDate: Date,
-    endDate: Date,
-    interval: number
-  ) {
-    return this.post<RoomTimeSeriesData[]>(`Timeline/FacilityTimelineData`, {
-      facilityId,
-      attr,
-      startDate,
-      endDate,
-      interval
-    });
-  }
 
   private extractStatus(item: any): LocationCurrentStatus {
     //const item = outItem.Content.Items[0];
@@ -364,9 +349,8 @@ export class PiWebApiService {
     };
   }
 
-  facilityCurrentStatusData(facility: string) {
+  facilityCurrentCompositeData(facility:string): Observable<LocationCurrentStatus[]> {
     const postBody = {
-
       "GetFacilityId": {
         "Method": "GET",
         "Resource": `${environment.piWebApi}/elements?path=\\\\ORF-COGENAF\\cGMP\\cGMP\\${facility}`
@@ -395,6 +379,40 @@ export class PiWebApiService {
 
         "Parameters": [
           "$.GetRooms.Content.Items[*].WebId"
+        ]
+      }
+    }
+
+    const currentStatuses = this.post<any>(
+      `batch`, postBody
+    ).pipe(map(x => {
+
+      const outerCompositeItems = x.GetCompositeStatus.Content.Items;
+      const innerCompositeItems = outerCompositeItems.map((item: any) => this.extractStatus(item.Content.Items[0]));
+
+      return innerCompositeItems;
+
+    }));
+
+    return currentStatuses;
+  }
+
+  facilityCurrentDpData(facility:string): Observable<LocationCurrentStatus[]> {
+    const postBody = {
+      "GetFacilityId": {
+        "Method": "GET",
+        "Resource": `${environment.piWebApi}/elements?path=\\\\ORF-COGENAF\\cGMP\\cGMP\\${facility}`
+      },
+
+      "GetRooms": {
+        "Method": "GET",
+        "Resource": `${environment.piWebApi}/elements/{0}/elements`,
+
+        "ParentIds": [
+          "GetFacilityId"
+        ],
+        "Parameters": [
+          "$.GetFacilityId.Content.WebId"
         ]
       },
 
@@ -440,20 +458,88 @@ export class PiWebApiService {
       `batch`, postBody
     ).pipe(map(x => {
 
-      const outerCompositeItems = x.GetCompositeStatus.Content.Items;
-      const innerCompositeItems = outerCompositeItems.map((item: any) => this.extractStatus(item.Content.Items[0]));
-
       const outerDpItems = x.GetDPStatus.Content.Items || [];
       const innerDpItems = outerDpItems.map((item: any) => this.extractStatus(item.Content.Items[0]));
-      // const outerAttributeItems = x.GetAttributeStatus.Content.Items;
-      // const innerAttributeItems = outerAttributeItems.filter((y:any)=>Boolean((y.Content.Items || []).length)).map(this.extractStatus); 
 
-      const allItems = innerCompositeItems.concat(innerDpItems);
-      return allItems;
+      return innerDpItems
 
     }));
 
     return currentStatuses;
+  }
+  
+  facilityCurrentSpecificAttributeData(facility:string, status:string): Observable<LocationCurrentStatus[]> {
+    const postBody = {
+      "GetFacilityId": {
+        "Method": "GET",
+        "Resource": `${environment.piWebApi}/elements?path=\\\\ORF-COGENAF\\cGMP\\cGMP\\${facility}`
+      },
+      
+      "GetRooms": {
+        "Method": "GET",
+        "Resource": `${environment.piWebApi}/elements/{0}/elements`,
+    
+        "ParentIds": [
+                     "GetFacilityId"
+            ],
+        "Parameters": [
+                     "$.GetFacilityId.Content.WebId"
+            ]
+      },
+      
+      "GetAttributes": {
+        "Method": "GET",
+    
+        "ParentIds":["GetRooms"],
+        
+        "RequestTemplate":{
+          "Resource": `${environment.piWebApi}/elements/{0}/attributes?nameFilter=${status}`
+          },
+        
+        "Parameters":[
+          "$.GetRooms.Content.Items[*].WebId"
+          ]
+      },
+      
+      "GetAttributeStatus": {
+        "Method": "GET",
+        "ParentIds":["GetAttributes"],
+        "RequestTemplate":{
+          "Resource": `${environment.piWebApi}/streamsets/{0}/value?nameFilter=Status`
+        },
+        "Parameters":[
+          "$.GetAttributes.Content.Items[*].Content.Items[*].WebId"
+        ]
+      }
+    }
+      
+      const currentStatuses = this.post<any>(
+        `batch`, postBody
+      ).pipe(map(x => {
+  
+        const outerItems = x.GetAttributeStatus.Content.Items || [];
+        const innerItems = outerItems.map((item: any) => this.extractStatus(item.Content.Items[0]));
+  
+        return innerItems
+  
+      }));
+
+      return currentStatuses;
+    
+  }
+  
+
+  facilityCurrentStatusData(facility: string, status:string): Observable<LocationCurrentStatus[]> {
+    const statusLower = status.toLowerCase();
+    
+    if(statusLower === 'composite' || statusLower === 'sum all') {
+      return this.facilityCurrentCompositeData(facility);
+    }
+    
+    if(statusLower === 'dp') {
+      return this.facilityCurrentDpData(facility); 
+    }
+    return this.facilityCurrentSpecificAttributeData(facility, status);
   }
 
   roomCurrentAttributeDataDP(facility: string, room: string, dpRoom: string) {

@@ -200,6 +200,11 @@ export interface PiDataFilter {
         ),
         map((f) => f.facility)
       );
+
+      const selectedStatus$ = this._piDataFilter$.pipe(
+        map((f) => (f.status.toLowerCase())),
+        distinctUntilChanged()
+      );
       
       // create an observable of the marker type to use with the map - 'pin' or 'arrow'
       const svgMapMarker$ = this._piDataFilter$.pipe(
@@ -207,42 +212,35 @@ export interface PiDataFilter {
         distinctUntilChanged()
       );
   
-      // Update the floor plan, current status values for rooms, and parameter values for rooms when the facility changes
+      // Update the floor plan when the facility changes
       selectedFacility$
-        .pipe(
-          filter(facility=>Boolean(facility?.value)),
-          mergeMap((facility) =>
-            zip(
-              of(facility.value),
-              this.piWebApiService.facilityCurrentStatusData(facility.sectionName),
-              this.dataService.roomParameterInfo(facility.value) // parameter info from database for each room and attribute in facility
-            )
-          )
-        )
-        .subscribe(([facilityId, currentStatusValues, parameterValues]) => {
-          const backGroundImageUrl = `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
+        .subscribe(facility => {
+          const backGroundImageUrl = `assets/images/orig-floor-plans/FID${facility.value}_FloorPlan.jpg`;
           this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
-  
-          this._currentStatusValues$.next(currentStatusValues);
-  
-          const compositeStatusValues = currentStatusValues.filter(
-            (x:any) => x.attribute === 'Composite' || x.locationName.endsWith('_DP')
-          );
-          const pinStatusLookup = reduce(
-            compositeStatusValues,
-            (acc, x) => ({
-              ...acc,
-              [x.locationName]: this.statusColor(x.statusPoint.numeric_value)
-            }),
-            {}
-          );
-          this._pinStates.next(pinStatusLookup);
-  
-          this._parameterValues$.next(parameterValues);
-  
-          this._selectedPin$.next('');
-          this._selectedRoomInfo$.next({});
         });
+
+      // Update the room states when the facility or the selected status attribute changes
+      combineLatest([selectedFacility$, selectedStatus$])
+        .pipe(
+          mergeMap(([facility,status]) => {
+            return this.piWebApiService.facilityCurrentStatusData(facility.sectionName, status);
+          }),
+          map((statusData)=>{
+            const pinStatusLookup = reduce(
+              statusData,
+              (acc, x) => ({
+                ...acc,
+                [x.locationName]: this.statusColor(x.statusPoint.numeric_value)
+              }),
+              {}
+            );
+            return pinStatusLookup;
+          })
+        ).subscribe((pinStatusLookup)=>{
+          this._pinStates.next(pinStatusLookup);
+    
+        })
+        
   
       // Get the pins or arrows for the Svg Floor plan if the facility changes or attriibute changes between not dp and dp
       combineLatest([selectedFacility$, svgMapMarker$])
