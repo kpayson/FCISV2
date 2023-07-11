@@ -9,6 +9,7 @@ import { keyBy, reduce } from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../api/data.service';
 import { FacilityGsf } from '../api/models';
+import { PiWebApiService } from '../api/pi-webapi.service';
 
 @Component({
   selector: 'app-portfolio-dashboard',
@@ -49,7 +50,7 @@ export class PortfolioDashboardComponent implements OnInit {
   chartOptions:any
   
 
-  constructor(private activatedRoute: ActivatedRoute, private dataService: DataService) {
+  constructor(private activatedRoute: ActivatedRoute, private dataService: DataService, private piWebApiService: PiWebApiService) {
     this.growthByFacilityData$ = this.activatedRoute.params.pipe(
       mergeMap(p => this.dataService.gsfByFacility(p.portfolioId)),
       map((d: any) => d.map((x: any) => [x.facility, x.gsf]))
@@ -84,7 +85,8 @@ export class PortfolioDashboardComponent implements OnInit {
 
     this.activatedRoute.params.pipe(
       mergeMap((p: any) =>
-        this.dataService
+        //this.dataService
+        this.piWebApiService
           .facilityAlltimelineData(
             p.portfolioId,
             twoDaysAgo,

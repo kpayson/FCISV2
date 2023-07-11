@@ -214,8 +214,6 @@ export interface PiDataFilter {
           mergeMap((facility) =>
             zip(
               of(facility.value),
-              // of([] as any),
-              //this.dataService.facilityCurrentStatusData(facility.value), // status for each room and attribute in facility
               this.piWebApiService.facilityCurrentStatusData(facility.sectionName),
               this.dataService.roomParameterInfo(facility.value) // parameter info from database for each room and attribute in facility
             )
@@ -223,9 +221,6 @@ export interface PiDataFilter {
         )
         .subscribe(([facilityId, currentStatusValues, parameterValues]) => {
           const backGroundImageUrl = `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
-            // facilityId == 0
-            //   ? 'assets/images/floor-plans/apf_facility_all_background.png'
-            //   : `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
           this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
   
           this._currentStatusValues$.next(currentStatusValues);

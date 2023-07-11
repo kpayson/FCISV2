@@ -251,16 +251,79 @@ export class PiWebApiService {
     startDate: Date,
     endDate: Date,
     interval: number
-  ) {
-    return this.post<FacilityTimeSeriesData[]>(
-      `Timeline/AllFacilityTimelineData`,
-      {
-        portfolioId,
-        startDate,
-        endDate,
-        interval
+  ):Observable<FacilityTimeSeriesData[]> {
+
+    const postBody = {
+      "cgmp": {
+        "Method": "GET",
+        "Resource": "https://orf-cogenaf.ors.nih.gov/piwebapi/elements?path=\\\\ORF-COGENAF\\cGMP\\cGMP"
+      },
+      "facilities": {
+        "Method": "GET",
+        "Resource":"https://orf-cogenaf.ors.nih.gov/piwebapi/elements/{0}/elements",
+        "ParentIds":["cgmp"],
+        "Parameters":["$.cgmp.Content.WebId"]
+      },
+    
+      "timelines": {
+        "Method": "GET",
+        "ParentIds": ["facilities"],
+    
+        "RequestTemplate": {
+          "Resource":"https://orf-cogenaf.ors.nih.gov/piwebapi/streamsets/{0}/interpolated?startTime=*-2d&endTime=*&interval=60m&nameFilter=facility_status_check"
+        },
+        "Parameters":["$.facilities.Content.Items[*].WebId"]
       }
-    );
+    };
+
+    const portfolioFacilities:{[portfolioId:string]:string[]} = {
+      CC: ['PET_1','PET_3','2J','E_TER','DLM_SL','IIVAU'],
+      CCE: ['2J','E_TER'],
+      CCPharmacy: ['IIVAU','P_IVAU'],
+      CCOther: ['PET_1','PET_3','DLM_SL'],
+      NCI:['VVF','HPP','T30','Tr1','Tr2'],
+      NIAID:[]
+    }
+
+
+    const timelines = this.post<any>(
+      `batch`, postBody
+    ).pipe(map(x => {
+      const outerItems = x.timelines.Content.Items as any[];
+      const facilityChecks = outerItems.filter(y=>y.Content.Items.some(Boolean)).map((y:any)=>y.Content.Items[0]);
+      const timeSeriesData = facilityChecks.map((y:any)=>{
+        try {
+          const path = y.Path;   //'\\\\ORF-COGENAF\\cGMP\\cGMP\\2J|Facility_Status_Check'
+          const i = path.indexOf('|');
+          const elementPath = path.substring(0, i);
+          const facilityName = elementPath.split('\\').slice(-1)[0];
+          const points = (y.Items || []).map((z:any)=>{
+            return {
+              numeric_value:z.Value,
+              timestamp:new Date(z.Timestamp).valueOf()
+            }
+          })
+          return {
+            facility: {
+              facilityName
+            },
+            points,
+            tag:elementPath
+          }
+        }
+        catch(e){
+          console.log(e);
+          return {} as FacilityTimeSeriesData;
+        }
+
+      });
+      const chosenFacilities = portfolioFacilities[portfolioId];
+      const facilityTimeSeriesData = timeSeriesData.filter(y=>chosenFacilities.some(z=>z === y.facility.facilityName))
+      return facilityTimeSeriesData as FacilityTimeSeriesData[];
+    }));
+
+
+    return timelines;
   }
 
   facilityRoomsTimelineDate(
