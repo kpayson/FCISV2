@@ -69,9 +69,7 @@ export interface PiDataFilter {
     constructor(private dataService: DataService, private piWebApiService:PiWebApiService) {
       const defaultStartDate = new Date();
       defaultStartDate.setDate(defaultStartDate.getDate() - 1);
-  
-      const defaultEndDate = new Date();
-  
+
       this._piDataFilter$ = new Subject<PiDataFilter>()
       // new BehaviorSubject<PiDataFilter>({
       //   facility: { repName: '', sectionName: '', value: 0 },
@@ -114,39 +112,7 @@ export interface PiDataFilter {
       this._hoveredTimelineLabel$ = new BehaviorSubject<string>('');
       this._apfLimits$ = new BehaviorSubject<apfLimitsLookup>({});
       this._pinStates = new BehaviorSubject<locationStatusLookup>({});
-  
-      // Set the list of Facilities when the IC changes
-      // this._ic$
-      //   .pipe(
-      //     filter(Boolean),
-      //     mergeMap((ic: string) => {
-      //       return this.dataService.facilitiesByIC(ic).pipe(
-      //         map((facs) => {
-      //           const facilityOptions = facs.map((fac: any) => {
-      //             const option = {
-      //               repName: fac.facilityRepName,
-      //               sectionName: fac.facilitySection,
-      //               value: fac.facilityId
-      //             };
-      //             return option;
-      //           });
-      //           const all = [
-      //             {
-      //               repName: `All ${ic.toLocaleUpperCase()}`,
-      //               sectionName: '',
-      //               value: '0'
-      //             },
-      //             ...facilityOptions
-      //           ];
-      //           return all;
-      //         })
-      //       );
-      //     })
-      //   )
-      //   .subscribe((facOptions) => {
-      //     this._facilityFilterOptions$.next(facOptions);
-      //   });
-  
+    
       // Setup APF Limits from PI for all facilities
       //this.dataService.apfLimits().subscribe((limits: any[]) => {
       this.piWebApiService.apfLimits().subscribe((limits: any[]) => {
@@ -169,26 +135,6 @@ export interface PiDataFilter {
         catch(e){
           console.log(e)
         }
-
-
-        // const limitsLookup = reduce(limits, (acc, limit) => {
-          
-        //   if(limit.Conn_Room) {
-        //     const name1 = limit.Conn_Room ? `${limit.Room}_${limit.Conn_Room}_DP` : limit.Room;
-        //     const name2 = limit.Conn_Room ? `${limit.Conn_Room}_${limit.Room}_DP` : limit.Room;
-        //     // hard to know room/conn_room order so add lookup for both directions
-        //     return{...acc,
-        //       [`${limit.Facility.toLowerCase()}|${name1.toLowerCase()}`]: limit,
-        //       [`${limit.Facility.toLowerCase()}|${name2.toLowerCase()}`]: limit,
-        //     }
-        //   } else {       
-        //     return{...acc,
-        //       [`${limit.Facility.toLowerCase()}|${limit.Room.toLowerCase()}`]: limit,
-        //     }
-        //   }
-  
-        // }
-      //);
   
         this._apfLimits$.next(limitsLookup);
       });
@@ -279,17 +225,9 @@ export interface PiDataFilter {
               //this.dataService.roomCurrentAttributeData(facility.value,pin)))
               this.piWebApiService.roomCurrentAttributeData(facility.sectionName,pin)))
           )
-      // this._selectedPin$.pipe(
-      //   filter(Boolean),
-      //   mergeMap((pin:string)=>zip(
-      //     of(pin),
-      //     this.dataService.roomCurrentAttributeData(this._piDataFilter$.value.facility.value,pin)
-      //   ))
-      // )
+
       roomCurrentAttributeData$
       .subscribe(([facility,pin,roomStatusValues]) => {
-        // const facility =
-        //   this._piDataFilter$.value.facility.sectionName.toLowerCase();
         const sectionName = facility.sectionName.toLowerCase();
         const key = `${sectionName}|${pin.toLowerCase()}`; // pin = room number
         const apfLimits = this._apfLimits$.value[key];
@@ -327,16 +265,8 @@ export interface PiDataFilter {
       // prepare data for specific facility timeline
       this._piDataFilter$
         .pipe(
-          // filter((f) => f.facilityOrPortfolio == 'facility'),
           mergeMap((filter: PiDataFilter) =>
-            // this.dataService
-            //   .facilityRoomsTimelineDate(
-            //     filter.facility.value,
-            //     filter.status,
-            //     filter.startDate,
-            //     filter.endDate,
-            //     filter.interval
-            //   )
+
             this.piWebApiService.timelineData(
               filter.facility.sectionName,
               filter.status,
