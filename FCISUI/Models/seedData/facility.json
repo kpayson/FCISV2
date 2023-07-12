@@ -164,7 +164,7 @@
         "FacilityName": "CC PHAR Pharmacy & IVAU",
         "FacilityAbbrName": "Pharmacy & IVAU",
         "FacilityIC": "CC Pharmacy",
-        "FacilitySection": null,
+        "FacilitySection": "P_IVAU",
         "FacilityBuilding": null,
         "FacilityLocation": null,
         "FacilityType": null,

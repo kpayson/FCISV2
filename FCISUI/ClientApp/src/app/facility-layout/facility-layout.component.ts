@@ -113,12 +113,12 @@ export class FacilityLayoutComponent implements OnInit {
     "1": this.allStatusOptionsExceptDP,
     "2": this.allStatusOptionsExceptDP,
     "3": this.allStatusOptions,
-    "4": this.allStatusOptionsExceptDP,
+    "4": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
     "5": this.allStatusOptions,
     "6": this.allStatusOptions,
     "7": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
-    "8": this.allStatusOptions,
-    "9": this.allStatusOptionsExceptDP,
+    "8": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
+    "9": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
     "10": this.allStatusOptions,
     "11": this.allStatusOptions,
     "12": this.allStatusOptions,
@@ -129,7 +129,7 @@ export class FacilityLayoutComponent implements OnInit {
     "17": this.allStatusOptionsExceptDP,
     "18": this.allStatusOptionsExceptDP,
     "19": this.allStatusOptions,
-    "20": this.allStatusOptions
+    "20": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
   }
 
   facilitySections:{[key:string]:string} = {

@@ -63,10 +63,10 @@ export class NavMenuComponent {
               label: 'CCE 2J Cell Therapy Facility',
               command: this.routeToFacility(3)
             },
-            // {
-            //   label: 'CCE 12E Cell Therapy Facility',
-            //   command: this.routeToFacility(4)
-            // },
+            {
+              label: 'CCE 12E Cell Therapy Facility',
+              command: this.routeToFacility(4)
+            },
             {
               label: 'CCE East Terrace Modular T10B',
               command: this.routeToFacility(5)
@@ -75,18 +75,18 @@ export class NavMenuComponent {
               label: 'CC Pharmacy I-IVAU',
               command: this.routeToFacility(17)
             },
-            // {
-            //   label: 'CC Pharmacy P-IVAU',
-            //   command: this.routeToFacility(9)
-            // },
+            {
+              label: 'CC Pharmacy P-IVAU',
+              command: this.routeToFacility(9)
+            },
             {
               label: 'CC DLM Sterility Lab',
               command: this.routeToFacility(6)
             },
-            // {
-            //   label: 'CC Interim Nuclear Pharmacy',
-            //   command: this.routeToFacility(7)
-            // },
+            {
+              label: 'CC Interim Nuclear Pharmacy',
+              command: this.routeToFacility(7)
+            },
             {
               label: 'CC PET Radiopharmacy',
               command: this.routeToFacility(1)
@@ -108,10 +108,10 @@ export class NavMenuComponent {
               label: 'CCE 2J Cell Therapy Facility',
               command: this.routeToFacility(3)
             },
-            // {
-            //   label: 'CCE 12E Cell Therapy Facility',
-            //   command: this.routeToFacility(4)
-            // },
+            {
+              label: 'CCE 12E Cell Therapy Facility',
+              command: this.routeToFacility(4)
+            },
             {
               label: 'CCE East Terrace Modular T10B',
               command: this.routeToFacility(5)
@@ -146,10 +146,10 @@ export class NavMenuComponent {
               label: 'CC DLM Sterility Lab',
               command: this.routeToFacility(6)
             },
-            // {
-            //   label: 'CC Interim Nuclear Pharmacy',
-            //   command: this.routeToFacility(7)
-            // },
+            {
+              label: 'CC Interim Nuclear Pharmacy',
+              command: this.routeToFacility(7)
+            },
             {
               label: 'CC PET Radiopharmacy',
               command: this.routeToFacility(1)
@@ -160,15 +160,15 @@ export class NavMenuComponent {
             }
           ]
         },
-        // {
-        //   label: 'NIAD Portfolio',
-        //   items: [
-        //     {
-        //       label: 'NIAID 29B Pilot Bioproduction Facility',
-        //       command: this.routeToFacility(20)
-        //     }
-        //   ]
-        // },
+        {
+          label: 'NIAD Portfolio',
+          items: [
+            {
+              label: 'NIAID 29B Pilot Bioproduction Facility',
+              command: this.routeToFacility(20)
+            }
+          ]
+        },
         {
           label: 'NCI Portfolio',
           items: [
