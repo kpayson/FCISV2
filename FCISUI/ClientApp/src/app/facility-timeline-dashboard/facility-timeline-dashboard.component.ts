@@ -88,8 +88,6 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
   selectedRoomInfo$: Observable<{ [field: string]: string }>;
 
   isFacilityAll$: Observable<boolean>;
-  selectedAttributeStatus$: Observable<string>;
-
 
   filterParams: any = {
     startDate: '',
@@ -122,9 +120,7 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
     this.timelineChartData$ = this.service.timelineChartData$;
     this.selectedRoomInfo$ = this.service.selectedRoomInfo$;
     this.isFacilityAll$ = this.service.isFacilityAll$;
-    this.selectedAttributeStatus$ = this.service.piDataFilter$.pipe(
-      map((x) => x.status)
-    );
+
     this.selectedRoomInfo$.pipe(
       map((x) => Object.keys(x).length > 0)
     ).subscribe(x => {

@@ -212,12 +212,27 @@ export interface PiDataFilter {
         distinctUntilChanged()
       );
   
-      // Update the floor plan when the facility changes
+      // Update the floor plan and room parameter info needed by svg map when the facility changes
       selectedFacility$
-        .subscribe(facility => {
-          const backGroundImageUrl = `assets/images/orig-floor-plans/FID${facility.value}_FloorPlan.jpg`;
+        .pipe(
+          filter(facility=>Boolean(facility?.value)),
+          mergeMap((facility) =>
+            zip(
+              of(facility.value),
+              this.dataService.roomParameterInfo(facility.value) // parameter info from database for each room and attribute in facility
+            )
+          )
+        )
+        .subscribe(([facilityId, parameterValues]) => {
+          const backGroundImageUrl = `assets/images/orig-floor-plans/FID${facilityId}_FloorPlan.jpg`;
           this._svgMapBackgroundImageUrl$.next(backGroundImageUrl);
+
+          this._parameterValues$.next(parameterValues);
+  
+          this._selectedPin$.next('');
+          this._selectedRoomInfo$.next({});
         });
+      
 
       // Update the room states when the facility or the selected status attribute changes
       combineLatest([selectedFacility$, selectedStatus$])

@@ -102,5 +102,5 @@
 
 <p-dialog header="Room Information" [(visible)]="roomInfoDialogVisible" [style]="{width: '50vw'}" (onHide)="hideRoomInfo($event)">
     <app-room-info-display [roomInfo]="(selectedRoomInfo$ | async) || {}"
-    [attribute]="(selectedAttributeStatus$ | async) || ''"></app-room-info-display>
+    [attribute]="(dashboardId$ | async) || ''"></app-room-info-display>
 </p-dialog>

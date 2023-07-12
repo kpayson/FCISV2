@@ -36,6 +36,7 @@ namespace FCISUI.Controllers
         }
 
         [HttpGet("{facilityId}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 3600)]
         public ActionResult<SvgMap> GetSvgMap(int facilityId, string marker = "pin")
         {
             try {
@@ -117,6 +118,7 @@ namespace FCISUI.Controllers
 
 
         [HttpGet("RoomParameterInfo/facility/{facilityId}")]
+        [ResponseCache(NoStore = false, Location = ResponseCacheLocation.Any, Duration = 3600)]
         public ActionResult<IEnumerable<Room>> RoomParameterInfo(int facilityId) {
             var rooms = this._context.Rooms.Where(r=>r.FacilityId == facilityId)
                 .Include(room => room.RoomParameters).Where(r=>r.FacilityId == facilityId).ToList();
