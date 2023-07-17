@@ -1,9 +1,9 @@
 
 <ul>
-    <li>
+    <li *ngIf="facilityId==3 || facilityId==16 || facilityId==5" >
         <b>CCE</b>
         <ul>
-            <li>
+            <li *ngIf="facilityId==3">
                 <b>2J</b>
                 <ul>
                     <li><a target="_blank" href="{{baseUrl}}/CCE/2J/2J%20MANUFACTURING%20FACILITY%20REPORT%20%20April%202022.pdf">2J
@@ -38,7 +38,7 @@
                             MANUFACTURING FACILITY REPORT September 2022.pdf</a></li>
                 </ul>
             </li>
-            <li>
+            <li  *ngIf="facilityId==16">
                 <b>3T</b>
                 <ul>
                     <li>
@@ -72,7 +72,7 @@
                 </ul>
 
             </li>
-            <li>
+            <li *ngIf="facilityId==5">
                 <b>ETER</b>
                 <ul>
                     <li><a target="_blank" href="{{baseUrl}}/CCE/ETER/T10B%20MANUFACTURING%20FACILITY%20REPORT%20%20August%202022.pdf">T10B
@@ -104,7 +104,7 @@
             </li>
         </ul>
     </li>
-    <li>
+    <li *ngIf="facilityId==6">
         <b>DLM</b>
         <ul>
             <li><a target="_blank" href="{{baseUrl}}/DLM/2022.07.14%20DLM%20SL%20Facility%20Tour%20open%20Exceptions.pdf">2022.07.14 DLM
@@ -117,7 +117,7 @@
                     3.docx</a></li>
         </ul>
     </li>
-    <li>
+    <li *ngIf="facilityId==17">
         <b>Pharm</b>
         <ul>
             <li><a target="_blank" href="{{baseUrl}}/Pharm/I-IVAU/2021.09.14%20IIVAU%20Facility%20Tour%20Findings%20.pdf">2021.09.14
@@ -149,5 +149,8 @@
                     Facility Tour open Exceptions 4.12.2022.pdf</a></li>
         </ul>
 
+    </li>
+    <li *ngIf="!(facilityId == 3 || facilityId == 16 || facilityId==5 || facilityId==6 || facilityId==17)">
+        <b>No reports available for this facility</b>
     </li>
 </ul>

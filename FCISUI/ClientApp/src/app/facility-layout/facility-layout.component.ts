@@ -125,11 +125,11 @@ export class FacilityLayoutComponent implements OnInit {
     "13": this.allStatusOptions,
     "14": this.allStatusOptionsExceptDP,
     "15": this.allStatusOptionsExceptDP,
-    "16": this.allStatusOptionsExceptDP,
+    "16": [{label:"Unavailable"}], // this.allStatusOptionsExceptDP,
     "17": this.allStatusOptionsExceptDP,
     "18": this.allStatusOptionsExceptDP,
     "19": this.allStatusOptions,
-    "20": [{label:"Unavailable"}], //this.allStatusOptionsExceptDP,
+    "20": [{label:"Unavailable"}], // this.allStatusOptionsExceptDP,
   }
 
   facilitySections:{[key:string]:string} = {
@@ -178,12 +178,12 @@ export class FacilityLayoutComponent implements OnInit {
           this.selectedTab = 'documents'
         }
       },
-      {
-        label: "Condition Reports",
-        command: (event: any) => {
-          this.selectedTab = 'condition_reports'
-        }
-      },
+      // {
+      //   label: "Condition Reports",
+      //   command: (event: any) => {
+      //     this.selectedTab = 'condition_reports'
+      //   }
+      // },
       // {
       //   label: "FCIS Resources",
       //   command: (event: any) => {
