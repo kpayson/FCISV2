@@ -15,6 +15,7 @@ import { FacilityAllMapComponent } from './facility-all-map/facility-all-map.com
 import { FacilityDescriptionComponent } from './facility-description/facility-description.component';
 import { FacilityInfoPageComponent } from './facility-info-page/facility-info-page.component';
 import { FacilityLayoutComponent } from './facility-layout/facility-layout.component';
+import { FacilityReportsComponent } from './facility-reports/facility-reports.component';
 import { FacilityTimelineDashboardComponent } from './facility-timeline-dashboard/facility-timeline-dashboard.component';
 import { FcisResourcesComponent } from './fcis-resources/fcis-resources.component';
 import { FormulaHeaderComponent } from './formula-header/formula-header.component';
@@ -23,7 +24,6 @@ import { GsfGrowthByClassificationChartComponent } from './gsf-growth-by-classif
 import { GsfPieChartComponent } from './gsf-pie-chart/gsf-pie-chart.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { LeftNavComponent } from './left-nav/left-nav.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { NgModule } from '@angular/core';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
@@ -43,7 +43,6 @@ import { StaticContentPageComponent } from './static-content-page/static-content
 import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component';
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
-import { FacilityReportsComponent } from './facility-reports/facility-reports.component';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
@@ -71,7 +70,6 @@ import { FacilityReportsComponent } from './facility-reports/facility-reports.co
     RoomInfoDisplayComponent,
     RoomDataTableComponent,
     ErrorLogDashboardComponent,
-    LeftNavComponent,
     FacilityInfoPageComponent,
     ContactUsDialogComponent,
     StaticContentPageComponent,
