@@ -88,10 +88,12 @@ namespace FCISUI
             builder.Services.AddControllersWithViews().AddJsonOptions(options =>
                 options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
+            var connString = builder.Configuration.GetConnectionString("FCIS");
             builder.Services.AddDbContext<FCISPortalContext>(options =>
 
             options.UseInMemoryDatabase(databaseName: "FCISInMem"));
-            //options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
+            
+            //options.UseSqlServer(connString));
 
             builder.Services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

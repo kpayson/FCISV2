@@ -1,4 +1,4 @@
-import {BehaviorSubject, Observable, map} from 'rxjs'
+import {BehaviorSubject, Observable } from 'rxjs'
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../api/data.service';

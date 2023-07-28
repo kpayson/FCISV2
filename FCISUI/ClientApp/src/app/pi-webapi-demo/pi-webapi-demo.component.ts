@@ -124,7 +124,7 @@ export class PiWebapiDemoComponent implements OnInit {
       }
 
       const locations:any = {};
-      for(let d of dataAndFilter.data) {
+      for(const d of dataAndFilter.data) {
         locations[d.location.roomNumber] =d.location
       }
 

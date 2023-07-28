@@ -28,7 +28,7 @@ export class ApfPortfolioMapComponent implements OnInit, AfterViewInit {
   tooltips: {[title: string]: any} = {};
 
   ngAfterViewInit(): void {
-    let pinElems = document.querySelectorAll('#Pins_Ownership a');
+    const pinElems = document.querySelectorAll('#Pins_Ownership a');
     pinElems.forEach((elem) => {
       const title = elem.getAttribute('data-title')!;
       // (elem as any).tooltip({

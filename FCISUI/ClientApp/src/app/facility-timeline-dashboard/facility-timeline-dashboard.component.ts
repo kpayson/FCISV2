@@ -1,17 +1,13 @@
-import { BehaviorSubject, Observable, Subject, combineLatest, filter, map } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Facility, SvgMap } from '../api/models';
 import {
   FacilityTimelineDashboardService,
-  PiDataFilter,
   TimelineChartData,
   locationStatusLookup
 } from './facility-timeline-dashboard.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
-import { ActivatedRoute } from '@angular/router';
-import { RoomInfoDisplayComponent } from '../room-info-display/room-info-display.component';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-facility-timeline-dashboard',

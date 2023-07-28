@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, Subject, debounce, timer } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,7 +7,7 @@ import {
   OnInit,
   Output
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 type filterFormData = {
   facility: FormControl<{

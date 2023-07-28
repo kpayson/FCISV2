@@ -1,4 +1,4 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import { moduleMetadata, Story } from '@storybook/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThirdPartyComponentsModule } from '../3rd-party-components/3rd-party-components.module';
 

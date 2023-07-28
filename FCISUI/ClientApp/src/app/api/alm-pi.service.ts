@@ -89,7 +89,7 @@ export class AlmPiService {
       'selectedFields=Items.Name;Items.CategoryNames;Items.Severity;Items.StartTime;Items.EndTime'
     ].join('&');
 
-    var url: string = [
+    const url: string = [
       this.AF_SERVER,
       '/piwebapi/assetdatabases/',
       this.DB_WEBID,

@@ -1,10 +1,10 @@
 import { BehaviorSubject, Observable, Subject, catchError, map, mergeMap, of } from 'rxjs';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import {
   TimelineChartData,
   TimelineChartDataPoint
 } from '../facility-timeline-dashboard/facility-timeline-dashboard.service';
-import { keyBy, reduce } from 'lodash';
+import { keyBy} from 'lodash';
 
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../api/data.service';

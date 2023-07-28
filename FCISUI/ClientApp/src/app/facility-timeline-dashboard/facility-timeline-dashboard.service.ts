@@ -120,7 +120,7 @@ export interface PiDataFilter {
         const limitsLookup:{[key:string]:string} = {};
 
         try {
-          for(let limit of limits) {
+          for(const limit of limits) {
             if(limit.Conn_Room) {
               const name1 = limit.Conn_Room ? `${limit.Room}_${limit.Conn_Room}_DP` : limit.Room;
               const name2 = limit.Conn_Room ? `${limit.Conn_Room}_${limit.Room}_DP` : limit.Room;
@@ -332,7 +332,7 @@ export interface PiDataFilter {
           }
 
           const locations:any = {};
-          for(let d of dataAndFilter.data) {
+          for(const d of dataAndFilter.data) {
             locations[d.location.roomNumber] =d.location
           }
 
