@@ -91,7 +91,7 @@ namespace FCISUI.Models
 
                 entity.Property(e => e.LastEditDate).HasColumnType("datetime");
 
-                entity.Property(e => e.LastEditPersonRoleId).HasColumnName("LastEditPersonRoleID");
+                entity.Property(e => e.LastEditPersonRoleId).HasColumnName("LastEditPersonRoleId");
 
                 entity.Property(e => e.OriginalFileName)
                     .HasMaxLength(255)
@@ -105,7 +105,7 @@ namespace FCISUI.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.UploadPersonRoleId).HasColumnName("UploadPersonRoleID");
+                entity.Property(e => e.UploadPersonRoleId).HasColumnName("UploadPersonRoleId");
             });
 
             modelBuilder.Entity<AttachmentType>(entity =>
@@ -260,11 +260,12 @@ namespace FCISUI.Models
                     .IsUnicode(false);
             });
 
+
             modelBuilder.Entity<Person>(entity =>
             {
                 entity.ToTable("Person");
 
-                entity.Property(e => e.PersonId).HasColumnName("PersonID");
+                entity.Property(e => e.PersonId).HasColumnName("PersonId");
 
                 entity.Property(e => e.Active).HasDefaultValueSql("((1))");
 
@@ -318,14 +319,14 @@ namespace FCISUI.Models
                 entity.Property(e => e.UserId)
                     .HasMaxLength(255)
                     .IsUnicode(false)
-                    .HasColumnName("UserID");
+                    .HasColumnName("UserId");
             });
 
             modelBuilder.Entity<PersonRole>(entity =>
             {
                 entity.ToTable("PersonRole");
 
-                entity.Property(e => e.PersonRoleId).HasColumnName("PersonRoleID");
+                entity.Property(e => e.PersonRoleId).HasColumnName("PersonRoleId");
 
                 entity.Property(e => e.Comments)
                     .HasMaxLength(255)
@@ -333,22 +334,22 @@ namespace FCISUI.Models
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PersonId).HasColumnName("PersonID");
+                entity.Property(e => e.PersonId).HasColumnName("PersonId");
 
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+                entity.Property(e => e.RoleId).HasColumnName("RoleId");
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
+                entity.Property(e => e.RoleId).HasColumnName("RoleId");
 
                 entity.Property(e => e.Comments)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Role1)
+                entity.Property(e => e.RoleName)
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("Role");

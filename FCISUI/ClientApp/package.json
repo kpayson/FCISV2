@@ -35,6 +35,8 @@
     "@tinymce/tinymce-angular": "^7.0.0",
     "@types/google.visualization": "^0.0.69",
     "angular-google-charts": "^2.2.3",
+    "angular-oauth2-oidc": "^14.0.1",
+    "angular-oauth2-oidc-jwks": "^14.0.1",
     "bootstrap": "^5.2.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",

@@ -34,6 +34,9 @@ using FCISUI.Models;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 // using AppPermissions = DAL.Core.ApplicationPermissions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace FCISUI
 {
@@ -48,10 +51,11 @@ namespace FCISUI
             AddServices(builder);// Add services to the container.
 
             var app = builder.Build();
+            var settings = app.Configuration.Get<AppSettings>();
+
+
 
             ConfigureRequestPipeline(app); // Configure the HTTP request pipeline.
-
-            var settings = app.Configuration.Get<AppSettings>();
 
             InitializeDatabase(app); //ensure database is created
 
@@ -75,26 +79,38 @@ namespace FCISUI
 
         private static void AddServices(WebApplicationBuilder builder)
         {
-            var connectionString = builder.Configuration.GetConnectionString("FCIS") ??
-                            throw new InvalidOperationException("Connection string 'FCIS' not found.");
+            var settings = builder.Configuration.Get<AppSettings>();
 
             builder.Services.AddHttpClient();
 
             builder.Services.AddCors();
 
             builder.Services.AddControllersWithViews().AddJsonOptions(options =>
-    options.JsonSerializerOptions.ReferenceHandler =
-         System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddDbContext<FCISPortalContext>(options =>
 
+            options.UseInMemoryDatabase(databaseName: "FCISInMem"));
+            //options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
 
-
-  options.UseInMemoryDatabase(databaseName: "FCISInMem"));
-            // options.UseSqlServer(builder.Configuration.GetConnectionString("FCIS")));
-
-
-
+            builder.Services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = settings.OidcIssuer; //"https://your-identity-provider-url"; // Set the URL of your Identity Provider
+                    options.Audience = settings.OidcClientId; // Set the audience value of your API resource
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = false, //true,
+                        ValidIssuer = settings.OidcIssuer, //"https://stsstg.nih.gov",
+                        ValidAudience = settings.OidcClientId, // "556a5a98-f1cd-4b98-aade-19f8bbbee22f" 
+                        // IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("your-signing-key")) // Set the signing key used to sign the JWT tokens
+                    };
+                });
+            builder.Services.AddAuthorization();
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FCISAPI", Version = "v1" });
@@ -127,6 +143,9 @@ namespace FCISUI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

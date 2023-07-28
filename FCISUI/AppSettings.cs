@@ -14,6 +14,8 @@ namespace FCISUI
     public class AppSettings
     {
         public SmtpConfig SmtpConfig { get; set; }
+        public string OidcIssuer { get; set; }
+        public string OidcClientId {get; set;}
 
     }
 

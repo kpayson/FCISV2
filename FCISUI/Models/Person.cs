@@ -19,5 +19,9 @@ namespace FCISUI.Models
         public string? Title { get; set; }
         public string? Comments { get; set; }
         public int? Active { get; set; }
+
+        // public List<Role> Roles { get; } = new();
+        public virtual ICollection<PersonRole> PersonRoles {get; set;}
+        // public virtual ICollection<Role> Roles {get; set;}
     }
 }

@@ -1,4 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
 
 import { AlmPiService } from './api/alm-pi.service';
 import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
@@ -85,6 +86,7 @@ import { appRoutes } from './routes';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    OAuthModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -92,7 +94,10 @@ import { appRoutes } from './routes';
     ThirdPartyComponentsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [DataService,PiWebApiService, AlmPiService],
+  providers: [
+    DataService,PiWebApiService, AlmPiService,
+  // { provide: OAuthStorage, useValue: localStorage }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

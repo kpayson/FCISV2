@@ -10,28 +10,35 @@ import {
   ICGsf,
   LocationCurrentStatus,
   LocationTimeSeriesData,
+  Role,
   Room,
   RoomTimeSeriesData,
   SvgMap,
   SvgMapPin
 } from './models';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient) {}
+  private headers: HttpHeaders;
+  constructor(private http: HttpClient, private oauthService: OAuthService) {
+    this.headers = new HttpHeaders().set('Accept', 'application/json')
+    .set('Authorization', 'Bearer ' + this.oauthService.getAccessToken());
+
+  }
 
   private get<T>(url: string) {
-    return this.http.get<T>(`${environment.apiRootUrl}/${url}`);
+    return this.http.get<T>(`${environment.apiRootUrl}/${url}`, {headers:this.headers});
   }
 
   private post<T>(url: string, body: any) {
-    return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body);
+    return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body, {headers:this.headers});
   }
 
   facilityById(id: number) {
@@ -180,6 +187,10 @@ export class DataService {
 
   statusReports() {
     return this.get<Attachment[]>(`Attachment/statusReports`);
+  }
+
+  userRoles(userId:string) {
+    return this.get<Role[]>(`Person/userId/${userId}`);
   }
 
   

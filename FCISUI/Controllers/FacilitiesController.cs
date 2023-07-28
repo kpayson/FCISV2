@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FCISUI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FCISUI.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class FacilitiesController : ControllerBase
     {

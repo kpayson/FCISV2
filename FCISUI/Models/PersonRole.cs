@@ -11,5 +11,8 @@ namespace FCISUI.Models
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string? Comments { get; set; }
+
+        public virtual Person Person {get; set;}
+        public virtual Role Role {get;set;}
     }
 }
