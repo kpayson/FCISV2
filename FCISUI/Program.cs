@@ -128,6 +128,7 @@ namespace FCISUI
             builder.Services.AddScoped<IPIDataService, PIDataService>();
             builder.Services.AddScoped<ISvgDataService, SvgDataService>();
             builder.Services.AddScoped<IErrorLogService, ErrorLogService>();
+            builder.Services.AddScoped<IUserInfoService, UserInfoService>();
 
         }
 

@@ -1,0 +1,23 @@
+[
+    {
+        "RoleId": 1,
+        "RoleName": "FCIS User",
+        "Description": "FCIS User",
+        "Comments": null,
+        "SortOrder": 10
+    },
+    {
+        "RoleId": 2,
+        "RoleName": "Other User",
+        "Description": "Non-FCIS User",
+        "Comments": null,
+        "SortOrder": 20
+    },
+    {
+        "RoleId": 3,
+        "RoleName": "Admin",
+        "Description": "Administrator",
+        "Comments": null,
+        "SortOrder": 30
+    }
+]

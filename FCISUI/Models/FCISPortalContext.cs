@@ -28,9 +28,9 @@ namespace FCISUI.Models
         public virtual DbSet<Errorlog> Errorlogs { get; set; } = null!;
         public virtual DbSet<Facility> Facilities { get; set; } = null!;
         public virtual DbSet<Gsfgrowth> Gsfgrowths { get; set; } = null!;
-        // public virtual DbSet<Person> People { get; set; } = null!;
-        // public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
-        // public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<Person> People { get; set; } = null!;
+        public virtual DbSet<PersonRole> PersonRoles { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Room> Rooms { get; set; } = null!;
         public virtual DbSet<RoomParameter> RoomParameters { get; set; } = null!;
 
@@ -497,6 +497,15 @@ namespace FCISUI.Models
             catch(Exception ex) {
                 Console.Write(ex);
             }
+
+            var roles = loader.GetRoles();
+            modelBuilder.Entity<Role>().HasData(roles);
+
+            var people = loader.GetPeople();
+            modelBuilder.Entity<Person>().HasData(people);
+
+            var personRoles = loader.GetPersonRoles();
+            modelBuilder.Entity<PersonRole>().HasData(personRoles);
 
 
 

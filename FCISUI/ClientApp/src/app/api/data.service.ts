@@ -10,11 +10,9 @@ import {
   ICGsf,
   LocationCurrentStatus,
   LocationTimeSeriesData,
-  Role,
   Room,
   RoomTimeSeriesData,
   SvgMap,
-  SvgMapPin
 } from './models';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -26,11 +24,15 @@ import { OAuthService } from 'angular-oauth2-oidc';
   providedIn: 'root'
 })
 export class DataService {
-  private headers: HttpHeaders;
+
   constructor(private http: HttpClient, private oauthService: OAuthService) {
-    this.headers = new HttpHeaders().set('Accept', 'application/json')
+  }
+
+  private get headers() {
+    const headers = new HttpHeaders().set('Accept', 'application/json')
     .set('Authorization', 'Bearer ' + this.oauthService.getAccessToken());
 
+    return headers;
   }
 
   private get<T>(url: string) {
@@ -189,8 +191,8 @@ export class DataService {
     return this.get<Attachment[]>(`Attachment/statusReports`);
   }
 
-  userRoles(userId:string) {
-    return this.get<Role[]>(`Person/userId/${userId}`);
+  currentUserRoles() {
+    return this.get<string[]>(`Roles/currentUser`);
   }
 
   

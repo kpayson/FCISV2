@@ -3,6 +3,8 @@ import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from './auth.config';
 import { filter } from 'rxjs/operators';
+import { DataService } from 'src/app/api/data.service';
+import { UserService } from './shared/auth/user.service';
 
 @Component({
   selector: 'app-root',
@@ -11,37 +13,26 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   title = 'app';
 
-  constructor(private oauthService: OAuthService) 
+  constructor(private oauthService: OAuthService, private userService: UserService) 
   {
-    
-    // this.oauthService.initCodeFlow();
-    this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.loadDiscoveryDocumentAndLogin();
-    
-
-    //this.oauthService.setupAutomaticSilentRefresh();
-
-    // Automatically load user profile
-    this.oauthService.events
-      .pipe(
-        filter((e) => e.type === 'token_received'),
-
-      )
-      .subscribe((_) => {
-        console.debug('state', this.oauthService.state);
-        this.oauthService.loadUserProfile().then((profile)=>{
-          console.log(profile);
-        });
-        const scopes = this.oauthService.getGrantedScopes();
-        console.debug('scopes', scopes);
-      });
+    this.userService.Login();
+    this.userService.currentUser$.subscribe(u=>{
+      console.log(u)
+    });
   }
 
-  get userName(): string {
+  get userId(): string {
 
     const claims = this.oauthService.getIdentityClaims();
     if (!claims) return '';
-    return claims['given_name'];
+    return claims['userid'];
+  }
+
+  get email(): string {
+
+    const claims = this.oauthService.getIdentityClaims();
+    if (!claims) return '';
+    return claims['email'];
   }
 
   get idToken(): string {

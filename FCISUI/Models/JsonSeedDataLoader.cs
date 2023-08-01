@@ -62,5 +62,20 @@ namespace FCISUI.Models
             var attachments = getEntities<Attachment>("attachment.json").ToList();
             return attachments;
         }
+
+        public List<Role> GetRoles() {
+            var roles = getEntities<Role>("roles.json").ToList();
+            return roles;
+        }
+
+        public List<Person> GetPeople() {
+            var people = getEntities<Person>("people.json").ToList();
+            return people;
+        }
+
+        public List<PersonRole> GetPersonRoles() {
+            var personRoles = getEntities<PersonRole>("personRole.json").ToList();
+            return personRoles;
+        }
     }
 }
