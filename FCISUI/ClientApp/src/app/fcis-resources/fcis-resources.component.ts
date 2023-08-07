@@ -5,36 +5,33 @@ import { ContactUsDialogComponent } from '../contact-us-dialog/contact-us-dialog
 import { ContactUsMessage } from '../api/models';
 import { DataService } from '../api/data.service';
 import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-nav-menu',
-//   templateUrl: './nav-menu.component.html',
-//   styleUrls: ['./nav-menu.component.scss'],
-//   providers: [DialogService, DataService]
-// })
-// export class NavMenuComponent {
-//   ref!: DynamicDialogRef;
-
-//   constructor(public dialogService: DialogService, private dataService: DataService, private router: Router) { }
-//   isExpanded = false;
-
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-fcis-resources',
   templateUrl: './fcis-resources.component.html',
-  styleUrls: ['./fcis-resources.component.css'],
+  styleUrls: ['./fcis-resources.component.scss'],
   providers: [DialogService, DataService]
 })
 export class FcisResourcesComponent implements OnInit {
   ref!: DynamicDialogRef;
 
-  constructor(public dialogService: DialogService, private dataService: DataService) { }
+  constructor(
+    public dialogService: DialogService, 
+    private dataService: DataService, 
+    private location: Location, 
+    private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  resourcesClick() {
-    
+
+  backClick() {
+    this.location.back();
+  }
+
+  homeClick() {
+    this.router.navigate(['/home']);
   }
 
   contactUsClick() {
