@@ -20,7 +20,8 @@ export const environment = {
   piWebApiCredentialMode: 'include',
   oidcIssuer: 'https://stsstg.nih.gov',
   oidcClientId: '556a5a98-f1cd-4b98-aade-19f8bbbee22f',
-  oidcDummySecret:'c6df1e86-4b9e-4b3d-8008-300c3802fc4b'
+  oidcDummySecret:'c6df1e86-4b9e-4b3d-8008-300c3802fc4b',
+  redirectUri:'https://localhost:44420'
 };
 
 /*

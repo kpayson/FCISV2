@@ -5,7 +5,7 @@ console.log('redirectUri:' + window.location.origin);
 
 export const authCodeFlowConfig: AuthConfig = {
   issuer: environment.oidcIssuer, //'https://stsstg.nih.gov', 
-  redirectUri: window.location.origin, // + '/index.html',
+  redirectUri: environment.redirectUri, //window.location.origin + '/index.html',
   clientId: environment.oidcClientId,
   responseType: 'code',
   scope: 'openid profile email',

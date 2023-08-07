@@ -22,6 +22,6 @@ namespace FCISUI.Models
 
         // public List<Role> Roles { get; } = new();
         public virtual ICollection<PersonRole> PersonRoles {get; set;}
-        public virtual ICollection<Role> Roles {get; set;}
+        // public virtual ICollection<Role> Roles {get; set;}
     }
 }

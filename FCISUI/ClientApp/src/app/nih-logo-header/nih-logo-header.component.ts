@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../shared/auth/user.service';
 
 @Component({
   selector: 'app-nih-logo-header',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./nih-logo-header.component.scss']
 })
 export class NihLogoHeaderComponent {
-  constructor() {}
+  userName = ''
+  constructor(public userService:UserService) {
+    userService.currentUser$.subscribe(user=> {
+      this.userName = user.firstname;
+    })
+  }
 }
