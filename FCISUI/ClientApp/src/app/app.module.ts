@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { OAuthModule } from 'angular-oauth2-oidc'; //, OAuthStorage
 
 import { AlmPiService } from './api/alm-pi.service';
 import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
@@ -30,7 +30,6 @@ import { NgModule } from '@angular/core';
 import { NihLogoHeaderComponent } from './nih-logo-header/nih-logo-header.component';
 import { PiDataFilterToolbarComponent } from './pi-data-filter-toolbar/pi-data-filter-toolbar.component';
 import {PiWebApiService} from 'src/app/api/pi-webapi.service';
-import { PiWebapiDemoComponent } from './pi-webapi-demo/pi-webapi-demo.component';
 import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-dashboard.component';
 import { RoomDataTableComponent } from './room-data-table/room-data-table.component';
 import { RoomInfoDisplayComponent } from './room-info-display/room-info-display.component';
@@ -82,7 +81,6 @@ import { UserService } from './shared/auth/user.service';
     FacilityTimelineDashboardComponent,
     PortfolioDashboardComponent,
     SopsComponent,
-    PiWebapiDemoComponent,
     FacilityReportsComponent
   ],
   imports: [

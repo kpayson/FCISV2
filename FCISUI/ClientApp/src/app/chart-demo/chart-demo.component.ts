@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import {
   ChartErrorEvent,
   ChartMouseLeaveEvent,
-  ChartMouseOverEvent,
   ChartSelectionChangedEvent,
   ChartType,
   Column,
