@@ -5,7 +5,7 @@ import { ContactUsDialogComponent } from '../contact-us-dialog/contact-us-dialog
 import { ContactUsMessage } from '../api/models';
 import { DataService } from '../api/data.service';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-fcis-resources',
