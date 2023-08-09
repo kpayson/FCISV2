@@ -2,14 +2,7 @@ import { Attachment, AttachmentGroup } from '../api/models';
 import {
     BehaviorSubject,
     Observable,
-    Subject,
-    combineLatest,
-    distinctUntilChanged,
-    filter,
-    map,
-    mergeMap,
-    of,
-    zip
+    map
 } from 'rxjs';
 
 import { DataService } from 'src/app/api/data.service';
@@ -41,7 +34,7 @@ export class FacilityInfoPageService {
         4: "CC-CCE-12E.about.html",
         5: "CC-CCE-NCI.about.html",
         6: "CC-DLM-Lab.about.html",
-        7: "CC-NMD_RADIO.about.html",
+        7: "CC-NMD_Radio.about.html", //"CC-NMD_RADIO.about.html",
         8: "I-IVAU.about.html",
         9: "P-IVAU.about.html",
         10: "NCI-1B42.about.html",

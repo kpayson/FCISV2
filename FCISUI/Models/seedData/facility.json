@@ -16,7 +16,7 @@
         "CircleId": "NCI_Facility_PET_Radiopharm",
         "IsActive": true,
         "FacilityRepName": "CC PET Radiopharmacy\r\n",
-        "FacilityFullName": "Clinical Center Positron Emission Tomography (PET) Radiopharmacy\r\n",
+        "FacilityFullName": "Clinical Center Positron Emission Tomography (PET) Radiopharmacy",
         "SvgMapPinId": "B1_PET"
     },
     {
@@ -36,7 +36,7 @@
         "CircleId": "NCI_Facility_PET_B3",
         "IsActive": false,
         "FacilityRepName": "CC PET B3 Radiochemistry\r\n",
-        "FacilityFullName": "Clinical Center Positron Emission Tomography (PET) B3 Radiochemistry\r\n",
+        "FacilityFullName": "Clinical Center Positron Emission Tomography (PET) B3 Radiochemistry",
         "SvgMapPinId": "B3_PET"
     },
     {
@@ -56,7 +56,7 @@
         "CircleId": "CC_Pharmacy_2J",
         "IsActive": true,
         "FacilityRepName": "CC CCE 2J Cell Therapy Lab\r\n",
-        "FacilityFullName": "Clinical Center, Center for Cellular Engineering (CCE) 2J Facility\r\n",
+        "FacilityFullName": "Clinical Center, Center for Cellular Engineering (CCE) 2J Facility",
         "SvgMapPinId": "2J"
     },
     {
@@ -76,7 +76,7 @@
         "CircleId": "Pin_Facility_2E",
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "Center for Cellular Engineering (CCE) 12E Facility",
         "SvgMapPinId": "12E"
     },
     {
@@ -96,7 +96,7 @@
         "CircleId": "CC_Pharmacy_East_Terrace",
         "IsActive": true,
         "FacilityRepName": "CC CCE East Terrace Modular\r\n",
-        "FacilityFullName": "Clinical Center, Center for Cellular Engineering (CCE) East Terrace Modular Facility\r\n",
+        "FacilityFullName": "Clinical Center, Center for Cellular Engineering (CCE) East Terrace Modular Facility",
         "SvgMapPinId": "T10B"
     },
     {
@@ -116,7 +116,7 @@
         "CircleId": "NCI_Facility_DLM_Image",
         "IsActive": true,
         "FacilityRepName": "CC DLM Sterility Lab\r\n",
-        "FacilityFullName": "Clinical Center - Department of Laboratory Medicine (DLM) Sterility Lab\r\n",
+        "FacilityFullName": "Clinical Center - Department of Laboratory Medicine (DLM) Sterility Lab",
         "SvgMapPinId": "DLM_Sterility"
     },
     {
@@ -136,7 +136,7 @@
         "CircleId": "Pin_Facility_NMD",
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "Clinical Center (CC) Nuclear Medicine (NM) Radiopharmacy & Biologics Radiolabeling Facility",
         "SvgMapPinId": "NMD_Radiopharmacy"
     },
     {
@@ -176,7 +176,7 @@
         "CircleId": "CCE_Facility_P_IVAU",
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "Clinical Center (CC) Pharmacy Permanent Intravenous Admixture Unit (I-IVAU)",
         "SvgMapPinId": "Pharmacy_IVAU"
     },
     {
@@ -235,8 +235,8 @@
         "Attribute": "Facility_Status_Check",
         "CircleId": "CC_Other_10B",
         "IsActive": true,
-        "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityRepName": "NCI Surgery Branch Trailer 1 (10B)",
+        "FacilityFullName": "NCI Surgery Branch Modular Trailer 10B",
         "SvgMapPinId": "Trailer_1"
     },
     {
@@ -255,8 +255,8 @@
         "Attribute": "Facility_Status_Check",
         "CircleId": "CC_Other_10A",
         "IsActive": true,
-        "FacilityRepName": "NCI Surgery Branch Trailer 1 (10B)\r\n",
-        "FacilityFullName": "NCI Surgery Branch Modular Trailer 10B\r\n",
+        "FacilityRepName": "NCI Surgery Branch Trailer 2 (10A)",
+        "FacilityFullName": "NCI Surgery Branch Modular Trailer 10A",
         "SvgMapPinId": "Trailer_2"
     },
     {
@@ -276,7 +276,7 @@
         "CircleId": null,
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "APF Common",
         "SvgMapPinId": "APF"
     },
     {
@@ -296,7 +296,7 @@
         "CircleId": null,
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "NCI Surgery Branch 3 West TIL Lab",
         "SvgMapPinId": "NCI_Surgery_Branch"
     },
     {
@@ -316,7 +316,7 @@
         "CircleId": "CC_Pharmacy_3E",
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "CC CCE 3T Cell Therapy Lab",
         "SvgMapPinId": "3T"
     },
     {
@@ -341,8 +341,8 @@
     },
     {
         "FacilityId": 18,
-        "FacilityName": "NIAID Viral Seed Stock ",
-        "FacilityAbbrName": "NIAID Viral Seed Stock ",
+        "FacilityName": "NIAID Viral Seed Stock",
+        "FacilityAbbrName": "NIAID Viral Seed Stock",
         "FacilityIC": "NIAD",
         "FacilitySection": null,
         "FacilityBuilding": null,
@@ -356,13 +356,13 @@
         "CircleId": null,
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "NIAID Viral Seed Stock",
         "SvgMapPinId": "NIAID_Viral_Seed_Stock"
     },
     {
         "FacilityId": 19,
-        "FacilityName": "NCI Hyperpolarized C-13 Facility ",
-        "FacilityAbbrName": "NCY Hyperpolarized C-13 ",
+        "FacilityName": "NCI Hyperpolarized C-13 Facility",
+        "FacilityAbbrName": "NCY Hyperpolarized C-13",
         "FacilityIC": "NCI",
         "FacilitySection": "HPP",
         "FacilityBuilding": null,
@@ -376,12 +376,12 @@
         "CircleId": "CC_Other_HP13",
         "IsActive": true,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "NCI Hyperpolarized C-13 Facility",
         "SvgMapPinId": "C-13"
     },
     {
         "FacilityId": 20,
-        "FacilityName": "Pilot Bioproduction Facility (PBF) ",
+        "FacilityName": "Pilot Bioproduction Facility (PBF)",
         "FacilityAbbrName": "PBF ",
         "FacilityIC": "NIAID",
         "FacilitySection": null,
@@ -396,7 +396,7 @@
         "CircleId": "NIAID_29B\r\n",
         "IsActive": false,
         "FacilityRepName": null,
-        "FacilityFullName": null,
+        "FacilityFullName": "Pilot Bioproduction Facility (PBF)",
         "SvgMapPinId": "PBF"
     }
 ]
