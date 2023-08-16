@@ -1,0 +1,48 @@
+<p>timeline-chart-next works!</p>
+<figure id="timelineChart"></figure>
+
+<!-- <svg id="timelineChart" [width]="chartParams.svg.width" [height]="chartParams.svg.height">
+    <g transform="translate({{chartParams.svg.margin.left}},{{{chartParams.svg.margin.top}})"></g>
+
+</svg> -->
+
+
+// const svg = d3
+//   .select("#chart")
+//   .attr("width", width + margin.left + margin.right)
+//   .attr("height", height + margin.top + margin.bottom)
+//   .append("g")
+//   .attr("transform", `translate(${margin.left},${margin.top})`);
+
+
+chartParams = {
+    svg: {
+      width: 800,
+      height: 200,
+      margin: { top: 20, right: 30, bottom: 30, left: 50 }
+    },
+    row: {
+      height: 41,
+      evenRowFillColor: '#ebe9e6',
+      oddRowFillColor: '#d4d2cf',
+      padding: {
+        top: 8,
+        right: 12,
+        bottom: 8,
+        left: 12
+      }
+    },
+    bar: {
+      height: 24,
+      colors: {
+        '0': 'green',
+        '1': 'yellow',
+        '2': 'red'
+      },
+      hoverColors: {
+        '0': 'lightgreen',
+        '1': 'lightyellow',
+        '2': 'lightred'
+      }
+    }
+  };

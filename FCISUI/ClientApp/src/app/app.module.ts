@@ -45,6 +45,7 @@ import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
 import { UserService } from './shared/auth/user.service';
+import { TimelineChartNextComponent } from './timeline-chart-next/timeline-chart-next.component';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
@@ -83,7 +84,8 @@ import { UserService } from './shared/auth/user.service';
     PortfolioDashboardComponent,
     SopsComponent,
     PiWebapiDemoComponent,
-    FacilityReportsComponent
+    FacilityReportsComponent,
+    TimelineChartNextComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
