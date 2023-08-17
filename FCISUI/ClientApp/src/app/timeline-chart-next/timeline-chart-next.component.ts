@@ -47,7 +47,7 @@ export class TimelineChartNextComponent implements OnInit {
 
   private createSvg(): void {
     const svgParams = this.chartParams.svg;
-    this.svg = d3.select("figure#bar")
+    this.svg = d3.select("figure#timelineChart")
       .append("svg")
       .attr("width", svgParams.width + svgParams.margin.left + svgParams.margin.right)
       .attr("height", svgParams.height + svgParams.margin.top + svgParams.margin.bottom)

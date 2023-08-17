@@ -8,6 +8,7 @@ import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-das
 import { Routes } from '@angular/router';
 import { SopsComponent } from './sops/sops.component';
 import { StaticContentPageComponent } from './static-content-page/static-content-page.component';
+import { TimelineChartNextComponent } from './timeline-chart-next/timeline-chart-next.component';
 
 export const appRoutes: Routes = [
   {
@@ -51,5 +52,6 @@ export const appRoutes: Routes = [
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'error-log', component: ErrorLogDashboardComponent },
-  { path: 'webapi-demo', component:PiWebapiDemoComponent}
+  { path: 'webapi-demo', component:PiWebapiDemoComponent},
+  { path: 'd3Timeline', component: TimelineChartNextComponent}
 ];
