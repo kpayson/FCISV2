@@ -13,19 +13,20 @@ export class ApfPortfolioAllDashboardComponent {
   chartByIcOptions = {
     pieHole: 0.5,
     pieSliceText: 'none',
+    chartArea: {height: '90%'},
     colors: [
       '#94762d', // CCE
       '#b5fd19', // CC Pharmacy
       '#fb09bf', // CC Other
       '#00ffff', // NCI
       '#c9363c' // NIAID 
-    ],
-
+    ]
   }
 
   chartByFacilityOptions = {
     pieHole: 0.5,
     pieSliceText: 'none',
+    chartArea: {height: '90%'},
     colors: [
       // CCE
       '#94762d',  // 2J

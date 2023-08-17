@@ -30,7 +30,8 @@ export class PortfolioDashboardComponent implements OnInit {
 
   chartBaseOptions = {
     pieHole: 0.5,
-    pieSliceText: 'none'
+    pieSliceText: 'none',
+    chartArea: {height: '90%'},
   }
   
   ccAllColors = [
