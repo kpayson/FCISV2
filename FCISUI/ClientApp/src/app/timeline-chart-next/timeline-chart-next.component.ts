@@ -6,6 +6,10 @@ interface StatusPoint {
   status: number;
 }
 
+interface EnhancedPoint extends StatusPoint {
+  duration: number;
+}
+
 interface RoomStatusData {
   roomName: string;
   statusPoints: StatusPoint[];
@@ -19,38 +23,39 @@ interface RoomStatusData {
 export class TimelineChartNextComponent implements OnInit {
   constructor() {}
 
-  private svg: any;
+  private svg!: any;
 
   ngOnInit(): void {
     this.createSvg();
     this.createBars(this.chartData);
   }
 
-  private dataPrep(points:StatusPoint[], minTime:Date, maxTime:Date) {
+  private dataPrep(points:StatusPoint[], minTime:Date, maxTime:Date): EnhancedPoint[]{
 
     points.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
 
-    if(points[0].time !== minTime) {
+    if(points[0].time.getTime() !== minTime.getTime()) {
         points.unshift({time: minTime, status: points[0].status})
     }
-    if(points[points.length - 1].time !== maxTime) {
+    if(points[points.length - 1].time.getTime() !== maxTime.getTime()) {
         points.push({time: maxTime, status: points[points.length - 1].status})
     }
-    const enhancedPoints = [];
+    const enhancedPoints:EnhancedPoint[] = [];
     for(let i=0; i<points.length-1; i++) {
       const duration = points[i+1].time.getTime() - points[i].time.getTime();
       const enhancedPoint = {...points[i], duration};
       enhancedPoints.push(enhancedPoint);
     }
-    return enhancedPoints.slice(0, -1);
+    return enhancedPoints;
   }
 
   private createSvg(): void {
     const svgParams = this.chartParams.svg;
     this.svg = d3.select("figure#timelineChart")
       .append("svg")
-      .attr("width", svgParams.width + svgParams.margin.left + svgParams.margin.right)
-      .attr("height", svgParams.height + svgParams.margin.top + svgParams.margin.bottom)
+      .attr("width", svgParams.width)
+      .attr("height", svgParams.height)
+      .attr("style", "border: 1px solid black")
       .append("g")
       .attr("transform", "translate(" + this.chartParams.svg.margin.left+ "," + svgParams.margin.top + ")");
   }
@@ -59,7 +64,10 @@ export class TimelineChartNextComponent implements OnInit {
     const minTime = d3.min(data.flatMap((d) => d.statusPoints), (d) => new Date(d.time)) || new Date();
     const maxTime = d3.max(data.flatMap((d) => d.statusPoints), (d) => new Date(d.time)) || new Date();
 
-      // difference between minTime and maxTime in milliseconds
+    const svgParams = this.chartParams.svg;
+    const chartWidth = svgParams.width - svgParams.margin.left - svgParams.margin.right;
+    const chartHeight = svgParams.height - svgParams.margin.top - svgParams.margin.bottom;
+
     const timeRange = maxTime.getTime() - minTime.getTime();
 
     const preparedData = data.map((d) => ({
@@ -67,22 +75,58 @@ export class TimelineChartNextComponent implements OnInit {
       statusPoints: this.dataPrep(d.statusPoints, minTime, maxTime)
     }));
 
+    const scaleDuration = d3.scaleLinear().domain([0, timeRange]).range([0, chartWidth]);
+
+    const colorScale = d3
+      .scaleOrdinal()
+      .domain(['0', '1', '2'])
+      .range(["green", "yellow", "red"]);
+
     // xAxis setup
     const xScale = 
-      d3.scaleTime().range([0, this.chartParams.svg.width])
-        .domain(
-          data.flatMap((d) => d.statusPoints).map(x=>x.time)
-        );
+      d3.scaleTime().range([0, chartWidth])
+        .domain([minTime, maxTime]);
     const xAxis = d3.axisBottom(xScale);
-    this.svg.append("g").attr("transform", `translate(0,${this.chartParams.svg.height})`).call(xAxis);
+    this.svg.append("g").attr("transform", `translate(0, ${chartHeight })`).call(xAxis);
 
     // yAxis setup
-    const yScale = d3.scaleBand().range([0, this.chartParams.svg.height]);
+    const yScale = d3.scaleBand().range([0, chartHeight]);
     const yAxis = d3.axisLeft(yScale);
     yScale.domain(data.map((d) => d.roomName));
     this.svg.append("g").call(yAxis);
 
+    const barGroup =     
+      this.svg
+        .selectAll(".bar-group")
+        .data(preparedData)
+        .enter()
+            .append("g")
+                .attr("class", "bar-group")
+                .attr("transform", (d:RoomStatusData) => `translate(0,${(yScale(d.roomName!) || 0) + this.chartParams.row.height/2 })`)
 
+    // create row container rectangle
+    barGroup.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", chartWidth)
+      .attr("height", this.chartParams.row.height)
+      .attr("fill", (_:undefined,i:number)=> i%2 ? "gray": "lightgray")
+
+    // create timeline pieces
+    barGroup
+      .append("g")
+      .attr("class", "bar-points")
+      .attr("transform", `translate(0,${(this.chartParams.row.height - this.chartParams.bar.height)/2 })`)
+      .selectAll(".bar")
+      .data((d:RoomStatusData) => d.statusPoints)
+      .enter()
+      .append("rect")
+          .attr("class", "bar")
+          .attr("x", (p:EnhancedPoint) => xScale(new Date(p.time))) 
+          .attr("y", 0)
+          .attr("width", (p:EnhancedPoint) => scaleDuration(p.duration))
+          .attr("height", this.chartParams.bar.height)
+          .attr("fill", (p:EnhancedPoint) => colorScale(String(p.status)))
   }
 
   chartParams = {
@@ -137,91 +181,4 @@ export class TimelineChartNextComponent implements OnInit {
 
   ];
 
-
 }
-
-
-
-
-
-// const minTime = d3.min(data.flatMap((d) => d.statusPoints), (d) => new Date(d.time));
-// const maxTime = d3.max(data.flatMap((d) => d.statusPoints), (d) => new Date(d.time));
-// const timeRange = maxTime - minTime;
-
-// for(const room of data) {
-//   dataPrep(room.statusPoints, minTime, maxTime);
-// }
-
-// const margin = { top: 20, right: 30, bottom: 30, left: 50 };
-// const width = 800 - margin.left - margin.right;
-// const height = 400 - margin.top - margin.bottom;
-
-// const svg = d3
-//   .select("#chart")
-//   .attr("width", width + margin.left + margin.right)
-//   .attr("height", height + margin.top + margin.bottom)
-//   .append("g")
-//   .attr("transform", `translate(${margin.left},${margin.top})`);
-
-// const scalePercent = (x) => width * x / timeRange;
-// const xScale = d3.scaleTime().range([0, width]);
-// const yScale = d3.scaleBand().range([0, height]);
-
-// const xAxis = d3.axisBottom(xScale);
-// const yAxis = d3.axisLeft(yScale);
-
-// const colorScale = d3
-//   .scaleOrdinal()
-//   .domain([0, 1, 2])
-//   .range(["green", "yellow", "red"]);
-
-// const rowFill0 = "#ebe9e6";
-// const rowFill1 = "#d4d2cf";
-// const rowHeight = 41;
-// const barHeight = 24;
-
-// xScale.domain(
-//   d3.extent(data.flatMap((d) => d.statusPoints), (d) => new Date(d.time))
-// );
-// yScale.domain(data.map((d) => d.roomName));
-
-// svg.append("g").attr("transform", `translate(0,${height})`).call(xAxis);
-// svg.append("g").call(yAxis);
-
-
-
-// svg
-// .selectAll(".bar-group")
-// .data(data)
-// .enter()
-//     .append("g")
-//         .attr("class", "bar-group")
-//         .attr("transform", (d) => `translate(0,${yScale(d.roomName) + 2 * margin.top + margin.bottom})`)
-//         .append("rect")
-//             .attr("x", 0)
-//             .attr("y", 0)
-//             .attr("width", 400)
-//             .attr("height", 20)
-//             .attr("fill", "green")
-//             .attr("pointer-events", "all")
-//             .on("mousemove", (event) => {
-//                 const [x, y] = d3.pointer(event);
-//                 const date = xScale.invert(x);
-//                 const room = yScale.domain()[Math.floor(y / yScale.step())];
-
-//                 const status = data.find((d) => d.roomName === room).statusPoints.find(
-//                     (d) => new Date(d.time) <= date && new Date(d.time) + 1000 > date
-//                 ).status;
-
-//                 console.log(`Room: ${room}, Status: ${status}`);
-//             })
-//         .selectAll(".bar")
-//         .data((d) => d.statusPoints)
-//         .enter()
-//         .append("rect")
-//             .attr("class", "bar")
-//             .attr("x", (p) => xScale(new Date(p.time)))  //(d) => xScale(new Date(d.time))
-//             .attr("y", 0)
-//             .attr("width", (p) => scalePercent(p.duration))
-//             .attr("height", 20)
-//             .attr("fill", (p) => colorScale(p.status))
