@@ -9,6 +9,7 @@ import { Routes } from '@angular/router';
 import { SopsComponent } from './sops/sops.component';
 import { StaticContentPageComponent } from './static-content-page/static-content-page.component';
 import { TimelineChartNextComponent } from './timeline-chart-next/timeline-chart-next.component';
+import {TimelineChartPlotlyComponent} from './timeline-chart-plotly/timeline-chart-plotly.component';
 
 export const appRoutes: Routes = [
   {
@@ -53,5 +54,6 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'error-log', component: ErrorLogDashboardComponent },
   { path: 'webapi-demo', component:PiWebapiDemoComponent},
-  { path: 'd3Timeline', component: TimelineChartNextComponent}
+  { path: 'd3Timeline', component: TimelineChartNextComponent},
+  { path: 'plotlyTimeline', component: TimelineChartPlotlyComponent}
 ];

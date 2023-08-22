@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OAuthModule, OAuthStorage } from 'angular-oauth2-oidc';
+import { OAuthModule} from 'angular-oauth2-oidc'; //, OAuthStorage 
 
 import { AlmPiService } from './api/alm-pi.service';
 import { ApfMonitoredRoomsChartComponent } from './apf-monitored-rooms-chart/apf-monitored-rooms-chart.component';
@@ -46,10 +46,13 @@ import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-com
 import { appRoutes } from './routes';
 import { UserService } from './shared/auth/user.service';
 import { TimelineChartNextComponent } from './timeline-chart-next/timeline-chart-next.component';
+import { TimelineChartPlotlyComponent } from './timeline-chart-plotly/timeline-chart-plotly.component';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
-
+PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +88,8 @@ import { TimelineChartNextComponent } from './timeline-chart-next/timeline-chart
     SopsComponent,
     PiWebapiDemoComponent,
     FacilityReportsComponent,
-    TimelineChartNextComponent
+    TimelineChartNextComponent,
+    TimelineChartPlotlyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -95,6 +99,7 @@ import { TimelineChartNextComponent } from './timeline-chart-next/timeline-chart
     ReactiveFormsModule,
     GoogleChartsModule,
     ThirdPartyComponentsModule,
+    PlotlyModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
