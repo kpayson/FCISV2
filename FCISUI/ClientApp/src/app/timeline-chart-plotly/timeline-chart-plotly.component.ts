@@ -76,11 +76,11 @@ export class TimelineChartPlotlyComponent {
     }));
 
     maintenanceWindow = {
-      x: ['2022-02-10', '2022-02-15'],  // Start and end timestamps of the maintenance window
-      y: ['Room 1', 'Room 3'],  // Rooms for which the maintenance window is applicable
+      x: ['2022-02-01', '2022-03-01'],  // Start and end timestamps of the maintenance window
+      y: [0, 5],  // Rooms for which the maintenance window is applicable
       type: 'rect',
       xref: 'x',
-      yref: 'y',
+      yref: 'paper',
       fillcolor: 'rgba(218, 112, 214, 0.9)',  // Light purple color with 30% opacity
       opacity: 0.9,  // Opacity of the rectangle
       line: {

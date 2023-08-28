@@ -49,6 +49,16 @@ export class TimelineChartNextComponent implements OnInit {
     return enhancedPoints;
   }
 
+  onStatusBarSectionMouseOver(evnt: MouseEvent, point:EnhancedPoint): void {
+    console.log(evnt);
+    console.log(point);
+  }
+
+  onStatusBarSectionMouseOut(evnt: MouseEvent, point:EnhancedPoint): void {
+    console.log(evnt);
+    console.log(point);
+  }
+
   private createSvg(): void {
     const svgParams = this.chartParams.svg;
     this.svg = d3.select("figure#timelineChart")
@@ -127,6 +137,22 @@ export class TimelineChartNextComponent implements OnInit {
           .attr("width", (p:EnhancedPoint) => scaleDuration(p.duration))
           .attr("height", this.chartParams.bar.height)
           .attr("fill", (p:EnhancedPoint) => colorScale(String(p.status)))
+          .on("mouseover", this.onStatusBarSectionMouseOver) 
+          .on("mouseout", this.onStatusBarSectionMouseOut)   
+    
+    // create maintainance window
+    const startTime = data[0].statusPoints[0].time;
+    startTime.setTime(startTime.getTime() + 1000 * 60 * 60);
+    const maintainanceWindowStart = xScale(startTime);
+    const maintainanceWindowWidth = scaleDuration(1000 * 60 * 60 * 0.5);
+
+    const maintainanceWindow =
+      this.svg.append("g")
+        .attr("transform", `translate(${maintainanceWindowStart},0)`)
+        .append("rect")
+          .attr("width", maintainanceWindowWidth)
+          .attr("height", chartHeight)
+          .attr("style", "fill:purple; opacity: 0.3")
   }
 
   chartParams = {
