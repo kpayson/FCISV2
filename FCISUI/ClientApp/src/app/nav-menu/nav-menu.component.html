@@ -3,8 +3,11 @@
     <div class="flex align-items-center">
       <b>Portfolios</b>&nbsp;&nbsp;|&nbsp;&nbsp;<p-menubar [model]="items"></p-menubar>
     </div>
-    <div class="flex align-items-center">
+    <div class="flex align-items-center gap-4">
+      <!-- <a (click)="adminDashboardClick()"><b>Admin Dashboard</b></a> -->
+      <p-menubar [model]="adminItems"></p-menubar>
       <a (click)="resourcesClick()"><b>Resources</b></a>
+      
     </div>
   </div>
 

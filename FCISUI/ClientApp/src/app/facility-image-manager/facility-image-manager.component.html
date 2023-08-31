@@ -1,0 +1,30 @@
+<h2>Facility Image Manager</h2>
+<p-table  [value]="(this.service.pictures$ | async) || []">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-picture>
+        <tr>
+            <td><img src="{{picture.url}}" alt="{{picture.name}}" width="100" height="100"></td>
+            <td>{{picture.name}}</td>
+            <td>
+                <button pButton type="button" icon="pi pi-pencil" class="ui-button-success" (click)="editClick($event)"></button>
+                <button pButton type="button" icon="pi pi-trash" class="ui-button-danger" (click)="deleteClick($event)"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<div>
+    <h3>Add New</h3>
+    <label>Caption</label>
+    <input type="text" [(ngModel)]="newPictureCaption" />
+    <p-fileUpload mode="basic" name="demo" url="" accept="image/*" 
+        (onUpload)="onBasicUploadAuto($event)" [auto]="true" chooseLabel="Browse"></p-fileUpload>
+    
+    <button pButton type="button" icon="pi pi-plus" class="ui-button-success" (click)="addClick()"></button>
+</div>

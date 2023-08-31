@@ -19,6 +19,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { Person } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,10 @@ export class DataService {
 
   private post<T>(url: string, body: any) {
     return this.http.post<T>(`${environment.apiRootUrl}/${url}`, body, {headers:this.headers});
+  }
+
+  private put<T>(url: string, body: any) {
+    return this.http.put<T>(`${environment.apiRootUrl}/${url}`, body, {headers:this.headers});
   }
 
   facilityById(id: number) {
@@ -195,5 +200,16 @@ export class DataService {
     return this.get<string[]>(`Roles/currentUser`);
   }
 
+  people() {
+    return this.get<Person[]>(`Person`);
+  }
+
+  addPerson(person:Person) {
+    return this.post<Person>(`Person`,person);
+  }
+
+  editPerson(person:Person) {
+    return this.put<Person>(`Person`,person);
+  }
   
 }

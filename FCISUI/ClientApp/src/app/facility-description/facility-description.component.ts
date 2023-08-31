@@ -20,4 +20,8 @@ export class FacilityDescriptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  managePhotosClick() {
+    
+  }
+
 }

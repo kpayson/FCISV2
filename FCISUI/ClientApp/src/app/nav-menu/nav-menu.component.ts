@@ -15,7 +15,10 @@ import { Router } from '@angular/router';
 export class NavMenuComponent {
   ref!: DynamicDialogRef;
 
-  constructor(public dialogService: DialogService, private dataService: DataService, private router: Router) { }
+  constructor(
+    public dialogService: DialogService, 
+    private dataService: DataService, 
+    private router: Router) { }
   isExpanded = false;
 
 
@@ -25,6 +28,8 @@ export class NavMenuComponent {
   routeToFacilityAll(portfolio: string) {
     return () => this.router.navigate(['/home', 'facility-all', portfolio])
   }
+
+  adminDashboardClick(){}
 
   // CCE 2J Cell Therapy Facility
   // CCE 12E Cell Therapy Facility
@@ -42,7 +47,21 @@ export class NavMenuComponent {
   // CC PET Nuclear Pharmacy
   // CC PET Radiopharmacy
 
-
+  adminItems = [
+    {
+      label: 'Admin',
+      items: [
+        {
+          label: 'Manage Users',
+          command: () => this.router.navigate(['/admin', 'user-dashboard'])
+        },
+        {
+          label: 'Facility Content',
+          command: () => this.router.navigate(['/home', 'admin', 'facility-content'])
+        }
+      ]
+    }
+  ]
 
   items = [
     {

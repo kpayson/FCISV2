@@ -7,6 +7,13 @@ import { PortfolioDashboardComponent } from './portfolio-dashboard/portfolio-das
 import { Routes } from '@angular/router';
 import { SopsComponent } from './sops/sops.component';
 import { StaticContentPageComponent } from './static-content-page/static-content-page.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AuthGuard } from './shared/auth/auth.guard';
+
+// function adminGuard() {
+//   return true;
+// }
 
 export const appRoutes: Routes = [
   {
@@ -48,6 +55,18 @@ export const appRoutes: Routes = [
       }
     ]
   },
+  {
+    path: 'admin',
+    component: AdminHomeComponent,
+    // canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'user-dashboard',
+        component: UserDashboardComponent,
+      },
+    ]
+  },
+
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'error-log', component: ErrorLogDashboardComponent },
 

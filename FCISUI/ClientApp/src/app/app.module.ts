@@ -44,6 +44,11 @@ import { SvgStatusMapComponent } from './svg-status-map/svg-status-map.component
 import { ThirdPartyComponentsModule } from './3rd-party-components/3rd-party-components.module';
 import { appRoutes } from './routes';
 import { UserService } from './shared/auth/user.service';
+import { FacilityImageManagerComponent } from './facility-image-manager/facility-image-manager.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+
+import { UserUpsertComponent } from './user-upsert/user-upsert.component';
 
 // import { ApfPortfolioIcDashboardComponent } from './apf-portfolio-ic-dashboard/apf-portfolio-ic-dashboard.component';
 // import { DataService } from './data.service';
@@ -81,7 +86,11 @@ import { UserService } from './shared/auth/user.service';
     FacilityTimelineDashboardComponent,
     PortfolioDashboardComponent,
     SopsComponent,
-    FacilityReportsComponent
+    FacilityReportsComponent,
+    FacilityImageManagerComponent,
+    UserDashboardComponent,
+    AdminHomeComponent,
+    UserUpsertComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

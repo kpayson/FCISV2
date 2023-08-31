@@ -1,0 +1,21 @@
+
+    <div [formGroup]="personForm">
+
+      <input type="text" pInputText formControlName="firstName" placeholder="First Name"/>
+      <input type="text" pInputText formControlName="lastName" placeholder="Last Name"/>
+      <input type="text" pInputText formControlName="miName" placeholder="Middle Initial"/>
+      <input type="text" pInputText formControlName="userId" placeholder="User ID"/>
+      <input type="text" pInputText formControlName="nihId" placeholder="NIH ID"/>
+      <input type="text" pInputText formControlName="email" placeholder="Email"/>
+      <input type="text" pInputText formControlName="phone" placeholder="Phone"/>
+      <input type="text" pInputText formControlName="ic" placeholder="IC"/>
+      <input type="text" pInputText formControlName="org" placeholder="Organization"/>
+      <input type="text" pInputText formControlName="orgAbbr" placeholder="Organization Abbr"/>
+      <input type="text" pInputText formControlName="title" placeholder="Title"/>
+      <input type="text" pInputText formControlName="comments" placeholder="Comments"/>
+
+      <p-checkbox formControlName="active" value="1"></p-checkbox>
+    </div>
+    <div>
+      <button pButton type="submit" label="Save" (click)="save()"></button>
+    </div>
