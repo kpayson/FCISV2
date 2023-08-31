@@ -21,6 +21,7 @@ import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
 import { PiWebApiService } from '../api/pi-webapi.service';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface PiDataFilter {
     facility: { repName?: string; sectionName: string; value: number };
@@ -66,9 +67,13 @@ export interface PiDataFilter {
   
   @Injectable()
   export class FacilityTimelineDashboardService {
+    gsfStartYear = Number(environment.gsfStartYear) || 2016;
+    gsfEndYear = Number(environment.gsfEndYear) || 2023;
+
     constructor(private dataService: DataService, private piWebApiService:PiWebApiService) {
       const defaultStartDate = new Date();
       defaultStartDate.setDate(defaultStartDate.getDate() - 1);
+      
 
       this._piDataFilter$ = new Subject<PiDataFilter>()
       // new BehaviorSubject<PiDataFilter>({
@@ -461,7 +466,7 @@ export interface PiDataFilter {
     };
   
     public gsfGrowthByClassification$ = this.dataService
-      .gsfGrowthByClassification()
+      .gsfGrowthByClassification(this.gsfStartYear, this.gsfEndYear)
       .pipe(
         map((d: any) =>
           d.map((x: any) => {

@@ -128,11 +128,6 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
     // this.timelineChartData$.subscribe(() => {
     //   this.isLoading = false;
     // });
-
-    
-
-
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -152,9 +147,6 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
     combineLatest([this._dashboardId$,this._facility$]).subscribe(([dashboardId, facility])=>{
       this.search(dashboardId);
     })
-
-    
-
     //this.search();
   }
 

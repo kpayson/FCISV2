@@ -63,8 +63,8 @@ export class DataService {
     return this.get<ICGsf[]>(`GsfChart/GsfByIC`);
   }
 
-  gsfGrowthByClassification() {
-    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification`);
+  gsfGrowthByClassification(startYear:number, endYear:number) {
+    return this.get<GsfGrowth[]>(`GsfChart/GsfGrowthByClassification?startYear=${startYear}&endYear=${endYear}`);
   }
 
   svgMap(facId: number, marker: string = 'pin') {

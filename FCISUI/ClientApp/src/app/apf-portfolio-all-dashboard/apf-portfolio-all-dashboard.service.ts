@@ -1,6 +1,7 @@
 import { DataService } from 'src/app/api/data.service';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ApfPortfolioAllDashboardService {
@@ -15,7 +16,7 @@ export class ApfPortfolioAllDashboardService {
     .pipe(map((d: any) => d.map((x: any) => [x.ic, x.gsf])));
 
   gsfGrowthByClassification$ = this.dataService
-    .gsfGrowthByClassification()
+    .gsfGrowthByClassification(environment.gsfStartYear, environment.gsfEndYear)
     .pipe(
       map((d: any) =>
         d.map((x: any) => {
