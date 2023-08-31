@@ -3,6 +3,7 @@ PowerShell*.txt
 .vs/*
 **/.angular/*
 **/bin/*
+**/node_modules/*
 
 *.local.json
 

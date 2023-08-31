@@ -39,7 +39,7 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
   filterForm = this.fb.group({
     startDate: new Date(),
     endDate: new Date(),
-    interval: 0
+    interval: 60
   });
 
   roomInfoDialogVisible = false;
@@ -54,8 +54,8 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
   $statusDisplay = this._dashboardId$.pipe(map(x => {
     const id = x.toLowerCase();
     if (id === 'dp') { return 'dP' }
-    if (id === 'ach') { return 'Airx' }
-    if (id === 'hum') { return 'Hum' }
+    if (id === 'ach' || id === 'airx') { return 'Airx' }
+    if (id === 'hum') { return 'Humid' }
     if (id === 'temp') { return 'Temp' }
     return 'Composite'; // 'Sum All'
   }));
@@ -190,14 +190,14 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
     { name: '24 Hour', value: 1440 }
   ];
 
-  get startDate(): Date {
-    return this.filterForm.get("startDate")?.value!;
+  get startDate(): Date | null | undefined {
+    return this.filterForm.get("startDate")?.value;
   }
-  get endDate(): Date {
-    return this.filterForm.get("endDate")?.value!;
+  get endDate(): Date | null | undefined {
+    return this.filterForm.get("endDate")?.value;
   }
-  get interval(): number {
-    return this.filterForm.get("interval")?.value!;
+  get interval(): number | null | undefined {
+    return this.filterForm.get("interval")?.value;
   }
 
   search(timelineAtr?:string) {
@@ -215,9 +215,9 @@ export class FacilityTimelineDashboardComponent implements OnInit, OnChanges {
       // portfolioId: this.portfolioId,
       // facilityOrPortfolio: this.portfolioId ? 'portfolio' : 'facility',
       status: timelineAtr || this.dashboardId,
-      startDate: this.startDate,
-      endDate: this.endDate,
-      interval: this.interval
+      startDate: this.startDate || new Date(),
+      endDate: this.endDate || new Date(),
+      interval: this.interval || 60
     })
   }
 
