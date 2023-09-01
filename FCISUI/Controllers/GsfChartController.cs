@@ -123,9 +123,11 @@ namespace FCISUI.Controllers
         }
 
         [HttpGet("GsfGrowthByClassification")]
-        public List<GSFGrowthCumulative> GetGsfGrowthByClassification([FromQuery] int startYear=2016, [FromQuery] int endYear=2023)
+        public List<GSFGrowthCumulative> GetGsfGrowthByClassification([FromQuery] int? startYear, [FromQuery] int? endYear)
         {
-            var gsfGrowthDeltas = _context.Gsfgrowths.Where(x=>x.Year >= startYear && x.Year <= endYear).Select(_mapper.Map<GSFGrowthDelta>).ToList();
+            var gsfGrowthDeltas = _context.Gsfgrowths
+                .Where(x=>(!startYear.HasValue || x.Year >= startYear.Value) && (!endYear.HasValue || x.Year <= endYear))
+                .Select(_mapper.Map<GSFGrowthDelta>).ToList();
             var gsfGrowthCummulative = GSFGrowthUtil.GetCumulativeValues(gsfGrowthDeltas);
             return gsfGrowthCummulative;
         }
